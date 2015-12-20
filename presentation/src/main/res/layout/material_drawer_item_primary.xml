@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable name="item" type="com.denis.mypocket.model.DrawerItem"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="@dimen/custom_padding_48dp"
+                  android:orientation="horizontal"
+                  android:paddingEnd="@dimen/default_padding"
+                  android:paddingLeft="@dimen/default_padding"
+                  android:paddingRight="@dimen/default_padding"
+                  android:paddingStart="@dimen/default_padding">
+
+        <ImageView
+            android:id="@+id/material_drawer_icon"
+            android:layout_width="@dimen/custom_padding_56dp"
+            android:layout_height="@dimen/custom_padding_48dp"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="@dimen/custom_padding_12dp"
+            android:paddingEnd="@dimen/custom_padding_32dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="@dimen/custom_padding_32dp"
+            android:paddingStart="0dp"
+            android:src="@{item.icon}"
+            android:paddingTop="@dimen/custom_padding_12dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/material_drawer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical|start"
+                android:lines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_14sp"
+                tools:text="@{item.itemText}" />
+
+    <!--        <TextView
+                android:id="@+id/material_drawer_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical|start"
+                android:lines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_14sp"
+                tools:text="Some drawer text" />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/material_drawer_badge_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingEnd="0dp"
+            android:paddingLeft="@dimen/half_default_padding"
+            android:paddingRight="0dp"
+            android:paddingStart="@dimen/half_default_padding">
+
+            <TextView
+                android:id="@+id/material_drawer_badge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:lines="1"
+                android:minWidth="20dp"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_14sp"
+                android:visibility="@{item.isBadgable? View.VISIBLE : View.GONE}"
+                tools:text="@{item.badge}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

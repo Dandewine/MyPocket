@@ -1,0 +1,118 @@
+<layout>
+    <data>
+        <variable
+            name="user"
+            type="com.denis.mypocket.model.User"/>
+    </data>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/material_drawer_account_header_height">
+
+        <ImageView
+            android:id="@+id/material_drawer_account_header_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:id="@+id/material_drawer_account_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_drawer_account_header_height">
+
+            <ImageView
+                android:id="@+id/material_drawer_account_header_current"
+                android:layout_width="@dimen/custom_padding_64dp"
+                android:layout_height="@dimen/custom_padding_64dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/custom_padding_4dp"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:layout_marginTop="@dimen/default_padding"
+                android:clickable="true"
+                android:src="@mipmap/ic_launcher"
+                android:elevation="2dp" />
+
+            <!--  <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentRight="true"
+                  android:layout_alignTop="@+id/material_drawer_account_header_current"
+                  android:gravity="right">
+
+                  <ImageView
+                      android:id="@+id/material_drawer_account_header_small_first"
+                      android:layout_width="@dimen/custom_padding_40dp"
+                      android:layout_height="@dimen/custom_padding_40dp"
+                      android:layout_marginRight="@dimen/default_padding"
+                      android:clickable="true"
+                      android:elevation="2dp"
+                      android:visibility="gone" />
+
+                  <ImageView
+                      android:id="@+id/material_drawer_account_header_small_second"
+                      android:layout_width="@dimen/custom_padding_40dp"
+                      android:layout_height="@dimen/custom_padding_40dp"
+                      android:layout_marginRight="@dimen/default_padding"
+                      android:clickable="true"
+                      android:elevation="2dp"
+                      android:visibility="gone" />
+
+                  <ImageView
+                      android:id="@+id/material_drawer_account_header_small_third"
+                      android:layout_width="@dimen/custom_padding_40dp"
+                      android:layout_height="@dimen/custom_padding_40dp"
+                      android:layout_marginRight="@dimen/default_padding"
+                      android:clickable="true"
+                      android:elevation="2dp"
+                      android:visibility="gone" />
+              </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/material_drawer_account_header_text_section"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/half_default_padding"
+                android:layout_toLeftOf="@+id/material_drawer_account_header_text_switcher"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingRight="56dp">
+
+                <TextView
+                    android:id="@+id/material_drawer_account_header_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:fontFamily="sans-serif-medium"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="@{user.name}"
+                    android:textSize="@dimen/text_size_14sp" />
+
+                <TextView
+                    android:id="@+id/material_drawer_account_header_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:fontFamily="sans-serif"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:text="@{user.email}"
+                    android:textSize="@dimen/text_size_14sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/material_drawer_account_header_text_switcher"
+                android:layout_width="@dimen/custom_padding_22dp"
+                android:layout_height="@dimen/custom_padding_22dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/custom_padding_14dp"
+                android:layout_marginRight="@dimen/default_padding" />
+
+        </RelativeLayout>
+    </FrameLayout>
+</layout>

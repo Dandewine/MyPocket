@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_elevation">5dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="half_default_padding">16dp</dimen>
+
+    <dimen name="custom_padding_4dp">4dp</dimen>
+    <dimen name="custom_padding_12dp">12dp</dimen>
+    <dimen name="custom_padding_14dp">14dp</dimen>
+    <dimen name="custom_padding_22dp">22dp</dimen>
+    <dimen name="custom_padding_32dp">32dp</dimen>
+    <dimen name="custom_padding_40dp">40dp</dimen>
+    <dimen name="custom_padding_48dp">48dp</dimen>
+    <dimen name="custom_padding_56dp">56dp</dimen>
+    <dimen name="custom_padding_64dp">64dp</dimen>
+    <dimen name="material_drawer_account_header_height">192dp</dimen>
+
+    <!--Text sizes-->
+    <dimen name="text_size_14sp">14sp</dimen>
+</resources>
