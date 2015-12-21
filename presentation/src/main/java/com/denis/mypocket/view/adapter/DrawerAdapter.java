@@ -52,7 +52,7 @@ public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHo
         DrawerItem item3 = new DrawerItem(context.getString(R.string.drawer_travel_mode),null,"23",false);
         DrawerItem item4 = new DrawerItem(context.getString(R.string.drawer_cycle_operations),null,"23",false);
         DrawerItem item5 = new DrawerItem(context.getString(R.string.drawer_tutorials),null,"23",false);
-        DrawerItem item6 = new DrawerItem(context.getString(R.string.drawer_wallets),context.getResources().getDrawable(R.drawable.ic_wallet),"23",false);
+        DrawerItem item6 = new DrawerItem(context.getString(R.string.drawer_wallets),context.getResources().getDrawable(R.drawable.ic_settings),"23",false);
         DrawerItem item7 = new DrawerItem(context.getString(R.string.drawer_settings),context.getResources().getDrawable(R.drawable.ic_settings),"23",false);
         DrawerItem item8 = new DrawerItem(context.getString(R.string.drawer_debts),null,"23",false);
 
