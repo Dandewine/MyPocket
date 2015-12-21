@@ -1,14 +1,12 @@
 package com.denis.mypocket.view.adapter;
 
-import android.databinding.DataBindingUtil;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.denis.mypocket.BR;
 import com.denis.mypocket.R;
-import com.denis.mypocket.databinding.MaterialDrawerActivityBinding;
 import com.denis.mypocket.databinding.MaterialDrawerHeaderBinding;
 import com.denis.mypocket.databinding.MaterialDrawerItemPrimaryBinding;
 import com.denis.mypocket.model.DrawerItem;
@@ -23,9 +21,6 @@ import java.util.Arrays;
  */
 public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHolder> {
 
-    public DrawerAdapter() {
-        setData();
-    }
 
     @Override
     public void onBindViewHolder(BindableHolder holder, int position) {
@@ -39,6 +34,12 @@ public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHo
     }
 
     @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        setData();
+    }
+
+    @Override
     public int getItemViewType(int position) {
         if(position==0)
             return TYPE_HEADER;
@@ -46,11 +47,16 @@ public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHo
     }
 
     private void setData(){
-        DrawerItem item1 = new DrawerItem("1",null,"23",true);
-        DrawerItem item2 = new DrawerItem("341",null,"23",false);
-        DrawerItem item3 = new DrawerItem("1",null,"23",false);
+        DrawerItem item1 = new DrawerItem(context.getString(R.string.drawer_categories),null,"23",true);
+        DrawerItem item2 = new DrawerItem(context.getString(R.string.drawer_saves),null,"23",false);
+        DrawerItem item3 = new DrawerItem(context.getString(R.string.drawer_travel_mode),null,"23",false);
+        DrawerItem item4 = new DrawerItem(context.getString(R.string.drawer_cycle_operations),null,"23",false);
+        DrawerItem item5 = new DrawerItem(context.getString(R.string.drawer_tutorials),null,"23",false);
+        DrawerItem item6 = new DrawerItem(context.getString(R.string.drawer_wallets),context.getResources().getDrawable(R.drawable.ic_wallet),"23",false);
+        DrawerItem item7 = new DrawerItem(context.getString(R.string.drawer_settings),context.getResources().getDrawable(R.drawable.ic_settings),"23",false);
+        DrawerItem item8 = new DrawerItem(context.getString(R.string.drawer_debts),null,"23",false);
 
-        addAll(Arrays.asList(item1,item2,item3));
+        addAll(Arrays.asList(item1,item2,item3,item4,item5,item6,item7,item8));
     }
 
     @Override

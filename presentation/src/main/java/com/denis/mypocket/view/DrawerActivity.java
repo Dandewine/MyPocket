@@ -24,19 +24,17 @@ import java.util.List;
  */
 public class DrawerActivity extends BaseActivity {
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private RecyclerView recyclerView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MaterialDrawerActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.material_drawer_activity);
-        mDrawerLayout = binding.drawerLayout;
-        recyclerView = binding.recycler;
+
+        DrawerLayout mDrawerLayout = binding.drawerLayout;
+        RecyclerView recyclerView = binding.recycler;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new DrawerAdapter());
-        mDrawerToggle = new ActionBarDrawerToggle(
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
                 R.string.app_name,  /* "open drawer" description for accessibility */
@@ -47,6 +45,7 @@ public class DrawerActivity extends BaseActivity {
                 //getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
+
             @Override
             public void onDrawerOpened(View drawerView) {
                 //getActionBar().setTitle(mDrawerTitle);
@@ -56,12 +55,6 @@ public class DrawerActivity extends BaseActivity {
         };
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-     /*   getFragmentManager().beginTransaction()
-                .replace(R.id.content_frame,new FirstFragment())
-                .commit();*/
-
-
     }
 
 

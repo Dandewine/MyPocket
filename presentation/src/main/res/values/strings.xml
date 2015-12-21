@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MyPocket</string>
+
+   <!-- Drawer Items-->
+    <string name="drawer.categories">Categories</string>
+    <string name="drawer.wallets">My Wallets</string>
+    <string name="drawer.saves">Saves</string>
+    <string name="drawer.travel_mode">Travel Mode</string>
+    <string name="drawer.cycle.operations">Cycle operations</string>
+    <string name="drawer.tutorials">Tutorials</string>
+    <string name="drawer.settings">Settings</string>
+    <string name="drawer.debts">Debts</string>
 </resources>

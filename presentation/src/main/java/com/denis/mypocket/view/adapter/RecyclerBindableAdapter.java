@@ -114,7 +114,6 @@ public abstract class RecyclerBindableAdapter<T,VH extends BindableHolder> exten
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
         this.context = recyclerView.getContext();
         this.inflater = LayoutInflater.from(context);
     }
