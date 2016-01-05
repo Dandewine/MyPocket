@@ -1,5 +1,6 @@
 package com.denis.mypocket.view.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,5 +17,8 @@ public class WalletsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ActivityWalletsBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_wallets);
         configireToolbar(binding.walletsToolbar.toolbar,R.string.drawer_wallets,true);
+
+        binding.fab.setOnClickListener(v ->
+                startActivity(new Intent(this,AddWalletActivity.class)));
     }
 }

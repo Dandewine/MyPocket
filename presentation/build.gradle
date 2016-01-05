@@ -53,12 +53,13 @@ dependencies {
     provided presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
 
-    //retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
+    retrolambdaConfig presentationDependencies.lambda
 
     compile presentationDependencies.recyclerView
     compile presentationDependencies.cardView
     compile presentationDependencies.appcompat
     compile presentationDependencies.design
+
 
     compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid

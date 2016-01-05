@@ -68,9 +68,9 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingEnd="0dp"
-            android:paddingLeft="@dimen/half_default_padding"
+            android:paddingLeft="@dimen/default_padding"
             android:paddingRight="0dp"
-            android:paddingStart="@dimen/half_default_padding">
+            android:paddingStart="@dimen/default_padding">
 
             <TextView
                 android:id="@+id/material_drawer_badge"

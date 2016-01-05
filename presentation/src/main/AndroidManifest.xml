@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.WalletsActivity"/>
+        <activity android:name=".view.activity.AddWalletActivity"/>
 
     </application>
 

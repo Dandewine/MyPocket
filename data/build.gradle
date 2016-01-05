@@ -41,7 +41,7 @@ dependencies {
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
 
-    //retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
+    retrolambdaConfig dataDependencies.lambda
 
     testCompile testDependencies.junit
     testCompile testDependencies.assertj

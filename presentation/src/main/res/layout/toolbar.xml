@@ -22,18 +22,6 @@
                 />
         </android.support.design.widget.AppBarLayout>
     </android.support.design.widget.CoordinatorLayout>
-    <!--<android.support.v7.widget.Toolbar
-        xmlns:local="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:fitsSystemWindows="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="@dimen/toolbar_elevation"
-        local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />-->
 </layout>
 
 

@@ -17,7 +17,7 @@
                android:id="@+id/walletName"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               android:text="@{wallet.name}"/>
+               android:text="12"/>
 
 
        </android.support.v7.widget.CardView>
