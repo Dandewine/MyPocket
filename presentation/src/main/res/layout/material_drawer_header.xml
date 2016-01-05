@@ -2,7 +2,7 @@
     <data>
         <variable
             name="user"
-            type="com.denis.mypocket.model.User"/>
+            type="com.denis.mypocket.model.UserModel"/>
     </data>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                  android:layout_width="match_parent"
@@ -17,7 +17,8 @@
         <RelativeLayout
             android:id="@+id/material_drawer_account_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/material_drawer_account_header_height">
+            android:layout_height="@dimen/material_drawer_account_header_height"
+            android:background="@drawable/drawer_bg">
 
             <ImageView
                 android:id="@+id/material_drawer_account_header_current"
@@ -87,6 +88,7 @@
                     android:layout_marginLeft="@dimen/default_padding"
                     android:fontFamily="sans-serif-medium"
                     android:lines="1"
+                    android:textColor="@android:color/white"
                     android:singleLine="true"
                     android:text="@{user.name}"
                     android:textSize="@dimen/text_size_14sp" />
@@ -98,6 +100,7 @@
                     android:layout_marginLeft="@dimen/default_padding"
                     android:fontFamily="sans-serif"
                     android:lines="1"
+                    android:textColor="@android:color/white"
                     android:singleLine="true"
                     android:text="@{user.email}"
                     android:textSize="@dimen/text_size_14sp" />

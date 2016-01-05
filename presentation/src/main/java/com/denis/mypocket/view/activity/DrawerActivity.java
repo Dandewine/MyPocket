@@ -1,4 +1,4 @@
-package com.denis.mypocket.view;
+package com.denis.mypocket.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -7,17 +7,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.MaterialDrawerActivityBinding;
 import com.denis.mypocket.view.adapter.DrawerAdapter;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by denis on 12/13/15.
@@ -30,7 +24,10 @@ public class DrawerActivity extends BaseActivity {
         MaterialDrawerActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.material_drawer_activity);
 
         DrawerLayout mDrawerLayout = binding.drawerLayout;
+        //mDrawerLayout.setStatusBarBackgroundColor(getColor(R.color.colorPrimaryDark));
+
         RecyclerView recyclerView = binding.recycler;
+        setSupportActionBar(binding.toolBarInclude.toolbar);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new DrawerAdapter());
@@ -56,6 +53,7 @@ public class DrawerActivity extends BaseActivity {
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
+
 
 
 }

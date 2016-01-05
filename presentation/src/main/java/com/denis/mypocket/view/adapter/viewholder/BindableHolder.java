@@ -28,6 +28,7 @@ public class BindableHolder<VH extends ViewDataBinding> extends RecyclerView.Vie
     }
 
     public void setOnClickListener(int position, Object item, ActionListener listener){
+        itemView.setClickable(true);
         itemView.setOnClickListener(e -> listener.onItemClickListener(position,item));
     }
 

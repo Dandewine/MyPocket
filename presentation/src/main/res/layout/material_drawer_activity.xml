@@ -4,16 +4,16 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         >
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            >
 
-            <include layout="@layout/toolbar"/>
+            <include
+                android:id="@+id/toolBarInclude"
+                layout="@layout/toolbar"/>
 
             <FrameLayout
                 android:id="@+id/content_frame"
@@ -32,4 +32,5 @@
             android:scrollbars="vertical"/>
 
     </android.support.v4.widget.DrawerLayout>
+
 </layout>

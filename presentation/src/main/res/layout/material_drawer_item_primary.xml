@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/selectableItemBackground">
 
     <data>
         <variable name="item" type="com.denis.mypocket.model.DrawerItem"/>
         <import type="android.view.View"/>
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:tools="http://schemas.android.com/tools"
-                  android:layout_width="match_parent"
-                  android:layout_height="@dimen/custom_padding_48dp"
-                  android:orientation="horizontal"
-                  android:paddingEnd="@dimen/default_padding"
-                  android:paddingLeft="@dimen/default_padding"
-                  android:paddingRight="@dimen/default_padding"
-                  android:paddingStart="@dimen/default_padding">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding"
+        android:paddingRight="@dimen/default_padding"
+        android:paddingStart="@dimen/default_padding">
 
         <ImageView
             android:id="@+id/material_drawer_icon"
@@ -81,6 +84,8 @@
                 android:paddingRight="1dp"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/badge_cycle"
                 android:visibility="@{item.isBadgable? View.VISIBLE : View.GONE}"
                 tools:text="@{item.badge}" />
         </LinearLayout>

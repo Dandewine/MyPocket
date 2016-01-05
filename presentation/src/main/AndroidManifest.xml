@@ -8,12 +8,14 @@
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".view.DrawerActivity">
+        <activity
+            android:name=".view.activity.DrawerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.WalletsActivity"/>
 
     </application>
 
