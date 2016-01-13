@@ -11,12 +11,19 @@ public interface WalletRepository {
     /**
      * Get an {@link rx.Observable} which will emit a List of {@link Wallet}.
      */
-    Observable<List<Wallet>> users();
+    Observable<List<Wallet>> getWalletList();
 
     /**
      * Get an {@link rx.Observable} which will emit a {@link Wallet}.
      *
-     * @param userId The user id used to retrieve user data.
+     * @param userId The getWallet id used to retrieve getWallet data.
      */
-    Observable<Wallet> user(final int userId);
+    Observable<Wallet> getWallet(final int userId);
+
+    Observable<Wallet> addWallet(Wallet wallet);
+
+    Observable<List<Wallet>> addWallet(List<Wallet> wallets);
+
+
+
 }

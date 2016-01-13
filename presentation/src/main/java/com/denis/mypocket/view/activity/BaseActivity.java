@@ -1,15 +1,27 @@
 package com.denis.mypocket.view.activity;
 
-import android.support.annotation.IdRes;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
-/**
- * Created by denis on 12/13/15.
- */
+import com.denis.mypocket.MyPocketApp;
+import com.denis.mypocket.internal.di.components.ApplicationComponent;
+import com.denis.mypocket.internal.di.modules.ActivityModule;
+
 public class BaseActivity extends AppCompatActivity {
+
+    protected ApplicationComponent applicationComponent;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        applicationComponent = getApplicationComponent();
+        applicationComponent.inject(this);
+    }
 
     protected void configireToolbar(Toolbar toolbar,
                                     @StringRes int text,
@@ -19,7 +31,37 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(asHomeEnabled);
     }
 
-    protected <T extends View>T myFindViewById(@IdRes int id){
-        return (T)(findViewById(id));
+    /**
+     * Adds a {@link Fragment} to this activity's layout.
+     *
+     * @param containerViewId The container view to where add the fragment.
+     * @param fragment The fragment to be added.
+     */
+    protected void addFragment(int containerViewId, Fragment fragment) {
+        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        fragmentTransaction.add(containerViewId, fragment);
+        fragmentTransaction.commit();
     }
+    /**
+     * Get the Main Application component for dependency injection.
+     *
+     * @return {@link com.denis.mypocket.internal.di.components.ApplicationComponent}
+     */
+    protected ApplicationComponent getApplicationComponent() {
+        return ((MyPocketApp)getApplication()).getApplicationComponent();
+    }
+    /**
+     * Get an Activity module for dependency injection.
+     *
+     * @return {@link com.denis.mypocket.internal.di.modules.ActivityModule}
+     */
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
+    }
+
+   /* protected <T extends View>T myFindViewById(@IdRes int id){
+        return (T)(findViewById(id));
+    }*/
+
+
 }

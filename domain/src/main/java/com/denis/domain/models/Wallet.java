@@ -4,16 +4,23 @@ package com.denis.domain.models;
  * Created by denis on 1/4/16.
  */
 public class Wallet {
-    private long id;
+    private int id;
     private String name;
     private String currency;
     private float balance;
 
-    public Wallet(long id) {
+    public Wallet(int id, String name, String currency, float balance) {
+        this.id = id;
+        this.name = name;
+        this.currency = currency;
+        this.balance = balance;
+    }
+
+    public Wallet(int id) {
         this.id = id;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

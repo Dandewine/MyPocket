@@ -1,7 +1,51 @@
 package com.denis.data.repository;
 
-/**
- * Created by denis on 1/5/16.
- */
-public class WalletDataRepository {
+import com.denis.data.entity.WalletEntity;
+import com.denis.data.entity.mapper.WalletDataMapper;
+import com.denis.data.repository.datasource.WalletDataStore;
+import com.denis.domain.models.Wallet;
+import com.denis.domain.repository.WalletRepository;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import rx.Observable;
+
+@Singleton
+public class WalletDataRepository implements WalletRepository {
+    private WalletDataMapper walletDataMapper;
+    private WalletDataStore walletDataStore;
+
+    @Inject
+    public WalletDataRepository(WalletDataMapper walletDataMapper,
+                                WalletDataStore walletDataStore) {
+        this.walletDataMapper = walletDataMapper;
+        this.walletDataStore = walletDataStore;
+    }
+
+    @Override
+    public Observable<List<Wallet>> getWalletList() {
+        return walletDataStore.getListWalletEntities()
+                .map(walletDataMapper::transform);
+    }
+
+    @Override
+    public Observable<Wallet> getWallet(int userId) {
+        return walletDataStore.getWalletEntity(userId)
+                .map(walletDataMapper::transform);
+    }
+
+    @Override
+    public Observable<Wallet> addWallet(Wallet wallet) {
+        WalletEntity walletEntity = walletDataMapper.transform(wallet);
+        return walletDataStore.put(walletEntity)
+                .map(walletDataMapper::transform);
+    }
+
+    @Override
+    public Observable<List<Wallet>> addWallet(List<Wallet> wallets) {
+        return null;
+    }
 }

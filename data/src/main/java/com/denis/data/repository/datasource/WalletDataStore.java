@@ -2,6 +2,7 @@ package com.denis.data.repository.datasource;
 
 import com.denis.data.entity.WalletEntity;
 
+import java.util.Collection;
 import java.util.List;
 
 import rx.Observable;
@@ -20,4 +21,7 @@ public interface WalletDataStore {
      * Get an {@link rx.Observable} which will emit a List of {@link WalletEntity}.
      */
     Observable<List<WalletEntity>> getListWalletEntities();
+
+    Observable<WalletEntity> put(WalletEntity walletEntity);
+    Observable<WalletEntity> put(Collection<? extends WalletEntity> collection);
 }

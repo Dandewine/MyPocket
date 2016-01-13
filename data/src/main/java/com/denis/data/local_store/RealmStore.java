@@ -1,5 +1,6 @@
 package com.denis.data.local_store;
 
+import java.util.Collection;
 import java.util.List;
 
 import rx.Observable;
@@ -9,7 +10,8 @@ import rx.Observable;
  */
 public interface RealmStore<T>  {
     Observable<T> get(final int id);
-    void put(T item);
+    Observable<T> put(T item);
+    Observable<T> put(Collection<T> collection);
 
     Observable<List<T>> getList();
 }

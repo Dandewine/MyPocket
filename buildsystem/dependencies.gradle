@@ -32,7 +32,7 @@ ext{
 
     //region Presentation
     presentationDependencies = [
-            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             recyclerView:       "com.android.support:recyclerview-v7:${supportLibVersion}",
             rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",

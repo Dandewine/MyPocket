@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.denis.mypocket.viewmodel.AddWalletViewModel"/>
+    </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
+
         <include android:id="@+id/addWalletToolbar" layout="@layout/toolbar"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.walletName}"
+            android:onTextChanged="@{viewModel.onTextChanged}"
             android:id="@+id/walletNameEdit"/>
 
         <Button
@@ -16,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="OK"
             android:id="@+id/addWalletBt"
+            android:onClick="@{viewModel.addWalletOnClick}"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </layout>

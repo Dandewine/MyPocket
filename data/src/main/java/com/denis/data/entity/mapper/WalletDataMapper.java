@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class WalletEntityDataMapper {
+public class WalletDataMapper {
+
+    @Inject
+    public WalletDataMapper() {
+    }
 
     /**
      * Transform a {@link WalletEntity} into an {@link Wallet}.
@@ -46,5 +51,18 @@ public class WalletEntityDataMapper {
             }
         }
         return walletList;
+    }
+
+    public List<WalletEntity> transform(List<Wallet> wallets){
+        List<WalletEntity> walletEntities = new ArrayList<>();
+        for (Wallet w : wallets) {
+            WalletEntity entity = new WalletEntity(w.getId(),w.getName(),w.getCurrency(),w.getBalance());
+            walletEntities.add(entity);
+        }
+        return walletEntities;
+    }
+
+    public WalletEntity transform(Wallet wallet){
+        return new WalletEntity(wallet.getId(),wallet.getName(),wallet.getCurrency(),wallet.getBalance());
     }
 }

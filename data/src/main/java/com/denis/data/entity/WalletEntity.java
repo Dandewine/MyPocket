@@ -13,6 +13,16 @@ public class WalletEntity extends RealmObject {
     private String currency;
     private float balance;
 
+    public WalletEntity(int id, String name, String currency, float balance) {
+        this.id = id;
+        this.name = name;
+        this.currency = currency;
+        this.balance = balance;
+    }
+
+    public WalletEntity() {
+    }
+
     public int getId() {
         return id;
     }
