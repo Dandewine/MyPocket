@@ -23,5 +23,5 @@ public interface WalletDataStore {
     Observable<List<WalletEntity>> getListWalletEntities();
 
     Observable<WalletEntity> put(WalletEntity walletEntity);
-    Observable<WalletEntity> put(Collection<? extends WalletEntity> collection);
+    Observable<WalletEntity> put(Collection<WalletEntity> collection);
 }

@@ -25,3 +25,6 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+task runDataUnitTests(dependsOn: [':data:cleanTestDebugUnitTest', ':data:testDebugUnitTest']){
+    description 'Run unit tests for the data layer.'
+}

@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 public class WalletLocalDataStore implements WalletDataStore {
-    public RealmStore storage;
+    public RealmStore<WalletEntity> storage;
 
     @Inject
     public WalletLocalDataStore(RealmStore storage) {
@@ -34,7 +34,7 @@ public class WalletLocalDataStore implements WalletDataStore {
     }
 
     @Override
-    public Observable<WalletEntity> put(Collection<? extends WalletEntity> collection) {
+    public Observable<WalletEntity> put(Collection<WalletEntity> collection) {
       return storage.put(collection);
     }
 }

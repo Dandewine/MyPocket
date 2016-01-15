@@ -1,7 +1,6 @@
 package com.denis.mypocket.view.activity;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -37,17 +36,24 @@ public class BaseActivity extends AppCompatActivity {
      * @param containerViewId The container view to where add the fragment.
      * @param fragment The fragment to be added.
      */
-    protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-        fragmentTransaction.add(containerViewId, fragment);
-        fragmentTransaction.commit();
+    public void addFragment(int containerViewId, Fragment fragment) {
+        getFragmentManager().beginTransaction()
+                .add(containerViewId, fragment)
+                .commit();
     }
+
+    public void replaceFragment(int containerViewId, Fragment fragment) {
+        getFragmentManager().beginTransaction()
+                .replace(containerViewId, fragment)
+                .commit();
+    }
+
     /**
      * Get the Main Application component for dependency injection.
      *
      * @return {@link com.denis.mypocket.internal.di.components.ApplicationComponent}
      */
-    protected ApplicationComponent getApplicationComponent() {
+    public ApplicationComponent getApplicationComponent() {
         return ((MyPocketApp)getApplication()).getApplicationComponent();
     }
     /**

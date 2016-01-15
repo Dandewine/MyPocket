@@ -9,11 +9,9 @@ import com.denis.domain.repository.WalletRepository;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import rx.Observable;
 
-@Singleton
 public class WalletDataRepository implements WalletRepository {
     private WalletDataMapper walletDataMapper;
     private WalletDataStore walletDataStore;
@@ -46,6 +44,6 @@ public class WalletDataRepository implements WalletRepository {
 
     @Override
     public Observable<List<Wallet>> addWallet(List<Wallet> wallets) {
-        return null;
+        throw new UnsupportedOperationException("You can't add a list of wallets");
     }
 }

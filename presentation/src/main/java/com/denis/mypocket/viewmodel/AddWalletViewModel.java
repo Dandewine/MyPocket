@@ -11,7 +11,7 @@ import com.denis.mypocket.PresentationConstants;
 import com.denis.mypocket.StringUtils;
 
 public class AddWalletViewModel implements ViewModel {
-    private AddWalletUseCase addWalletUseCase;
+    public AddWalletUseCase addWalletUseCase;
     public ObservableField<String> walletName = new ObservableField<>();
 
 
@@ -24,12 +24,7 @@ public class AddWalletViewModel implements ViewModel {
         addWalletUseCase.unsubscribe();
     }
 
-    @Override
-    public void success() {
-
-    }
-
-    private class AddWalletSubscriber extends DefaultSubscriber<Wallet>{
+    private static class AddWalletSubscriber extends DefaultSubscriber<Wallet>{
         @Override
         public void onCompleted() {
             Log.d(PresentationConstants.WALLET_TAG,"Completed");

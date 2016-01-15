@@ -28,10 +28,12 @@ android {
 }
 
 dependencies {
-    compile project(path: ':domain')
+
     def dataDependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.dataTestDependencies
 
+
+    compile project(path: ':domain')
     provided dataDependencies.daggerCompiler
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.dagger
@@ -46,6 +48,6 @@ dependencies {
     testCompile testDependencies.junit
     testCompile testDependencies.assertj
     testCompile testDependencies.mockito
-    testCompile testDependencies.robolectric
+   // testCompile testDependencies.robolectric
 
 }

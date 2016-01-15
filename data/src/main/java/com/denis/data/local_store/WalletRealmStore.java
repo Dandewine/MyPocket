@@ -40,6 +40,6 @@ public class WalletRealmStore implements RealmStore<WalletEntity> {
     @Override
     public Observable<WalletEntity> put(Collection<WalletEntity> collection) {
         mRealm.executeTransaction(realm -> realm.copyToRealmOrUpdate(collection));
-        return null;
+        throw new UnsupportedOperationException("I can't do this");
     }
 }

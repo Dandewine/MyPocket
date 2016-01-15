@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 
 @Module
 public class ApplicationModule {
@@ -35,6 +36,10 @@ public class ApplicationModule {
     @Provides @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
+    }
+
+    @Provides @Singleton Realm provideRealm(){
+        return Realm.getDefaultInstance();
     }
 
 }

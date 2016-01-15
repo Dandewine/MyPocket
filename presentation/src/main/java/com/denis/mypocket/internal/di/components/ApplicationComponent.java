@@ -10,6 +10,7 @@ import com.denis.mypocket.view.activity.BaseActivity;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import io.realm.Realm;
 
 /**
  * A component whose lifetime is the life of the application.
@@ -23,4 +24,5 @@ public interface ApplicationComponent {
     Context context();
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
+    Realm realm();
 }

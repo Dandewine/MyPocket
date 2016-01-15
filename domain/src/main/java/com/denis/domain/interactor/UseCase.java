@@ -31,13 +31,14 @@ public abstract class UseCase<Argument> {
      * @param useCaseSubscriber The guy who will be listen to the observable build with {@link #buildUseCaseObservable(Argument... args)}.
      */
     @SuppressWarnings("unchecked")
-    public void execute(Subscriber useCaseSubscriber, Argument... arg) {
+    public void executeAsync(Subscriber useCaseSubscriber, Argument... arg) {
         this.subscription = this.buildUseCaseObservable(arg)
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(useCaseSubscriber);
     }
 
+    @SuppressWarnings("unchecked")
     public void executeSync(Subscriber useCaseSubscriber, Argument... arg){
         this.subscription = this.buildUseCaseObservable(arg)
                 .subscribe(useCaseSubscriber);

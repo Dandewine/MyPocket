@@ -12,6 +12,7 @@ import android.view.View;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.MaterialDrawerActivityBinding;
 import com.denis.mypocket.view.adapter.DrawerAdapter;
+import com.denis.mypocket.view.fragments.TransactionsFragment;
 
 /**
  * Created by denis on 12/13/15.
@@ -27,7 +28,7 @@ public class DrawerActivity extends BaseActivity {
         //mDrawerLayout.setStatusBarBackgroundColor(getColor(R.color.colorPrimaryDark));
 
         RecyclerView recyclerView = binding.recycler;
-        setSupportActionBar(binding.toolBarInclude.toolbar);
+        configireToolbar(binding.toolBarInclude.toolbar,R.string.app_name,false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new DrawerAdapter());
@@ -52,8 +53,8 @@ public class DrawerActivity extends BaseActivity {
         };
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        addFragment(R.id.content_frame, TransactionsFragment.newInstance());
     }
-
-
 
 }

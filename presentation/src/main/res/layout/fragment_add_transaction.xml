@@ -1,0 +1,42 @@
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.denis.mypocket.viewmodel.AddTransactionViewModel"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+        <include android:id="@+id/toolbarAddTrans" layout="@layout/toolbar"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.amount}"
+            android:onTextChanged="@{viewModel.onTextChanged}"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD"
+            android:id="@+id/addTrans"
+            android:layout_gravity="right"/>
+
+
+    </LinearLayout>
+</layout>
+

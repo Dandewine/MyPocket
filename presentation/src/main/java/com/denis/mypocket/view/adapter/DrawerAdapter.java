@@ -7,7 +7,6 @@ import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.denis.mypocket.BR;
 import com.denis.mypocket.R;
@@ -52,16 +51,18 @@ public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHo
     }
 
     private void setData(){
-        DrawerItem item1 = new DrawerItem(context.getString(R.string.drawer_categories),getDrawable(R.drawable.vector_categories),"23",true);
-        DrawerItem item2 = new DrawerItem(context.getString(R.string.drawer_saves),getDrawable(R.drawable.vector_saves),"23",false);
-        DrawerItem item3 = new DrawerItem(context.getString(R.string.drawer_travel_mode),getDrawable(R.drawable.vector_travel_mode),"23",false);
-        DrawerItem item4 = new DrawerItem(context.getString(R.string.drawer_cycle_operations),getDrawable(R.drawable.vector_cycle),"23",false);
-        DrawerItem item5 = new DrawerItem(context.getString(R.string.drawer_tutorials),getDrawable(R.drawable.vector_tutorials),"23",false);
-        DrawerItem item6 = new DrawerItem(context.getString(R.string.drawer_wallets),getDrawable(R.drawable.vector_wallet),"23",false);
-        DrawerItem item7 = new DrawerItem(context.getString(R.string.drawer_settings),getDrawable(R.drawable.vector_settings),"23",false);
-        DrawerItem item8 = new DrawerItem(context.getString(R.string.drawer_debts),getDrawable(R.drawable.vector_debts),"23",false);
+        DrawerItem transactions = new DrawerItem(context.getString(R.string.drawer_trans),getDrawable(R.drawable.vector_transactions),"23",false);
+        DrawerItem categories = new DrawerItem(context.getString(R.string.drawer_categories),getDrawable(R.drawable.vector_categories),"23",true);
+        DrawerItem saves = new DrawerItem(context.getString(R.string.drawer_saves),getDrawable(R.drawable.vector_saves),"23",false);
+        DrawerItem travelMode = new DrawerItem(context.getString(R.string.drawer_travel_mode),getDrawable(R.drawable.vector_travel_mode),"23",false);
+        DrawerItem cycleOperations = new DrawerItem(context.getString(R.string.drawer_cycle_operations),getDrawable(R.drawable.vector_cycle),"23",false);
+        DrawerItem tutorials = new DrawerItem(context.getString(R.string.drawer_tutorials),getDrawable(R.drawable.vector_tutorials),"23",false);
+        DrawerItem wallets = new DrawerItem(context.getString(R.string.drawer_wallets),getDrawable(R.drawable.vector_wallet),"23",false);
+        DrawerItem settings = new DrawerItem(context.getString(R.string.drawer_settings),getDrawable(R.drawable.vector_settings),"23",false);
+        DrawerItem debts = new DrawerItem(context.getString(R.string.drawer_debts),getDrawable(R.drawable.vector_debts),"23",false);
 
-        addAll(Arrays.asList(item1,item2,item3,item4,item5,item6,item7,item8));
+
+        addAll(Arrays.asList(transactions,categories,saves,travelMode,cycleOperations,tutorials,wallets,settings,debts));
     }
 
 
@@ -104,7 +105,8 @@ public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHo
 
     BindableHolder.ActionListener actionListener = (position, item) -> {
         switch (position){
-            case 6: context.startActivity(new Intent(context, WalletsActivity.class));
+            case 6: context.startActivity(new Intent(context, WalletsActivity.class)); break;
+            case 1: context.startActivity(new Intent());
         }
     };
 

@@ -28,8 +28,8 @@ public class WalletModule {
     }
 
     @Provides @PerActivity
-    RealmStore getRealmStore(){
-        return new WalletRealmStore(Realm.getDefaultInstance());
+    RealmStore getRealmStore(Realm realm){
+        return new WalletRealmStore(realm);
     }
 
     @Provides @PerActivity

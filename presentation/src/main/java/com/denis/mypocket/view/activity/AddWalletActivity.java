@@ -36,4 +36,10 @@ public class AddWalletActivity extends BaseActivity{
         binding.setViewModel(viewModel);
 
     }
+
+    @Override
+    protected void onDestroy() {
+        viewModel.destroy();
+        super.onDestroy();
+    }
 }
