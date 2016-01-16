@@ -3,6 +3,7 @@
 <layout>
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,11 +14,40 @@
                 android:layout_height="match_parent"/>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addTransFab"
+            android:id="@+id/addIncomeTrans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_dialog_email"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="160dp"
+            app:pressedTranslationZ="12dp"
+            app:elevation="6dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/fab_income"
+            android:transitionName="revealIncome"
+            android:layout_gravity="bottom|end"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addOutcomeTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_dialog_email"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="90dp"
+            app:pressedTranslationZ="12dp"
+            app:elevation="6dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/fab_outcome"
+            android:transitionName="revealOutcome"
+            android:layout_gravity="bottom|end"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vector_plus"
             android:layout_margin="@dimen/default_padding"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_gravity="bottom|end"/>
 
     </android.support.design.widget.CoordinatorLayout>

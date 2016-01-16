@@ -6,4 +6,7 @@
 
     <color name="drawer_badge_color">#ff0000</color>
     <color name="drawer_icon_color">#616161</color>
+
+    <color name="fab_income">#8BC34A</color>
+    <color name="fab_outcome">#FF5722</color>
 </resources>
