@@ -7,8 +7,8 @@ import com.denis.mypocket.view.activity.AddTransactionActivity;
 import dagger.Component;
 
 @PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = {AddTransactionModule.class})
+@Component(dependencies = ApplicationComponent.class,
+           modules = {AddTransactionModule.class, AddTransactionModule.class})
 public interface AddTransactionComponent {
     void inject(AddTransactionActivity fragment);
-
 }

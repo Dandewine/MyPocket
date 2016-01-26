@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.utils.PLTags;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,7 +18,7 @@ public class ActivityModule {
 
     public ActivityModule(Activity activity) {
         this.activity = activity;
-        Log.d("myTag","Activity Module, "+hashCode());
+        Log.d(PLTags.INSTANCE_TAG,"Activity Module, "+hashCode());
     }
 
 

@@ -4,23 +4,31 @@ import android.databinding.ObservableField;
 import android.util.Log;
 import android.view.View;
 
-import com.denis.domain.interactor.AddTransactionUseCase;
 import com.denis.domain.interactor.DefaultSubscriber;
+import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.Transaction;
-import com.denis.mypocket.PresentationConstants;
+import com.denis.domain.models.Wallet;
 import com.denis.mypocket.internal.di.PerFragment;
+import com.denis.mypocket.utils.PLTags;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 @PerFragment
 public class AddTransactionViewModel implements ViewModel {
     public ObservableField<String> amount = new ObservableField<>();
-    public AddTransactionUseCase addTransactionUseCase;
+    public UseCase<Transaction> addTransactionUseCase;
+    private UseCase<Wallet> getWalletsUseCase;
+
 
     @Inject
-    public AddTransactionViewModel(AddTransactionUseCase addTransactionUseCase) {
+    public AddTransactionViewModel(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
+                                   @Named("getWallets") UseCase<Wallet> getWalletsUseCase) {
         this.addTransactionUseCase = addTransactionUseCase;
+        this.getWalletsUseCase = getWalletsUseCase;
+        Log.d(PLTags.INSTANCE_TAG,"Add Transaction ViewModel, "+hashCode());
     }
+
 
     @Override
     public void destroy() {
@@ -31,7 +39,7 @@ public class AddTransactionViewModel implements ViewModel {
     private static class AddTransactionSubscriber extends DefaultSubscriber<Transaction>{
         @Override
         public void onCompleted() {
-            Log.d(PresentationConstants.TRANSACTIONS_TAG,"Transaction was added");
+            Log.d(PLTags.TRANSACTIONS_TAG,"Transaction was added");
         }
 
         @Override
@@ -41,7 +49,7 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(Transaction transaction) {
-            Log.d(PresentationConstants.TRANSACTIONS_TAG,"onNext");
+            Log.d(PLTags.TRANSACTIONS_TAG,"onNext");
         }
     }
 
@@ -50,5 +58,6 @@ public class AddTransactionViewModel implements ViewModel {
     }
 
     public View.OnClickListener addOnClick =
-            v -> addTransactionUseCase.executeSync(new AddTransactionSubscriber(),new Transaction(0,0,345f,1,234L));
+            v -> addTransactionUseCase
+                    .executeSync(new AddTransactionSubscriber(),new Transaction(0,0,345f,1,234L));
 }

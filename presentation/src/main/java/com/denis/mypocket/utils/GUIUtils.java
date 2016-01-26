@@ -1,4 +1,4 @@
-package com.denis.mypocket;
+package com.denis.mypocket.utils;
 
 import android.animation.Animator;
 import android.content.Context;

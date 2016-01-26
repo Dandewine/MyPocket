@@ -48,6 +48,6 @@ dependencies {
     testCompile testDependencies.junit
     testCompile testDependencies.assertj
     testCompile testDependencies.mockito
-   // testCompile testDependencies.robolectric
+    testCompile testDependencies.robolectric
 
 }

@@ -2,7 +2,7 @@ package com.denis.data.repository;
 
 import com.denis.data.entity.WalletEntity;
 import com.denis.data.entity.mapper.WalletDataMapper;
-import com.denis.data.repository.datasource.WalletDataStore;
+import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 

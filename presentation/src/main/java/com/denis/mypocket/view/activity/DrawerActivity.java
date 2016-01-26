@@ -57,4 +57,8 @@ public class DrawerActivity extends BaseActivity {
         addFragment(R.id.content_frame, TransactionsFragment.newInstance());
     }
 
+    @Override
+    protected void initDIComponent() {
+
+    }
 }

@@ -8,9 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
 public class TransactionDataMapper {
 
     @Inject

@@ -2,6 +2,7 @@ package com.denis.data.repository.datasource;
 
 import com.denis.data.entity.WalletEntity;
 import com.denis.data.local_store.RealmStore;
+import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 
 import java.util.Collection;
 import java.util.List;

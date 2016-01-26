@@ -21,4 +21,9 @@ public class WalletsActivity extends BaseActivity {
         binding.fab.setOnClickListener(v ->
                 startActivity(new Intent(this,AddWalletActivity.class)));
     }
+
+    @Override
+    protected void initDIComponent() {
+
+    }
 }

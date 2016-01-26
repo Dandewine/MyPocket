@@ -1,4 +1,4 @@
-package com.denis.data.repository.datasource;
+package com.denis.data.repository.datasource.interfaces;
 
 import com.denis.data.entity.TransactionEntity;
 

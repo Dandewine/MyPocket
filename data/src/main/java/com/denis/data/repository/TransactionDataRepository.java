@@ -1,7 +1,7 @@
 package com.denis.data.repository;
 
 import com.denis.data.entity.mapper.TransactionDataMapper;
-import com.denis.data.repository.datasource.TransactionDataStore;
+import com.denis.data.repository.datasource.interfaces.TransactionDataStore;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.repository.TransactionRepository;
 

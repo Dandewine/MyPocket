@@ -11,15 +11,15 @@ import com.denis.mypocket.MyPocketApp;
 import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected ApplicationComponent applicationComponent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        initDIComponent();
         super.onCreate(savedInstanceState);
         applicationComponent = getApplicationComponent();
-        applicationComponent.inject(this);
     }
 
     protected void configireToolbar(Toolbar toolbar,
@@ -68,6 +68,8 @@ public class BaseActivity extends AppCompatActivity {
    /* protected <T extends View>T myFindViewById(@IdRes int id){
         return (T)(findViewById(id));
     }*/
+
+    protected abstract void initDIComponent();
 
 
 }

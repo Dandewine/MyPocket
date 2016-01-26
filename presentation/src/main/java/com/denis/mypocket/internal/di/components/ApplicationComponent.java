@@ -5,7 +5,6 @@ import android.content.Context;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.mypocket.internal.di.modules.ApplicationModule;
-import com.denis.mypocket.view.activity.BaseActivity;
 
 import javax.inject.Singleton;
 
@@ -18,7 +17,7 @@ import io.realm.Realm;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
-    void inject(BaseActivity baseActivity);
+    //void inject(BaseActivity baseActivity);
 
     //Exposed to sub-graphs.
     Context context();

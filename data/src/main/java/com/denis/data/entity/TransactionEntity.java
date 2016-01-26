@@ -10,6 +10,13 @@ public class TransactionEntity extends RealmObject {
     private int type;
     private long unixDateTime;
 
+    public TransactionEntity(int id) {
+        this.id = id;
+    }
+
+    public TransactionEntity() {
+    }
+
     public int getId() {
         return id;
     }
