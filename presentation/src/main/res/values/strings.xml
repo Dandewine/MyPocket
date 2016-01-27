@@ -14,4 +14,14 @@
 
     <string name="toolbar_add_wallet">Add Wallet</string>
     <string name="toolbar_add_trans">Add Transaction</string>
+
+    <string-array name="mock_array">
+        <item>Wallet A</item>
+        <item>Wallet B</item>
+    </string-array>
+
+    <string-array name="mock_array2">
+        <item>Category A</item>
+        <item>Category B</item>
+    </string-array>
 </resources>

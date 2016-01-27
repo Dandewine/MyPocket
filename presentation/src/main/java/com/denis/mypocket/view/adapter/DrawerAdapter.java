@@ -105,7 +105,7 @@ public class DrawerAdapter extends RecyclerBindableAdapter<DrawerItem,BindableHo
 
     BindableHolder.ActionListener actionListener = (position, item) -> {
         switch (position){
-            case 6: context.startActivity(new Intent(context, WalletsActivity.class)); break;
+            case 7: context.startActivity(new Intent(context, WalletsActivity.class)); break;
             case 1: context.startActivity(new Intent());
         }
     };

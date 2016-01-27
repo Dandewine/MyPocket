@@ -4,7 +4,8 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class TransactionEntity extends RealmObject {
-    @PrimaryKey private int id;
+    @PrimaryKey
+    private int id;
     private int walletId;
     private float amount;
     private int type;

@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Observable;
 
@@ -15,7 +16,7 @@ public class TransactionLocalDataStore implements TransactionDataStore {
     private RealmStore<TransactionEntity> realmStore;
 
     @Inject
-    public TransactionLocalDataStore(RealmStore<TransactionEntity> realmStore) {
+    public TransactionLocalDataStore(@Named("transactions") RealmStore<TransactionEntity> realmStore) {
         this.realmStore = realmStore;
     }
 
@@ -35,7 +36,8 @@ public class TransactionLocalDataStore implements TransactionDataStore {
     }
 
     @Override
-    public Observable<TransactionEntity> put(Collection<TransactionEntity> collection) {
+    public Observable<List<TransactionEntity>> put(Collection<TransactionEntity> collection) {
         return realmStore.put(collection);
     }
+
 }

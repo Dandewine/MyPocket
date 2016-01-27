@@ -1,6 +1,6 @@
 package com.denis.data.repository.datasource;
 
-import com.denis.data.entity.ProfitCategoryEntity;
+import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.ProfitCategoryDataStore;
 
@@ -20,22 +20,22 @@ public class ProfitCateforyLocalDataStore implements ProfitCategoryDataStore {
     }
 
     @Override
-    public Observable<ProfitCategoryEntity> getProfitCategoryEntity(int categoryId) {
+    public Observable<IncomeCategoryEntity> getProfitCategoryEntity(int categoryId) {
         return realmStore.get(categoryId);
     }
 
     @Override
-    public Observable<List<ProfitCategoryEntity>> getListWalletEntities() {
+    public Observable<List<IncomeCategoryEntity>> getListWalletEntities() {
         return realmStore.getList();
     }
 
     @Override
-    public Observable<ProfitCategoryEntity> put(ProfitCategoryEntity profitCategoryEntity) {
-        return realmStore.put(profitCategoryEntity);
+    public Observable<IncomeCategoryEntity> put(IncomeCategoryEntity incomeCategoryEntity) {
+        return realmStore.put(incomeCategoryEntity);
     }
 
     @Override
-    public Observable<ProfitCategoryEntity> put(Collection<ProfitCategoryEntity> collection) {
+    public Observable<IncomeCategoryEntity> put(Collection<IncomeCategoryEntity> collection) {
         return realmStore.put(collection);
     }
 }

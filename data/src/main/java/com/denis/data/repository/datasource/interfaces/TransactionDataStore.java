@@ -30,5 +30,5 @@ public interface TransactionDataStore {
      * @param collection
      * @return
      */
-    Observable<TransactionEntity> put(Collection<TransactionEntity> collection);
+    Observable<List<TransactionEntity>> put(Collection<TransactionEntity> collection);
 }

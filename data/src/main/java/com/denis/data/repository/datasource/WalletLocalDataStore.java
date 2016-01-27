@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Observable;
 
@@ -15,7 +16,7 @@ public class WalletLocalDataStore implements WalletDataStore {
     public RealmStore<WalletEntity> storage;
 
     @Inject
-    public WalletLocalDataStore(RealmStore storage) {
+    public WalletLocalDataStore(@Named("wallets") RealmStore<WalletEntity> storage) {
         this.storage = storage;
     }
 
@@ -35,7 +36,8 @@ public class WalletLocalDataStore implements WalletDataStore {
     }
 
     @Override
-    public Observable<WalletEntity> put(Collection<WalletEntity> collection) {
-      return storage.put(collection);
+    public Observable<List<WalletEntity>> put(Collection<WalletEntity> collection) {
+        return storage.put(collection);
     }
+
 }

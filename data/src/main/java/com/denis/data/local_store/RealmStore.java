@@ -11,7 +11,7 @@ import rx.Observable;
 public interface RealmStore<T>  {
     Observable<T> get(final int id);
     Observable<T> put(T item);
-    Observable<T> put(Collection<T> collection);
+    Observable<List<T>> put(Collection<T> collection);
 
     Observable<List<T>> getList();
 }

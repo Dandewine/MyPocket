@@ -3,24 +3,30 @@ package com.denis.data.entity;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class WasteCategoryEntity extends RealmObject {
-    @PrimaryKey private int id;
+public class IncomeCategoryEntity extends RealmObject {
+    @PrimaryKey
+    private int id;
     private String name;
     private String path;
 
-    public WasteCategoryEntity(int id) {
+    public IncomeCategoryEntity(int id) {
         this.id = id;
     }
 
-    public WasteCategoryEntity() {
+    public IncomeCategoryEntity(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public IncomeCategoryEntity() {
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

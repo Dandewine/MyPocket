@@ -24,6 +24,7 @@ public class DefaultSubscriber<T> extends rx.Subscriber<T> {
   }
 
   @Override public void onError(Throwable e) {
+    e.printStackTrace();
     // no-op by default.
   }
 

@@ -1,25 +1,20 @@
-package com.denis.data.entity;
+package com.denis.domain.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
-public class ProfitCategoryEntity extends RealmObject {
-   @PrimaryKey private int id;
+public class ExpenseCategory {
+    private int id;
     private String name;
     private String path;
 
-    public ProfitCategoryEntity(int id) {
-        this.id = id;
-    }
-
-    public ProfitCategoryEntity() {
-    }
-    public void setId(int id) {
+    public ExpenseCategory(int id) {
         this.id = id;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

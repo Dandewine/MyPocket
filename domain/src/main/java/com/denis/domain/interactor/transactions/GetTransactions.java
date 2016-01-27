@@ -1,7 +1,8 @@
-package com.denis.domain.interactor;
+package com.denis.domain.interactor.transactions;
 
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
+import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.repository.TransactionRepository;
 

@@ -1,7 +1,8 @@
-package com.denis.domain.interactor;
+package com.denis.domain.interactor.wallets;
 
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
+import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 

@@ -10,7 +10,7 @@ import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.data.repository.datasource.WalletLocalDataStore;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
-import com.denis.domain.interactor.AddWalletUseCase;
+import com.denis.domain.interactor.wallets.AddWalletUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;

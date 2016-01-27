@@ -3,6 +3,7 @@ package com.denis.mypocket.view.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.MenuItem;
 
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddWalletBinding;
@@ -27,9 +28,18 @@ public class AddWalletActivity extends BaseActivity{
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void initDIComponent() {
         DaggerWalletsComponent.builder()
                 .activityModule(getActivityModule())
+                .applicationComponent(getApplicationComponent())
                 .walletModule(new WalletModule())
                 .build().inject(this);
     }

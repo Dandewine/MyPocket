@@ -15,24 +15,28 @@ import javax.inject.Inject;
 
 public class AddTransactionActivity extends BaseActivity {
 
-    @Inject public AddTransactionViewModel viewModel;
+    @Inject
+    public AddTransactionViewModel viewModel;
     private ActivityAddTransactionBinding binding;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding =  DataBindingUtil.setContentView(this,R.layout.activity_add_transaction);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_transaction);
         binding.setViewModel(viewModel);
         binding.addTrans.setOnClickListener(viewModel.addOnClick);
-        configireToolbar(binding.toolbarAddTrans.toolbar,R.string.toolbar_add_trans,true);
+        configireToolbar(binding.toolbarAddTrans.toolbar, R.string.toolbar_add_trans, true);
 
     }
 
+
     @Override
     protected void initDIComponent() {
-       DaggerAddTransactionComponent.builder()
+        DaggerAddTransactionComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .addTransactionModule(new AddTransactionModule())
+                .activityModule(getActivityModule())
                 .build().inject(this);
     }
 
@@ -45,7 +49,7 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
         }

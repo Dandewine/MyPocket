@@ -1,7 +1,9 @@
 package com.denis.mypocket.internal.di.modules;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.denis.data.entity.WalletEntity;
 import com.denis.data.entity.mapper.TransactionDataMapper;
 import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.local_store.RealmStore;
@@ -15,8 +17,8 @@ import com.denis.data.repository.datasource.TransactionLocalDataStore;
 import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
-import com.denis.domain.interactor.AddTransactionUseCase;
-import com.denis.domain.interactor.GetWalletsUseCase;
+import com.denis.domain.interactor.transactions.AddTransactionUseCase;
+import com.denis.domain.interactor.wallets.GetWalletsUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
@@ -32,7 +34,7 @@ import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
 
-@Module
+@Module(includes = ActivityModule.class)
 public class AddTransactionModule {
 
     public AddTransactionModule() {
@@ -42,8 +44,9 @@ public class AddTransactionModule {
     //region transactions
     @Provides @PerActivity
     AddTransactionViewModel provideAddTransactionViewModel(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
-                                                           @Named("getWallets") UseCase<Wallet> walletsUseCase){
-        return new AddTransactionViewModel(addTransactionUseCase,walletsUseCase );
+                                                           @Named("getWallets") UseCase<Wallet> walletsUseCase,
+                                                           @Named("activity") Context context){
+        return new AddTransactionViewModel(addTransactionUseCase,walletsUseCase,context );
     }
 
     @Provides @PerActivity @Named("addTransaction")
@@ -76,11 +79,11 @@ public class AddTransactionModule {
         return new WalletDataMapper();
     }
 
-    @Provides @PerActivity @Named("wallets") RealmStore provideWalletRealmStore(Realm realm){
+    @Provides @PerActivity @Named("wallets") RealmStore<WalletEntity> provideWalletRealmStore(Realm realm){
         return new WalletRealmStore(realm);
     }
 
-    @Provides @PerActivity WalletDataStore provideWalletDataStore(@Named("wallets") RealmStore store){
+    @Provides @PerActivity WalletDataStore provideWalletDataStore(@Named("wallets") RealmStore<WalletEntity> store){
         return new WalletLocalDataStore(store);
     }
 

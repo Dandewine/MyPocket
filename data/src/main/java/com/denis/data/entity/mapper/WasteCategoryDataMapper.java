@@ -1,7 +1,7 @@
 package com.denis.data.entity.mapper;
 
-import com.denis.data.entity.WasteCategoryEntity;
-import com.denis.domain.models.WasteCategory;
+import com.denis.data.entity.ExpenseCategoryEntity;
+import com.denis.domain.models.ExpenseCategory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,45 +15,45 @@ public class WasteCategoryDataMapper {
     public WasteCategoryDataMapper() {
     }
 
-    public WasteCategory transform(WasteCategoryEntity wasteCategoryEntity) {
-        WasteCategory wasteCategory = null;
-        if (wasteCategoryEntity != null) {
-            wasteCategory = new WasteCategory(wasteCategoryEntity.getId());
-            wasteCategory.setName(wasteCategoryEntity.getName());
-            wasteCategory.setPath(wasteCategoryEntity.getPath());
+    public ExpenseCategory transform(ExpenseCategoryEntity expenseCategoryEntity) {
+        ExpenseCategory expenseCategory = null;
+        if (expenseCategoryEntity != null) {
+            expenseCategory = new ExpenseCategory(expenseCategoryEntity.getId());
+            expenseCategory.setName(expenseCategoryEntity.getName());
+            expenseCategory.setPath(expenseCategoryEntity.getPath());
         }
-        return wasteCategory;
+        return expenseCategory;
     }
 
-    public List<WasteCategory> transform(Collection<WasteCategoryEntity> wasteCategoryEntities){
-        List<WasteCategory> wasteCategories = null;
+    public List<ExpenseCategory> transform(Collection<ExpenseCategoryEntity> wasteCategoryEntities){
+        List<ExpenseCategory> wasteCategories = null;
         if(wasteCategoryEntities != null && !wasteCategoryEntities.isEmpty()){
             wasteCategories = new ArrayList<>();
-            for (WasteCategoryEntity wce:wasteCategoryEntities){
-                WasteCategory wc = transform(wce);
+            for (ExpenseCategoryEntity wce:wasteCategoryEntities){
+                ExpenseCategory wc = transform(wce);
                 wasteCategories.add(wc);
             }
         }
         return wasteCategories;
     }
 
-    public WasteCategoryEntity transform(WasteCategory wasteCategory){
-        WasteCategoryEntity wasteCategoryEntity = null;
-        if(wasteCategory != null){
-            wasteCategoryEntity = new WasteCategoryEntity(wasteCategory.getId());
-            wasteCategoryEntity.setPath(wasteCategory.getName());
-            wasteCategoryEntity.setName(wasteCategory.getName());
+    public ExpenseCategoryEntity transform(ExpenseCategory expenseCategory){
+        ExpenseCategoryEntity expenseCategoryEntity = null;
+        if(expenseCategory != null){
+            expenseCategoryEntity = new ExpenseCategoryEntity(expenseCategory.getId());
+            expenseCategoryEntity.setPath(expenseCategory.getName());
+            expenseCategoryEntity.setName(expenseCategory.getName());
         }
-        return wasteCategoryEntity;
+        return expenseCategoryEntity;
     }
 
 
-    public List<WasteCategoryEntity> transform(List<WasteCategory> wasteCategories){
-        List<WasteCategoryEntity> wasteCategoriesEntities = null;
+    public List<ExpenseCategoryEntity> transform(List<ExpenseCategory> wasteCategories){
+        List<ExpenseCategoryEntity> wasteCategoriesEntities = null;
         if(wasteCategories != null && !wasteCategories.isEmpty()){
             wasteCategoriesEntities = new ArrayList<>();
-            for (WasteCategory wc:wasteCategories){
-                WasteCategoryEntity wce = transform(wc);
+            for (ExpenseCategory wc:wasteCategories){
+                ExpenseCategoryEntity wce = transform(wc);
                 wasteCategoriesEntities.add(wce);
             }
         }

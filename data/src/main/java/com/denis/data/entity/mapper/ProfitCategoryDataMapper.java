@@ -1,6 +1,6 @@
 package com.denis.data.entity.mapper;
 
-import com.denis.data.entity.ProfitCategoryEntity;
+import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.domain.models.ProfitCategory;
 
 import java.util.ArrayList;
@@ -15,21 +15,21 @@ public class ProfitCategoryDataMapper {
     public ProfitCategoryDataMapper() {
     }
 
-    public ProfitCategory transform(ProfitCategoryEntity profitCategoryEntity) {
+    public ProfitCategory transform(IncomeCategoryEntity incomeCategoryEntity) {
         ProfitCategory profitCategory = null;
-        if (profitCategoryEntity != null) {
-            profitCategory = new ProfitCategory(profitCategoryEntity.getId());
-            profitCategory.setName(profitCategoryEntity.getName());
-            profitCategory.setPath(profitCategoryEntity.getPath());
+        if (incomeCategoryEntity != null) {
+            profitCategory = new ProfitCategory(incomeCategoryEntity.getId());
+            profitCategory.setName(incomeCategoryEntity.getName());
+            profitCategory.setPath(incomeCategoryEntity.getPath());
         }
         return profitCategory;
     }
 
-    public List<ProfitCategory> transform(List<ProfitCategoryEntity> profitCategoryEntities){
+    public List<ProfitCategory> transform(List<IncomeCategoryEntity> profitCategoryEntities){
         List<ProfitCategory> profitCategories = null;
         if(profitCategoryEntities != null && !profitCategoryEntities.isEmpty()){
             profitCategories = new ArrayList<>();
-            for (ProfitCategoryEntity pce : profitCategoryEntities) {
+            for (IncomeCategoryEntity pce : profitCategoryEntities) {
                 ProfitCategory pc = transform(pce);
                 profitCategories.add(pc);
             }
@@ -37,22 +37,22 @@ public class ProfitCategoryDataMapper {
         return profitCategories;
     }
 
-    public ProfitCategoryEntity transform(ProfitCategory entity){
-        ProfitCategoryEntity pce = null;
+    public IncomeCategoryEntity transform(ProfitCategory entity){
+        IncomeCategoryEntity pce = null;
         if(entity != null){
-            pce = new ProfitCategoryEntity(entity.getId());
+            pce = new IncomeCategoryEntity(entity.getId());
             pce.setName(entity.getName());
             pce.setPath(entity.getPath());
         }
         return pce;
     }
 
-    public List<ProfitCategoryEntity> transfrom(Collection<ProfitCategory> profitCategories){
-        List<ProfitCategoryEntity> entities = null;
+    public List<IncomeCategoryEntity> transform(Collection<ProfitCategory> profitCategories){
+        List<IncomeCategoryEntity> entities = null;
         if(profitCategories != null && !profitCategories.isEmpty()){
             entities = new ArrayList<>();
             for (ProfitCategory pc : profitCategories) {
-                ProfitCategoryEntity pce = transform(pc);
+                IncomeCategoryEntity pce = transform(pc);
                 entities.add(pce);
             }
         }

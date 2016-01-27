@@ -1,9 +1,10 @@
 package com.denis.mypocket.internal.di.components;
 
-import android.app.Activity;
+import android.content.Context;
 
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
+import com.denis.mypocket.view.activity.BaseActivity;
 
 import dagger.Component;
 
@@ -17,7 +18,6 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class,modules = ActivityModule.class)
 public interface ActivityComponent {
-    Activity activity();
-
-
+    void inject(BaseActivity baseActivity);
+    Context activity();
 }

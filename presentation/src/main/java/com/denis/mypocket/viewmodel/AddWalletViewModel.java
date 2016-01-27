@@ -49,8 +49,6 @@ public class AddWalletViewModel implements ViewModel {
 
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         walletName.set(s.toString());
-        Log.d("myTag",walletName.get());
-
     }
 
     public View.OnClickListener addWalletOnClick = v ->

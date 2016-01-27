@@ -1,12 +1,24 @@
-package com.denis.domain.models;
+package com.denis.data.entity;
 
-public class WasteCategory {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class ExpenseCategoryEntity extends RealmObject {
+    @PrimaryKey
     private int id;
     private String name;
     private String path;
 
-    public WasteCategory(int id) {
+    public ExpenseCategoryEntity(int id) {
         this.id = id;
+    }
+
+    public ExpenseCategoryEntity(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public ExpenseCategoryEntity() {
     }
 
     public int getId() {
