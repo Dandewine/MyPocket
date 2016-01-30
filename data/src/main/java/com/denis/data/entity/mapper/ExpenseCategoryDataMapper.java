@@ -25,11 +25,11 @@ public class ExpenseCategoryDataMapper {
         return expenseCategory;
     }
 
-    public List<ExpenseCategory> transform(Collection<ExpenseCategoryEntity> wasteCategoryEntities){
+    public List<ExpenseCategory> transform(Collection<ExpenseCategoryEntity> wasteCategoryEntities) {
         List<ExpenseCategory> wasteCategories = null;
-        if(wasteCategoryEntities != null && !wasteCategoryEntities.isEmpty()){
+        if (wasteCategoryEntities != null && !wasteCategoryEntities.isEmpty()) {
             wasteCategories = new ArrayList<>();
-            for (ExpenseCategoryEntity wce:wasteCategoryEntities){
+            for (ExpenseCategoryEntity wce : wasteCategoryEntities) {
                 ExpenseCategory wc = transform(wce);
                 wasteCategories.add(wc);
             }
@@ -37,9 +37,9 @@ public class ExpenseCategoryDataMapper {
         return wasteCategories;
     }
 
-    public ExpenseCategoryEntity transform(ExpenseCategory expenseCategory){
+    public ExpenseCategoryEntity transform(ExpenseCategory expenseCategory) {
         ExpenseCategoryEntity expenseCategoryEntity = null;
-        if(expenseCategory != null){
+        if (expenseCategory != null) {
             expenseCategoryEntity = new ExpenseCategoryEntity(expenseCategory.getId());
             expenseCategoryEntity.setPath(expenseCategory.getName());
             expenseCategoryEntity.setName(expenseCategory.getName());
@@ -48,11 +48,11 @@ public class ExpenseCategoryDataMapper {
     }
 
 
-    public List<ExpenseCategoryEntity> transform(List<ExpenseCategory> wasteCategories){
+    public List<ExpenseCategoryEntity> transform(List<ExpenseCategory> wasteCategories) {
         List<ExpenseCategoryEntity> wasteCategoriesEntities = null;
-        if(wasteCategories != null && !wasteCategories.isEmpty()){
+        if (wasteCategories != null && !wasteCategories.isEmpty()) {
             wasteCategoriesEntities = new ArrayList<>();
-            for (ExpenseCategory wc:wasteCategories){
+            for (ExpenseCategory wc : wasteCategories) {
                 ExpenseCategoryEntity wce = transform(wc);
                 wasteCategoriesEntities.add(wce);
             }

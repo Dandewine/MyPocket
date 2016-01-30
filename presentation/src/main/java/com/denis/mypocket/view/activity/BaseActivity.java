@@ -22,9 +22,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         applicationComponent = getApplicationComponent();
     }
 
+    /**
+     * Get the Main Application component for dependency injection.
+     *
+     * @return {@link com.denis.mypocket.internal.di.components.ApplicationComponent}
+     */
+    public ApplicationComponent getApplicationComponent() {
+        return ((MyPocketApp) getApplication()).getApplicationComponent();
+    }
+
+    /**
+     * Get an Activity module for dependency injection.
+     *
+     * @return {@link com.denis.mypocket.internal.di.modules.ActivityModule}
+     */
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
+    }
+
     protected void configireToolbar(Toolbar toolbar,
                                     @StringRes int text,
-                                    boolean asHomeEnabled){
+                                    boolean asHomeEnabled) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(text);
         getSupportActionBar().setDisplayHomeAsUpEnabled(asHomeEnabled);
@@ -34,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Adds a {@link Fragment} to this activity's layout.
      *
      * @param containerViewId The container view to where add the fragment.
-     * @param fragment The fragment to be added.
+     * @param fragment        The fragment to be added.
      */
     public void addFragment(int containerViewId, Fragment fragment) {
         getFragmentManager().beginTransaction()
@@ -48,22 +66,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .commit();
     }
 
-    /**
-     * Get the Main Application component for dependency injection.
-     *
-     * @return {@link com.denis.mypocket.internal.di.components.ApplicationComponent}
-     */
-    public ApplicationComponent getApplicationComponent() {
-        return ((MyPocketApp)getApplication()).getApplicationComponent();
-    }
-    /**
-     * Get an Activity module for dependency injection.
-     *
-     * @return {@link com.denis.mypocket.internal.di.modules.ActivityModule}
-     */
-    protected ActivityModule getActivityModule() {
-        return new ActivityModule(this);
-    }
+
+
 
    /* protected <T extends View>T myFindViewById(@IdRes int id){
         return (T)(findViewById(id));

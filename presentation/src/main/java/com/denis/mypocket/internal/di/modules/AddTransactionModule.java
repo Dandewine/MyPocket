@@ -1,7 +1,6 @@
 package com.denis.mypocket.internal.di.modules;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.denis.data.entity.WalletEntity;
 import com.denis.data.entity.mapper.TransactionDataMapper;
@@ -27,7 +26,6 @@ import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.TransactionRepository;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.AddTransactionViewModel;
 
 import javax.inject.Named;
@@ -38,10 +36,15 @@ import io.realm.Realm;
 
 @Module(includes = {ActivityModule.class, IncomeCategoryModule.class, ExpenseCategoryModule.class})
 public class AddTransactionModule {
+    boolean isIncome;
 
-    public AddTransactionModule() {
-        Log.d(PLTags.INSTANCE_TAG,"AddTransactionModule, "+hashCode());
+    public AddTransactionModule(boolean isIncome) {
+        this.isIncome = isIncome;
     }
+
+  /*  public AddTransactionModule() {
+        Log.d(PLTags.INSTANCE_TAG,"AddTransactionModule, "+hashCode());
+    }*/
 
     //region transactions
     @Provides @PerActivity
@@ -50,7 +53,7 @@ public class AddTransactionModule {
                                                            @Named("incomeUC") UseCase<IncomeCategory> getCategoriesUseCase,
                                                            @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase,
                                                            @Named("activity") Context context){
-        return new AddTransactionViewModel(addTransactionUseCase,walletsUseCase,getCategoriesUseCase, expenseCategoryUseCase,context);
+        return new AddTransactionViewModel(addTransactionUseCase,walletsUseCase,getCategoriesUseCase, expenseCategoryUseCase,context,isIncome);
     }
 
     @Provides @PerActivity @Named("addTransaction")

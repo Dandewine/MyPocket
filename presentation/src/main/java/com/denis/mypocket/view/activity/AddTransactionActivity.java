@@ -8,6 +8,7 @@ import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
 import com.denis.mypocket.internal.di.components.DaggerAddTransactionComponent;
+import com.denis.mypocket.internal.di.modules.AddTransactionModule;
 import com.denis.mypocket.viewmodel.AddTransactionViewModel;
 
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        isIncome = getIntent().getBooleanExtra(PLConstants.INTENT_INCOME_FLAG,false);
+        isIncome = getIntent().getBooleanExtra(PLConstants.INTENT_INCOME_FLAG, false);
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_transaction);
         binding.setViewModel(viewModel);
@@ -34,9 +35,10 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     protected void initDIComponent() {
-         DaggerAddTransactionComponent.builder()
+        DaggerAddTransactionComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
+                .addTransactionModule(new AddTransactionModule(isIncome))
                 .build().inject(this);
     }
 

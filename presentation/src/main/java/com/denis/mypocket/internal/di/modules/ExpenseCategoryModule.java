@@ -1,7 +1,7 @@
 package com.denis.mypocket.internal.di.modules;
 
 import com.denis.data.entity.mapper.ExpenseCategoryDataMapper;
-import com.denis.data.local_store.IncomeCategoriesStore;
+import com.denis.data.local_store.ExpenseCategoriesStore;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.ExpenseCategoryDataRepository;
 import com.denis.data.repository.datasource.interfaces.ExpenseCategoryDataStore;
@@ -43,6 +43,6 @@ public class ExpenseCategoryModule {
     }
 
     @Provides @PerActivity @Named("expenseRS") RealmStore provideStore(Realm realm){
-        return new IncomeCategoriesStore(realm);
+        return new ExpenseCategoriesStore(realm);
     }
 }

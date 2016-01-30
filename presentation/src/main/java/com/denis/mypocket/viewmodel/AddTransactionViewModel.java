@@ -38,23 +38,23 @@ public class AddTransactionViewModel implements ViewModel {
                                    @Named("getWallets") UseCase<Wallet> walletsUseCase,
                                    @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
                                    @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase,
-                                   @Named("activity") Context context) {
+                                   @Named("activity") Context context, boolean isIncome) {
         this.addTransactionUseCase = addTransactionUseCase;
         this.getWalletsUseCase = walletsUseCase;
         this.incomeCategoryUseCase = incomeCategoriesUseCase;
         this.expenseCategoryUseCase = expenseCategoryUseCase;
 
-        categoriesAdapter = new ArrayAdapter(context,android.R.layout.simple_list_item_1);
-        walletsAdapter = new ArrayAdapter(context,android.R.layout.simple_list_item_1);
+        categoriesAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
+        walletsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
 
-        Log.d(PLTags.INSTANCE_TAG,"Add Transaction ViewModel, "+hashCode());
+        Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
 
-        if(walletsUseCase != null)
-            walletsUseCase.executeSync(new GetAllWalletsSubscriber());
-        if(incomeCategoryUseCase != null)
-            incomeCategoryUseCase.executeSync(new GetAllCategories());
+        walletsUseCase.executeSync(new GetAllWalletsSubscriber());
+        if (isIncome)
+            incomeCategoryUseCase.executeSync(new GetAllIncomeCategories());
+        else
+            expenseCategoryUseCase.executeSync(new GetAllExpenseCategories());
     }
-
 
 
     @Override
@@ -62,7 +62,7 @@ public class AddTransactionViewModel implements ViewModel {
         addTransactionUseCase.unsubscribe();
     }
 
-    private class GetAllCategories extends DefaultSubscriber<List<IncomeCategory>>{
+    private class GetAllIncomeCategories extends DefaultSubscriber<List<IncomeCategory>> {
         @Override
         public void onCompleted() {
         }
@@ -80,7 +80,26 @@ public class AddTransactionViewModel implements ViewModel {
         }
     }
 
-    private class GetAllWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+    private class GetAllExpenseCategories extends DefaultSubscriber<List<ExpenseCategory>> {
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+        }
+
+        @Override
+        public void onNext(List<ExpenseCategory> expenseCategories) {
+            for (int i = 0; i < expenseCategories.size(); i++) {
+                categoriesAdapter.add(expenseCategories.get(i).getName());
+            }
+        }
+    }
+
+
+    private class GetAllWalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onCompleted() {
         }
@@ -98,10 +117,10 @@ public class AddTransactionViewModel implements ViewModel {
         }
     }
 
-    private static class AddTransactionSubscriber extends DefaultSubscriber<Transaction>{
+    private static class AddTransactionSubscriber extends DefaultSubscriber<Transaction> {
         @Override
         public void onCompleted() {
-            Log.d(PLTags.TRANSACTIONS_TAG,"Transaction was added");
+            Log.d(PLTags.TRANSACTIONS_TAG, "Transaction was added");
         }
 
         @Override
@@ -111,7 +130,7 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(Transaction transaction) {
-            Log.d(PLTags.TRANSACTIONS_TAG,"new transaction was added, id = "+transaction.getId());
+            Log.d(PLTags.TRANSACTIONS_TAG, "new transaction was added, id = " + transaction.getId());
         }
     }
 
@@ -120,7 +139,7 @@ public class AddTransactionViewModel implements ViewModel {
     }
 
     public View.OnClickListener addOnClick =
-            v -> addTransactionUseCase.executeSync(new AddTransactionSubscriber(),new Transaction(0,0,345f,1,234L));
+            v -> addTransactionUseCase.executeSync(new AddTransactionSubscriber(), new Transaction(0, 0, 345f, 1, 234L));
 
     public ArrayAdapter getCategoriesAdapter() {
         return categoriesAdapter;
