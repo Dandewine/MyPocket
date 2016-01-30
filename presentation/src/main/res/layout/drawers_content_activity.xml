@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".view.activity.DrawerActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <include android:id="@+id/includeToolbar" layout="@layout/toolbar"/>
+        </android.support.design.widget.AppBarLayout>
+
+        <include layout="@layout/content_drawet_test"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addIncomeTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_dialog_email"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="160dp"
+            app:pressedTranslationZ="12dp"
+            app:elevation="6dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/fab_income"
+            android:layout_gravity="bottom|end"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addOutcomeTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_dialog_email"
+            android:layout_marginRight="@dimen/default_padding"
+            android:layout_marginBottom="90dp"
+            app:pressedTranslationZ="12dp"
+            app:elevation="6dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/fab_outcome"
+            android:layout_gravity="bottom|end"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:backgroundTint="@color/colorAccent"
+            android:src="@drawable/vector_plus"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
+

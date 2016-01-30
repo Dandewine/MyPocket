@@ -1,4 +1,4 @@
-package com.denis.data.repository.datasource;
+package com.denis.data.repository.datasource.local;
 
 import com.denis.data.entity.WalletEntity;
 import com.denis.data.local_store.RealmStore;

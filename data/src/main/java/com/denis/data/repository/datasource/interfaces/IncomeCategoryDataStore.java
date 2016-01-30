@@ -7,17 +7,17 @@ import java.util.List;
 
 import rx.Observable;
 
-public interface ProfitCategoryDataStore {
+public interface IncomeCategoryDataStore {
     /**
      *Get an {@link rx.Observable} which will emit a {@link IncomeCategoryEntity} by its id.
      * @param categoryId The id to retrieve wallet data.
      */
-    Observable<IncomeCategoryEntity> getProfitCategoryEntity(final int categoryId);
+    Observable<IncomeCategoryEntity> getIncomeCategoryEntity(final int categoryId);
     /**
      * Get an {@link rx.Observable} which will emit a List of {@link IncomeCategoryEntity}.
      */
-    Observable<List<IncomeCategoryEntity>> getListWalletEntities();
+    Observable<List<IncomeCategoryEntity>> getListIncomeEntities();
 
     Observable<IncomeCategoryEntity> put(IncomeCategoryEntity IncomeCategoryEntity);
-    Observable<IncomeCategoryEntity> put(Collection<IncomeCategoryEntity> collection);
+    Observable<List<IncomeCategoryEntity>> put(Collection<IncomeCategoryEntity> collection);
 }

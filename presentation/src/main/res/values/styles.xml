@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools"
+<resources
     >
 
     <!-- Base application theme. -->
@@ -7,7 +7,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="AppTheme.Drawer" parent="AppTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="FabStyle">
@@ -15,5 +21,9 @@
         <item name="android:layout_marginRight">@dimen/default_padding</item>
         <item name="android:layout_gravity">bottom|end</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

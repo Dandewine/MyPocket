@@ -6,14 +6,13 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentTransactionsListBinding;
 import com.denis.mypocket.view.activity.AddTransactionActivity;
@@ -48,7 +47,8 @@ public class TransactionsFragment extends BaseFragment {
         fabAddIncome = binding.addIncomeTrans;
         fabAddOutcome = binding.addOutcomeTrans;
         binding.fabMain.setOnClickListener(v -> animateFAB());
-        fabAddIncome.setOnClickListener(v -> startAddTransactionAct());
+        fabAddIncome.setOnClickListener(v -> startAddTransactionAct(true));
+        fabAddOutcome.setOnClickListener(v -> startAddTransactionAct(false));
     }
 
     public void animateFAB() {
@@ -70,11 +70,13 @@ public class TransactionsFragment extends BaseFragment {
         }
     }
 
-    public void startAddTransactionAct(){
+    public void startAddTransactionAct(boolean isIncome) {
         Intent intent = new Intent(getActivity(), AddTransactionActivity.class);
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), fabAddIncome, "reveal");
-        ActivityCompat.startActivity(getActivity(),intent,optionsCompat.toBundle());
+        intent.putExtra(PLConstants.INTENT_INCOME_FLAG,isIncome);
+        startActivity(intent);
 
+        /*ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), fabAddIncome, "reveal");
+        ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());*/
     }
 
     public void initAnimations() {

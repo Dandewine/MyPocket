@@ -1,31 +1,33 @@
-package com.denis.data.repository.datasource;
+package com.denis.data.repository.datasource.local;
 
 import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.local_store.RealmStore;
-import com.denis.data.repository.datasource.interfaces.ProfitCategoryDataStore;
+import com.denis.data.repository.datasource.interfaces.IncomeCategoryDataStore;
 
 import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Observable;
 
-public class ProfitCateforyLocalDataStore implements ProfitCategoryDataStore {
+public class IncomeCateforyLocalDataStore implements IncomeCategoryDataStore {
     private RealmStore realmStore;
 
     @Inject
-    public ProfitCateforyLocalDataStore(RealmStore realmStore) {
+    public IncomeCateforyLocalDataStore(@Named("categories") RealmStore realmStore) {
         this.realmStore = realmStore;
     }
 
     @Override
-    public Observable<IncomeCategoryEntity> getProfitCategoryEntity(int categoryId) {
+    public Observable<IncomeCategoryEntity> getIncomeCategoryEntity(int categoryId) {
         return realmStore.get(categoryId);
     }
 
     @Override
-    public Observable<List<IncomeCategoryEntity>> getListWalletEntities() {
+    public Observable<List<IncomeCategoryEntity>> getListIncomeEntities() {
+
         return realmStore.getList();
     }
 
@@ -35,7 +37,7 @@ public class ProfitCateforyLocalDataStore implements ProfitCategoryDataStore {
     }
 
     @Override
-    public Observable<IncomeCategoryEntity> put(Collection<IncomeCategoryEntity> collection) {
+    public Observable<List<IncomeCategoryEntity>> put(Collection<IncomeCategoryEntity> collection) {
         return realmStore.put(collection);
     }
 }

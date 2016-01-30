@@ -1,7 +1,9 @@
 package com.denis.data.local_store;
 
+import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.entity.IncomeCategoryEntity;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,7 +29,39 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
 
     @Override
     public Observable<List<IncomeCategoryEntity>> getList() {
-        return Observable.just(mRealm.where(IncomeCategoryEntity.class).findAllSortedAsync("id"));
+        List<IncomeCategoryEntity> list = Arrays.asList(new IncomeCategoryEntity(0, "Salary"),
+                new IncomeCategoryEntity(1, "Selling"),
+                new IncomeCategoryEntity(2, "Gifts"),
+                new IncomeCategoryEntity(3, "Award"),
+                new IncomeCategoryEntity(4, "Interest Money"),
+                new IncomeCategoryEntity(5, "Other"));
+
+        List<ExpenseCategoryEntity> list2 = Arrays.asList(
+                new ExpenseCategoryEntity(0, "Food & Beverage"),
+                new ExpenseCategoryEntity(1, "Shopping/Clothes"),
+                new ExpenseCategoryEntity(2, "Health/Medicine"),
+                new ExpenseCategoryEntity(3, "Gym"),
+                new ExpenseCategoryEntity(4, "Fees and Charges"),
+                new ExpenseCategoryEntity(5, "Insurance"),
+                new ExpenseCategoryEntity(6, "Education"),
+                new ExpenseCategoryEntity(7, "Gifts and presents"),
+                new ExpenseCategoryEntity(8, "Travel"),
+                new ExpenseCategoryEntity(9, "Love"),
+                new ExpenseCategoryEntity(10, "Entertainment"),
+                new ExpenseCategoryEntity(11, "Investment"),
+                new ExpenseCategoryEntity(12, "Repairs"),
+                new ExpenseCategoryEntity(13, "Transport"),
+                new ExpenseCategoryEntity(14, "Bills and Utilities"),
+                new ExpenseCategoryEntity(15, "Rent"),
+                new ExpenseCategoryEntity(16, "Family"),
+                new ExpenseCategoryEntity(17, "Other")
+        );
+
+
+        mRealm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(list));
+        mRealm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(list2));
+
+        return Observable.just(mRealm.where(IncomeCategoryEntity.class).findAllSorted("id"));
     }
 
     @Override
@@ -42,11 +76,6 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
 
     @Override
     public Observable<List<IncomeCategoryEntity>> put(Collection<IncomeCategoryEntity> collection) {
-      /*  List<IncomeCategoryEntity> entities;
-        mRealm.beginTransaction();
-        entities = mRealm.copyToRealmOrUpdate(collection);
-        mRealm.commitTransaction();
-        return Observable.from(entities);*/
         throw new UnsupportedOperationException("Can't do that");
     }
 

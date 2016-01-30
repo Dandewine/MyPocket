@@ -1,11 +1,11 @@
 package com.denis.domain.models;
 
-public class ProfitCategory {
+public class IncomeCategory {
     private int id;
     private String name;
     private String path;
 
-    public ProfitCategory(int id) {
+    public IncomeCategory(int id) {
         this.id = id;
     }
 

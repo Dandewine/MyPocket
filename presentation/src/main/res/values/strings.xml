@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyPocket</string>
 
-   <!-- Drawer Items-->
+    <!-- Drawer Items-->
     <string name="drawer.trans">Transactions</string>
     <string name="drawer.categories">Categories</string>
     <string name="drawer.wallets">My Wallets</string>
@@ -24,4 +24,10 @@
         <item>Category A</item>
         <item>Category B</item>
     </string-array>
+    <string name="title_activity_drawet_test">DrawetTest</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

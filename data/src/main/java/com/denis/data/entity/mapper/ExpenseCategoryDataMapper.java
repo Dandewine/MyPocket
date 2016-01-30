@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class WasteCategoryDataMapper {
+public class ExpenseCategoryDataMapper {
 
     @Inject
-    public WasteCategoryDataMapper() {
+    public ExpenseCategoryDataMapper() {
     }
 
     public ExpenseCategory transform(ExpenseCategoryEntity expenseCategoryEntity) {
