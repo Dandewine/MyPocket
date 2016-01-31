@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.denis.domain.interactor.DefaultSubscriber;
-import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.model.ExpenseCategoryModel;
+import com.denis.mypocket.model.IncomeCategoryModel;
+import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
+import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
 import com.denis.mypocket.utils.PLTags;
 
 import java.util.List;
@@ -24,42 +27,36 @@ import javax.inject.Named;
 public class AddTransactionViewModel implements ViewModel {
     public ObservableField<String> amount = new ObservableField<>();
 
-    public UseCase<Transaction> addTransactionUseCase;
-    private UseCase<Wallet> getWalletsUseCase;
-    private UseCase<IncomeCategory> incomeCategoryUseCase;
-    private UseCase<ExpenseCategory> expenseCategoryUseCase;
-
     private ArrayAdapter categoriesAdapter;
     private ArrayAdapter walletsAdapter;
+    private UseCasesFacade workerFacade;
+    private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
+    private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
 
 
     @Inject
-    public AddTransactionViewModel(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
-                                   @Named("getWallets") UseCase<Wallet> walletsUseCase,
-                                   @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
-                                   @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase,
-                                   @Named("activity") Context context, boolean isIncome) {
-        this.addTransactionUseCase = addTransactionUseCase;
-        this.getWalletsUseCase = walletsUseCase;
-        this.incomeCategoryUseCase = incomeCategoriesUseCase;
-        this.expenseCategoryUseCase = expenseCategoryUseCase;
+    public AddTransactionViewModel(UseCasesFacade workerFacade,
+                                   @Named("activity") Context context,
+                                   boolean isIncome) {
 
+        this.workerFacade = workerFacade;
         categoriesAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
         walletsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
 
-        walletsUseCase.executeSync(new GetAllWalletsSubscriber());
+        workerFacade.getWallets(new GetAllWalletsSubscriber());
         if (isIncome)
-            incomeCategoryUseCase.executeSync(new GetAllIncomeCategories());
+            workerFacade.getIncomeCategories(new GetAllIncomeCategories());
         else
-            expenseCategoryUseCase.executeSync(new GetAllExpenseCategories());
+            workerFacade.getExpenseCategories(new GetAllExpenseCategories());
     }
 
 
     @Override
     public void destroy() {
-        addTransactionUseCase.unsubscribe();
+        Log.i(PLTags.INSTANCE_TAG,"AddTransactionViewModel has been destroyed");
+        workerFacade.destroy();
     }
 
     private class GetAllIncomeCategories extends DefaultSubscriber<List<IncomeCategory>> {
@@ -74,8 +71,9 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<IncomeCategory> incomeCategories) {
-            for (int i = 0; i < incomeCategories.size(); i++) {
-                categoriesAdapter.add(incomeCategories.get(i).getName());
+            List<IncomeCategoryModel> models = incomeMapper.transform(incomeCategories);
+            for (int i = 0; i < models.size(); i++) {
+                categoriesAdapter.add(models.get(i).getName());
             }
         }
     }
@@ -92,7 +90,8 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<ExpenseCategory> expenseCategories) {
-            for (int i = 0; i < expenseCategories.size(); i++) {
+            List<ExpenseCategoryModel> modelList = expenseMapper.transform(expenseCategories);
+            for (int i = 0; i < modelList.size(); i++) {
                 categoriesAdapter.add(expenseCategories.get(i).getName());
             }
         }
@@ -139,7 +138,7 @@ public class AddTransactionViewModel implements ViewModel {
     }
 
     public View.OnClickListener addOnClick =
-            v -> addTransactionUseCase.executeSync(new AddTransactionSubscriber(), new Transaction(0, 0, 345f, 1, 234L));
+            v -> workerFacade.addTransaction(new AddTransactionSubscriber(), new Transaction( 0, 345f, 1, 234L));
 
     public ArrayAdapter getCategoriesAdapter() {
         return categoriesAdapter;

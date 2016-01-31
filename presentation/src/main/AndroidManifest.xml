@@ -29,7 +29,6 @@
 
         <activity
             android:name=".view.activity.DrawerActivity"
-            android:label="@string/title_activity_drawet_test"
             android:theme="@style/AppTheme.Drawer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

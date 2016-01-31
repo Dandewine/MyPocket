@@ -7,8 +7,7 @@ public class Transaction {
     private int type;
     private long unixDateTime;
 
-    public Transaction(int id, int walletId, float amount, int type, long unixDateTime) {
-        this.id = id;
+    public Transaction(int walletId, float amount, int type, long unixDateTime) {
         this.walletId = walletId;
         this.amount = amount;
         this.type = type;

@@ -1,6 +1,7 @@
 package com.denis.mypocket.internal.di.modules;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.denis.data.entity.WalletEntity;
 import com.denis.data.entity.mapper.TransactionDataMapper;
@@ -26,7 +27,9 @@ import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.TransactionRepository;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.AddTransactionViewModel;
+import com.denis.mypocket.viewmodel.UseCasesFacade;
 
 import javax.inject.Named;
 
@@ -39,21 +42,24 @@ public class AddTransactionModule {
     boolean isIncome;
 
     public AddTransactionModule(boolean isIncome) {
+        Log.d(PLTags.INSTANCE_TAG,"AddTransactionModule, "+hashCode());
         this.isIncome = isIncome;
     }
 
-  /*  public AddTransactionModule() {
-        Log.d(PLTags.INSTANCE_TAG,"AddTransactionModule, "+hashCode());
-    }*/
+    @Provides @PerActivity
+    UseCasesFacade provideUseCaseFacade(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
+                                        @Named("getWallets") UseCase<Wallet> walletsUseCase,
+                                        @Named("incomeUC") UseCase<IncomeCategory> getCategoriesUseCase,
+                                        @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase
+                                        ){
+        return new UseCasesFacade(addTransactionUseCase,walletsUseCase,getCategoriesUseCase,expenseCategoryUseCase);
+    }
 
     //region transactions
     @Provides @PerActivity
-    AddTransactionViewModel provideAddTransactionViewModel(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
-                                                           @Named("getWallets") UseCase<Wallet> walletsUseCase,
-                                                           @Named("incomeUC") UseCase<IncomeCategory> getCategoriesUseCase,
-                                                           @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase,
+    AddTransactionViewModel provideAddTransactionViewModel(UseCasesFacade facade,
                                                            @Named("activity") Context context){
-        return new AddTransactionViewModel(addTransactionUseCase,walletsUseCase,getCategoriesUseCase, expenseCategoryUseCase,context,isIncome);
+        return new AddTransactionViewModel(facade,context,isIncome);
     }
 
     @Provides @PerActivity @Named("addTransaction")

@@ -18,8 +18,8 @@ public class WalletModelMapper {
     public WalletModelMapper() {
     }
 
-    public WalletModel transform(Wallet wallet){
-        if(wallet==null)
+    public WalletModel transform(Wallet wallet) {
+        if (wallet == null)
             throw new NullPointerException("Cannot transform a null value");
         WalletModel walletModel = new WalletModel(wallet.getId());
         walletModel.setName(wallet.getName());
@@ -29,9 +29,9 @@ public class WalletModelMapper {
     }
 
     @Nullable
-    public List<WalletModel> transform(List<Wallet> wallets){
+    public List<WalletModel> transform(List<Wallet> wallets) {
         List<WalletModel> walletModels = null;
-        if(wallets!=null && !wallets.isEmpty()) {
+        if (wallets != null && !wallets.isEmpty()) {
             walletModels = new ArrayList<>();
             for (Wallet w : wallets) walletModels.add(transform(w));
         }
