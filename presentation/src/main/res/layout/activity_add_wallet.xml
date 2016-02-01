@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
@@ -10,14 +10,20 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
 
-        <include android:id="@+id/addWalletToolbar" layout="@layout/toolbar"/>
+        <include android:id="@+id/addWalletToolbar"
+                 layout="@layout/toolbar"/>
 
-        <EditText
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.walletName}"
-            android:onTextChanged="@{viewModel.onTextChanged}"
-            android:id="@+id/walletNameEdit"/>
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/walletNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/wallet_hint"
+                android:text="@{viewModel.walletName}"
+                android:afterTextChanged="@{viewModel.afterTextChanged}"/>
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:layout_width="wrap_content"

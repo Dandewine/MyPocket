@@ -1,6 +1,7 @@
 package com.denis.mypocket.viewmodel;
 
-import android.databinding.ObservableField;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
@@ -10,19 +11,38 @@ import com.denis.domain.models.Wallet;
 import com.denis.mypocket.StringUtils;
 import com.denis.mypocket.utils.PLTags;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 
 public class AddWalletViewModel implements ViewModel {
     public UseCase<Wallet> addWalletUseCase;
-    public ObservableField<String> walletName = new ObservableField<>();
+    public String walletName = "";
+
+    TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
 
     @Inject
     public AddWalletViewModel(@Named("addWallet") UseCase<Wallet> addWalletUseCase) {
         this.addWalletUseCase = addWalletUseCase;
-        Log.d(PLTags.INSTANCE_TAG,"AddWallet ViewModel, "+hashCode());
+        Log.d(PLTags.INSTANCE_TAG, "AddWallet ViewModel, " + hashCode());
     }
 
     @Override
@@ -30,10 +50,10 @@ public class AddWalletViewModel implements ViewModel {
         addWalletUseCase.unsubscribe();
     }
 
-    private static class AddWalletSubscriber extends DefaultSubscriber<Wallet>{
+    private static class AddWalletSubscriber extends DefaultSubscriber<Wallet> {
         @Override
         public void onCompleted() {
-            Log.d(PLTags.WALLET_TAG,"Completed");
+            Log.d(PLTags.WALLET_TAG, "Completed");
         }
 
         @Override
@@ -43,16 +63,22 @@ public class AddWalletViewModel implements ViewModel {
 
         @Override
         public void onNext(Wallet wallet) {
-            Log.d(PLTags.WALLET_TAG, StringUtils.concat(wallet.getName()," was created"));
+            Log.d(PLTags.WALLET_TAG, StringUtils.concat(wallet.getName(), " was created"));
         }
     }
 
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        walletName.set(s.toString());
+        if (!Objects.equals(walletName, s.toString()))
+            walletName = s.toString();
+    }
+
+    public void afterTextChanged(Editable s) {
+        if (!Objects.equals(walletName, s.toString()))
+            walletName = s.toString();
     }
 
     public View.OnClickListener addWalletOnClick = v ->
-            addWalletUseCase.executeSync(new AddWalletSubscriber(),new Wallet(0,walletName.get(),"",3.f));
+            addWalletUseCase.executeSync(new AddWalletSubscriber(), new Wallet(0, walletName, "", 3.f));
 
 
 }
