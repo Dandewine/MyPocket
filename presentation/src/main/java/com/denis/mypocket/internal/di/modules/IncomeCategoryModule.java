@@ -1,7 +1,7 @@
 package com.denis.mypocket.internal.di.modules;
 
 import com.denis.data.entity.mapper.IncomeCategoryDataMapper;
-import com.denis.data.local_store.IncomeCategoriesStore;
+import com.denis.data.local_store.categories.IncomeCategoriesStore;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.IncomeCategoriesDataRepository;
 import com.denis.data.repository.datasource.interfaces.IncomeCategoryDataStore;

@@ -1,37 +1,37 @@
 package com.denis.mypocket.model.mapper;
 
 import com.denis.domain.models.CircleOperation;
-import com.denis.mypocket.model.CircleOperationModel;
+import com.denis.mypocket.model.CycleOperationModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class CircleOperationModelMapper {
+public class CycleOperationModelMapper {
 
     private TransactionModelDataMapper transactionDataMapper;
 
     @Inject
-    public CircleOperationModelMapper(TransactionModelDataMapper transactionDataMapper) {
+    public CycleOperationModelMapper(TransactionModelDataMapper transactionDataMapper) {
         this.transactionDataMapper = transactionDataMapper;
     }
 
-    public CircleOperationModel transform(CircleOperation operation) {
-        CircleOperationModel operationModel = null;
+    public CycleOperationModel transform(CircleOperation operation) {
+        CycleOperationModel operationModel = null;
         if (operation != null) {
-            operationModel = new CircleOperationModel(operation.getId());
+            operationModel = new CycleOperationModel(operation.getId());
             operationModel.setTransactionEntity(transactionDataMapper.transform(operation.getTransactionEntity()));
         }
         return operationModel;
     }
 
-    public List<CircleOperationModel> transform(List<CircleOperation> operationList) {
-        List<CircleOperationModel> modelsList = null;
+    public List<CycleOperationModel> transform(List<CircleOperation> operationList) {
+        List<CycleOperationModel> modelsList = null;
         if (operationList != null && !operationList.isEmpty()) {
             modelsList = new ArrayList<>();
             for (CircleOperation co : operationList) {
-                CircleOperationModel model = transform(co);
+                CycleOperationModel model = transform(co);
                 modelsList.add(model);
             }
         }

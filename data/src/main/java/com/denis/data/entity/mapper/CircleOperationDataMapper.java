@@ -1,6 +1,6 @@
 package com.denis.data.entity.mapper;
 
-import com.denis.data.entity.CircleOperationEntity;
+import com.denis.data.entity.CycleOperationEntity;
 import com.denis.domain.models.CircleOperation;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class CircleOperationDataMapper {
         this.transactionDataMapper = transactionDataMapper;
     }
 
-    public CircleOperation transform(CircleOperationEntity entity) {
+    public CircleOperation transform(CycleOperationEntity entity) {
         CircleOperation operation = null;
         if (entity != null) {
             operation = new CircleOperation(entity.getId());
@@ -30,11 +30,11 @@ public class CircleOperationDataMapper {
         return operation;
     }
 
-    public List<CircleOperation> transform(List<CircleOperationEntity> entityList) {
+    public List<CircleOperation> transform(List<CycleOperationEntity> entityList) {
         List<CircleOperation> operationList = null;
         if (entityList != null && !entityList.isEmpty()) {
             operationList = new ArrayList<>();
-            for (CircleOperationEntity entity : entityList) {
+            for (CycleOperationEntity entity : entityList) {
                 CircleOperation operation = transform(entity);
                 operationList.add(operation);
             }
@@ -42,22 +42,22 @@ public class CircleOperationDataMapper {
         return operationList;
     }
 
-    public CircleOperationEntity transform(CircleOperation operation) {
-        CircleOperationEntity entity = null;
+    public CycleOperationEntity transform(CircleOperation operation) {
+        CycleOperationEntity entity = null;
         if (operation != null) {
-            entity = new CircleOperationEntity(operation.getId());
+            entity = new CycleOperationEntity(operation.getId());
             entity.setInterval(operation.getInterval().getValue());
             entity.setTransactionEntity(transactionDataMapper.transform(operation.getTransactionEntity()));
         }
         return entity;
     }
 
-    public List<CircleOperationEntity> transform(Collection<CircleOperation> operations) {
-        List<CircleOperationEntity> entities = null;
+    public List<CycleOperationEntity> transform(Collection<CircleOperation> operations) {
+        List<CycleOperationEntity> entities = null;
         if (operations != null && !operations.isEmpty()) {
             entities = new ArrayList<>();
             for (CircleOperation co : operations) {
-                CircleOperationEntity coe = transform(co);
+                CycleOperationEntity coe = transform(co);
                 entities.add(coe);
             }
         }

@@ -3,13 +3,13 @@ package com.denis.data.entity;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class CircleOperationEntity extends RealmObject {
+public class CycleOperationEntity extends RealmObject {
     @PrimaryKey
     private int id;
     private TransactionEntity transactionEntity;
     private String interval;
 
-    public CircleOperationEntity(int id) {
+    public CycleOperationEntity(int id) {
         this.id = id;
     }
 

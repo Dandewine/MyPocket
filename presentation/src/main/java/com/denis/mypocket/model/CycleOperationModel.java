@@ -1,11 +1,11 @@
 package com.denis.mypocket.model;
 
-public class CircleOperationModel {
+public class CycleOperationModel {
     private int id;
     private TransactionModel transactionEntity;
     private String interval;
 
-    public CircleOperationModel(int id) {
+    public CycleOperationModel(int id) {
         this.id = id;
     }
 
