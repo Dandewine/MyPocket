@@ -17,6 +17,8 @@ public class MyPocketApp extends Application {
         super.onCreate();
         initializeInjector();
         configureRealm();
+
+
     }
     private void initializeInjector(){
         component = DaggerApplicationComponent

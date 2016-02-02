@@ -17,7 +17,7 @@ ext{
     rxJavaVersion = '1.0.14'
     rxAndroidVersion = '1.0.1'
     javaxAnnotationVersion = '1.0'
-    realmVersion = '0.87.1'
+    realmVersion = '0.87.4'
     androidAnnotationsVersion = '21.0.3'
     retrolambdaVersion = '2.0.6'
 

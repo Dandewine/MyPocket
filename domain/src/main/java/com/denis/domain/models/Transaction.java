@@ -36,6 +36,14 @@ public class Transaction {
         this.walletId = walletId;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public float getAmount() {
         return amount;
     }

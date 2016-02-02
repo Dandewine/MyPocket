@@ -8,6 +8,10 @@ public class TransactionModel {
     private int type;
     private long unixDateTime;
 
+    public TransactionModel(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

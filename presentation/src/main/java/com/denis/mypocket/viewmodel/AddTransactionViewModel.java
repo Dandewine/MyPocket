@@ -130,7 +130,7 @@ public class AddTransactionViewModel implements ViewModel {
         }
     }
 
-    private static class AddTransactionSubscriber extends DefaultSubscriber<Transaction> {
+    private class AddTransactionSubscriber extends DefaultSubscriber<Transaction> {
         @Override
         public void onCompleted() {
             Log.d(PLTags.TRANSACTIONS_TAG, "Transaction was added");
@@ -143,7 +143,7 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(Transaction transaction) {
-            Log.d(PLTags.TRANSACTIONS_TAG, "new transaction was added, id = " + transaction.getId());
+            Log.d(PLTags.TRANSACTIONS_TAG, "new transaction was added, id = " + transaction.getId() + ", categoryId = " + categoryId);
         }
     }
 

@@ -23,6 +23,7 @@ public class TransactionDataMapper {
             transaction.setAmount(entity.getAmount());
             transaction.setType(entity.getType());
             transaction.setUnixDateTime(entity.getUnixDateTime());
+            transaction.setCategoryId(entity.getCategoryId());
         }
         return transaction;
     }
@@ -47,7 +48,7 @@ public class TransactionDataMapper {
             transactionEntity.setWalletId(transaction.getWalletId());
             transactionEntity.setAmount(transaction.getAmount());
             transactionEntity.setType(transaction.getType());
-            transactionEntity.setCategoryId(transaction.getId());
+            transactionEntity.setCategoryId(transaction.getCategoryId());
             transactionEntity.setUnixDateTime(transaction.getUnixDateTime());
         }
         return transactionEntity;
