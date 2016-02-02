@@ -27,8 +27,14 @@ public class AddTransactionActivity extends BaseActivity {
         isIncome = getIntent().getBooleanExtra(PLConstants.INTENT_INCOME_FLAG, false);
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_transaction);
+
+        binding.categorySpinner.setOnItemSelectedListener(viewModel.categoryOnClickListener);
+        binding.walletsSpinner.setOnItemSelectedListener(viewModel.walletOnCLickListener);
+
         binding.setViewModel(viewModel);
-        binding.addTrans.setOnClickListener(viewModel.addOnClick);
+
+       // binding.addTrans.setOnClickListener(viewModel.addOnClick);
+
         configireToolbar(binding.toolbarAddTrans.toolbar, R.string.toolbar_add_trans, true);
     }
 

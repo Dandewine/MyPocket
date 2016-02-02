@@ -1,9 +1,11 @@
 package com.denis.mypocket.viewmodel;
 
 import android.content.Context;
-import android.databinding.ObservableField;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.denis.domain.interactor.DefaultSubscriber;
@@ -25,7 +27,12 @@ import javax.inject.Named;
 
 @PerActivity
 public class AddTransactionViewModel implements ViewModel {
-    public ObservableField<String> amount = new ObservableField<>();
+    public String amount = "";
+
+    private int categoryId;
+    private int walletId;
+
+    private boolean isIncome;
 
     private ArrayAdapter categoriesAdapter;
     private ArrayAdapter walletsAdapter;
@@ -40,7 +47,8 @@ public class AddTransactionViewModel implements ViewModel {
                                    boolean isIncome) {
 
         this.workerFacade = workerFacade;
-        categoriesAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
+        this.isIncome = isIncome;
+        categoriesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1);
         walletsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
@@ -50,12 +58,18 @@ public class AddTransactionViewModel implements ViewModel {
             workerFacade.getIncomeCategories(new GetAllIncomeCategories());
         else
             workerFacade.getExpenseCategories(new GetAllExpenseCategories());
+
     }
 
 
+    public void afterTextChanged(Editable s){
+        if (!TextUtils.equals(s.toString(), amount))
+            amount = s.toString();
+    }
+
     @Override
     public void destroy() {
-        Log.i(PLTags.INSTANCE_TAG,"AddTransactionViewModel has been destroyed");
+        Log.i(PLTags.INSTANCE_TAG, "AddTransactionViewModel has been destroyed");
         workerFacade.destroy();
     }
 
@@ -133,12 +147,42 @@ public class AddTransactionViewModel implements ViewModel {
         }
     }
 
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        amount.set(s.toString());
-    }
 
     public View.OnClickListener addOnClick =
-            v -> workerFacade.addTransaction(new AddTransactionSubscriber(), new Transaction( 0, 345f, 1, 234L));
+            v -> {
+                Transaction transaction = new Transaction(walletId,
+                        Float.parseFloat(amount),
+                        isIncome ? 1 : 0,
+                        System.currentTimeMillis() / 1000, categoryId);
+                workerFacade.addTransaction(new AddTransactionSubscriber(),
+                        transaction);
+            };
+
+    public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Log.d("myTag", "itemClicked, position = " + position + ", id = " + id);
+            categoryId = (int) id;
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    public AdapterView.OnItemSelectedListener walletOnCLickListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            walletId = (int) id;
+            Log.d("myTag", "wallet id = " + walletId);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     public ArrayAdapter getCategoriesAdapter() {
         return categoriesAdapter;

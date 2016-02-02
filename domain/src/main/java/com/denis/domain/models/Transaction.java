@@ -5,12 +5,14 @@ public class Transaction {
     private int walletId;
     private float amount;
     private int type;
+    private int categoryId;
     private long unixDateTime;
 
-    public Transaction(int walletId, float amount, int type, long unixDateTime) {
+    public Transaction(int walletId, float amount, int type, long unixDateTime, int categoryId) {
         this.walletId = walletId;
         this.amount = amount;
         this.type = type;
+        this.categoryId = categoryId;
         this.unixDateTime = unixDateTime;
     }
 

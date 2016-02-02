@@ -8,7 +8,8 @@ public class TransactionEntity extends RealmObject {
     private int id;
     private int walletId;
     private float amount;
-    private int type;
+    private int type; // 1 - Income, 0 - Expense
+    private int categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
     private long unixDateTime;
 
     public TransactionEntity(int id) {
@@ -48,6 +49,14 @@ public class TransactionEntity extends RealmObject {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public long getUnixDateTime() {
