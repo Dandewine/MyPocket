@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.mypocket.viewmodel.adding;
 
 import android.content.Context;
 import android.text.Editable;
@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.denis.domain.interactor.DefaultSubscriber;
+import com.denis.domain.interactor.UseCasesFacade;
 import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
@@ -19,6 +20,7 @@ import com.denis.mypocket.model.IncomeCategoryModel;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
 import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
 import com.denis.mypocket.utils.PLTags;
+import com.denis.mypocket.viewmodel.ViewModel;
 
 import java.util.List;
 

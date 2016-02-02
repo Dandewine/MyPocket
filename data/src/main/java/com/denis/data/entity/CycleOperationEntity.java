@@ -6,11 +6,15 @@ import io.realm.annotations.PrimaryKey;
 public class CycleOperationEntity extends RealmObject {
     @PrimaryKey
     private int id;
+    private String name;
     private TransactionEntity transactionEntity;
     private String interval;
 
     public CycleOperationEntity(int id) {
         this.id = id;
+    }
+
+    public CycleOperationEntity() {
     }
 
     public int getId() {
@@ -19,6 +23,14 @@ public class CycleOperationEntity extends RealmObject {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public TransactionEntity getTransactionEntity() {

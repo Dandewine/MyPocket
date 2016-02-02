@@ -31,6 +31,7 @@ public class WalletDataMapper {
         }
         return wallet;
     }
+
     /**
      * Transform a List of {@link WalletEntity} into a Collection of {@link Wallet}.
      *
@@ -42,25 +43,32 @@ public class WalletDataMapper {
         if (wallets != null) {
             walletList = new ArrayList<>();
             Wallet wallet;
-            for (WalletEntity we:wallets){
+            for (WalletEntity we : wallets) {
                 wallet = transform(we);
-                if(wallet!=null)
+                if (wallet != null)
                     walletList.add(wallet);
             }
         }
         return walletList;
     }
 
-    public List<WalletEntity> transform(List<Wallet> wallets){
-        List<WalletEntity> walletEntities = new ArrayList<>();
-        for (Wallet w : wallets) {
-            WalletEntity entity = new WalletEntity(w.getId(),w.getName(),w.getCurrency(),w.getBalance());
-            walletEntities.add(entity);
+    public List<WalletEntity> transform(List<Wallet> wallets) {
+        List<WalletEntity> walletEntities = null;
+        if (wallets != null && !wallets.isEmpty()) {
+            walletEntities = new ArrayList<>();
+            for (Wallet w : wallets) {
+                WalletEntity entity = transform(w);
+                walletEntities.add(entity);
+            }
         }
         return walletEntities;
     }
 
-    public WalletEntity transform(Wallet wallet){
-        return new WalletEntity(wallet.getId(),wallet.getName(),wallet.getCurrency(),wallet.getBalance());
+    public WalletEntity transform(Wallet wallet) {
+        WalletEntity entity = null;
+        if (wallet != null) {
+            entity = new WalletEntity(wallet.getId(), wallet.getName(), wallet.getCurrency(), wallet.getBalance());
+        }
+        return entity;
     }
 }

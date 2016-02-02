@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.mypocket.viewmodel.adding;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,14 +9,16 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.StringUtils;
+import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.utils.PLTags;
+import com.denis.mypocket.viewmodel.ViewModel;
 
 import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
+@PerActivity
 public class AddWalletViewModel implements ViewModel {
     public UseCase<Wallet> addWalletUseCase;
     public String walletName = "";

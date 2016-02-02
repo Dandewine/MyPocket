@@ -1,12 +1,19 @@
 package com.denis.domain.models;
 
-public class CircleOperation {
+public class CycleOperation {
     private int id;
     private Transaction transactionEntity;
+    private String name;
     private String interval;
 
-    public CircleOperation(int id) {
+    public CycleOperation(int id) {
         this.id = id;
+    }
+
+    public CycleOperation(Transaction transactionEntity, String name, String interval) {
+        this.transactionEntity = transactionEntity;
+        this.name = name;
+        this.interval = interval;
     }
 
 
@@ -14,6 +21,13 @@ public class CircleOperation {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Transaction getTransactionEntity() {
         return transactionEntity;
@@ -47,5 +61,13 @@ public class CircleOperation {
         public String getValue() {
             return mValue;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "id = " + id +
+                ", name = " + name +
+                ", interval = " + interval +
+                ", transactionId = " + transactionEntity.getId();
     }
 }

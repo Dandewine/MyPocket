@@ -41,7 +41,7 @@ public class ExpenseCategoryDataMapper {
         ExpenseCategoryEntity expenseCategoryEntity = null;
         if (expenseCategory != null) {
             expenseCategoryEntity = new ExpenseCategoryEntity(expenseCategory.getId());
-            expenseCategoryEntity.setPath(expenseCategory.getName());
+            expenseCategoryEntity.setPath(expenseCategory.getPath());
             expenseCategoryEntity.setName(expenseCategory.getName());
         }
         return expenseCategoryEntity;

@@ -1,6 +1,7 @@
 package com.denis.data.repository.datasource.local;
 
 import com.denis.data.entity.CycleOperationEntity;
+import com.denis.data.local_store.CircleOperationRealmStore;
 import com.denis.data.repository.datasource.interfaces.CycleOperationDataStore;
 
 import java.util.Collection;
@@ -12,21 +13,21 @@ import rx.Observable;
 
 public class CycleOperationLocalDataStore implements CycleOperationDataStore {
 
-    private CycleOperationDataStore dataStore;
+    private CircleOperationRealmStore dataStore;
 
     @Inject
-    public CycleOperationLocalDataStore(CycleOperationDataStore dataStore) {
+    public CycleOperationLocalDataStore(CircleOperationRealmStore dataStore) {
         this.dataStore = dataStore;
     }
 
     @Override
     public Observable<CycleOperationEntity> getCircleOperationEntity(int categoryId) {
-        return dataStore.getCircleOperationEntity(categoryId);
+        return dataStore.get(categoryId);
     }
 
     @Override
     public Observable<List<CycleOperationEntity>> getListExpenseEntities() {
-        return dataStore.getListExpenseEntities();
+        return dataStore.getList();
     }
 
     @Override

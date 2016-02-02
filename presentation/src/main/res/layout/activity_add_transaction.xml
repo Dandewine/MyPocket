@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.AddTransactionViewModel"/>
+            type="com.denis.mypocket.viewmodel.adding.AddTransactionViewModel"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

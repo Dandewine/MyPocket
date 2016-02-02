@@ -28,8 +28,8 @@ import com.denis.domain.repository.TransactionRepository;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.utils.PLTags;
-import com.denis.mypocket.viewmodel.AddTransactionViewModel;
-import com.denis.mypocket.viewmodel.UseCasesFacade;
+import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;
+import com.denis.domain.interactor.UseCasesFacade;
 
 import javax.inject.Named;
 

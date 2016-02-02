@@ -18,6 +18,12 @@ public class ExpenseCategoryEntity extends RealmObject {
         this.name = name;
     }
 
+    public ExpenseCategoryEntity(int id, String name, String path) {
+        this.id = id;
+        this.name = name;
+        this.path = path;
+    }
+
     public ExpenseCategoryEntity() {
     }
 

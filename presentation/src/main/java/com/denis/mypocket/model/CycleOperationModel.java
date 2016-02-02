@@ -4,6 +4,7 @@ public class CycleOperationModel {
     private int id;
     private TransactionModel transactionEntity;
     private String interval;
+    private String name;
 
     public CycleOperationModel(int id) {
         this.id = id;
@@ -19,6 +20,14 @@ public class CycleOperationModel {
 
     public void setTransactionEntity(TransactionModel transactionEntity) {
         this.transactionEntity = transactionEntity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public CircleTypes getInterval() {

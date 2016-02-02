@@ -1,6 +1,6 @@
 package com.denis.domain.repository;
 
-import com.denis.domain.models.CircleOperation;
+import com.denis.domain.models.CycleOperation;
 
 import java.util.List;
 
@@ -8,31 +8,31 @@ import rx.Observable;
 
 public interface CycleOperationRepository {
     /**
-     * Get an {@link rx.Observable} which will emit a List of {@link CircleOperation}.
+     * Get an {@link rx.Observable} which will emit a List of {@link CycleOperation}.
      */
-    Observable<List<CircleOperation>> getCircleOperationList();
+    Observable<List<CycleOperation>> getCircleOperationList();
 
     /**
-     * Get an {@link rx.Observable} which will emit a {@link CircleOperation}.
+     * Get an {@link rx.Observable} which will emit a {@link CycleOperation}.
      *
      * @param userId The getCircleOperation id used to retrieve getCircleOperation data.
      */
-    Observable<CircleOperation> getCircleOperation(final int userId);
+    Observable<CycleOperation> getCircleOperation(final int userId);
 
     /**
-     * Add CircleOperation into our local storage
+     * Add CycleOperation into our local storage
      *
-     * @param CircleOperation
+     * @param CycleOperation
      * @return
      */
 
-    Observable<CircleOperation> addCircleOperation(CircleOperation CircleOperation);
+    Observable<CycleOperation> addCircleOperation(CycleOperation CycleOperation);
 
     /**
-     * Add CircleOperation's list to our local storage
+     * Add CycleOperation's list to our local storage
      *
-     * @param CircleOperations
+     * @param cycleOperations
      * @return
      */
-    Observable<List<CircleOperation>> addCircleOperation(List<CircleOperation> CircleOperations);
+    Observable<List<CycleOperation>> addCircleOperation(List<CycleOperation> cycleOperations);
 }

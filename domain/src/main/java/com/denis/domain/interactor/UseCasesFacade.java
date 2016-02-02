@@ -1,21 +1,15 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.domain.interactor;
 
-import android.util.Log;
-
-import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
-import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.utils.PLTags;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import rx.Subscriber;
 
-@PerActivity
 public class UseCasesFacade {
     private UseCase<Transaction> addTransactionUseCase;
     private UseCase<Wallet> getWalletsUseCase;
@@ -54,6 +48,5 @@ public class UseCasesFacade {
         expenseCategoryUseCase.unsubscribe();
         incomeCategoryUseCase.unsubscribe();
         getWalletsUseCase.unsubscribe();
-        Log.i(PLTags.INSTANCE_TAG,"UseCaseFacade has been destroyed");
     }
 }

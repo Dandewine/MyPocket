@@ -2,7 +2,7 @@ package com.denis.data.repository;
 
 import com.denis.data.entity.mapper.CircleOperationDataMapper;
 import com.denis.data.repository.datasource.interfaces.CycleOperationDataStore;
-import com.denis.domain.models.CircleOperation;
+import com.denis.domain.models.CycleOperation;
 import com.denis.domain.repository.CycleOperationRepository;
 
 import java.util.List;
@@ -23,26 +23,26 @@ public class CycleOperationDataRepository implements CycleOperationRepository {
     }
 
     @Override
-    public Observable<List<CircleOperation>> getCircleOperationList() {
+    public Observable<List<CycleOperation>> getCircleOperationList() {
         return dataStore.getListExpenseEntities()
                 .map(dataMapper::transform);
     }
 
     @Override
-    public Observable<CircleOperation> getCircleOperation(int userId) {
+    public Observable<CycleOperation> getCircleOperation(int userId) {
         return dataStore.getCircleOperationEntity(userId)
                 .map(dataMapper::transform);
     }
 
     @Override
-    public Observable<CircleOperation> addCircleOperation(CircleOperation circleOperation) {
-        return dataStore.put(dataMapper.transform(circleOperation))
+    public Observable<CycleOperation> addCircleOperation(CycleOperation cycleOperation) {
+        return dataStore.put(dataMapper.transform(cycleOperation))
                 .map(dataMapper::transform);
     }
 
     @Override
-    public Observable<List<CircleOperation>> addCircleOperation(List<CircleOperation> circleOperations) {
-        return dataStore.put(dataMapper.transform(circleOperations))
+    public Observable<List<CycleOperation>> addCircleOperation(List<CycleOperation> cycleOperations) {
+        return dataStore.put(dataMapper.transform(cycleOperations))
                 .map(dataMapper::transform);
     }
 }
