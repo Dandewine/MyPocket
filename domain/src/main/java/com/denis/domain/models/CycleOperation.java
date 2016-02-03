@@ -10,15 +10,15 @@ public class CycleOperation {
         this.id = id;
     }
 
-    public CycleOperation(Transaction transactionEntity, String name, String interval) {
-        this.transactionEntity = transactionEntity;
+    public CycleOperation(Transaction transaction, String name, String interval) {
+        this.transactionEntity = transaction;
         this.name = name;
         this.interval = interval;
     }
 
-    public CycleOperation(int id, Transaction transactionEntity, String name, String interval) {
+    public CycleOperation(int id, Transaction transaction, String name, String interval) {
         this.id = id;
-        this.transactionEntity = transactionEntity;
+        this.transactionEntity = transaction;
         this.name = name;
         this.interval = interval;
     }
@@ -39,8 +39,8 @@ public class CycleOperation {
         return transactionEntity;
     }
 
-    public void setTransaction(Transaction transactionEntity) {
-        this.transactionEntity = transactionEntity;
+    public void setTransaction(Transaction transaction) {
+        this.transactionEntity = transaction;
     }
 
     public String getInterval() {
@@ -74,6 +74,6 @@ public class CycleOperation {
         return "id = " + id +
                 ", name = " + name +
                 ", interval = " + interval +
-                ", transactionId = " + transactionEntity.getId();
+                ", transactionId = " + (transactionEntity == null ? "null" : String.valueOf(transactionEntity.getId()));
     }
 }

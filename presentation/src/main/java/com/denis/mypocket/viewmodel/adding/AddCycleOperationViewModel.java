@@ -8,6 +8,7 @@ import android.view.View;
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.CycleOperation;
+import com.denis.domain.models.Transaction;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.ViewModel;
@@ -21,13 +22,13 @@ public class AddCycleOperationViewModel implements ViewModel {
         this.addUseCase = addUseCase;
     }
 
-    public View.OnClickListener addOnClick = v -> addUseCase.executeSync(new AddCycleOperation(), new CycleOperation(null, name, CycleOperation.CircleTypes.WEEK.getValue()));
+    public View.OnClickListener addOnClick = v ->
+            addUseCase.executeSync(new AddCycleOperation(), new CycleOperation(new Transaction(45), name, CycleOperation.CircleTypes.WEEK.getValue()));
 
     @Override
     public void destroy() {
-
+        addUseCase.unsubscribe();
     }
-
 
     public void afterTextChanged(Editable s) {
         if (!TextUtils.equals(s.toString(), name))
