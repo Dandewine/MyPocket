@@ -8,7 +8,16 @@ public class Transaction {
     private int categoryId;
     private long unixDateTime;
 
-    public Transaction(int walletId, float amount, int type, long unixDateTime, int categoryId) {
+    public Transaction(int id, int walletId, float amount, int type, long unixDateTime, int categoryId) {
+        this.id = id;
+        this.walletId = walletId;
+        this.amount = amount;
+        this.type = type;
+        this.categoryId = categoryId;
+        this.unixDateTime = unixDateTime;
+    }
+
+    public Transaction(int walletId, float amount, int type, int categoryId, long unixDateTime) {
         this.walletId = walletId;
         this.amount = amount;
         this.type = type;

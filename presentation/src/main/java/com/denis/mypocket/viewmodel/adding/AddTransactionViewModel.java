@@ -155,7 +155,8 @@ public class AddTransactionViewModel implements ViewModel {
                 Transaction transaction = new Transaction(walletId,
                         Float.parseFloat(amount),
                         isIncome ? 1 : 0,
-                        System.currentTimeMillis() / 1000, categoryId);
+                        categoryId,
+                        System.currentTimeMillis() / 1000);
                 workerFacade.addTransaction(new AddTransactionSubscriber(),
                         transaction);
             };

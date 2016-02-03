@@ -1,6 +1,6 @@
 package com.denis.data.repository;
 
-import com.denis.data.entity.mapper.CircleOperationDataMapper;
+import com.denis.data.entity.mapper.CycleOperationDataMapper;
 import com.denis.data.repository.datasource.interfaces.CycleOperationDataStore;
 import com.denis.domain.models.CycleOperation;
 import com.denis.domain.repository.CycleOperationRepository;
@@ -13,11 +13,11 @@ import rx.Observable;
 
 public class CycleOperationDataRepository implements CycleOperationRepository {
 
-    private CircleOperationDataMapper dataMapper;
+    private CycleOperationDataMapper dataMapper;
     private CycleOperationDataStore dataStore;
 
     @Inject
-    public CycleOperationDataRepository(CycleOperationDataStore dataStore, CircleOperationDataMapper dataMapper) {
+    public CycleOperationDataRepository(CycleOperationDataStore dataStore, CycleOperationDataMapper dataMapper) {
         this.dataStore = dataStore;
         this.dataMapper = dataMapper;
     }

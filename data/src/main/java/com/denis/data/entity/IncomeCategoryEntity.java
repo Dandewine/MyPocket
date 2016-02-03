@@ -18,6 +18,12 @@ public class IncomeCategoryEntity extends RealmObject {
         this.name = name;
     }
 
+    public IncomeCategoryEntity(int id, String name, String path) {
+        this.id = id;
+        this.name = name;
+        this.path = path;
+    }
+
     public IncomeCategoryEntity() {
     }
 

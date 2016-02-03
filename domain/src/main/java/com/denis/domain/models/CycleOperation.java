@@ -16,6 +16,12 @@ public class CycleOperation {
         this.interval = interval;
     }
 
+    public CycleOperation(int id, Transaction transactionEntity, String name, String interval) {
+        this.id = id;
+        this.transactionEntity = transactionEntity;
+        this.name = name;
+        this.interval = interval;
+    }
 
     public int getId() {
         return id;
@@ -29,16 +35,16 @@ public class CycleOperation {
         this.name = name;
     }
 
-    public Transaction getTransactionEntity() {
+    public Transaction getTransaction() {
         return transactionEntity;
     }
 
-    public void setTransactionEntity(Transaction transactionEntity) {
+    public void setTransaction(Transaction transactionEntity) {
         this.transactionEntity = transactionEntity;
     }
 
-    public CircleTypes getInterval() {
-        return CircleTypes.valueOf(interval);
+    public String getInterval() {
+        return interval;
     }
 
     public void setInterval(String interval) {

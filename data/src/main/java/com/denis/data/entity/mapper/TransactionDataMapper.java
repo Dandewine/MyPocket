@@ -18,7 +18,7 @@ public class TransactionDataMapper {
     public Transaction transform(TransactionEntity entity) {
         Transaction transaction = null;
         if (entity != null) {
-            transaction = new Transaction(entity.getCategoryId());
+            transaction = new Transaction(entity.getId());
             transaction.setWalletId(entity.getWalletId());
             transaction.setAmount(entity.getAmount());
             transaction.setType(entity.getType());

@@ -21,7 +21,7 @@ public class CycleOperationModelMapper {
         CycleOperationModel operationModel = null;
         if (operation != null) {
             operationModel = new CycleOperationModel(operation.getId());
-            operationModel.setTransactionEntity(transactionDataMapper.transform(operation.getTransactionEntity()));
+            operationModel.setTransactionEntity(transactionDataMapper.transform(operation.getTransaction()));
             operationModel.setName(operation.getName());
         }
         return operationModel;

@@ -17,6 +17,13 @@ public class CycleOperationEntity extends RealmObject {
     public CycleOperationEntity() {
     }
 
+    public CycleOperationEntity(int id, String name, TransactionEntity transactionEntity, String interval) {
+        this.id = id;
+        this.name = name;
+        this.transactionEntity = transactionEntity;
+        this.interval = interval;
+    }
+
     public int getId() {
         return id;
     }

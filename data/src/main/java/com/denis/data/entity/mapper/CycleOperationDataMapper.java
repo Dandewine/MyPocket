@@ -9,12 +9,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CircleOperationDataMapper {
+public class CycleOperationDataMapper {
 
     private TransactionDataMapper transactionDataMapper;
 
     @Inject
-    public CircleOperationDataMapper(TransactionDataMapper transactionDataMapper) {
+    public CycleOperationDataMapper(TransactionDataMapper transactionDataMapper) {
         this.transactionDataMapper = transactionDataMapper;
     }
 
@@ -24,7 +24,7 @@ public class CircleOperationDataMapper {
             operation = new CycleOperation(entity.getId());
             operation.setInterval(entity.getInterval());
             operation.setName(entity.getName());
-            operation.setTransactionEntity(
+            operation.setTransaction(
                     transactionDataMapper.transform(entity.getTransactionEntity())
             );
         }
@@ -47,8 +47,8 @@ public class CircleOperationDataMapper {
         CycleOperationEntity entity = null;
         if (operation != null) {
             entity = new CycleOperationEntity(operation.getId());
-            entity.setInterval(operation.getInterval().getValue());
-            entity.setTransactionEntity(transactionDataMapper.transform(operation.getTransactionEntity()));
+            entity.setInterval(operation.getInterval());
+            entity.setTransactionEntity(transactionDataMapper.transform(operation.getTransaction()));
             entity.setName(operation.getName());
         }
         return entity;

@@ -19,6 +19,15 @@ public class TransactionEntity extends RealmObject {
     public TransactionEntity() {
     }
 
+    public TransactionEntity(int id, int walletId, float amount, int type, int categoryId, long unixDateTime) {
+        this.id = id;
+        this.walletId = walletId;
+        this.amount = amount;
+        this.type = type;
+        this.categoryId = categoryId;
+        this.unixDateTime = unixDateTime;
+    }
+
     public int getId() {
         return id;
     }

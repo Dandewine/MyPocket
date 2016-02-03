@@ -1,6 +1,6 @@
 package com.denis.mypocket.internal.di.modules;
 
-import com.denis.data.entity.mapper.CircleOperationDataMapper;
+import com.denis.data.entity.mapper.CycleOperationDataMapper;
 import com.denis.data.entity.mapper.TransactionDataMapper;
 import com.denis.data.local_store.CircleOperationRealmStore;
 import com.denis.data.local_store.RealmStore;
@@ -42,13 +42,13 @@ public class AddCycleOPModule {
 
     @Provides
     @PerActivity
-    CircleOperationDataMapper provideDataMapper(TransactionDataMapper dataMapper) {
-        return new CircleOperationDataMapper(dataMapper);
+    CycleOperationDataMapper provideDataMapper(TransactionDataMapper dataMapper) {
+        return new CycleOperationDataMapper(dataMapper);
     }
 
     @Provides
     @PerActivity
-    CycleOperationRepository provideCycleOPRepository(CycleOperationDataStore dataStore, CircleOperationDataMapper dataMapper) {
+    CycleOperationRepository provideCycleOPRepository(CycleOperationDataStore dataStore, CycleOperationDataMapper dataMapper) {
         return new CycleOperationDataRepository(dataStore, dataMapper);
     }
 

@@ -9,6 +9,12 @@ public class IncomeCategory {
         this.id = id;
     }
 
+    public IncomeCategory(int id, String name, String path) {
+        this.id = id;
+        this.name = name;
+        this.path = path;
+    }
+
     public int getId() {
         return id;
     }
