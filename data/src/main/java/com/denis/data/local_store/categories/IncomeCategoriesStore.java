@@ -80,5 +80,8 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
         throw new UnsupportedOperationException("Can't do that");
     }
 
-
+    @Override
+    public Observable<IncomeCategoryEntity> update(IncomeCategoryEntity item) {
+        return Observable.just(mRealm.copyToRealmOrUpdate(item));
+    }
 }

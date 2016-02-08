@@ -11,15 +11,21 @@ import io.realm.RealmConfiguration;
 
 public class MyPocketApp extends Application {
     private ApplicationComponent component;
-
+    private static MyPocketApp pocketApp;
     @Override
     public void onCreate() {
         super.onCreate();
         initializeInjector();
         configureRealm();
+        pocketApp = this;
 
 
     }
+
+    public static MyPocketApp getPocketApp() {
+        return pocketApp;
+    }
+
     private void initializeInjector(){
         component = DaggerApplicationComponent
                 .builder()

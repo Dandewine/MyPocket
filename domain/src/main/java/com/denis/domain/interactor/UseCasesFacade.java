@@ -44,9 +44,9 @@ public class UseCasesFacade {
     }
 
     public void destroy(){
-        addTransactionUseCase.unsubscribe();
-        expenseCategoryUseCase.unsubscribe();
-        incomeCategoryUseCase.unsubscribe();
-        getWalletsUseCase.unsubscribe();
+        addTransactionUseCase.unSubscribe();
+        expenseCategoryUseCase.unSubscribe();
+        incomeCategoryUseCase.unSubscribe();
+        getWalletsUseCase.unSubscribe();
     }
 }

@@ -10,8 +10,11 @@ import javax.inject.Inject;
 
 public class TransactionModelDataMapper {
 
+    private WalletModelDataMapper walletModelDataMapper;
+
     @Inject
-    public TransactionModelDataMapper() {
+    public TransactionModelDataMapper(WalletModelDataMapper walletModelDataMapper) {
+        this.walletModelDataMapper = walletModelDataMapper;
     }
 
     public TransactionModel transform(Transaction transaction) {
@@ -21,7 +24,7 @@ public class TransactionModelDataMapper {
             model.setAmount(transaction.getAmount());
             model.setType(transaction.getType());
             model.setUnixDateTime(transaction.getUnixDateTime());
-            model.setWalletId(transaction.getWalletId());
+            model.setWalletModel(walletModelDataMapper.transform(transaction.getWallet()));
         }
         return model;
     }

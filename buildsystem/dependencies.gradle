@@ -63,6 +63,8 @@ ext{
     domainTestDependencies = [
             junit:              "junit:junit:${jUnitVersion}",
             mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
+            assertj:            "org.assertj:assertj-core:${assertJVersion}",
     ]
     //endregion
 

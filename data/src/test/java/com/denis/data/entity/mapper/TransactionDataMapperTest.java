@@ -1,8 +1,9 @@
 package com.denis.data.entity.mapper;
 
-import com.denis.data.ApplicationTestCase;
 import com.denis.data.entity.TransactionEntity;
+import com.denis.data.entity.WalletEntity;
 import com.denis.domain.models.Transaction;
+import com.denis.domain.models.Wallet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,21 +17,26 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class TransactionDataMapperTest extends ApplicationTestCase {
+public class TransactionDataMapperTest{
 
     private TransactionDataMapper dataMapper;
+    private WalletDataMapper mapper = new WalletDataMapper();
 
     private static final int FAKE_ID = 92;
-    private static final int FAKE_WALLET_ID = 921;
     private static final float FAKE_AMOUNT = 100;
     private static final int FAKE_TYPE = 0;
     private static final long FAKE_DATE = 14784934923L;
     private static final int FAKE_CATEGORY_ID = 17;
 
+    private static final int FAKE_WALLET_ID = 921;
+    private static final String FAKE_WALLET_NAME = "fake_wallet";
+    private static final String FAKE_WALLET_CURRENCY = "fake_$";
+    private static final float FAKE_WALLET_BALANCE = 100;
+
 
     @Before
     public void setUp() {
-        dataMapper = new TransactionDataMapper();
+        dataMapper = new TransactionDataMapper(mapper);
     }
 
     @Test
@@ -44,7 +50,12 @@ public class TransactionDataMapperTest extends ApplicationTestCase {
         assertThat(entity.getCategoryId(),is(FAKE_CATEGORY_ID));
         assertThat(entity.getType(),is(FAKE_TYPE));
         assertThat(entity.getUnixDateTime(),is(FAKE_DATE));
-        assertThat(entity.getWalletId(),is(FAKE_WALLET_ID));
+
+        assertThat(entity.getWalletEntity(),is(notNullValue()));
+        assertThat(entity.getWalletEntity().getId(),is(FAKE_WALLET_ID));
+        assertThat(entity.getWalletEntity().getName(),is(FAKE_WALLET_NAME));
+        assertThat(entity.getWalletEntity().getCurrency(),is(FAKE_WALLET_CURRENCY));
+        assertThat(entity.getWalletEntity().getBalance(),is(FAKE_WALLET_BALANCE));
     }
 
     @Test
@@ -58,7 +69,12 @@ public class TransactionDataMapperTest extends ApplicationTestCase {
         assertThat(transaction.getCategoryId(),is(FAKE_CATEGORY_ID));
         assertThat(transaction.getType(),is(FAKE_TYPE));
         assertThat(transaction.getUnixDateTime(),is(FAKE_DATE));
-        assertThat(transaction.getWalletId(),is(FAKE_WALLET_ID));
+
+        assertThat(transaction.getWallet(),is(notNullValue()));
+        assertThat(transaction.getWallet().getId(),is(FAKE_WALLET_ID));
+        assertThat(transaction.getWallet().getName(),is(FAKE_WALLET_NAME));
+        assertThat(transaction.getWallet().getCurrency(),is(FAKE_WALLET_CURRENCY));
+        assertThat(transaction.getWallet().getBalance(),is(FAKE_WALLET_BALANCE));
     }
 
     @Test
@@ -96,10 +112,17 @@ public class TransactionDataMapperTest extends ApplicationTestCase {
     }
 
     private Transaction createFakeTransaction() {
-        return new Transaction(FAKE_ID,FAKE_WALLET_ID,FAKE_AMOUNT,FAKE_TYPE,FAKE_DATE,FAKE_CATEGORY_ID);
+        return new Transaction(FAKE_ID,createFakeWallet(),FAKE_AMOUNT,FAKE_TYPE,FAKE_DATE,FAKE_CATEGORY_ID);
     }
 
     private TransactionEntity createFakeTransactionEntity(){
-        return new TransactionEntity(FAKE_ID,FAKE_WALLET_ID,FAKE_AMOUNT,FAKE_TYPE,FAKE_CATEGORY_ID,FAKE_DATE);
+        return new TransactionEntity(FAKE_ID,createFakeWalletEntity(),FAKE_AMOUNT,FAKE_TYPE,FAKE_CATEGORY_ID,FAKE_DATE);
+    }
+
+    private WalletEntity createFakeWalletEntity(){
+        return new WalletEntity(FAKE_WALLET_ID,FAKE_WALLET_NAME,FAKE_WALLET_CURRENCY,FAKE_WALLET_BALANCE);
+    }
+    private Wallet createFakeWallet(){
+        return new Wallet(FAKE_WALLET_ID,FAKE_WALLET_NAME,FAKE_WALLET_CURRENCY,FAKE_WALLET_BALANCE);
     }
 }

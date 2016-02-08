@@ -38,6 +38,13 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".internal.broadcast.CycleOperationBroadcast"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="action"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

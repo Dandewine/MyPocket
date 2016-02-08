@@ -30,6 +30,7 @@ public abstract class UseCase<Argument> {
      *
      * @param useCaseSubscriber The guy who will be listen to the observable build with {@link #buildUseCaseObservable(Argument... args)}.
      */
+    // TODO: 2/3/16 make this async
     @SuppressWarnings("unchecked")
     public void executeAsync(Subscriber useCaseSubscriber, Argument... arg) {
         this.subscription = this.buildUseCaseObservable(arg)
@@ -44,15 +45,10 @@ public abstract class UseCase<Argument> {
                 .subscribe(useCaseSubscriber);
     }
 
-  /*  @SuppressWarnings("unchecked")
-    public void executeSync(Subscriber useCaseSubscriber){
-        this.subscription = this.buildUseCaseObservable()
-                .subscribe(useCaseSubscriber);
-    }*/
     /**
      * Unsubscribes from current {@link rx.Subscription}.
      */
-    public void unsubscribe() {
+    public void unSubscribe() {
         if (!subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }

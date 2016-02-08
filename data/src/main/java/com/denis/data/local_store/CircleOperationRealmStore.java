@@ -47,4 +47,9 @@ public class CircleOperationRealmStore implements RealmStore<CycleOperationEntit
     public Observable<List<CycleOperationEntity>> getList() {
         return Observable.just(mRealm.where(CycleOperationEntity.class).findAllSorted("id"));
     }
+
+    @Override
+    public Observable<CycleOperationEntity> update(CycleOperationEntity item) {
+        return Observable.just(mRealm.copyToRealmOrUpdate(item));
+    }
 }

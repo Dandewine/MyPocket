@@ -1,8 +1,30 @@
-apply plugin: 'java'
+
+apply plugin: 'com.android.library'
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
 //noinspection GroovyUnusedAssignment
 targetCompatibility = 1.7
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
 configurations {
     provided
 }
@@ -22,6 +44,9 @@ dependencies {
     compile domainDependencies.dagger
     compile domainDependencies.rxJava
 
+
     testCompile domainTestDependencies.junit
     testCompile domainTestDependencies.mockito
+    testCompile domainTestDependencies.robolectric
+    testCompile domainTestDependencies.assertj
 }

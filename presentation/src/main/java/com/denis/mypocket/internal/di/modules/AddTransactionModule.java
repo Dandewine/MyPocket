@@ -64,9 +64,10 @@ public class AddTransactionModule {
 
     @Provides @PerActivity @Named("addTransaction")
     UseCase<Transaction> provideAddTransactionUseCase(ThreadExecutor threadExecutor,
-                                         PostExecutionThread postExecutionThread,
-                                         TransactionRepository repository){
-        return new AddTransactionUseCase(threadExecutor,postExecutionThread,repository);
+                                                      PostExecutionThread postExecutionThread,
+                                                      TransactionRepository repository,
+                                                      WalletRepository walletRepo){
+        return new AddTransactionUseCase(threadExecutor,postExecutionThread,repository, walletRepo);
     }
 
     @Provides @PerActivity @Named("transactions") RealmStore provideTransactionEntityRealmStore(Realm realm){
@@ -77,8 +78,8 @@ public class AddTransactionModule {
         return new TransactionLocalDataStore(store);
     }
 
-    @Provides @PerActivity TransactionDataMapper provideTransactionDataMapper(){
-        return new TransactionDataMapper();
+    @Provides @PerActivity TransactionDataMapper provideTransactionDataMapper(WalletDataMapper dataMapper){
+        return new TransactionDataMapper(dataMapper);
     }
 
     @Provides @PerActivity TransactionRepository provideTransactionRepository(TransactionDataStore dataStore, TransactionDataMapper dataMapper){

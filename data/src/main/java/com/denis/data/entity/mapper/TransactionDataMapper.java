@@ -11,15 +11,18 @@ import javax.inject.Inject;
 
 public class TransactionDataMapper {
 
+    private WalletDataMapper dataMapper;
+
     @Inject
-    public TransactionDataMapper() {
+    public TransactionDataMapper(WalletDataMapper dataMapper) {
+        this.dataMapper = dataMapper;
     }
 
     public Transaction transform(TransactionEntity entity) {
         Transaction transaction = null;
         if (entity != null) {
             transaction = new Transaction(entity.getId());
-            transaction.setWalletId(entity.getWalletId());
+            transaction.setWallet(dataMapper.transform(entity.getWalletEntity()));
             transaction.setAmount(entity.getAmount());
             transaction.setType(entity.getType());
             transaction.setUnixDateTime(entity.getUnixDateTime());
@@ -45,7 +48,7 @@ public class TransactionDataMapper {
         if (transaction != null) {
             transactionEntity = new TransactionEntity();
             transactionEntity.setId(transaction.getId());
-            transactionEntity.setWalletId(transaction.getWalletId());
+            transactionEntity.setWalletEntity(dataMapper.transform(transaction.getWallet()));
             transactionEntity.setAmount(transaction.getAmount());
             transactionEntity.setType(transaction.getType());
             transactionEntity.setCategoryId(transaction.getCategoryId());

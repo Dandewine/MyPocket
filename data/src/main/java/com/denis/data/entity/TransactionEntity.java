@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey;
 public class TransactionEntity extends RealmObject {
     @PrimaryKey
     private int id;
-    private int walletId;
+    private WalletEntity walletEntity;
     private float amount;
     private int type; // 1 - Income, 0 - Expense
     private int categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
@@ -19,9 +19,9 @@ public class TransactionEntity extends RealmObject {
     public TransactionEntity() {
     }
 
-    public TransactionEntity(int id, int walletId, float amount, int type, int categoryId, long unixDateTime) {
+    public TransactionEntity(int id,  WalletEntity walletEntity, float amount, int type, int categoryId, long unixDateTime) {
         this.id = id;
-        this.walletId = walletId;
+        this.walletEntity = walletEntity;
         this.amount = amount;
         this.type = type;
         this.categoryId = categoryId;
@@ -36,12 +36,12 @@ public class TransactionEntity extends RealmObject {
         this.id = id;
     }
 
-    public int getWalletId() {
-        return walletId;
+    public WalletEntity getWalletEntity() {
+        return walletEntity;
     }
 
-    public void setWalletId(int walletId) {
-        this.walletId = walletId;
+    public void setWalletEntity(WalletEntity walletEntity) {
+        this.walletEntity = walletEntity;
     }
 
     public float getAmount() {

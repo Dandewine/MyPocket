@@ -42,6 +42,7 @@ public class AddTransactionViewModel implements ViewModel {
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
 
+    private List<Wallet> walletList;
 
     @Inject
     public AddTransactionViewModel(UseCasesFacade workerFacade,
@@ -125,9 +126,10 @@ public class AddTransactionViewModel implements ViewModel {
         }
 
         @Override
-        public void onNext(List<Wallet> wallet) {
-            for (int i = 0; i < wallet.size(); i++) {
-                walletsAdapter.add(wallet.get(i).getName());
+        public void onNext(List<Wallet> wallets) {
+            walletList = wallets;
+            for (int i = 0; i < wallets.size(); i++) {
+                walletsAdapter.add(wallets.get(i).getName());
             }
         }
     }
@@ -152,7 +154,7 @@ public class AddTransactionViewModel implements ViewModel {
 
     public View.OnClickListener addOnClick =
             v -> {
-                Transaction transaction = new Transaction(walletId,
+                Transaction transaction = new Transaction(walletList.get(walletId),
                         Float.parseFloat(amount),
                         isIncome ? 1 : 0,
                         categoryId,

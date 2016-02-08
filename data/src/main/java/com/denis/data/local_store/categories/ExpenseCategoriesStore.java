@@ -43,4 +43,9 @@ public class ExpenseCategoriesStore implements RealmStore<ExpenseCategoryEntity>
     public Observable<List<ExpenseCategoryEntity>> getList() {
         return Observable.just(mRealm.where(ExpenseCategoryEntity.class).findAllSorted("id"));
     }
+
+    @Override
+    public Observable<ExpenseCategoryEntity> update(ExpenseCategoryEntity item) {
+        return Observable.just(mRealm.copyToRealmOrUpdate(item));
+    }
 }

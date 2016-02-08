@@ -9,6 +9,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddCycleOperationBinding;
 import com.denis.mypocket.internal.di.components.DaggerAddCycleOPComponent;
 import com.denis.mypocket.internal.di.modules.AddCycleOPModule;
+import com.denis.mypocket.internal.di.modules.WalletModule;
 import com.denis.mypocket.viewmodel.adding.AddCycleOperationViewModel;
 
 import javax.inject.Inject;
@@ -33,6 +34,7 @@ public class AddCycleOperationActivity extends BaseActivity {
         DaggerAddCycleOPComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .addCycleOPModule(new AddCycleOPModule())
+                .walletModule(new WalletModule())
                 .build().inject(this);
     }
 

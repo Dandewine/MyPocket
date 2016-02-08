@@ -1,7 +1,11 @@
 package com.denis.mypocket.internal.di.modules;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.denis.data.entity.mapper.CycleOperationDataMapper;
 import com.denis.data.entity.mapper.TransactionDataMapper;
+import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.local_store.CircleOperationRealmStore;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.CycleOperationDataRepository;
@@ -13,14 +17,19 @@ import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.cycle_operations.AddCircleOperationUseCase;
 import com.denis.domain.repository.CycleOperationRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.adding.AddCycleOperationViewModel;
 
 import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
 
-@Module
+@Module(includes = WalletModule.class)
 public class AddCycleOPModule {
+
+    public AddCycleOPModule() {
+        Log.d(PLTags.INSTANCE_TAG,"AddCycleOpModule created "+hashCode());
+    }
 
     @Provides
     @PerActivity
@@ -36,8 +45,8 @@ public class AddCycleOPModule {
 
     @Provides
     @PerActivity
-    TransactionDataMapper provideTransactionDataMapper() {
-        return new TransactionDataMapper();
+    TransactionDataMapper provideTransactionDataMapper(WalletDataMapper dataMapper) {
+        return new TransactionDataMapper(dataMapper);
     }
 
     @Provides
@@ -56,14 +65,14 @@ public class AddCycleOPModule {
     @PerActivity
     UseCase provideAddUseCase(ThreadExecutor executor,
                               PostExecutionThread thread,
-                              CycleOperationRepository repository) {
-        return new AddCircleOperationUseCase(executor, thread, repository);
+                              CycleOperationRepository repository, Context context) {
+        return new AddCircleOperationUseCase(executor, thread, repository, context);
     }
 
     @Provides
     @PerActivity
-    AddCycleOperationViewModel provideViewModel(UseCase addCycleOperationUseCase) {
-        return new AddCycleOperationViewModel(addCycleOperationUseCase);
+    AddCycleOperationViewModel provideViewModel(UseCase addCycleOperationUseCase, Context context) {
+        return new AddCycleOperationViewModel(addCycleOperationUseCase, context);
     }
 
 }

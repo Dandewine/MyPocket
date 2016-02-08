@@ -1,6 +1,9 @@
 package com.denis.domain.models;
 
-public class CycleOperation {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CycleOperation implements Parcelable {
     private int id;
     private Transaction transactionEntity;
     private String name;
@@ -76,4 +79,34 @@ public class CycleOperation {
                 ", interval = " + interval +
                 ", transactionId = " + (transactionEntity == null ? "null" : String.valueOf(transactionEntity.getId()));
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeParcelable(this.transactionEntity, flags);
+        dest.writeString(this.name);
+        dest.writeString(this.interval);
+    }
+
+    protected CycleOperation(Parcel in) {
+        this.id = in.readInt();
+        this.transactionEntity = in.readParcelable(Transaction.class.getClassLoader());
+        this.name = in.readString();
+        this.interval = in.readString();
+    }
+
+    public static final Parcelable.Creator<CycleOperation> CREATOR = new Parcelable.Creator<CycleOperation>() {
+        public CycleOperation createFromParcel(Parcel source) {
+            return new CycleOperation(source);
+        }
+
+        public CycleOperation[] newArray(int size) {
+            return new CycleOperation[size];
+        }
+    };
 }

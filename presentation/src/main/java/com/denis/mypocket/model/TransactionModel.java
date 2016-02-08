@@ -3,7 +3,7 @@ package com.denis.mypocket.model;
 public class TransactionModel {
 
     private int id;
-    private int walletId;
+    private WalletModel walletModel;
     private float amount;
     private int type;
     private long unixDateTime;
@@ -20,12 +20,12 @@ public class TransactionModel {
         this.id = id;
     }
 
-    public int getWalletId() {
-        return walletId;
+    public WalletModel getWalletModel() {
+        return walletModel;
     }
 
-    public void setWalletId(int walletId) {
-        this.walletId = walletId;
+    public void setWalletModel(WalletModel walletModel) {
+        this.walletModel = walletModel;
     }
 
     public float getAmount() {

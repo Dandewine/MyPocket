@@ -24,6 +24,6 @@ public interface WalletRepository {
 
     Observable<List<Wallet>> addWallet(List<Wallet> wallets);
 
-
+    Observable<Wallet> update(Wallet item);
 
 }

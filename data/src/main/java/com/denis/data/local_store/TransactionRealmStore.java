@@ -47,4 +47,9 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
     public Observable<List<TransactionEntity>> getList() {
         return Observable.just(mRealm.where(TransactionEntity.class).findAllAsync());
     }
+
+    @Override
+    public Observable<TransactionEntity> update(TransactionEntity item) {
+        return Observable.just(mRealm.copyToRealmOrUpdate(item));
+    }
 }

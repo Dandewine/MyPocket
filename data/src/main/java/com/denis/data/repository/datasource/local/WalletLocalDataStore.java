@@ -40,4 +40,8 @@ public class WalletLocalDataStore implements WalletDataStore {
         return storage.put(collection);
     }
 
+    @Override
+    public Observable<WalletEntity> update(WalletEntity entity) {
+        return storage.update(entity);
+    }
 }
