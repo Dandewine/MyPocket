@@ -1,5 +1,7 @@
 package com.denis.domain.interactor.transactions;
 
+import android.util.Log;
+
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
@@ -36,6 +38,7 @@ public class AddTransactionUseCase extends UseCase<Transaction> {
                 wallet.setBalance(wallet.getBalance() - transaction.getAmount());
             else if (transaction.getType() == 1) //if transaction was income
                 wallet.setBalance(wallet.getBalance() + transaction.getAmount());
+            Log.d("myTag", "walletBalance = "+wallet.getBalance());
             walletsRepository.update(wallet);
             return transactionRepository.addTransaction(transaction);
         } else throw new RuntimeException("Transaction was null, can't proceed operation!");

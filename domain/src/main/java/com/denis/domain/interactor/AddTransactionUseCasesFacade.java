@@ -10,17 +10,17 @@ import javax.inject.Named;
 
 import rx.Subscriber;
 
-public class UseCasesFacade {
+public class AddTransactionUseCasesFacade {
     private UseCase<Transaction> addTransactionUseCase;
     private UseCase<Wallet> getWalletsUseCase;
     private UseCase<IncomeCategory> incomeCategoryUseCase;
     private UseCase<ExpenseCategory> expenseCategoryUseCase;
 
     @Inject
-    public UseCasesFacade(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
-                          @Named("getWallets") UseCase<Wallet> walletsUseCase,
-                          @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
-                          @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase) {
+    public AddTransactionUseCasesFacade(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
+                                        @Named("getWallets") UseCase<Wallet> walletsUseCase,
+                                        @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
+                                        @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase) {
         this.addTransactionUseCase = addTransactionUseCase;
         this.getWalletsUseCase = walletsUseCase;
         this.incomeCategoryUseCase = incomeCategoriesUseCase;

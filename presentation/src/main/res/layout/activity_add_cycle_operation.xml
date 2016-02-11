@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/tools">
 
 
     <data>
@@ -19,10 +20,12 @@
             android:id="@+id/toolbarAddCO"
             layout="@layout/toolbar"/>
 
-        <android.support.v7.widget.CardView
+        <FrameLayout
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/half_padding"
+            android:background="@android:color/transparent"
             app:cardCornerRadius="@dimen/custom_padding_4dp"
             app:cardElevation="@dimen/custom_padding_4dp"
             >
@@ -61,19 +64,136 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/half_padding"
+                        android:src="@drawable/vector_transactions"/>
+
+
+                    <Spinner
+                        android:id="@+id/walletsSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        bind:adapter="@{viewModel.transactionAdapter}"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/half_padding"
+                        android:src="@drawable/vector_transactions"/>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Wallet"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/half_padding"
+                        android:src="@drawable/vector_calendar"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Today"
+                        />
+                </LinearLayout>
+
+
+                <RadioGroup
+                    android:id="@+id/radioGroupAddCycleOP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/half_padding">
+
+                    <RadioButton
+                        android:id="@+id/rbYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Year"/>
+
+                    <RadioButton
+                        android:id="@+id/rbMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Month"/>
+
+                    <RadioButton
+                        android:id="@+id/rbWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Week"/>
+
+                    <RadioButton
+                        android:id="@+id/rbDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Day"/>
+
+                    <RadioButton
+                        android:id="@+id/rbCustom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="Custom"/>
+                </RadioGroup>
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/addTrans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center_horizontal"
                     android:onClick="@{viewModel.addOnClick}"
                     android:src="@drawable/vector_check"
-                    android:transitionName="reveal"
                     app:backgroundTint="@color/fab_income"/>
 
+                <View
+                    android:id="@+id/activity_details_vw_circle"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/circle"
+                    android:transitionName="@string/transition_fab_cycle_list_to_add_cycle_op"/>
+
+
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </FrameLayout>
     </LinearLayout>
 
 

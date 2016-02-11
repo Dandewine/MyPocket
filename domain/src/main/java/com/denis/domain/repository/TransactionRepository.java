@@ -15,9 +15,9 @@ public interface TransactionRepository {
     /**
      * Get an {@link rx.Observable} which will emit a {@link Transaction}.
      *
-     * @param userId The getTransaction id used to retrieve getTransaction data.
+     * @param transactionId The getTransaction id used to retrieve getTransaction data.
      */
-    Observable<Transaction> getTransaction(final int userId);
+    Observable<Transaction> getTransaction(final int transactionId);
 
     /**
      * Add transaction into our local storage

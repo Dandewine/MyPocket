@@ -1,4 +1,4 @@
-package com.denis.mypocket.internal.di.modules;
+package com.denis.mypocket.internal.di.modules.categories;
 
 import com.denis.data.entity.mapper.IncomeCategoryDataMapper;
 import com.denis.data.local_store.categories.IncomeCategoriesStore;

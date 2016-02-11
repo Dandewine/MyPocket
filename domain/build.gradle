@@ -1,9 +1,10 @@
 
 apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+/*//noinspection GroovyUnusedAssignment
+sourceCompatibility = 1.8
 //noinspection GroovyUnusedAssignment
-sourceCompatibility = 1.7
-//noinspection GroovyUnusedAssignment
-targetCompatibility = 1.7
+targetCompatibility = 1.8*/
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -22,6 +23,10 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -43,7 +48,7 @@ dependencies {
 
     compile domainDependencies.dagger
     compile domainDependencies.rxJava
-
+    retrolambdaConfig domainDependencies.lambda
 
     testCompile domainTestDependencies.junit
     testCompile domainTestDependencies.mockito

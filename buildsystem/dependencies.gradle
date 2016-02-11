@@ -58,6 +58,7 @@ ext{
             dagger:             "com.google.dagger:dagger:${daggerVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
+            lambda:             "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
     ]
 
     domainTestDependencies = [

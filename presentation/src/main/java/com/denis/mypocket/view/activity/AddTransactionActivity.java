@@ -8,7 +8,7 @@ import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
 import com.denis.mypocket.internal.di.components.DaggerAddTransactionComponent;
-import com.denis.mypocket.internal.di.modules.AddTransactionModule;
+import com.denis.mypocket.internal.di.modules.ProvideViewModelAddTransactionModule;
 import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;
 
 import javax.inject.Inject;
@@ -44,7 +44,7 @@ public class AddTransactionActivity extends BaseActivity {
         DaggerAddTransactionComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .addTransactionModule(new AddTransactionModule(isIncome))
+                .provideViewModelAddTransactionModule(new ProvideViewModelAddTransactionModule(isIncome))
                 .build().inject(this);
     }
 

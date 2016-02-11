@@ -131,7 +131,6 @@
                     android:layout_gravity="right"
                     android:onClick="@{viewModel.addOnClick}"
                     android:src="@drawable/vector_check"
-                    android:transitionName="reveal"
                     app:backgroundTint="@color/fab_income"/>
 
             </LinearLayout>

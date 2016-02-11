@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.denis.domain.interactor.AddTransactionUseCasesFacade;
 import com.denis.domain.interactor.DefaultSubscriber;
-import com.denis.domain.interactor.UseCasesFacade;
 import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
@@ -38,14 +38,15 @@ public class AddTransactionViewModel implements ViewModel {
 
     private ArrayAdapter categoriesAdapter;
     private ArrayAdapter walletsAdapter;
-    private UseCasesFacade workerFacade;
+    private AddTransactionUseCasesFacade workerFacade;
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
 
     private List<Wallet> walletList;
+    @Inject Context context;
 
     @Inject
-    public AddTransactionViewModel(UseCasesFacade workerFacade,
+    public AddTransactionViewModel(AddTransactionUseCasesFacade workerFacade,
                                    @Named("activity") Context context,
                                    boolean isIncome) {
 

@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.denis.data.entity.mapper.CycleOperationDataMapper;
 import com.denis.data.entity.mapper.TransactionDataMapper;
-import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.local_store.CircleOperationRealmStore;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.CycleOperationDataRepository;
@@ -15,16 +14,22 @@ import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.cycle_operations.AddCircleOperationUseCase;
+import com.denis.domain.interactor.transactions.AddTransactionUseCase;
+import com.denis.domain.models.Transaction;
+import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.CycleOperationRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.adding.AddCycleOperationViewModel;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
 
-@Module(includes = WalletModule.class)
+@Module(includes = AddTransactionModule.class)
 public class AddCycleOPModule {
 
     public AddCycleOPModule() {
@@ -45,12 +50,6 @@ public class AddCycleOPModule {
 
     @Provides
     @PerActivity
-    TransactionDataMapper provideTransactionDataMapper(WalletDataMapper dataMapper) {
-        return new TransactionDataMapper(dataMapper);
-    }
-
-    @Provides
-    @PerActivity
     CycleOperationDataMapper provideDataMapper(TransactionDataMapper dataMapper) {
         return new CycleOperationDataMapper(dataMapper);
     }
@@ -65,14 +64,17 @@ public class AddCycleOPModule {
     @PerActivity
     UseCase provideAddUseCase(ThreadExecutor executor,
                               PostExecutionThread thread,
-                              CycleOperationRepository repository, Context context) {
-        return new AddCircleOperationUseCase(executor, thread, repository, context);
+                              CycleOperationRepository repository, AddTransactionUseCase useCase) {
+        return new AddCircleOperationUseCase(executor, thread, repository, useCase);
     }
 
     @Provides
     @PerActivity
-    AddCycleOperationViewModel provideViewModel(UseCase addCycleOperationUseCase, Context context) {
-        return new AddCycleOperationViewModel(addCycleOperationUseCase, context);
+    AddCycleOperationViewModel provideViewModel(UseCase addCycleOperationUseCase,
+                                                @Named("getWallets") UseCase<Wallet> walletUseCase,
+                                                @Named("getTransactions") UseCase<Transaction> transactionUseCase,
+                                                Context context, TransactionModelDataMapper dataMapper) {
+        return new AddCycleOperationViewModel(addCycleOperationUseCase,transactionUseCase,walletUseCase,context,dataMapper);
     }
 
 }

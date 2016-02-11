@@ -45,7 +45,7 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
 
     @Override
     public Observable<List<TransactionEntity>> getList() {
-        return Observable.just(mRealm.where(TransactionEntity.class).findAllAsync());
+        return Observable.just(mRealm.where(TransactionEntity.class).findAll());
     }
 
     @Override

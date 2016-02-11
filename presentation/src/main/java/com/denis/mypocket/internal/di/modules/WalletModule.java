@@ -12,6 +12,7 @@ import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.wallets.AddWalletUseCase;
 import com.denis.domain.interactor.UseCase;
+import com.denis.domain.interactor.wallets.GetWalletsUseCase;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
@@ -28,7 +29,7 @@ public class WalletModule {
     public WalletModule() {
         Log.d(PLTags.INSTANCE_TAG,"Wallet Module, "+hashCode());
     }
-    //region Wallet Use Case dependencies
+
 
     @Provides
     @PerActivity
@@ -36,13 +37,13 @@ public class WalletModule {
         return new WalletDataMapper();
     }
 
-    @Provides @PerActivity
+    @Provides @PerActivity @Named("walletStore")
     RealmStore getRealmStore(Realm realm){
         return new WalletRealmStore(realm);
     }
 
     @Provides @PerActivity
-    WalletDataStore walletDataStore(RealmStore store){
+    WalletDataStore walletDataStore(@Named("walletStore") RealmStore store){
         return new WalletLocalDataStore(store);
     }
 
@@ -55,5 +56,11 @@ public class WalletModule {
     UseCase<Wallet> getAddWalletUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, WalletRepository repository){
         return new AddWalletUseCase(threadExecutor,postExecutionThread,repository);
     }
-    //endregion
+
+    @Provides @PerActivity @Named("getWallets") UseCase<Wallet> providerGetWalletsUseCase(ThreadExecutor threadExecutor,
+                                                                                          PostExecutionThread postExecutionThread,
+                                                                                          WalletRepository repository){
+        return new GetWalletsUseCase(threadExecutor,postExecutionThread,repository);
+    }
+
 }

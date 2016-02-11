@@ -56,8 +56,9 @@ public class WalletRealmStore implements RealmStore<WalletEntity> {
 
     @Override
     public Observable<WalletEntity> update(WalletEntity item) {
-        final WalletEntity[] entity = new WalletEntity[1];
-        mRealm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
-        return Observable.just(entity[0]);
+        mRealm.beginTransaction();
+        WalletEntity update = mRealm.copyToRealmOrUpdate(item);
+        mRealm.commitTransaction();
+        return Observable.just(update);
     }
 }
