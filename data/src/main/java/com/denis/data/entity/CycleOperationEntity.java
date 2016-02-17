@@ -9,6 +9,7 @@ public class CycleOperationEntity extends RealmObject {
     private String name;
     private TransactionEntity transactionEntity;
     private String interval;
+    private long triggerTime;
 
     public CycleOperationEntity(int id) {
         this.id = id;
@@ -38,6 +39,14 @@ public class CycleOperationEntity extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getTriggerTime() {
+        return triggerTime;
+    }
+
+    public void setTriggerTime(long triggerTime) {
+        this.triggerTime = triggerTime;
     }
 
     public TransactionEntity getTransactionEntity() {

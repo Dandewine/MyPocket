@@ -2,7 +2,7 @@ package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
 import com.denis.data.entity.WalletEntity;
-import com.denis.domain.models.Wallet;
+
 
 import org.junit.Before;
 import org.junit.Test;

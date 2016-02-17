@@ -8,6 +8,7 @@ public class CycleOperation implements Parcelable {
     private Transaction transactionEntity;
     private String name;
     private String interval;
+    private long triggerTime; //trigger time in unix
 
     public CycleOperation(int id) {
         this.id = id;
@@ -54,6 +55,14 @@ public class CycleOperation implements Parcelable {
         this.interval = interval;
     }
 
+    public long getTriggerTime() {
+        return triggerTime;
+    }
+
+    public void setTriggerTime(long triggerTime) {
+        this.triggerTime = triggerTime;
+    }
+
     public enum CircleTypes {
         YEAR("365"),
         MONTH("30"),
@@ -77,7 +86,8 @@ public class CycleOperation implements Parcelable {
         return "id = " + id +
                 ", name = " + name +
                 ", interval = " + interval +
-                ", transactionId = " + (transactionEntity == null ? "null" : String.valueOf(transactionEntity.getId()));
+                ", transactionId = " + (transactionEntity == null ? "null" : String.valueOf(transactionEntity.getId())) +
+                ", triggerTime = " + triggerTime;
     }
 
     @Override
@@ -91,6 +101,7 @@ public class CycleOperation implements Parcelable {
         dest.writeParcelable(this.transactionEntity, flags);
         dest.writeString(this.name);
         dest.writeString(this.interval);
+        dest.writeLong(this.triggerTime);
     }
 
     protected CycleOperation(Parcel in) {
@@ -98,6 +109,7 @@ public class CycleOperation implements Parcelable {
         this.transactionEntity = in.readParcelable(Transaction.class.getClassLoader());
         this.name = in.readString();
         this.interval = in.readString();
+        this.triggerTime = in.readLong();
     }
 
     public static final Parcelable.Creator<CycleOperation> CREATOR = new Parcelable.Creator<CycleOperation>() {

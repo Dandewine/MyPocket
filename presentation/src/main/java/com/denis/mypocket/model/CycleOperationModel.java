@@ -5,6 +5,7 @@ public class CycleOperationModel {
     private TransactionModel transactionEntity;
     private String interval;
     private String name;
+    private long triggerTime;
 
     public CycleOperationModel(int id) {
         this.id = id;
@@ -20,6 +21,14 @@ public class CycleOperationModel {
 
     public void setTransactionEntity(TransactionModel transactionEntity) {
         this.transactionEntity = transactionEntity;
+    }
+
+    public long getTriggerTime() {
+        return triggerTime;
+    }
+
+    public void setTriggerTime(long triggerTime) {
+        this.triggerTime = triggerTime;
     }
 
     public String getName() {

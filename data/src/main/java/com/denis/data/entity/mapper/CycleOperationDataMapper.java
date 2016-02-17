@@ -27,6 +27,7 @@ public class CycleOperationDataMapper {
             operation.setTransaction(
                     transactionDataMapper.transform(entity.getTransactionEntity())
             );
+            operation.setTriggerTime(entity.getTriggerTime());
         }
         return operation;
     }
@@ -50,6 +51,7 @@ public class CycleOperationDataMapper {
             entity.setInterval(operation.getInterval());
             entity.setTransactionEntity(transactionDataMapper.transform(operation.getTransaction()));
             entity.setName(operation.getName());
+            entity.setTriggerTime(operation.getTriggerTime());
         }
         return entity;
     }

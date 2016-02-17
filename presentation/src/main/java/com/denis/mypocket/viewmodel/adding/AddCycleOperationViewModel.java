@@ -17,6 +17,7 @@ import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.CycleOperation;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
+import com.denis.mypocket.DateTimeUtils;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
@@ -39,8 +40,8 @@ public class AddCycleOperationViewModel implements ViewModel {
     public String name = "";
     public String interval = "";
 
-    List<TransactionModel> transactionModels;
-    TransactionModelDataMapper dataMapper;
+    private List<TransactionModel> transactionModels;
+    private TransactionModelDataMapper dataMapper;
 
     private Transaction transaction;
 
@@ -60,7 +61,7 @@ public class AddCycleOperationViewModel implements ViewModel {
         this.transactionUseCase.executeSync(new GetTransactionSubscriber());
 
 
-       buildCycleOperation();
+        buildCycleOperation();
         Log.i(PLTags.INSTANCE_TAG, "AddCycleOperationViewModel created, " + hashCode());
     }
 
@@ -69,11 +70,21 @@ public class AddCycleOperationViewModel implements ViewModel {
 
     public RadioGroup.OnCheckedChangeListener changeListener = (group, checkedId) -> {
         switch (checkedId) {
-            case R.id.rbDay: interval = CycleOperation.CircleTypes.DAY.getValue(); break;
-            case R.id.rbWeek: interval = CycleOperation.CircleTypes.WEEK.getValue(); break;
-            case R.id.rbMonth:interval = CycleOperation.CircleTypes.MONTH.getValue(); break;
-            case R.id.rbYear: interval = CycleOperation.CircleTypes.YEAR.getValue(); break;
-            case R.id.rbCustom: interval = CycleOperation.CircleTypes.CUSTOM.getValue(); break;
+            case R.id.rbDay:
+                interval = CycleOperation.CircleTypes.DAY.getValue();
+                break;
+            case R.id.rbWeek:
+                interval = CycleOperation.CircleTypes.WEEK.getValue();
+                break;
+            case R.id.rbMonth:
+                interval = CycleOperation.CircleTypes.MONTH.getValue();
+                break;
+            case R.id.rbYear:
+                interval = CycleOperation.CircleTypes.YEAR.getValue();
+                break;
+            case R.id.rbCustom:
+                interval = CycleOperation.CircleTypes.CUSTOM.getValue();
+                break;
         }
     };
 
@@ -94,19 +105,21 @@ public class AddCycleOperationViewModel implements ViewModel {
     private void setAlarm(CycleOperation operation) {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("action");
-        intent.putExtra("key", "hello world!");
         intent.putExtra("data", operation);
-        PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, 3000, pi);
+            manager.set(AlarmManager.RTC_WAKEUP, operation.getTriggerTime(), pi);
         else
-            manager.setExact(AlarmManager.RTC_WAKEUP, 3000, pi);
+            manager.set(AlarmManager.RTC_WAKEUP, operation.getTriggerTime(), pi);
+        Log.d(PLTags.CYCLE_OPERATIONS_TAG, "alarm was set on "+ DateTimeUtils.getFormattedShiftListItemDateTime(operation.getTriggerTime()));
     }
 
     public CycleOperation buildCycleOperation() {
         return new CycleOperation(transaction, name, interval);
     }
+
+    //region subscribers
 
     class AddCycleOperation extends DefaultSubscriber<CycleOperation> {
         @Override
@@ -139,4 +152,6 @@ public class AddCycleOperationViewModel implements ViewModel {
             }
         }
     }
+
+    //endregion
 }

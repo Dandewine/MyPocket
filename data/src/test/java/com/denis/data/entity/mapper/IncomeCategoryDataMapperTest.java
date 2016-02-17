@@ -2,7 +2,7 @@ package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
 import com.denis.data.entity.IncomeCategoryEntity;
-import com.denis.domain.models.IncomeCategory;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 public class IncomeCategoryDataMapperTest extends ApplicationTestCase {
 
     private IncomeCategoryDataMapper dataMapper;
-
     private static final int FAKE_ID = 92;
     private static final String FAKE_NAME = "find";
     private static final String FAKE_PATH = "fake_path";

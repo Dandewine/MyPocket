@@ -1,10 +1,10 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
-/*//noinspection GroovyUnusedAssignment
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.8
 //noinspection GroovyUnusedAssignment
-targetCompatibility = 1.8*/
+targetCompatibility = 1.8
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")

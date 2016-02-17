@@ -1,11 +1,8 @@
 package com.denis.mypocket.internal.broadcast;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.cycle_operations.AddCircleOperationUseCase;
@@ -75,17 +72,17 @@ public class CycleOperationBroadcast extends BroadcastReceiver {
         }
 
         private void setAlarm(CycleOperation operation) {
-            AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+          /*  AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent("action");
-            intent.putExtra("key", "hello world!");
             intent.putExtra("data", operation);
             PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, 3000, pi);
+                manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, operation.getTriggerTime()*1000, pi);
             else
-                manager.setExact(AlarmManager.RTC_WAKEUP, 3000, pi);
+                manager.setExact(AlarmManager.RTC_WAKEUP, operation.getTriggerTime()*1000, pi);*/
+
         }
 
     }

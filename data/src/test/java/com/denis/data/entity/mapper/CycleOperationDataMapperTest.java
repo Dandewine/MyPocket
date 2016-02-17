@@ -3,8 +3,7 @@ package com.denis.data.entity.mapper;
 import com.denis.data.ApplicationTestCase;
 import com.denis.data.entity.CycleOperationEntity;
 import com.denis.data.entity.TransactionEntity;
-import com.denis.domain.models.CycleOperation;
-import com.denis.domain.models.Transaction;
+
 
 import org.junit.Before;
 import org.junit.Test;
