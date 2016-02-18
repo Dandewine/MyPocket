@@ -2,7 +2,6 @@ package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
 import com.denis.data.entity.ExpenseCategoryEntity;
-import com.denis.domain.models.ExpenseCategory;
 
 import org.junit.Before;
 import org.junit.Test;
