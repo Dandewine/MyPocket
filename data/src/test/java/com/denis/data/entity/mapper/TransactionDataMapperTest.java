@@ -1,24 +1,8 @@
 package com.denis.data.entity.mapper;
 
-import com.denis.data.entity.TransactionEntity;
-import com.denis.data.entity.WalletEntity;
-
-
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-
 public class TransactionDataMapperTest{
 
-    private TransactionDataMapper dataMapper;
+    /*private TransactionDataMapper dataMapper;
     private WalletDataMapper mapper = new WalletDataMapper();
 
     private static final int FAKE_ID = 92;
@@ -123,5 +107,5 @@ public class TransactionDataMapperTest{
     }
     private Wallet createFakeWallet(){
         return new Wallet(FAKE_WALLET_ID,FAKE_WALLET_NAME,FAKE_WALLET_CURRENCY,FAKE_WALLET_BALANCE);
-    }
+    }*/
 }

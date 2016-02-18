@@ -43,7 +43,6 @@ public class AddTransactionViewModel implements ViewModel {
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
 
     private List<Wallet> walletList;
-    @Inject Context context;
 
     @Inject
     public AddTransactionViewModel(AddTransactionUseCasesFacade workerFacade,
@@ -64,7 +63,6 @@ public class AddTransactionViewModel implements ViewModel {
             workerFacade.getExpenseCategories(new GetAllExpenseCategories());
 
     }
-
 
     public void afterTextChanged(Editable s){
         if (!TextUtils.equals(s.toString(), amount))

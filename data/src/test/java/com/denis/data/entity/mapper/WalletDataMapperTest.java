@@ -1,24 +1,10 @@
 package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
-import com.denis.data.entity.WalletEntity;
-
-
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class WalletDataMapperTest extends ApplicationTestCase {
 
-    private static final int FAKE_WALLET_ID = 123;
+   /* private static final int FAKE_WALLET_ID = 123;
     private static final String FAKE_WALLET_NAME = "TestWallet";
     private static final String FAKE_CURRENCY = "$";
     private static final float FAKE_BALANCE = 2000;
@@ -105,6 +91,6 @@ public class WalletDataMapperTest extends ApplicationTestCase {
                 FAKE_BALANCE
         );
     }
-
+*/
 
 }

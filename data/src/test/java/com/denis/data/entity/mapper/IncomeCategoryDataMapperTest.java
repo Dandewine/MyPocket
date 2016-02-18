@@ -1,24 +1,10 @@
 package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
-import com.denis.data.entity.IncomeCategoryEntity;
-
-
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class IncomeCategoryDataMapperTest extends ApplicationTestCase {
 
-    private IncomeCategoryDataMapper dataMapper;
+   /* private IncomeCategoryDataMapper dataMapper;
     private static final int FAKE_ID = 92;
     private static final String FAKE_NAME = "find";
     private static final String FAKE_PATH = "fake_path";
@@ -91,5 +77,5 @@ public class IncomeCategoryDataMapperTest extends ApplicationTestCase {
 
     private IncomeCategoryEntity createFakeIncomeCategoryEntity() {
         return new IncomeCategoryEntity(FAKE_ID, FAKE_NAME, FAKE_PATH);
-    }
+    }*/
 }

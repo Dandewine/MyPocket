@@ -1,27 +1,9 @@
 package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
-import com.denis.data.entity.CycleOperationEntity;
-import com.denis.data.entity.TransactionEntity;
-
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class CycleOperationDataMapperTest extends ApplicationTestCase{
-    private CycleOperationDataMapper dataMapper;
+  /*  private CycleOperationDataMapper dataMapper;
 
     private static final int FAKE_ID = 34;
     private static final String FAKE_NAME = "gas";
@@ -119,5 +101,5 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
 
     private CycleOperation createCycleOperation(){
         return new CycleOperation(FAKE_ID,transaction,FAKE_NAME,FAKE_INTERVAL);
-    }
+    }*/
 }

@@ -98,6 +98,7 @@ public class AddCycleOperationViewModel implements ViewModel {
             name = s.toString();
     }
 
+
     public void execute(CycleOperation operation) {
         addUseCase.executeSync(new AddCycleOperation(), operation);
     }

@@ -87,4 +87,8 @@ public class TransactionsFragment extends BaseFragment {
         ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());*/
     }
 
+    @Override
+    protected void initDI() {
+
+    }
 }

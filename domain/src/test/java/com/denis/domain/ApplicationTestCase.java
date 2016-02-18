@@ -26,4 +26,19 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, application = ApplicationStub.class, sdk = 21)
 public abstract class ApplicationTestCase {
+
+   /* @Before
+    protected abstract void setUp();
+
+    protected abstract void initDI();
+
+    @Component(modules = )
+    interface AppComp{
+        void inject(ApplicationTestCase testCase);
+    }
+
+    @Module
+    private static class AppModule{
+
+    }*/
 }

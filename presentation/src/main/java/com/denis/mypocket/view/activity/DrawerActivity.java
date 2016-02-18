@@ -17,8 +17,8 @@ import com.denis.mypocket.view.fragments.TransactionsFragment;
 
 public class DrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    DrawerLayout drawer;
-    NavigationView navigationView;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
