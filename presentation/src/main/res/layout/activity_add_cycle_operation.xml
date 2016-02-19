@@ -79,10 +79,10 @@
 
 
                     <Spinner
-                        android:id="@+id/walletsSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:spinnerMode="dropdown"
+                        bind:item_selected_listener="@{viewModel.itemSelectedListener}"
                         bind:adapter="@{viewModel.transactionAdapter}"/>
                 </LinearLayout>
 
@@ -97,17 +97,14 @@
                         android:layout_gravity="center_vertical"
                         android:paddingRight="@dimen/half_padding"
                         android:src="@drawable/vector_transactions"/>
-
-                    <android.support.design.widget.TextInputLayout
+                    <Spinner
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        bind:item_selected_listener="@{viewModel.walletOnItemClick}"
+                        bind:adapter="@{viewModel.walletsAdapter}"
+                       />
 
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Wallet"
-                            />
-                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout

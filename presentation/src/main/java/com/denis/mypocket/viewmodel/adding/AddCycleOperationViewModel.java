@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 
@@ -21,7 +22,9 @@ import com.denis.mypocket.DateTimeUtils;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
+import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
+import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.ViewModel;
 
@@ -41,11 +44,14 @@ public class AddCycleOperationViewModel implements ViewModel {
     public String interval = "";
 
     private List<TransactionModel> transactionModels;
+    private List<WalletModel> walletModels;
+
     private TransactionModelDataMapper dataMapper;
 
-    private Transaction transaction;
+    private TransactionModel transactionModel;
 
     public ArrayAdapter transactionAdapter;
+    public ArrayAdapter walletsAdapter;
 
     @Inject
     public AddCycleOperationViewModel(UseCase<CycleOperation> addUseCase,
@@ -57,16 +63,42 @@ public class AddCycleOperationViewModel implements ViewModel {
         this.context = context;
         this.dataMapper = dataMapper;
         this.transactionUseCase = transactionUseCase;
+
         transactionAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
+        walletsAdapter = new ArrayAdapter(context,android.R.layout.simple_list_item_1);
+
         this.transactionUseCase.executeSync(new GetTransactionSubscriber());
+        this.getWalletUseCase.executeSync(new GetWalletsSubscriber());
 
 
-        buildCycleOperation();
         Log.i(PLTags.INSTANCE_TAG, "AddCycleOperationViewModel created, " + hashCode());
     }
 
-    public View.OnClickListener addOnClick = v ->
-            execute(buildCycleOperation());
+    public View.OnClickListener addOnClick = v -> execute(buildCycleOperation());
+
+    public AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+           transactionModel = transactionModels.get(position);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            transactionModel = transactionModels.get(0);
+        }
+    };
+
+    public AdapterView.OnItemSelectedListener walletOnItemClick = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     public RadioGroup.OnCheckedChangeListener changeListener = (group, checkedId) -> {
         switch (checkedId) {
@@ -103,6 +135,17 @@ public class AddCycleOperationViewModel implements ViewModel {
         addUseCase.executeSync(new AddCycleOperation(), operation);
     }
 
+    private Transaction convert(TransactionModel model){
+        return new Transaction(model.getId(),
+                convert(model.getWalletModel()),
+                model.getAmount(),model.getType(),
+                model.getUnixDateTime(), model.getCategoryId());
+    }
+
+    private Wallet convert(WalletModel model){
+        return new Wallet(model.getId(),model.getName(),model.getCurrency(),model.getBalance());
+    }
+
     private void setAlarm(CycleOperation operation) {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("action");
@@ -117,7 +160,7 @@ public class AddCycleOperationViewModel implements ViewModel {
     }
 
     public CycleOperation buildCycleOperation() {
-        return new CycleOperation(transaction, name, interval);
+        return new CycleOperation(convert(transactionModel), name, interval);
     }
 
     //region subscribers
@@ -148,9 +191,25 @@ public class AddCycleOperationViewModel implements ViewModel {
                 for (int i = 0; i < transactionModels.size(); i++) {
                     transactionAdapter.add(transactionModels.get(i).getAmount());
                 }
-                //Note that I get always first element of the list
-                transaction = transactionList.get(0);
             }
+        }
+    }
+
+    class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+        @Override
+        public void onNext(List<Wallet> wallets) {
+            if(wallets != null && !wallets.isEmpty()) {
+                WalletModelDataMapper walletModelDataMapper = dataMapper.getWalletModelDataMapper();
+                walletModels = walletModelDataMapper.transform(wallets);
+                for (WalletModel model : walletModels) {
+                    walletsAdapter.add(model.getName());
+                }
+            }
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
         }
     }
 

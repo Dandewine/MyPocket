@@ -2,9 +2,8 @@ package com.denis.data.entity;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.internal.RealmObjectProxy;
 
-public class IncomeCategoryEntity extends RealmObject implements RealmObjectProxy {
+public class IncomeCategoryEntity extends RealmObject {
     @PrimaryKey
     private int id;
     private String name;

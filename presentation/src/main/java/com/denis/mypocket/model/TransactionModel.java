@@ -7,6 +7,7 @@ public class TransactionModel {
     private float amount;
     private int type;
     private long unixDateTime;
+    private int categoryId;
 
     public TransactionModel(int id) {
         this.id = id;
@@ -50,5 +51,13 @@ public class TransactionModel {
 
     public void setUnixDateTime(long unixDateTime) {
         this.unixDateTime = unixDateTime;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

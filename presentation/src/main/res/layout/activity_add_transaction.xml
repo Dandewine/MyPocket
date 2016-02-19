@@ -76,7 +76,7 @@
                         android:src="@drawable/vector_wallet"/>
 
                     <Spinner
-                        android:id="@+id/walletsSpinner"
+                        android:id="@+id/transactionSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:spinnerMode="dropdown"

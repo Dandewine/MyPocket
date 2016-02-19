@@ -25,6 +25,7 @@ public class TransactionModelDataMapper {
             model.setType(transaction.getType());
             model.setUnixDateTime(transaction.getUnixDateTime());
             model.setWalletModel(walletModelDataMapper.transform(transaction.getWallet()));
+            model.setCategoryId(transaction.getCategoryId());
         }
         return model;
     }
@@ -39,5 +40,9 @@ public class TransactionModelDataMapper {
             }
         }
         return modelList;
+    }
+
+    public WalletModelDataMapper getWalletModelDataMapper() {
+        return walletModelDataMapper;
     }
 }

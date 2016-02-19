@@ -106,9 +106,11 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<ExpenseCategory> expenseCategories) {
-            List<ExpenseCategoryModel> modelList = expenseMapper.transform(expenseCategories);
-            for (int i = 0; i < modelList.size(); i++) {
-                categoriesAdapter.add(expenseCategories.get(i).getName());
+            if(expenseCategories != null) {
+                List<ExpenseCategoryModel> modelList = expenseMapper.transform(expenseCategories);
+                for (int i = 0; i < modelList.size(); i++) {
+                    categoriesAdapter.add(expenseCategories.get(i).getName());
+                }
             }
         }
     }
