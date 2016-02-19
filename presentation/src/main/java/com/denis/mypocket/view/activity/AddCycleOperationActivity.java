@@ -38,7 +38,7 @@ public class AddCycleOperationActivity extends BaseActivity {
     protected void initDIComponent() {
         DaggerAddCycleOPComponent.builder()
                 .applicationComponent(getApplicationComponent())
-              //  .activityModule(getActivityModule())
+                .activityModule(getActivityModule())
                 .build().inject(this);
     }
 

@@ -5,6 +5,8 @@
         <variable
             name="operation"
             type="com.denis.mypocket.model.CycleOperationModel"/>
+
+        <import type="com.denis.mypocket.DateTimeUtils"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,29 +31,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
-                android:text="350$"
+                android:text="@{String.valueOf(operation.transactionModel.amount)}"
                 android:textColor="@android:color/black"
                 android:textSize="22sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:text="@{operation.transactionModel.walletModel.name}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{DateTimeUtils.convertMillis(operation.triggerTime)}"
+                android:layout_gravity="right|top"/>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
-                android:text="Salary"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:text="Wallet Name"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="15/9/16"
-                android:layout_gravity="center|right"/>
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_gravity="center"
+                android:textSize="24sp" />
 
         </FrameLayout>
 

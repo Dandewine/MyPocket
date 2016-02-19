@@ -3,8 +3,8 @@ package com.denis.mypocket;
 import java.text.SimpleDateFormat;
 
 public class DateTimeUtils {
-    public static String getFormattedShiftListItemDateTime(long unixTimeStamp) {
-        SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+    public static String convertMillis(long unixTimeStamp) {
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd/MM/yy");
         return outputDateFormat.format(unixTimeStamp);
     }
 }

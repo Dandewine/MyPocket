@@ -73,7 +73,7 @@ public class AddCycleOPModule {
     AddCycleOperationViewModel provideViewModel(UseCase addCycleOperationUseCase,
                                                 @Named("getWallets") UseCase<Wallet> walletUseCase,
                                                 @Named("getTransactions") UseCase<Transaction> transactionUseCase,
-                                                Context context, TransactionModelDataMapper dataMapper) {
+                                                @Named("activity") Context context, TransactionModelDataMapper dataMapper) {
         return new AddCycleOperationViewModel(addCycleOperationUseCase,transactionUseCase,walletUseCase,context,dataMapper);
     }
 

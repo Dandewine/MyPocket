@@ -2,7 +2,7 @@ package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
 
-public class ExpenseCategoryDataMapperTest extends ApplicationTestCase {
+public class ExpenseCategoryEntityDataMapperTest extends ApplicationTestCase {
 
   /*  private final static int FAKE_ID = 12;
     private final static String FAKE_NAME = "girls";

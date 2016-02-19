@@ -2,7 +2,7 @@ package com.denis.mypocket.model;
 
 public class CycleOperationModel {
     private int id;
-    private TransactionModel transactionEntity;
+    private TransactionModel transactionModel;
     private String interval;
     private String name;
     private long triggerTime;
@@ -15,12 +15,12 @@ public class CycleOperationModel {
         return id;
     }
 
-    public TransactionModel getTransactionEntity() {
-        return transactionEntity;
+    public TransactionModel getTransactionModel() {
+        return transactionModel;
     }
 
-    public void setTransactionEntity(TransactionModel transactionEntity) {
-        this.transactionEntity = transactionEntity;
+    public void setTransactionModel(TransactionModel transactionModel) {
+        this.transactionModel = transactionModel;
     }
 
     public long getTriggerTime() {

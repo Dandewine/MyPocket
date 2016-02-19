@@ -2,8 +2,9 @@ package com.denis.data.entity;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.internal.RealmObjectProxy;
 
-public class IncomeCategoryEntity extends RealmObject {
+public class IncomeCategoryEntity extends RealmObject implements RealmObjectProxy {
     @PrimaryKey
     private int id;
     private String name;
@@ -50,4 +51,5 @@ public class IncomeCategoryEntity extends RealmObject {
     public void setPath(String path) {
         this.path = path;
     }
+
 }
