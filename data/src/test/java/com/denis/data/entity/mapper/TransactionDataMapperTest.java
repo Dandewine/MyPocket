@@ -1,5 +1,8 @@
 package com.denis.data.entity.mapper;
 
+import org.junit.Test;
+
+
 public class TransactionDataMapperTest{
 
     /*private TransactionDataMapper dataMapper;

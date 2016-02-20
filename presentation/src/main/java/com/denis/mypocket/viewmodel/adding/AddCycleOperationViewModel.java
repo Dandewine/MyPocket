@@ -49,6 +49,7 @@ public class AddCycleOperationViewModel implements ViewModel {
     private TransactionModelDataMapper dataMapper;
 
     private TransactionModel transactionModel;
+    private WalletModel walletModel;
 
     public ArrayAdapter transactionAdapter;
     public ArrayAdapter walletsAdapter;
@@ -91,12 +92,12 @@ public class AddCycleOperationViewModel implements ViewModel {
     public AdapterView.OnItemSelectedListener walletOnItemClick = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            walletModel = walletModels.get(position);
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-
+            walletModel = walletModels.get(0);
         }
     };
 
@@ -135,9 +136,9 @@ public class AddCycleOperationViewModel implements ViewModel {
         addUseCase.executeSync(new AddCycleOperation(), operation);
     }
 
-    private Transaction convert(TransactionModel model){
+    private Transaction convert(TransactionModel model){ // TODO: 2/20/16 cleanup here
         return new Transaction(model.getId(),
-                convert(model.getWalletModel()),
+                convert(walletModel),
                 model.getAmount(),model.getType(),
                 model.getUnixDateTime(), model.getCategoryId());
     }
