@@ -18,6 +18,9 @@ public class DebtEntity extends RealmObject {
         this.id = id;
     }
 
+    public DebtEntity() {
+    }
+
     public int getId() {
         return id;
     }

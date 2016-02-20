@@ -6,7 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class Convertors {
+public class BindingUtils {
 
     @BindingAdapter("bind:adapter")
     public static void bindAdapter(Spinner spinner, ArrayAdapter adapter) {

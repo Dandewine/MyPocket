@@ -1,6 +1,5 @@
 package com.denis.data.repository;
 
-import com.denis.data.entity.DebtEntity;
 import com.denis.data.entity.mapper.DebtsMapper;
 import com.denis.data.repository.datasource.interfaces.DebtsDataStore;
 import com.denis.domain.models.Debt;
@@ -9,7 +8,6 @@ import com.denis.domain.repository.DebtRepository;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import rx.Observable;
 

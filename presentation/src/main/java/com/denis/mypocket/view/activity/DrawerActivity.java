@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
+import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
 
 public class DrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,7 +77,7 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_categories) {
 
         } else if (id == R.id.nav_debts) {
-
+            replaceFragment(R.id.containerDrawer, DebtsFragment.newInstance());
         } else if (id == R.id.travel_mode) {
 
         } else if (id == R.id.nav_settings) {
@@ -84,7 +85,6 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_tutorials) {
 
         } else if (id == R.id.nav_cycle_operations) {
-
             replaceFragment(R.id.containerDrawer, CycleOperationFragment.newInstance());
         } else if (id == R.id.nav_transactions) {
             replaceFragment(R.id.containerDrawer, TransactionsFragment.newInstance());

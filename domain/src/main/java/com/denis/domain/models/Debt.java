@@ -1,8 +1,6 @@
 package com.denis.domain.models;
 
-/**
- * Created by denis on 2/20/16.
- */
+
 public class Debt {
     private int id;
     private String name;
@@ -14,6 +12,8 @@ public class Debt {
     public Debt(int id) {
         this.id = id;
     }
+
+    public Debt() {}
 
     public int getId() {
         return id;
