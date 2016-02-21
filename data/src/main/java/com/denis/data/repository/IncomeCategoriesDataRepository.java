@@ -26,19 +26,19 @@ public class IncomeCategoriesDataRepository implements IncomeCategoriesRepositor
     @Override
     public Observable<List<IncomeCategory>> getIncomeCategoryList() {
         return dataStore.getListIncomeEntities()
-                .map(mapper::transform);
+                .map(mapper::fromEntity);
     }
 
     @Override
     public Observable<IncomeCategory> getIncomeCategory(int userId) {
         return dataStore.getIncomeCategoryEntity(userId)
-                .map(mapper::transform);
+                .map(mapper::fromEntity);
     }
 
     @Override
     public Observable<IncomeCategory> addIncomeCategory(IncomeCategory incomeCategory) {
-        IncomeCategoryEntity entity = mapper.transform(incomeCategory);
-        return dataStore.put(entity).map(mapper::transform);
+        IncomeCategoryEntity entity = mapper.toEntity(incomeCategory);
+        return dataStore.put(entity).map(mapper::fromEntity);
 
     }
 

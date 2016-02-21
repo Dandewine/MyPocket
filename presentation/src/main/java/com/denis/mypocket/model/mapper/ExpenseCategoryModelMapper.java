@@ -10,12 +10,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 @PerActivity
-public class ExpenseCategoryModelMapper {
+public class ExpenseCategoryModelMapper implements ModelMapper<ExpenseCategory,ExpenseCategoryModel> {
 
     @Inject
     public ExpenseCategoryModelMapper() {
     }
 
+    @Override
     public ExpenseCategoryModel transform(ExpenseCategory expenseCategory) {
         ExpenseCategoryModel model = null;
         if (expenseCategory != null) {
@@ -26,6 +27,7 @@ public class ExpenseCategoryModelMapper {
         return model;
     }
 
+    @Override
     public List<ExpenseCategoryModel> transform(List<ExpenseCategory> expenseCategories) {
         List<ExpenseCategoryModel> modelList = null;
         if (expenseCategories != null && !expenseCategories.isEmpty()) {

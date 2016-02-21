@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class TransactionModelDataMapper {
+public class TransactionModelDataMapper implements ModelMapper<Transaction, TransactionModel> {
 
     private WalletModelDataMapper walletModelDataMapper;
 
@@ -17,6 +17,7 @@ public class TransactionModelDataMapper {
         this.walletModelDataMapper = walletModelDataMapper;
     }
 
+    @Override
     public TransactionModel transform(Transaction transaction) {
         TransactionModel model = null;
         if (transaction != null) {
@@ -30,6 +31,7 @@ public class TransactionModelDataMapper {
         return model;
     }
 
+    @Override
     public List<TransactionModel> transform(List<Transaction> transactionList) {
         List<TransactionModel> modelList = null;
         if (transactionList != null && !transactionList.isEmpty()) {

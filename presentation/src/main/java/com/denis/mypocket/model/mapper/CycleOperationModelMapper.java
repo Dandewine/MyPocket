@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class CycleOperationModelMapper {
+public class CycleOperationModelMapper implements ModelMapper<CycleOperation,CycleOperationModel>{
 
     private TransactionModelDataMapper transactionDataMapper;
 
@@ -17,6 +17,7 @@ public class CycleOperationModelMapper {
         this.transactionDataMapper = transactionDataMapper;
     }
 
+    @Override
     public CycleOperationModel transform(CycleOperation operation) {
         CycleOperationModel operationModel = null;
         if (operation != null) {
@@ -27,6 +28,7 @@ public class CycleOperationModelMapper {
         return operationModel;
     }
 
+    @Override
     public List<CycleOperationModel> transform(List<CycleOperation> operationList) {
         List<CycleOperationModel> modelsList = null;
         if (operationList != null && !operationList.isEmpty()) {

@@ -12,14 +12,15 @@ import javax.inject.Inject;
 /**
  * Created by denis on 2/20/16.
  */
-public class DebtsMapper {
+public class DebtsMapper implements EntityMapper<DebtEntity, Debt> {
 
     @Inject
     public DebtsMapper() {
     }
 
-    public DebtEntity transform(Debt debt) {
-        DebtEntity  debtEntity = null;
+    @Override
+    public DebtEntity toEntity(Debt debt) {
+        DebtEntity debtEntity = null;
         if (debt != null) {
             debtEntity = new DebtEntity(debt.getId());
             debtEntity.setAmount(debt.getAmount());
@@ -32,19 +33,21 @@ public class DebtsMapper {
         return debtEntity;
     }
 
-    public List<DebtEntity > transform(Collection<Debt> debtsList) {
+    @Override
+    public List<DebtEntity> toEntity(List<Debt> debtsList) {
         List<DebtEntity> transactionList = null;
         if (debtsList != null && !debtsList.isEmpty()) {
             transactionList = new ArrayList<>();
             for (Debt debt : debtsList) {
-                DebtEntity d = transform(debt);
+                DebtEntity d = toEntity(debt);
                 transactionList.add(d);
             }
         }
         return transactionList;
     }
 
-    public Debt transform(DebtEntity debtEntity) {
+    @Override
+    public Debt fromEntity(DebtEntity debtEntity) {
         Debt debt = null;
         if (debtEntity != null) {
             debt = new Debt(debtEntity.getId());
@@ -57,12 +60,13 @@ public class DebtsMapper {
         return debt;
     }
 
-    public List<Debt> transform(List<DebtEntity> debtList) {
+    @Override
+    public List<Debt> fromEntity(List<DebtEntity> debtList) {
         List<Debt> entityList = null;
         if (debtList != null && !debtList.isEmpty()) {
             entityList = new ArrayList<>();
             for (DebtEntity de : debtList) {
-                Debt d = transform(de);
+                Debt d = fromEntity(de);
                 entityList.add(d);
             }
         }

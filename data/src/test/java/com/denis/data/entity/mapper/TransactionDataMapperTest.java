@@ -28,7 +28,7 @@ public class TransactionDataMapperTest{
     @Test
     public void testTransactionToTransactionEntity() {
         Transaction transaction = createFakeTransaction();
-        TransactionEntity entity = dataMapper.transform(transaction);
+        TransactionEntity entity = dataMapper.toEntity(transaction);
 
         assertThat(entity,is(notNullValue()));
         assertThat(entity.getId(),is(FAKE_ID));
@@ -47,7 +47,7 @@ public class TransactionDataMapperTest{
     @Test
     public void testTransactionEntityToTransaction() {
         TransactionEntity entity= createFakeTransactionEntity();
-        Transaction transaction = dataMapper.transform(entity);
+        Transaction transaction = dataMapper.toEntity(entity);
 
         assertThat(transaction,is(notNullValue()));
         assertThat(transaction.getId(),is(FAKE_ID));
@@ -72,7 +72,7 @@ public class TransactionDataMapperTest{
         list.add(transaction);
         list.add(transaction1);
 
-        List<TransactionEntity> entities = dataMapper.transform(list);
+        List<TransactionEntity> entities = dataMapper.toEntity(list);
 
         assertThat(entities, is(notNullValue()));
         assertThat(entities.toArray()[0], is(instanceOf(TransactionEntity.class)));
@@ -89,7 +89,7 @@ public class TransactionDataMapperTest{
         list.add(entity);
         list.add(entity1);
 
-        List<Transaction> entities = dataMapper.transform(list);
+        List<Transaction> entities = dataMapper.toEntity(list);
 
         assertThat(entities, is(notNullValue()));
         assertThat(entities.toArray()[0], is(instanceOf(Transaction.class)));

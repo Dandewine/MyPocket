@@ -26,20 +26,20 @@ public class WalletDataRepository implements WalletRepository {
     @Override
     public Observable<List<Wallet>> getWalletList() {
         return walletDataStore.getListWalletEntities()
-                .map(walletDataMapper::transform);
+                .map(walletDataMapper::fromEntity);
     }
 
     @Override
     public Observable<Wallet> getWallet(int userId) {
         return walletDataStore.getWalletEntity(userId)
-                .map(walletDataMapper::transform);
+                .map(walletDataMapper::fromEntity);
     }
 
     @Override
     public Observable<Wallet> addWallet(Wallet wallet) {
-        WalletEntity walletEntity = walletDataMapper.transform(wallet);
+        WalletEntity walletEntity = walletDataMapper.toEntity(wallet);
         return walletDataStore.put(walletEntity)
-                .map(walletDataMapper::transform);
+                .map(walletDataMapper::fromEntity);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class WalletDataRepository implements WalletRepository {
 
     @Override
     public Observable<Wallet> update(Wallet item) {
-        return walletDataStore.update(walletDataMapper.transform(item))
-                .map(walletDataMapper::transform);
+        return walletDataStore.update(walletDataMapper.toEntity(item))
+                .map(walletDataMapper::fromEntity);
     }
 }

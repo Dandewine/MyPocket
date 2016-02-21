@@ -25,24 +25,24 @@ public class CycleOperationDataRepository implements CycleOperationRepository {
     @Override
     public Observable<List<CycleOperation>> getCircleOperationList() {
         return dataStore.getListExpenseEntities()
-                .map(dataMapper::transform);
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<CycleOperation> getCircleOperation(int userId) {
         return dataStore.getCircleOperationEntity(userId)
-                .map(dataMapper::transform);
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<CycleOperation> addCircleOperation(CycleOperation cycleOperation) {
-        return dataStore.put(dataMapper.transform(cycleOperation))
-                .map(dataMapper::transform);
+        return dataStore.put(dataMapper.toEntity(cycleOperation))
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<List<CycleOperation>> addCircleOperation(List<CycleOperation> cycleOperations) {
-        return dataStore.put(dataMapper.transform(cycleOperations))
-                .map(dataMapper::transform);
+        return dataStore.put(dataMapper.toEntity(cycleOperations))
+                .map(dataMapper::fromEntity);
     }
 }

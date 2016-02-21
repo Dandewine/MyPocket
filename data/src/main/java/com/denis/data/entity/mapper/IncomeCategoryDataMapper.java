@@ -15,7 +15,7 @@ public class IncomeCategoryDataMapper {
     public IncomeCategoryDataMapper() {
     }
 
-    public IncomeCategory transform(IncomeCategoryEntity incomeCategoryEntity) {
+    public IncomeCategory fromEntity(IncomeCategoryEntity incomeCategoryEntity) {
         IncomeCategory incomeCategory = null;
         if (incomeCategoryEntity != null) {
             incomeCategory = new IncomeCategory(incomeCategoryEntity.getId());
@@ -25,19 +25,19 @@ public class IncomeCategoryDataMapper {
         return incomeCategory;
     }
 
-    public List<IncomeCategory> transform(List<IncomeCategoryEntity> profitCategoryEntities){
+    public List<IncomeCategory> fromEntity(List<IncomeCategoryEntity> profitCategoryEntities){
         List<IncomeCategory> profitCategories = null;
         if(profitCategoryEntities != null && !profitCategoryEntities.isEmpty()){
             profitCategories = new ArrayList<>();
             for (IncomeCategoryEntity pce : profitCategoryEntities) {
-                IncomeCategory pc = transform(pce);
+                IncomeCategory pc = fromEntity(pce);
                 profitCategories.add(pc);
             }
         }
         return profitCategories;
     }
 
-    public IncomeCategoryEntity transform(IncomeCategory entity){
+    public IncomeCategoryEntity toEntity(IncomeCategory entity){
         IncomeCategoryEntity pce = null;
         if(entity != null){
             pce = new IncomeCategoryEntity(entity.getId());
@@ -47,12 +47,12 @@ public class IncomeCategoryDataMapper {
         return pce;
     }
 
-    public List<IncomeCategoryEntity> transform(Collection<IncomeCategory> profitCategories){
+    public List<IncomeCategoryEntity> toEntity(Collection<IncomeCategory> profitCategories){
         List<IncomeCategoryEntity> entities = null;
         if(profitCategories != null && !profitCategories.isEmpty()){
             entities = new ArrayList<>();
             for (IncomeCategory pc : profitCategories) {
-                IncomeCategoryEntity pce = transform(pc);
+                IncomeCategoryEntity pce = toEntity(pc);
                 entities.add(pce);
             }
         }

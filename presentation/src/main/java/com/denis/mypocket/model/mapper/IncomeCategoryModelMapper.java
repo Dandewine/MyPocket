@@ -10,12 +10,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 @PerActivity
-public class IncomeCategoryModelMapper {
+public class IncomeCategoryModelMapper implements ModelMapper<IncomeCategory, IncomeCategoryModel> {
 
     @Inject
     public IncomeCategoryModelMapper() {
     }
 
+    @Override
     public IncomeCategoryModel transform(IncomeCategory category) {
         IncomeCategoryModel categoryModel = null;
         if (category != null) {
@@ -26,6 +27,7 @@ public class IncomeCategoryModelMapper {
         return categoryModel;
     }
 
+    @Override
     public List<IncomeCategoryModel> transform(List<IncomeCategory> categoryList) {
         List<IncomeCategoryModel> modelList = null;
         if (categoryList != null && !categoryList.isEmpty()) {

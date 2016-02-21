@@ -4,12 +4,11 @@ import com.denis.data.entity.TransactionEntity;
 import com.denis.domain.models.Transaction;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class TransactionDataMapper {
+public class TransactionDataMapper implements EntityMapper<TransactionEntity, Transaction> {
 
     private WalletDataMapper dataMapper;
 
@@ -18,11 +17,12 @@ public class TransactionDataMapper {
         this.dataMapper = dataMapper;
     }
 
-    public Transaction transform(TransactionEntity entity) {
+    @Override
+    public Transaction fromEntity(TransactionEntity entity) {
         Transaction transaction = null;
         if (entity != null) {
             transaction = new Transaction(entity.getId());
-            transaction.setWallet(dataMapper.transform(entity.getWalletEntity()));
+            transaction.setWallet(dataMapper.fromEntity(entity.getWalletEntity()));
             transaction.setAmount(entity.getAmount());
             transaction.setType(entity.getType());
             transaction.setUnixDateTime(entity.getUnixDateTime());
@@ -31,24 +31,26 @@ public class TransactionDataMapper {
         return transaction;
     }
 
-    public List<Transaction> transform(Collection<TransactionEntity> entityList) {
+    @Override
+    public List<Transaction> fromEntity(List<TransactionEntity> entityList) {
         List<Transaction> transactionList = null;
         if (entityList != null && !entityList.isEmpty()) {
             transactionList = new ArrayList<>();
             for (TransactionEntity entity : entityList) {
-                Transaction t = transform(entity);
+                Transaction t = fromEntity(entity);
                 transactionList.add(t);
             }
         }
         return transactionList;
     }
 
-    public TransactionEntity transform(Transaction transaction) {
+    @Override
+    public TransactionEntity toEntity(Transaction transaction) {
         TransactionEntity transactionEntity = null;
         if (transaction != null) {
             transactionEntity = new TransactionEntity();
             transactionEntity.setId(transaction.getId());
-            transactionEntity.setWalletEntity(dataMapper.transform(transaction.getWallet()));
+            transactionEntity.setWalletEntity(dataMapper.toEntity(transaction.getWallet()));
             transactionEntity.setAmount(transaction.getAmount());
             transactionEntity.setType(transaction.getType());
             transactionEntity.setCategoryId(transaction.getCategoryId());
@@ -57,12 +59,13 @@ public class TransactionDataMapper {
         return transactionEntity;
     }
 
-    public List<TransactionEntity> transform(List<Transaction> transactionList) {
+    @Override
+    public List<TransactionEntity> toEntity(List<Transaction> transactionList) {
         List<TransactionEntity> entityList = null;
         if (transactionList != null && !transactionList.isEmpty()) {
             entityList = new ArrayList<>();
             for (Transaction t : transactionList) {
-                TransactionEntity e = transform(t);
+                TransactionEntity e = toEntity(t);
                 entityList.add(e);
             }
         }

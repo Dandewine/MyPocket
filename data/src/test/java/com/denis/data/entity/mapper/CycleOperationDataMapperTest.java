@@ -25,7 +25,7 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
     @Test
     public void testCycleOperationToCycleOperationEntity(){
         CycleOperation operation = createCycleOperation();
-        CycleOperationEntity entity = dataMapper.transform(operation);
+        CycleOperationEntity entity = dataMapper.toEntity(operation);
 
         assertThat(entity, is(notNullValue()));
         assertThat(entity.getId(),is(FAKE_ID));
@@ -38,7 +38,7 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
     @Test
     public void testCycleOperationEntityToCycleOperation(){
         CycleOperationEntity entity = createCycleOperationEntity();
-        CycleOperation operation = dataMapper.transform(entity);
+        CycleOperation operation = dataMapper.toEntity(entity);
 
         assertThat(operation, is(notNullValue()));
         assertThat(operation.getId(),is(FAKE_ID));
@@ -57,7 +57,7 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
         list.add(operation);
         list.add(operation1);
 
-        List<CycleOperationEntity> entities = dataMapper.transform(list);
+        List<CycleOperationEntity> entities = dataMapper.toEntity(list);
 
         assertThat(entities, is(notNullValue()));
         assertThat(entities.size(), is(2));
@@ -80,7 +80,7 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
         list.add(entity);
         list.add(entity1);
 
-        List<CycleOperation> entities = dataMapper.transform(list);
+        List<CycleOperation> entities = dataMapper.toEntity(list);
 
         assertThat(entities, is(notNullValue()));
         assertThat(entities.size(), is(2));

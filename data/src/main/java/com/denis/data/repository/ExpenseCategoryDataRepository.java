@@ -25,24 +25,24 @@ public class ExpenseCategoryDataRepository implements ExpenseCategoriesRepositor
     @Override
     public Observable<List<ExpenseCategory>> getExpenseCategoryList() {
         return dataStore.getListExpenseEntities()
-                .map(dataMapper::transform);
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<ExpenseCategory> getExpenseCategory(int categoryId) {
         return dataStore.getExpenseCategoryEntity(categoryId)
-                .map(dataMapper::transform);
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<ExpenseCategory> addExpenseCategory(ExpenseCategory expenseCategory) {
-        return dataStore.put(dataMapper.transform(expenseCategory))
-                .map(dataMapper::transform);
+        return dataStore.put(dataMapper.toEntity(expenseCategory))
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<List<ExpenseCategory>> addExpenseCategory(List<ExpenseCategory> expenseCategorys) {
-        return dataStore.put(dataMapper.transform(expenseCategorys))
-                .map(dataMapper::transform);
+        return dataStore.put(dataMapper.toEntity(expenseCategorys))
+                .map(dataMapper::fromEntity);
     }
 }

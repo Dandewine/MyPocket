@@ -18,7 +18,7 @@ public class IncomeCategoryEntityDataMapperTest extends ApplicationTestCase {
     @Test
     public void testIncomeCategoryToIncomeCategoryEntity() {
         IncomeCategory category = createFakeIncomeCategory();
-        IncomeCategoryEntity entity = dataMapper.transform(category);
+        IncomeCategoryEntity entity = dataMapper.toEntity(category);
 
         assertThat(entity, is(notNullValue()));
         assertThat(entity.getId(), is(FAKE_ID));
@@ -29,7 +29,7 @@ public class IncomeCategoryEntityDataMapperTest extends ApplicationTestCase {
     @Test
     public void testIncomeCategoryEntityToIncomeCategory() {
         IncomeCategoryEntity entity = createFakeIncomeCategoryEntity();
-        IncomeCategory category = dataMapper.transform(entity);
+        IncomeCategory category = dataMapper.toEntity(entity);
 
         assertThat(category, is(notNullValue()));
         assertThat(category.getId(), is(FAKE_ID));
@@ -46,7 +46,7 @@ public class IncomeCategoryEntityDataMapperTest extends ApplicationTestCase {
         list.add(IncomeCategory);
         list.add(IncomeCategory1);
 
-        List<IncomeCategoryEntity> entities = dataMapper.transform(list);
+        List<IncomeCategoryEntity> entities = dataMapper.toEntity(list);
 
         assertThat(entities.toArray()[0], is(instanceOf(IncomeCategoryEntity.class)));
         assertThat(entities.toArray()[1], is(instanceOf(IncomeCategoryEntity.class)));
@@ -63,7 +63,7 @@ public class IncomeCategoryEntityDataMapperTest extends ApplicationTestCase {
         list.add(IncomeCategory);
         list.add(IncomeCategory1);
 
-        List<IncomeCategory> entities = dataMapper.transform(list);
+        List<IncomeCategory> entities = dataMapper.toEntity(list);
 
         assertThat(entities.toArray()[0], is(instanceOf(IncomeCategory.class)));
         assertThat(entities.toArray()[1], is(instanceOf(IncomeCategory.class)));

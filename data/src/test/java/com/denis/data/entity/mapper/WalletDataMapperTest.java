@@ -19,7 +19,7 @@ public class WalletDataMapperTest extends ApplicationTestCase {
     @Test
     public void testWalletToWalletEntity() {
         Wallet wallet = createFakeWallet();
-        WalletEntity walletEntity = dataMapper.transform(wallet);
+        WalletEntity walletEntity = dataMapper.toEntity(wallet);
 
         assertThat(walletEntity, is(notNullValue()));
         assertThat(walletEntity.getId(), is(FAKE_WALLET_ID));
@@ -37,7 +37,7 @@ public class WalletDataMapperTest extends ApplicationTestCase {
         list.add(wallet);
         list.add(wallet1);
 
-        List<WalletEntity> entities = dataMapper.transform(list);
+        List<WalletEntity> entities = dataMapper.toEntity(list);
 
         assertThat(entities.toArray()[0], is(instanceOf(WalletEntity.class)));
         assertThat(entities.toArray()[1], is(instanceOf(WalletEntity.class)));
@@ -48,7 +48,7 @@ public class WalletDataMapperTest extends ApplicationTestCase {
     @Test
     public void testWalletEntityToWallet() {
         WalletEntity entity = createFakeWalletEntity();
-        Wallet wallet = dataMapper.transform(entity);
+        Wallet wallet = dataMapper.toEntity(entity);
 
         assertThat(wallet, is(notNullValue()));
         assertThat(wallet.getId(), is(FAKE_WALLET_ID));
@@ -66,7 +66,7 @@ public class WalletDataMapperTest extends ApplicationTestCase {
         list.add(wallet);
         list.add(wallet1);
 
-        List<Wallet> wallets = dataMapper.transform(list);
+        List<Wallet> wallets = dataMapper.toEntity(list);
 
         assertThat(wallets.toArray()[0], is(instanceOf(Wallet.class)));
         assertThat(wallets.toArray()[1], is(instanceOf(Wallet.class)));

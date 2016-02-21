@@ -9,13 +9,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ExpenseCategoryDataMapper {
+public class ExpenseCategoryDataMapper implements EntityMapper<ExpenseCategoryEntity, ExpenseCategory> {
 
     @Inject
     public ExpenseCategoryDataMapper() {
     }
 
-    public ExpenseCategory transform(ExpenseCategoryEntity expenseCategoryEntity) {
+    @Override
+    public ExpenseCategory fromEntity(ExpenseCategoryEntity expenseCategoryEntity) {
         ExpenseCategory expenseCategory = null;
         if (expenseCategoryEntity != null) {
             expenseCategory = new ExpenseCategory(expenseCategoryEntity.getId());
@@ -25,19 +26,21 @@ public class ExpenseCategoryDataMapper {
         return expenseCategory;
     }
 
-    public List<ExpenseCategory> transform(Collection<ExpenseCategoryEntity> wasteCategoryEntities) {
+    @Override
+    public List<ExpenseCategory> fromEntity(List<ExpenseCategoryEntity> wasteCategoryEntities) {
         List<ExpenseCategory> wasteCategories = null;
         if (wasteCategoryEntities != null && !wasteCategoryEntities.isEmpty()) {
             wasteCategories = new ArrayList<>();
             for (ExpenseCategoryEntity wce : wasteCategoryEntities) {
-                ExpenseCategory wc = transform(wce);
+                ExpenseCategory wc = fromEntity(wce);
                 wasteCategories.add(wc);
             }
         }
         return wasteCategories;
     }
 
-    public ExpenseCategoryEntity transform(ExpenseCategory expenseCategory) {
+    @Override
+    public ExpenseCategoryEntity toEntity(ExpenseCategory expenseCategory) {
         ExpenseCategoryEntity expenseCategoryEntity = null;
         if (expenseCategory != null) {
             expenseCategoryEntity = new ExpenseCategoryEntity(expenseCategory.getId());
@@ -47,13 +50,13 @@ public class ExpenseCategoryDataMapper {
         return expenseCategoryEntity;
     }
 
-
-    public List<ExpenseCategoryEntity> transform(List<ExpenseCategory> wasteCategories) {
+    @Override
+    public List<ExpenseCategoryEntity> toEntity(List<ExpenseCategory> wasteCategories) {
         List<ExpenseCategoryEntity> wasteCategoriesEntities = null;
         if (wasteCategories != null && !wasteCategories.isEmpty()) {
             wasteCategoriesEntities = new ArrayList<>();
             for (ExpenseCategory wc : wasteCategories) {
-                ExpenseCategoryEntity wce = transform(wc);
+                ExpenseCategoryEntity wce = toEntity(wc);
                 wasteCategoriesEntities.add(wce);
             }
         }

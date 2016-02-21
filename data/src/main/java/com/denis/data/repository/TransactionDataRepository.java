@@ -25,18 +25,18 @@ public class TransactionDataRepository implements TransactionRepository {
     @Override
     public Observable<List<Transaction>> getTransactionList() {
         return dataStore.getListTransactionEntities()
-                .map(dataMapper::transform);
+                .map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<Transaction> getTransaction(int transactionId) {
-        return dataStore.getTransactionEntity(transactionId).map(dataMapper::transform);
+        return dataStore.getTransactionEntity(transactionId).map(dataMapper::fromEntity);
     }
 
     @Override
     public Observable<Transaction> addTransaction(Transaction transaction) {
-        return dataStore.put(dataMapper.transform(transaction))
-                .map(transactionEntity -> dataMapper.transform(transactionEntity));
+        return dataStore.put(dataMapper.toEntity(transaction))
+                .map(transactionEntity -> dataMapper.fromEntity(transactionEntity));
     }
 
     @Override

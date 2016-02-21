@@ -27,21 +27,21 @@ public class DebtsRepository implements DebtRepository {
 
     @Override
     public Observable<List<Debt>> getDebtList() {
-        return debtsDataStore.getListExpenseEntities().map(debtsMapper::transform);
+        return debtsDataStore.getListExpenseEntities().map(debtsMapper::fromEntity);
     }
 
     @Override
     public Observable<Debt> getDebt(int userId) {
-        return debtsDataStore.getDebtEntity(userId).map(debtsMapper::transform);
+        return debtsDataStore.getDebtEntity(userId).map(debtsMapper::fromEntity);
     }
 
     @Override
     public Observable<Debt> addDebt(Debt debt) {
-        return debtsDataStore.put(debtsMapper.transform(debt)).map(debtsMapper::transform);
+        return debtsDataStore.put(debtsMapper.toEntity(debt)).map(debtsMapper::fromEntity);
     }
 
     @Override
     public Observable<List<Debt>> addDebt(List<Debt> debts) {
-        return debtsDataStore.put(debtsMapper.transform(debts)).map(debtsMapper::transform);
+        return debtsDataStore.put(debtsMapper.toEntity(debts)).map(debtsMapper::fromEntity);
     }
 }

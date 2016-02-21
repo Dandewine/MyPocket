@@ -20,7 +20,7 @@ public class WalletModelDataMapper {
 
     public WalletModel transform(Wallet wallet) {
         if (wallet == null)
-            throw new NullPointerException("Cannot transform a null value");
+            throw new NullPointerException("Cannot toEntity a null value");
         WalletModel walletModel = new WalletModel(wallet.getId());
         walletModel.setName(wallet.getName());
         walletModel.setCurrency(wallet.getCurrency());

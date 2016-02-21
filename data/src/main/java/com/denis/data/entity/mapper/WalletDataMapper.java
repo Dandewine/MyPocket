@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class WalletDataMapper {
+public class WalletDataMapper implements EntityMapper<WalletEntity, Wallet> {
 
     @Inject
     public WalletDataMapper() {
@@ -21,7 +21,8 @@ public class WalletDataMapper {
      * @param walletEntity Object to be transformed.
      * @return {@link Wallet} if valid {@link WalletEntity} otherwise null.
      */
-    public Wallet transform(WalletEntity walletEntity) {
+    @Override
+    public Wallet fromEntity(WalletEntity walletEntity) {
         Wallet wallet = null;
         if (walletEntity != null) {
             wallet = new Wallet(walletEntity.getId());
@@ -38,13 +39,14 @@ public class WalletDataMapper {
      * @param wallets Object Collection to be transformed.
      * @return {@link Wallet} if valid {@link WalletEntity} otherwise null.
      */
-    public List<Wallet> transform(Collection<WalletEntity> wallets) {
+    @Override
+    public List<Wallet> fromEntity(List<WalletEntity> wallets) {
         List<Wallet> walletList = null;
         if (wallets != null) {
             walletList = new ArrayList<>();
             Wallet wallet;
             for (WalletEntity we : wallets) {
-                wallet = transform(we);
+                wallet = fromEntity(we);
                 if (wallet != null)
                     walletList.add(wallet);
             }
@@ -52,19 +54,21 @@ public class WalletDataMapper {
         return walletList;
     }
 
-    public List<WalletEntity> transform(List<Wallet> wallets) {
+    @Override
+    public List<WalletEntity> toEntity(List<Wallet> wallets) {
         List<WalletEntity> walletEntities = null;
         if (wallets != null && !wallets.isEmpty()) {
             walletEntities = new ArrayList<>();
             for (Wallet w : wallets) {
-                WalletEntity entity = transform(w);
+                WalletEntity entity = toEntity(w);
                 walletEntities.add(entity);
             }
         }
         return walletEntities;
     }
 
-    public WalletEntity transform(Wallet wallet) {
+    @Override
+    public WalletEntity toEntity(Wallet wallet) {
         WalletEntity entity = null;
         if (wallet != null) {
             entity = new WalletEntity(wallet.getId(), wallet.getName(), wallet.getCurrency(), wallet.getBalance());
