@@ -12,8 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class
-JobExecutor implements ThreadExecutor {
+public class JobExecutor implements ThreadExecutor {
     private static final int INITIAL_POOL_SIZE = 3;
     private static final int MAX_POOL_SIZE = 5;
 
