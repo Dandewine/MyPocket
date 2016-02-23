@@ -12,7 +12,7 @@ import android.view.View;
 import com.denis.mypocket.AnimationUtils;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddCycleOperationBinding;
-import com.denis.mypocket.internal.di.components.DaggerAddCycleOPComponent;
+import com.denis.mypocket.internal.di.components.activity.DaggerAddCycleOPComponent;
 import com.denis.mypocket.viewmodel.adding.AddCycleOperationViewModel;
 
 import javax.inject.Inject;
@@ -36,10 +36,12 @@ public class AddCycleOperationActivity extends BaseActivity {
 
     @Override
     protected void initDIComponent() {
+       // Debug.startMethodTracing("Add CO activity inject");
         DaggerAddCycleOPComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build().inject(this);
+       // Debug.stopMethodTracing();
     }
 
     @Override

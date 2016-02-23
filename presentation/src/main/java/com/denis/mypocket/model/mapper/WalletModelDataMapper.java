@@ -3,7 +3,6 @@ package com.denis.mypocket.model.mapper;
 import android.support.annotation.Nullable;
 
 import com.denis.domain.models.Wallet;
-import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.WalletModel;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-@PerActivity
+
 public class WalletModelDataMapper {
 
     @Inject

@@ -14,6 +14,9 @@ public class DebtEntity extends RealmObject {
     private float amount;
     private String person;
 
+    public DebtEntity() {
+    }
+
     public DebtEntity(int id) {
         this.id = id;
     }

@@ -14,6 +14,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
+import com.denis.mypocket.view.fragments.WalletFragment;
 
 public class DrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -72,7 +73,7 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if (id == R.id.nav_wallets) {
-            //startActivity(new Intent(this,WalletsActivity.class));
+            replaceFragment(R.id.containerDrawer,WalletFragment.newInstance());
         } else if (id == R.id.nav_categories) {
 
         } else if (id == R.id.nav_debts) {

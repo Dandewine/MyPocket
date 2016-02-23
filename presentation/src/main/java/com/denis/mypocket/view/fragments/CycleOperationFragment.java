@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentCycleOperationBinding;
-import com.denis.mypocket.internal.di.components.DaggerGetCycleOpComponent;
+import com.denis.mypocket.internal.di.components.fragment.DaggerGetCycleOpComponent;
 import com.denis.mypocket.view.activity.AddCycleOperationActivity;
 import com.denis.mypocket.viewmodel.getting.GetCycleOperationViewModel;
 

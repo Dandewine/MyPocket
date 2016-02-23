@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
-import com.denis.mypocket.internal.di.components.DaggerAddTransactionComponent;
+import com.denis.mypocket.internal.di.components.activity.DaggerAddTransactionComponent;
 import com.denis.mypocket.internal.di.modules.ProvideViewModelAddTransactionModule;
 import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;
 
