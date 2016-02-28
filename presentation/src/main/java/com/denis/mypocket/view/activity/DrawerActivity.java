@@ -1,40 +1,45 @@
 package com.denis.mypocket.view.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
-import com.denis.domain.models.Transaction;
+import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
 
-public class DrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DrawerActivity extends BaseActivity implements
+        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout mDrawer;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private FloatingActionButton fabTrans, fabCyclic, fabSaves, fabStats, fabAddIncome, fabAddExpense;
+
+    private Animation rotate_backward, fab_close, fab_open, rotate_forward;
+    private boolean isTransFabOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +49,71 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
         Toolbar toolbar = binding.content.toolbar;
         configireToolbar(toolbar, R.string.app_name, false);
 
-        bindDrawer(binding,toolbar);
+        initAnimations();
 
+        bindFabs(binding);
+        bindDrawer(binding, toolbar);
         bindTabs(binding);
+    }
+
+    public void initAnimations() {
+        rotate_backward = AnimationUtils.loadAnimation(this, R.anim.rotate_backward);
+        rotate_forward = AnimationUtils.loadAnimation(this, R.anim.rotate_forward);
+        fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close);
+        fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open);
+    }
+
+    private void bindFabs(ActivityDrawerBinding binding) {
+        fabTrans = binding.content.fabTrans;
+        fabCyclic = binding.content.fabCyclic;
+        fabSaves = binding.content.fabSaves;
+        fabStats = binding.content.fabStats;
+
+        fabAddExpense = binding.content.addExpenseTrans;
+        fabAddIncome = binding.content.addIncomeTrans;
+
+        fabTrans.setOnClickListener(this);
+
+        fabAddExpense.setOnClickListener(this);
+        fabAddIncome.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.addExpenseTrans: startAddTransactionAct(false); break;
+            case R.id.addIncomeTrans: startAddTransactionAct(true); break;
+            case R.id.fabTrans: animateFAB(); break;
+            default: throw new IllegalArgumentException("Can't recognize incoming ID");
+        }
+    }
+
+    public void startAddTransactionAct(boolean isIncome) {
+        Intent intent = new Intent(this, AddTransactionActivity.class);
+        intent.putExtra(PLConstants.INTENT_INCOME_FLAG, isIncome);
+
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, fabAddIncome, "reveal");
+        ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
+    }
+
+
+
+    public void animateFAB() {
+        if (isTransFabOpen) {
+            fabTrans.startAnimation(rotate_backward);
+            fabAddIncome.startAnimation(fab_close);
+            fabAddExpense.startAnimation(fab_close);
+            fabAddIncome.setClickable(false);
+            fabAddExpense.setClickable(false);
+            isTransFabOpen = false;
+        } else {
+            fabTrans.startAnimation(rotate_forward);
+            fabAddIncome.startAnimation(fab_open);
+            fabAddExpense.startAnimation(fab_open);
+            fabAddIncome.setClickable(true);
+            fabAddExpense.setClickable(true);
+            isTransFabOpen = true;
+        }
     }
 
 
@@ -72,17 +139,34 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
 
     }
 
-    private void bindTabs(ActivityDrawerBinding binding){
+    private void bindTabs(ActivityDrawerBinding binding) {
         mTabLayout = binding.content.tabs;
         mViewPager = binding.content.viewPagerContainer;
 
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void bindDrawer(ActivityDrawerBinding binding, Toolbar toolbar){
+    private void bindDrawer(ActivityDrawerBinding binding, Toolbar toolbar) {
         NavigationView navigationView = binding.navView;
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -91,8 +175,6 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
                 this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(toggle);
         toggle.syncState();
-
-
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -132,10 +214,11 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
      * A {@link FragmentStatePagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public  class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-       @DrawableRes int[] tabsIndicators = {R.drawable.ic_menu_camera,
-       R.drawable.vector_cycle, R.drawable.vector_saves, R.drawable.vector_wallet};
+        @DrawableRes
+        int[] tabsIndicators = {R.drawable.ic_menu_camera,
+                R.drawable.vector_cycle, R.drawable.vector_saves, R.drawable.vector_wallet};
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -143,12 +226,17 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
-                case 0: return TransactionsFragment.newInstance();
-                case 1: return CycleOperationFragment.newInstance();
-                case 2: return CycleOperationFragment.newInstance();
-                case 3: return CycleOperationFragment.newInstance();
-                default: throw new IllegalStateException("Can't recognize which fragment I should give to");
+            switch (position) {
+                case 0:
+                    return TransactionsFragment.newInstance();
+                case 1:
+                    return CycleOperationFragment.newInstance();
+                case 2:
+                    return CycleOperationFragment.newInstance();
+                case 3:
+                    return CycleOperationFragment.newInstance();
+                default:
+                    throw new IllegalStateException("Can't recognize which fragment I should give to");
             }
         }
 
@@ -174,8 +262,10 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
                     return "Cyclic";
                 case 2:
                     return "Saves";
-                case 3: return "Stats";
-                default: throw new IllegalStateException("Can't find title.");
+                case 3:
+                    return "Stats";
+                default:
+                    throw new IllegalStateException("Can't find title.");
             }
         }
 

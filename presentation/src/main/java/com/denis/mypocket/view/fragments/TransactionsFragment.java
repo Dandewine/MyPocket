@@ -53,7 +53,7 @@ public class TransactionsFragment extends BaseFragment {
     public void configureViews(FragmentTransactionsListBinding binding) {
         fabMain = binding.fabMain;
         fabAddIncome = binding.addIncomeTrans;
-        fabAddOutcome = binding.addOutcomeTrans;
+        fabAddOutcome = binding.addExpense;
         binding.fabMain.setOnClickListener(v -> animateFAB());
         fabAddIncome.setOnClickListener(v -> startAddTransactionAct(true));
         fabAddOutcome.setOnClickListener(v -> startAddTransactionAct(false));
