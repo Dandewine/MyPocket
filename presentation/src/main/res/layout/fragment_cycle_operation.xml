@@ -20,7 +20,7 @@
             bind:adapter="@{viewModel.operationAdapter}"
            />
 
-        <android.support.design.widget.FloatingActionButton
+       <!-- <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAddCO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_margin="@dimen/default_padding"
             android:background="?android:attr/selectableItemBackground"
             android:transitionName="@string/transition_fab_cycle_list_to_add_cycle_op"
-            android:layout_gravity="bottom|end"/>
+            android:layout_gravity="bottom|end"/>-->
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

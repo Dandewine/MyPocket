@@ -34,19 +34,19 @@ public class CycleOperationFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cycle_operation, container, false);
-        binding.fabAddCO.setOnClickListener(v -> startTransition());
+       // binding.fabAddCO.setOnClickListener(v -> startTransition());
       //  binding.recyclerTransactions.setAdapter(viewModel.operationAdapter);
         binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }
 
-    private void startTransition(){
+  /*  private void startTransition(){
         Intent intent = new Intent(getActivity(), AddCycleOperationActivity.class);
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(getActivity(), binding.fabAddCO, binding.fabAddCO.getTransitionName());
         ActivityCompat.startActivity(getActivity(),intent,optionsCompat.toBundle());
-    }
+    }*/
 
     @Override
     protected void initDI() {

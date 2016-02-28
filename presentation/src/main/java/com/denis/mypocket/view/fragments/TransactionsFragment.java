@@ -23,7 +23,7 @@ import com.denis.mypocket.view.activity.AddTransactionActivity;
 public class TransactionsFragment extends BaseFragment {
 
     private Animation rotate_backward, fab_close, fab_open, rotate_forward;
-    FloatingActionButton fabMain, fabAddIncome, fabAddOutcome;
+   // FloatingActionButton fabMain, fabAddIncome, fabAddOutcome;
     boolean isFabOpen = false;
 
     public static TransactionsFragment newInstance() {
@@ -37,12 +37,12 @@ public class TransactionsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentTransactionsListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_transactions_list, container, false);
-        initAnimations();
-        configureViews(binding);
+        //initAnimations();
+        //configureViews(binding);
         return binding.getRoot();
     }
 
-
+/*
     public void initAnimations() {
         rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
         rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
@@ -83,9 +83,9 @@ public class TransactionsFragment extends BaseFragment {
         intent.putExtra(PLConstants.INTENT_INCOME_FLAG, isIncome);
         startActivity(intent);
 
-        /*ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, fabAddIncome, "reveal");
-        ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());*/
-    }
+        *//*ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, fabAddIncome, "reveal");
+        ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());*//*
+    }*/
 
     @Override
     protected void initDI() {
