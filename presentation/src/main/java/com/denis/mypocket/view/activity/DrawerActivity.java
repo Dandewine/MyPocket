@@ -1,5 +1,8 @@
 package com.denis.mypocket.view.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -20,8 +23,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
 
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
@@ -39,6 +48,7 @@ public class DrawerActivity extends BaseActivity implements
     private FloatingActionButton fabTrans, fabCyclic, fabSaves, fabStats, fabAddIncome, fabAddExpense;
 
     private Animation rotate_backward, fab_close, fab_open, rotate_forward;
+    private AnimatorSet fabCloseSet, fabOpenSet;
     private boolean isTransFabOpen = false;
 
     @Override
@@ -54,6 +64,47 @@ public class DrawerActivity extends BaseActivity implements
         bindFabs(binding);
         bindDrawer(binding, toolbar);
         bindTabs(binding);
+
+        initCloseAnimation();
+        initOpenAnimation();
+
+    }
+
+    private void initCloseAnimation(){
+        fabCloseSet = new AnimatorSet();
+
+        Animator scaleAnimatorX = ObjectAnimator.ofFloat(fabTrans,"scaleX",1f,0.0f)
+                .setDuration(300);
+        scaleAnimatorX.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        Animator scaleAnimatorY = ObjectAnimator.ofFloat(fabTrans,"scaleY",1f,0.0f)
+                .setDuration(300);
+        scaleAnimatorY.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        Animator alpha = ObjectAnimator.ofFloat(fabTrans,"alpha",1f,0.0f)
+                .setDuration(300);
+        alpha.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        fabCloseSet.playTogether(scaleAnimatorX,scaleAnimatorY,alpha);
+    }
+
+    private void initOpenAnimation(){
+        fabOpenSet = new AnimatorSet();
+
+        Animator scaleAnimatorX = ObjectAnimator.ofFloat(fabCyclic,"scaleX",0f,1f)
+                .setDuration(300);
+        scaleAnimatorX.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        Animator scaleAnimatorY = ObjectAnimator.ofFloat(fabCyclic,"scaleY",0f,1f)
+                .setDuration(300);
+        scaleAnimatorY.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        Animator alpha = ObjectAnimator.ofFloat(fabCyclic,"alpha",0f,1f)
+                .setDuration(300);
+        alpha.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        fabOpenSet.setStartDelay(400);
+        fabOpenSet.playTogether(scaleAnimatorX,scaleAnimatorY,alpha);
     }
 
     public void initAnimations() {
@@ -154,7 +205,17 @@ public class DrawerActivity extends BaseActivity implements
 
             @Override
             public void onPageSelected(int position) {
-
+                switch (position){
+                    case 1: fabCloseSet.start(); fabOpenSet.start();
+                        /*fabTrans.startAnimation(fab_close2);
+                       *//* fab_open2.setStartOffset(300);
+                        fabCyclic.startAnimation(fab_open2);*/ break;
+                   /* case 2: fabCyclic.startAnimation(fab_close2);
+                        fabSaves.startAnimation(fab_open2); break;
+                    case 3: fabStats.startAnimation(fab_open2);
+                        fabSaves.startAnimation(fab_close2); break;*/
+                    default: break;
+                }
             }
 
             @Override
