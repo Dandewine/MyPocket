@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -20,17 +21,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.ScaleAnimation;
 
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
@@ -48,8 +45,10 @@ public class DrawerActivity extends BaseActivity implements
     private FloatingActionButton fabTrans, fabCyclic, fabSaves, fabStats, fabAddIncome, fabAddExpense;
 
     private Animation rotate_backward, fab_close, fab_open, rotate_forward;
-    private AnimatorSet fabCloseSet, fabOpenSet;
-    private boolean isTransFabOpen = false;
+    private boolean isTransFabOpen;
+
+    private boolean[] currentlyPageShown = {true, false, false, false};
+    private FloatingActionButton[] fabMassive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,47 +63,93 @@ public class DrawerActivity extends BaseActivity implements
         bindFabs(binding);
         bindDrawer(binding, toolbar);
         bindTabs(binding);
-
-        initCloseAnimation();
-        initOpenAnimation();
-
     }
 
-    private void initCloseAnimation(){
-        fabCloseSet = new AnimatorSet();
+    private void playCloseAnimation(View view) {
+        AnimatorSet fabCloseSet = new AnimatorSet();
 
-        Animator scaleAnimatorX = ObjectAnimator.ofFloat(fabTrans,"scaleX",1f,0.0f)
+        Animator scaleAnimatorX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0.0f)
                 .setDuration(300);
         scaleAnimatorX.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        Animator scaleAnimatorY = ObjectAnimator.ofFloat(fabTrans,"scaleY",1f,0.0f)
+        Animator scaleAnimatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 0.0f)
                 .setDuration(300);
         scaleAnimatorY.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        Animator alpha = ObjectAnimator.ofFloat(fabTrans,"alpha",1f,0.0f)
+        Animator alpha = ObjectAnimator.ofFloat(view, "alpha", 1f, 0.0f)
                 .setDuration(300);
         alpha.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        fabCloseSet.playTogether(scaleAnimatorX,scaleAnimatorY,alpha);
+        fabCloseSet.playTogether(scaleAnimatorX, scaleAnimatorY, alpha);
+        fabCloseSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        fabCloseSet.start();
+
+
     }
 
-    private void initOpenAnimation(){
-        fabOpenSet = new AnimatorSet();
+    private void playOpenAnimation(View view) {
 
-        Animator scaleAnimatorX = ObjectAnimator.ofFloat(fabCyclic,"scaleX",0f,1f)
+        AnimatorSet fabOpenSet = new AnimatorSet();
+
+        Animator scaleAnimatorX = ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f)
                 .setDuration(300);
         scaleAnimatorX.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        Animator scaleAnimatorY = ObjectAnimator.ofFloat(fabCyclic,"scaleY",0f,1f)
+        Animator scaleAnimatorY = ObjectAnimator.ofFloat(view, "scaleY", 0f, 1f)
                 .setDuration(300);
         scaleAnimatorY.setInterpolator(new AccelerateDecelerateInterpolator());
 
-        Animator alpha = ObjectAnimator.ofFloat(fabCyclic,"alpha",0f,1f)
+        Animator alpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
                 .setDuration(300);
         alpha.setInterpolator(new AccelerateDecelerateInterpolator());
 
         fabOpenSet.setStartDelay(400);
-        fabOpenSet.playTogether(scaleAnimatorX,scaleAnimatorY,alpha);
+        fabOpenSet.playTogether(scaleAnimatorX, scaleAnimatorY, alpha);
+
+        fabOpenSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        fabOpenSet.start();
+
+
     }
 
     public void initAnimations() {
@@ -127,15 +172,34 @@ public class DrawerActivity extends BaseActivity implements
 
         fabAddExpense.setOnClickListener(this);
         fabAddIncome.setOnClickListener(this);
+
+        fabMassive = new FloatingActionButton[]{fabTrans, fabCyclic, fabSaves, fabStats};
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.addExpenseTrans: startAddTransactionAct(false); break;
-            case R.id.addIncomeTrans: startAddTransactionAct(true); break;
-            case R.id.fabTrans: animateFAB(); break;
-            default: throw new IllegalArgumentException("Can't recognize incoming ID");
+        switch (v.getId()) {
+            case R.id.addExpenseTrans:
+                startAddTransactionAct(false);
+                break;
+            case R.id.addIncomeTrans:
+                startAddTransactionAct(true);
+                break;
+            case R.id.fabTrans:
+                animateFAB();
+                break;
+            case R.id.fabCyclic:
+                Snackbar.make(fabCyclic, "Cyclic", Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.fabSaves:
+                Snackbar.make(fabSaves, "Saves", Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.fabStats:
+                Snackbar.make(fabStats, "Stats", Snackbar.LENGTH_SHORT).show();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Can't recognize incoming ID");
         }
     }
 
@@ -146,7 +210,6 @@ public class DrawerActivity extends BaseActivity implements
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, fabAddIncome, "reveal");
         ActivityCompat.startActivity(this, intent, optionsCompat.toBundle());
     }
-
 
 
     public void animateFAB() {
@@ -197,32 +260,7 @@ public class DrawerActivity extends BaseActivity implements
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position){
-                    case 1: fabCloseSet.start(); fabOpenSet.start();
-                        /*fabTrans.startAnimation(fab_close2);
-                       *//* fab_open2.setStartOffset(300);
-                        fabCyclic.startAnimation(fab_open2);*/ break;
-                   /* case 2: fabCyclic.startAnimation(fab_close2);
-                        fabSaves.startAnimation(fab_open2); break;
-                    case 3: fabStats.startAnimation(fab_open2);
-                        fabSaves.startAnimation(fab_close2); break;*/
-                    default: break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        mViewPager.addOnPageChangeListener(pageChangeListener);
 
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -332,4 +370,35 @@ public class DrawerActivity extends BaseActivity implements
 
 
     }
+
+    /**
+     * A {@link ViewPager.OnPageChangeListener} where fabs animations will fire
+     */
+    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        int previousFabIdx = 0;
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (currentlyPageShown[previousFabIdx]) {
+                playCloseAnimation(fabMassive[previousFabIdx]);
+                currentlyPageShown[previousFabIdx] = false;
+            }
+            currentlyPageShown[position] = true;
+            playOpenAnimation(fabMassive[position]);
+
+            Log.d("myTag", "current = " + position);
+            Log.d("myTag", "prev = " + previousFabIdx);
+            previousFabIdx = position;
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 }

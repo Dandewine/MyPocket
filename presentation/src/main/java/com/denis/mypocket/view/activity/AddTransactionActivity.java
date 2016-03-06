@@ -2,6 +2,7 @@ package com.denis.mypocket.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.MenuItem;
 
 import com.denis.mypocket.PLConstants;
@@ -12,6 +13,8 @@ import com.denis.mypocket.internal.di.modules.ProvideViewModelAddTransactionModu
 import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;
 
 import javax.inject.Inject;
+
+import dagger.Lazy;
 
 
 public class AddTransactionActivity extends BaseActivity {
@@ -35,6 +38,7 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     protected void initDIComponent() {
+
         DaggerAddTransactionComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
