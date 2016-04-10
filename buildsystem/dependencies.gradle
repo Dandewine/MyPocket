@@ -1,25 +1,26 @@
-allprojects{
-    repositories{
+allprojects {
+    repositories {
         jcenter()
     }
 }
 
-ext{
+ext {
     //Android
     androidBuildToolsVersion = "23.0.2"
-    androidMinSdkVersion = 21
+    androidMinSdkVersion = 18
     androidTargetSdkVersion = 23
     androidCompileSdkVersion = 23
 
     //libraries
     daggerVersion = '2.0.2'
-    supportLibVersion = '23.1.1'
+    supportLibVersion = '23.2.1'
     rxJavaVersion = '1.0.14'
     rxAndroidVersion = '1.0.1'
     javaxAnnotationVersion = '1.0'
     realmVersion = '0.87.4'
     androidAnnotationsVersion = '21.0.3'
     retrolambdaVersion = '2.0.6'
+    retrofit = '2.0.1'
 
     //Testing
     robolectricVersion = '3.0'
@@ -32,60 +33,61 @@ ext{
 
     //region Presentation
     presentationDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
-            recyclerView:       "com.android.support:recyclerview-v7:${supportLibVersion}",
-            rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
-            rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            cardView:           "com.android.support:cardview-v7:${supportLibVersion}",
-            appcompat:          "com.android.support:appcompat-v7:${supportLibVersion}",
-            design:             "com.android.support:design:${supportLibVersion}",
-            lambda:             "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
+            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger         : "com.google.dagger:dagger:${daggerVersion}",
+            recyclerView   : "com.android.support:recyclerview-v7:${supportLibVersion}",
+            rxJava         : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid      : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            cardView       : "com.android.support:cardview-v7:${supportLibVersion}",
+            appcompat      : "com.android.support:appcompat-v7:${supportLibVersion}",
+            design         : "com.android.support:design:${supportLibVersion}",
+            lambda         : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
+            retrofit       : "compile 'com.squareup.retrofit2:retrofit:${retrofit}"
     ]
     presentationTestDependencies = [
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            dexmaker:           "com.google.dexmaker:dexmaker:${dexmakerVersion}",
-            dexmakerMockito:    "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            mockito          : "org.mockito:mockito-core:${mockitoVersion}",
+            dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+            espresso         : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            testingSupportLib: "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
     ]
     //endregion
 
     //region Domain
     domainDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
-            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
-            lambda:             "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
+            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger         : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            rxJava         : "io.reactivex:rxjava:${rxJavaVersion}",
+            lambda         : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
     ]
 
     domainTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
-            assertj:            "org.assertj:assertj-core:${assertJVersion}",
+            junit      : "junit:junit:${jUnitVersion}",
+            mockito    : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+            assertj    : "org.assertj:assertj-core:${assertJVersion}",
     ]
     //endregion
 
     //region Data
     dataDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
-            rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
-            rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
-            realm:              "io.realm:realm-android:${realmVersion}",
-            lambda:             "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
+            realm             : "io.realm:realm-android:${realmVersion}",
+            lambda            : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
     ]
 
     dataTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            assertj:            "org.assertj:assertj-core:${assertJVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
+            junit      : "junit:junit:${jUnitVersion}",
+            assertj    : "org.assertj:assertj-core:${assertJVersion}",
+            mockito    : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
     ]
     //endregion
 

@@ -1,6 +1,8 @@
 package com.denis.mypocket.viewmodel.adding;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
+import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -43,6 +45,7 @@ public class AddTransactionViewModel implements ViewModel {
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
 
     private List<Wallet> walletList;
+    public Typeface typeface;
 
     @Inject
     public AddTransactionViewModel(AddTransactionUseCasesFacade workerFacade,
@@ -53,6 +56,8 @@ public class AddTransactionViewModel implements ViewModel {
         this.isIncome = isIncome;
         categoriesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1);
         walletsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
+
+        typeface = Typeface.createFromAsset(context.getAssets(),"Roboto-Light.ttf");
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
 
@@ -156,7 +161,7 @@ public class AddTransactionViewModel implements ViewModel {
     public View.OnClickListener addOnClick =
             v -> {
                 Transaction transaction = new Transaction(walletList.get(walletId),
-                        Float.parseFloat(amount),
+                        Float.parseFloat(amount.isEmpty()? "0" :amount),
                         isIncome ? 1 : 0,
                         categoryId,
                         System.currentTimeMillis() / 1000);
@@ -189,6 +194,8 @@ public class AddTransactionViewModel implements ViewModel {
 
         }
     };
+
+
 
     public ArrayAdapter getCategoriesAdapter() {
         return categoriesAdapter;

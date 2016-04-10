@@ -2,15 +2,17 @@ package com.denis.data.entity.mapper;
 
 import com.denis.data.ApplicationTestCase;
 
+
 public class CycleOperationDataMapperTest extends ApplicationTestCase{
-  /*  private CycleOperationDataMapper dataMapper;
+    /*private CycleOperationDataMapper dataMapper;
 
     private static final int FAKE_ID = 34;
     private static final String FAKE_NAME = "gas";
     private static final String FAKE_INTERVAL = CycleOperation.CircleTypes.YEAR.getValue();
 
     @Mock private TransactionEntity entity;
-    @Mock private Transaction transaction;
+    @Mock
+    private Transaction transaction;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private TransactionDataMapper transactionDataMapper;

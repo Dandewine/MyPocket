@@ -11,6 +11,7 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {

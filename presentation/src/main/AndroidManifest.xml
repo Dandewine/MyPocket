@@ -12,6 +12,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".view.activity.SingInActivity" android:theme="@style/AppTheme.Dark">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".view.activity.WalletsActivity"
             android:parentActivityName=".view.activity.DrawerActivity">
@@ -19,23 +27,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.DrawerActivity"/>
         </activity>
-
+        
         <activity
             android:name=".view.activity.AddWalletActivity"/>
 
         <activity
             android:name=".view.activity.AddTransactionActivity"
+
             />
         <activity android:name=".view.activity.AddCycleOperationActivity"/>
 
         <activity
             android:name=".view.activity.DrawerActivity"
             android:theme="@style/AppTheme.Drawer">
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <receiver android:name=".internal.broadcast.CycleOperationBroadcast"

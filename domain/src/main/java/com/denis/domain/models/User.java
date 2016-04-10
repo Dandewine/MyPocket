@@ -1,32 +1,19 @@
-package com.denis.data.entity;
-
-
-
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+package com.denis.domain.models;
 
 /**
- * Created by denis on 1/5/16.
+ * Created by denis on 4/10/16.
  */
-public class UserEntity extends RealmObject {
-    @PrimaryKey
+public class User {
     private String id;
     private String name;
     private String email;
 
-    public UserEntity() {
-    }
-
-    public UserEntity(String id) {
+    public User(String id) {
         this.id = id;
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

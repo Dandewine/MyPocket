@@ -6,7 +6,6 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -26,8 +25,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
@@ -40,15 +42,144 @@ public class DrawerActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout mDrawer;
-    private ViewPager mViewPager;
-    private TabLayout mTabLayout;
     private FloatingActionButton fabTrans, fabCyclic, fabSaves, fabStats, fabAddIncome, fabAddExpense;
 
     private Animation rotate_backward, fab_close, fab_open, rotate_forward;
     private boolean isTransFabOpen;
-
-    private boolean[] currentlyPageShown = {true, false, false, false};
+    private Interpolator interpolatorOpen = new AccelerateInterpolator();
+    private Interpolator interpolatorClose = new DecelerateInterpolator();
+    private boolean[] currentlyPageShown = {true, false, false, false}; //need to indicate which button is showing
     private FloatingActionButton[] fabMassive;
+
+    /**
+     * Listener which need to subscribe to tab selection events
+     */
+    private class OnTabSelectedListener extends TabLayout.ViewPagerOnTabSelectedListener {
+
+        int previousFabIdx = 0;
+
+        public OnTabSelectedListener(ViewPager viewPager) {
+            super(viewPager);
+        }
+
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            super.onTabSelected(tab);
+            Log.d("myTag", "onTabSelected: ");
+            if (currentlyPageShown[previousFabIdx]) { //previous fab is showing
+                if (isTransFabOpen) //fabTrans is showing
+                    animateFAB();
+                playCloseAnimation(fabMassive[previousFabIdx], tab.getPosition()); //close fab with animation
+                currentlyPageShown[previousFabIdx] = false;// fab isn't showing
+            }
+
+            currentlyPageShown[tab.getPosition()] = true;
+            previousFabIdx = tab.getPosition(); //save current idx to previous
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+            Log.d("myTag", "onTabUnselected: ");
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+            Log.d("myTag", "onTabReselected: ");
+        }
+
+        private void playCloseAnimation(View view, int nextBtIdx) {
+
+            AnimatorSet fabCloseSet = new AnimatorSet();
+
+            Animator scaleAnimatorX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0.0f)
+                    .setDuration(300);
+            scaleAnimatorX.setInterpolator(interpolatorClose);
+
+            Animator scaleAnimatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 0.0f)
+                    .setDuration(300);
+            scaleAnimatorY.setInterpolator(interpolatorClose);
+
+            Animator alpha = ObjectAnimator.ofFloat(view, "alpha", 1f, 0.0f)
+                    .setDuration(300);
+            alpha.setInterpolator(interpolatorClose);
+
+            fabCloseSet.playTogether(scaleAnimatorX, scaleAnimatorY, alpha);
+
+            fabCloseSet.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    view.setVisibility(View.GONE);
+                    view.setClickable(false);
+                    playOpenAnimation(fabMassive[nextBtIdx]); //open actual fab with animation
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+
+            fabCloseSet.start();
+        }
+
+        private void playOpenAnimation(View view) {
+            AnimatorSet fabOpenSet = new AnimatorSet();
+
+            Animator scaleAnimatorX = ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f)
+                    .setDuration(300);
+
+            scaleAnimatorX.setInterpolator(interpolatorOpen);
+
+            Animator scaleAnimatorY = ObjectAnimator.ofFloat(view, "scaleY", 0f, 1f)
+                    .setDuration(300);
+            scaleAnimatorY.setInterpolator(interpolatorOpen);
+
+            Animator alpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
+                    .setDuration(300);
+            alpha.setInterpolator(interpolatorOpen);
+
+            fabOpenSet.playTogether(scaleAnimatorX, scaleAnimatorY, alpha);
+
+            fabOpenSet.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    if (fabMassive[previousFabIdx].getVisibility() == View.VISIBLE)
+                        fabMassive[previousFabIdx].setVisibility(View.GONE);
+                    view.setClickable(true);
+                    view.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            fabOpenSet.start();
+
+
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,93 +194,6 @@ public class DrawerActivity extends BaseActivity implements
         bindFabs(binding);
         bindDrawer(binding, toolbar);
         bindTabs(binding);
-    }
-
-    private void playCloseAnimation(View view) {
-        AnimatorSet fabCloseSet = new AnimatorSet();
-
-        Animator scaleAnimatorX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0.0f)
-                .setDuration(300);
-        scaleAnimatorX.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        Animator scaleAnimatorY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 0.0f)
-                .setDuration(300);
-        scaleAnimatorY.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        Animator alpha = ObjectAnimator.ofFloat(view, "alpha", 1f, 0.0f)
-                .setDuration(300);
-        alpha.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        fabCloseSet.playTogether(scaleAnimatorX, scaleAnimatorY, alpha);
-        fabCloseSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        fabCloseSet.start();
-
-
-    }
-
-    private void playOpenAnimation(View view) {
-
-        AnimatorSet fabOpenSet = new AnimatorSet();
-
-        Animator scaleAnimatorX = ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f)
-                .setDuration(300);
-        scaleAnimatorX.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        Animator scaleAnimatorY = ObjectAnimator.ofFloat(view, "scaleY", 0f, 1f)
-                .setDuration(300);
-        scaleAnimatorY.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        Animator alpha = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f)
-                .setDuration(300);
-        alpha.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        fabOpenSet.setStartDelay(400);
-        fabOpenSet.playTogether(scaleAnimatorX, scaleAnimatorY, alpha);
-
-        fabOpenSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                view.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        fabOpenSet.start();
-
-
     }
 
     public void initAnimations() {
@@ -169,6 +213,9 @@ public class DrawerActivity extends BaseActivity implements
         fabAddIncome = binding.content.addIncomeTrans;
 
         fabTrans.setOnClickListener(this);
+        fabStats.setOnClickListener(this);
+        fabSaves.setOnClickListener(this);
+        fabCyclic.setOnClickListener(this);
 
         fabAddExpense.setOnClickListener(this);
         fabAddIncome.setOnClickListener(this);
@@ -254,15 +301,14 @@ public class DrawerActivity extends BaseActivity implements
     }
 
     private void bindTabs(ActivityDrawerBinding binding) {
-        mTabLayout = binding.content.tabs;
-        mViewPager = binding.content.viewPagerContainer;
+        TabLayout tabLayout = binding.content.tabs;
 
+        ViewPager viewPager = binding.content.viewPagerContainer;
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
 
-        mViewPager.addOnPageChangeListener(pageChangeListener);
-
-        mTabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setOnTabSelectedListener(new OnTabSelectedListener(viewPager));
     }
 
     private void bindDrawer(ActivityDrawerBinding binding, Toolbar toolbar) {
@@ -315,10 +361,6 @@ public class DrawerActivity extends BaseActivity implements
      */
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-        @DrawableRes
-        int[] tabsIndicators = {R.drawable.ic_menu_camera,
-                R.drawable.vector_cycle, R.drawable.vector_saves, R.drawable.vector_wallet};
-
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -347,13 +389,6 @@ public class DrawerActivity extends BaseActivity implements
         @Override
         public CharSequence getPageTitle(int position) {
 
-            /*Drawable vectorDrawable = ContextCompat.getDrawable(DrawerActivity.this,tabsIndicators[position]);
-            vectorDrawable.setBounds(0,0, 24, 24);
-            SpannableString sb = new SpannableString(" "+position);
-            ImageSpan imageSpan = new ImageSpan(vectorDrawable, ImageSpan.ALIGN_BOTTOM);
-            sb.setSpan(imageSpan,0,1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return sb;*/
-
             switch (position) {
                 case 0:
                     return "Trans";
@@ -371,34 +406,4 @@ public class DrawerActivity extends BaseActivity implements
 
     }
 
-    /**
-     * A {@link ViewPager.OnPageChangeListener} where fabs animations will fire
-     */
-    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        int previousFabIdx = 0;
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (currentlyPageShown[previousFabIdx]) {
-                playCloseAnimation(fabMassive[previousFabIdx]);
-                currentlyPageShown[previousFabIdx] = false;
-            }
-            currentlyPageShown[position] = true;
-            playOpenAnimation(fabMassive[position]);
-
-            Log.d("myTag", "current = " + position);
-            Log.d("myTag", "prev = " + previousFabIdx);
-            previousFabIdx = position;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 }

@@ -17,6 +17,8 @@ android {
         versionName globalConfiguration.getAt("androidVersionName")
         testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
         testApplicationId globalConfiguration.getAt("testApplicationId")
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
