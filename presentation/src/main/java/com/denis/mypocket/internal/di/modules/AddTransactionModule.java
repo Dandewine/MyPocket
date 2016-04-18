@@ -30,7 +30,7 @@ import dagger.Provides;
 import io.realm.Realm;
 
 @Module(includes = {IncomeCategoryModule.class,
-        ExpenseCategoryModule.class, WalletModule.class, ActivityModule.class})
+        ExpenseCategoryModule.class, AddWalletModule.class, ActivityModule.class})
 public class AddTransactionModule {
 
     public AddTransactionModule() {

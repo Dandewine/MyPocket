@@ -51,7 +51,9 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
+    compile dataDependencies.gsonconverter
 
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     retrolambdaConfig dataDependencies.lambda
 
     testCompile testDependencies.junit

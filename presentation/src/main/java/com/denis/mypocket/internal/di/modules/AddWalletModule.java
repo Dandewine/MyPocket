@@ -25,8 +25,8 @@ import dagger.Provides;
 import io.realm.Realm;
 
 @Module
-public class WalletModule {
-    public WalletModule() {
+public class AddWalletModule {
+    public AddWalletModule() {
         Log.d(PLTags.INSTANCE_TAG,"Wallet Module, "+hashCode());
     }
 

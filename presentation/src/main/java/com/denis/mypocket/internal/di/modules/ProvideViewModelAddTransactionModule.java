@@ -12,7 +12,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module(includes = ActivityModule.class)
-public class ProvideViewModelAddTransactionModule extends AddTransactionModule{
+public class ProvideViewModelAddTransactionModule extends AddTransactionModule {
 
     private boolean isIncome;
 

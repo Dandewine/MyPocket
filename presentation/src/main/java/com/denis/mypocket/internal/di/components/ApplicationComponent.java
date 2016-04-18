@@ -2,6 +2,7 @@ package com.denis.mypocket.internal.di.components;
 
 import android.content.Context;
 
+import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.mypocket.internal.di.modules.ApplicationModule;
@@ -24,4 +25,5 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
     Realm realm();
+    RestClient restClient();
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.denis.data.executor.JobExecutor;
+import com.denis.data.rest.RestClientRetrofit;
+import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.mypocket.MyPocketApp;
@@ -30,7 +32,6 @@ public class ApplicationModule {
         return this.pocketApp;
     }
 
-
     @Provides @Singleton
     ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
         return jobExecutor;
@@ -43,6 +44,11 @@ public class ApplicationModule {
 
     @Provides @Singleton Realm provideRealm(){
         return Realm.getDefaultInstance();
+    }
+
+    @Provides @Singleton
+    RestClient provideRestClient(){
+        return new RestClientRetrofit();
     }
 
 

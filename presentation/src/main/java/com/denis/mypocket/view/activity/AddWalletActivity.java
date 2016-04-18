@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddWalletBinding;
 import com.denis.mypocket.internal.di.components.DaggerWalletsComponent;
-import com.denis.mypocket.internal.di.modules.WalletModule;
+import com.denis.mypocket.internal.di.modules.AddWalletModule;
 import com.denis.mypocket.viewmodel.adding.AddWalletViewModel;
 
 import javax.inject.Inject;
@@ -40,7 +40,7 @@ public class AddWalletActivity extends BaseActivity{
         DaggerWalletsComponent.builder()
                 .activityModule(getActivityModule())
                 .applicationComponent(getApplicationComponent())
-                .walletModule(new WalletModule())
+               // .walletModule(new AddWalletModule())
                 .build().inject(this);
     }
 

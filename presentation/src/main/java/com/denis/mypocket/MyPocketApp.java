@@ -12,6 +12,7 @@ import io.realm.RealmConfiguration;
 public class MyPocketApp extends Application {
     private ApplicationComponent component;
     private static MyPocketApp pocketApp;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,16 +27,18 @@ public class MyPocketApp extends Application {
         return pocketApp;
     }
 
-    private void initializeInjector(){
+    private void initializeInjector() {
         component = DaggerApplicationComponent
                 .builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
     }
-    private void configureRealm(){
+
+    private void configureRealm() {
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }
+
     public ApplicationComponent getApplicationComponent() {
         return component;
     }
