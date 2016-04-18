@@ -1,5 +1,7 @@
 package com.denis.mypocket.internal.di.modules;
 
+import com.denis.data.entity.UserEntity;
+import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.entity.mapper.UserDataMapper;
 import com.denis.data.repository.UserDataStoreRepository;
 import com.denis.data.repository.datasource.cloud.UserCloudDataStore;
@@ -15,6 +17,8 @@ import com.denis.domain.repository.UserRepository;
 import com.denis.mypocket.viewmodel.RegistrationViewModel;
 
 import com.denis.mypocket.internal.di.PerActivity;
+
+import java.util.Map;
 
 import dagger.Module;
 import dagger.Provides;
@@ -45,7 +49,11 @@ public class RegistrationModule {
     }
 
     @Provides @PerActivity
-    UserDataStore provideUserDataStore(RestClient restClient){
-        return new UserCloudDataStore(restClient.create(AuthService.class));
+    UserDataStore provideUserDataStore(RestClient restClient, EntityMapper<UserEntity,User> mapper){
+        return new UserCloudDataStore(restClient.create(AuthService.class),mapper);
+    }
+
+    @Provides @PerActivity EntityMapper<UserEntity, User> provideMapper(){
+        return new UserDataMapper();
     }
 }

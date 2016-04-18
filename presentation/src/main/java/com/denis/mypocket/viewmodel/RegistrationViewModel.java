@@ -37,8 +37,9 @@ public class RegistrationViewModel implements ViewModel {
 
     private User getUserTest() {
         User user = new User();
-        user.setEmail("test@test.com");
-        user.setName("hello");
+        user.setEmail("superman@gmail.com");
+        user.setName("Clark");
+        user.setPassword("superman");
 
         return user;
     }

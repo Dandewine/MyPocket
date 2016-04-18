@@ -15,6 +15,6 @@ public class UserCloudDataStoreTest extends ApplicationTestCase {
     @Before
     public void setUp(){
 
-        userCloudDataStore = new UserCloudDataStore(authService);
+        //userCloudDataStore = new UserCloudDataStore(authService,);
     }
 }

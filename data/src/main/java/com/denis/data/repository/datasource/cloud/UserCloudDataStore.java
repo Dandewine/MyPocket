@@ -1,10 +1,11 @@
 package com.denis.data.repository.datasource.cloud;
 
 import com.denis.data.entity.UserEntity;
+import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 import com.denis.data.rest.AuthService;
+import com.denis.domain.models.User;
 import com.google.gson.Gson;
-
 
 import java.io.IOException;
 
@@ -12,6 +13,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Observable;
 
 /**
@@ -21,10 +24,12 @@ import rx.Observable;
 public class UserCloudDataStore implements UserDataStore {
 
     private AuthService authService;
+    private EntityMapper<UserEntity, User> mapper;
 
     @Inject
-    public UserCloudDataStore(AuthService authService) {
+    public UserCloudDataStore(AuthService authService, EntityMapper<UserEntity, User> mapper) {
         this.authService = authService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -33,16 +38,25 @@ public class UserCloudDataStore implements UserDataStore {
     }
 
     @Override
-    public Observable<UserEntity> put(UserEntity userEntity){
-        Gson gson = new Gson();
-        String body = gson.toJson(userEntity);
+    public Observable<UserEntity> put(UserEntity userEntity) {
+        User user = mapper.fromEntity(userEntity);
+
+        String body = new Gson().toJson(user);
         Call<Void> call = authService.registerUser(body);
 
-        try {
-            call.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+
+                }
+            });
+
         return Observable.just(userEntity);
     }
 }
