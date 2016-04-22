@@ -45,17 +45,9 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-   <!-- <style name="Theme.Transparent.MyDemo" parent="AppTheme">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="windowActionBar">false</item>
-    </style>-->
+    <style name="errorAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/errorRegColor</item>
+    </style>
 
 
 </resources>

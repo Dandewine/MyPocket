@@ -1,5 +1,7 @@
 package com.denis.mypocket.internal.di.modules;
 
+import android.content.Context;
+
 import com.denis.data.entity.UserEntity;
 import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.entity.mapper.UserDataMapper;
@@ -29,8 +31,8 @@ import dagger.Provides;
 @Module
 public class RegistrationModule {
     @Provides @PerActivity
-    RegistrationViewModel registrationViewModel(UseCase<User> regUserCase){
-        return new RegistrationViewModel(regUserCase);
+    RegistrationViewModel registrationViewModel(UseCase<User> regUserCase, Context context){
+        return new RegistrationViewModel(regUserCase, context);
     }
 
     @Provides @PerActivity

@@ -7,15 +7,15 @@ import com.denis.data.rest.AuthService;
 import com.denis.domain.models.User;
 import com.google.gson.Gson;
 
+
 import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by denis on 4/15/16.
@@ -42,21 +42,26 @@ public class UserCloudDataStore implements UserDataStore {
         User user = mapper.fromEntity(userEntity);
 
         String body = new Gson().toJson(user);
-        Call<Void> call = authService.registerUser(body);
+        authService.registerUser(body).subscribe(new Subscriber<Call>() {
+            @Override
+            public void onCompleted() {
 
+            }
 
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+            @Override
+            public void onError(Throwable e) {
 
+            }
+
+            @Override
+            public void onNext(Call call) {
+                try {
+                    call.execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-
-                }
-            });
-
+            }
+        });
         return Observable.just(userEntity);
     }
 }

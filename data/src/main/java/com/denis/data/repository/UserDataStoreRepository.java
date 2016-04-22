@@ -7,6 +7,8 @@ import com.denis.domain.models.User;
 import com.denis.domain.repository.UserRepository;
 
 import rx.Observable;
+import rx.Scheduler;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by denis on 4/10/16.
@@ -30,7 +32,7 @@ public class UserDataStoreRepository implements UserRepository {
     @Override
     public Observable<User> addUser(User user) {
         UserEntity entity = userDataMapper.toEntity(user);
-        return userDataStore.put(entity)
-                .map(userDataMapper::fromEntity);
+        userDataStore.put(entity);
+        return Observable.just(user);
     }
 }

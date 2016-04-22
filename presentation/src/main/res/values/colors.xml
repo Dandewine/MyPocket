@@ -33,4 +33,6 @@
     <color name="iron">#CCCCCC</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="errorRegColor">#FF5722</color>
+
 </resources>

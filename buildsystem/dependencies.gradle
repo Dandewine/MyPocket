@@ -13,12 +13,12 @@ ext {
 
     //libraries
     daggerVersion = '2.0.2'
-    supportLibVersion = '23.2.1'
+    supportLibVersion = '23.3.0'
     rxJavaVersion = '1.0.14'
     rxAndroidVersion = '1.0.1'
     javaxAnnotationVersion = '1.0'
     realmVersion = '0.87.4'
-    androidAnnotationsVersion = '21.0.3'
+    androidAnnotationsVersion = '23.3.0'
     retrolambdaVersion = '2.0.6'
     retrofit = '2.0.1'
 
@@ -81,7 +81,8 @@ ext {
             realm             : "io.realm:realm-android:${realmVersion}",
             lambda            : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
             retrofit          : "compile 'com.squareup.retrofit2:retrofit:${retrofit}",
-            gsonconverter     : "com.squareup.retrofit2:converter-gson:${retrofit}"
+            gsonconverter     : "com.squareup.retrofit2:converter-gson:${retrofit}",
+            retrofitrx : "com.squareup.retrofit2:adapter-rxjava:${retrofit}",
     ]
 
     dataTestDependencies = [
