@@ -2,7 +2,10 @@ package com.denis.mypocket.viewmodel;
 
 
 import android.content.Context;
+import android.databinding.ObservableByte;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,8 +16,10 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
 
+import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.view.activity.SigInActivity;
 
 import java.util.regex.Pattern;
 
@@ -26,11 +31,12 @@ import javax.inject.Inject;
 @PerActivity
 public class RegistrationViewModel implements ViewModel {
 
-    private UseCase<User> loginUseCase;
+    private UseCase<User> registrationUseCase;
 
     public ObservableField<String> userNameError = new ObservableField<>();
     public ObservableField<String> emailError = new ObservableField<>();
     public ObservableField<String> passwordError = new ObservableField<>();
+
 
     public boolean isUsernameValid;
     public boolean isPasswordValid;
@@ -40,22 +46,28 @@ public class RegistrationViewModel implements ViewModel {
     public String email = "";
     public String password = "";
 
-    private Context context;
+    public ObservableInt prorgessBarVisibility = new ObservableInt(View.GONE);
 
+    private Context context;
+    //cause for this callback that android sdk has a problem with InputTextLayout error handling
+    //they make errors invisible after successful validation, so we will have blank spaces under the edittext
+    //solution is to crete your own TIL with setErrorEnabled method and call it with false parameter.
     private ClearBlankSpaceCallback blankSpaceCallback;
-    //private boolean isUserNameValidate, isEmailValidate, isPasswordValidate;
 
     @Inject
-    public RegistrationViewModel(UseCase<User> loginUseCase, Context context) {
-        this.loginUseCase = loginUseCase;
+    public RegistrationViewModel(UseCase<User> registrationUseCase, Context context) {
+        this.registrationUseCase = registrationUseCase;
         this.context = context;
     }
 
     public View.OnClickListener onClick = v -> execute();
 
     private void execute() {
-        //User user = getUserTest();
-        //loginUseCase.executeAsync(new RegistrationSubscriber(), user);
+        if (isPasswordValid && isUsernameValid && isEmailValid) {
+            prorgessBarVisibility.set(View.VISIBLE);
+            User user = getUserTest();
+            registrationUseCase.executeAsync(new RegistrationSubscriber(), user);
+        }
     }
 
     private void validateUserName() {
@@ -137,7 +149,7 @@ public class RegistrationViewModel implements ViewModel {
 
     @Override
     public void destroy() {
-        loginUseCase.unSubscribe();
+        registrationUseCase.unSubscribe();
     }
 
 
@@ -155,6 +167,9 @@ public class RegistrationViewModel implements ViewModel {
         @Override
         public void onNext(User user) {
             Log.d("myTag", "onNext: " + user.getName());
+            Bundle bundle = new Bundle();
+            bundle.putString(PLConstants.EMAIL_INTENT,email);
+            SigInActivity.toSignInActivity(context,bundle);
         }
     }
 

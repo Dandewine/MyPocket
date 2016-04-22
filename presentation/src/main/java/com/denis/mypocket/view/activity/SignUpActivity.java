@@ -17,7 +17,8 @@ import javax.inject.Inject;
  */
 public class SignUpActivity extends BaseActivity implements RegistrationViewModel.ClearBlankSpaceCallback {
 
-    @Inject public RegistrationViewModel viewModel;
+    @Inject
+    public RegistrationViewModel viewModel;
     private ActivitySignupBinding binding;
 
     @Override
@@ -44,8 +45,8 @@ public class SignUpActivity extends BaseActivity implements RegistrationViewMode
 
     @Override
     public void clear() {
-        binding.textInputLayoutPassword.setErrorEnabled(!viewModel.isPasswordValid);
-        binding.textInputLatourName.setErrorEnabled(!viewModel.isUsernameValid);
-        binding.textInputLayoutEmail.setErrorEnabled(!viewModel.isEmailValid);
+        binding.textInputLayoutPasswordAS.setErrorEnabled(!viewModel.isPasswordValid);
+        binding.textInputLatourNameAS.setErrorEnabled(!viewModel.isUsernameValid);
+        binding.textInputLayoutEmailAS.setErrorEnabled(!viewModel.isEmailValid);
     }
 }
