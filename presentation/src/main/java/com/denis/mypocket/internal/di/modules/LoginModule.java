@@ -1,5 +1,7 @@
 package com.denis.mypocket.internal.di.modules;
 
+import android.content.Context;
+
 import com.denis.data.entity.mapper.UserDataMapper;
 import com.denis.data.repository.UserDataStoreRepository;
 import com.denis.data.repository.datasource.cloud.UserCloudDataStore;
@@ -23,8 +25,8 @@ import dagger.Provides;
 @Module
 public class LoginModule {
 
-    @Provides @PerActivity LoginViewModel provideViewModel(UseCase<String> loginUseCase){
-        return new LoginViewModel(loginUseCase);
+    @Provides @PerActivity LoginViewModel provideViewModel(UseCase<String> loginUseCase, Context context){
+        return new LoginViewModel(loginUseCase,context);
     }
 
     @Provides @PerActivity UseCase<String> providUseCase(ThreadExecutor executor, PostExecutionThread thread, UserRepository repository){
