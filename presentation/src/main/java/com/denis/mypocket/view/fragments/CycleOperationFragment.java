@@ -1,11 +1,8 @@
 package com.denis.mypocket.view.fragments;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,6 @@ import android.view.ViewGroup;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentCycleOperationBinding;
 import com.denis.mypocket.internal.di.components.DaggerGetCycleOpComponent;
-import com.denis.mypocket.view.activity.AddCycleOperationActivity;
 import com.denis.mypocket.viewmodel.getting.GetCycleOperationViewModel;
 
 import javax.inject.Inject;

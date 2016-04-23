@@ -1,16 +1,22 @@
 package com.denis.mypocket.model;
 
-import android.databinding.ObservableField;
 
 /**
  * Created by denis on 12/20/15.
  */
 public class UserModel {
-    public ObservableField<String> name = new ObservableField<>();
-    public ObservableField<String> email = new ObservableField<>();
+    private String login;
+    private String email;
+    private String password;
 
-    public UserModel(String name, String email) {
-        this.name.set(name);
-        this.email.set(email);
+    public UserModel(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public UserModel(String login, String email, String password) {
+        this.login = login;
+        this.email = email;
+        this.password = password;
     }
 }

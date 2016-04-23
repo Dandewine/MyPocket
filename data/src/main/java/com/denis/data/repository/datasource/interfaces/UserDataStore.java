@@ -14,8 +14,11 @@ public interface UserDataStore {
      * @param categoryId The id to retrieve wallet data.
      */
     Observable<UserEntity> getUserEntity(final int categoryId);
+
+
+    Observable<String> getUserEntity(String body);
     /**
      * Get an {@link rx.Observable} which will emit a {@link UserEntity}.
      */
-    Observable<UserEntity> put(UserEntity UserEntity);
+    Observable<UserEntity> put(UserEntity userEntity);
 }

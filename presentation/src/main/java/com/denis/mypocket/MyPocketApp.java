@@ -19,8 +19,6 @@ public class MyPocketApp extends Application {
         initializeInjector();
         configureRealm();
         pocketApp = this;
-
-
     }
 
     public static MyPocketApp getPocketApp() {

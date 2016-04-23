@@ -8,13 +8,18 @@ import com.denis.domain.models.User;
 import com.google.gson.Gson;
 
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Observable;
+import rx.Observer;
 import rx.Subscriber;
 
 /**
@@ -34,34 +39,36 @@ public class UserCloudDataStore implements UserDataStore {
 
     @Override
     public Observable<UserEntity> getUserEntity(int categoryId) {
-        return null;
+        throw new UnsupportedOperationException("Can't do this");
     }
 
     @Override
+    public Observable<String> getUserEntity(String body) {
+        Response response;
+
+        try {
+            response = authService.loginUser(body).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Observable.just(null);
+    }
+
+    @Override @SuppressWarnings("null")
     public Observable<UserEntity> put(UserEntity userEntity) {
+        Response response = null;
         User user = mapper.fromEntity(userEntity);
-
         String body = new Gson().toJson(user);
-        authService.registerUser(body).subscribe(new Subscriber<Call>() {
-            @Override
-            public void onCompleted() {
+        Call call = authService.registerUser(body);
 
-            }
+        try {
+           response = call.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Call call) {
-                try {
-                    call.execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return Observable.just(userEntity);
+        return Observable.just(
+                (response != null ? response.code() : 0) == 201 ? userEntity : null
+        );
     }
 }

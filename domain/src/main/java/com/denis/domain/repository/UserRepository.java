@@ -22,4 +22,7 @@ public interface UserRepository {
      */
 
     Observable<User> addUser(User user);
+
+
+    Observable getUser(String body);
 }

@@ -6,11 +6,13 @@ import android.databinding.ObservableByte;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
@@ -51,7 +53,7 @@ public class RegistrationViewModel implements ViewModel {
     private Context context;
     //cause for this callback that android sdk has a problem with InputTextLayout error handling
     //they make errors invisible after successful validation, so we will have blank spaces under the edittext
-    //solution is to crete your own TIL with setErrorEnabled method and call it with false parameter.
+    //solution is to crete your own TIL with setErrorEnabled method and call it with false parameter after successful validation
     private ClearBlankSpaceCallback blankSpaceCallback;
 
     @Inject
@@ -156,20 +158,24 @@ public class RegistrationViewModel implements ViewModel {
     private class RegistrationSubscriber extends DefaultSubscriber<User> {
         @Override
         public void onCompleted() {
-
+            prorgessBarVisibility.set(View.GONE);
         }
 
         @Override
         public void onError(Throwable e) {
             super.onError(e);
+            prorgessBarVisibility.set(View.GONE);
         }
 
         @Override
         public void onNext(User user) {
-            Log.d("myTag", "onNext: " + user.getName());
-            Bundle bundle = new Bundle();
-            bundle.putString(PLConstants.EMAIL_INTENT,email);
-            SigInActivity.toSignInActivity(context,bundle);
+            prorgessBarVisibility.set(View.GONE);
+            if (user != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString(PLConstants.EMAIL_INTENT, email);
+                context.startActivity(SigInActivity.getCallingIntent(context, bundle));
+            }else
+            Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
         }
     }
 

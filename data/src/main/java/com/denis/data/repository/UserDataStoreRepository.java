@@ -32,7 +32,12 @@ public class UserDataStoreRepository implements UserRepository {
     @Override
     public Observable<User> addUser(User user) {
         UserEntity entity = userDataMapper.toEntity(user);
-        userDataStore.put(entity);
-        return Observable.just(user);
+        return userDataStore.put(entity)
+                .map(userDataMapper::fromEntity);
+    }
+
+    @Override
+    public Observable<String> getUser(String body) {
+        return userDataStore.getUserEntity(body);
     }
 }

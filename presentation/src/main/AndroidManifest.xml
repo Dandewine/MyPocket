@@ -51,7 +51,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.activity.SigInActivity">
+        <activity
+            android:name=".view.activity.SigInActivity"
+            android:theme="@style/AppTheme.Dark">
         </activity>
     </application>
 

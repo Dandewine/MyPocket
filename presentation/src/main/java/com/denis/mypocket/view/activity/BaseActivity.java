@@ -7,19 +7,25 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.denis.mypocket.AppNavigator;
 import com.denis.mypocket.MyPocketApp;
 import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
 
+import javax.inject.Inject;
+
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected ApplicationComponent applicationComponent;
+    //AppNavigator navigator;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initDIComponent();
         super.onCreate(savedInstanceState);
         applicationComponent = getApplicationComponent();
+        applicationComponent.inject(this);
     }
 
     /**

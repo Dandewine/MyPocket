@@ -3,19 +3,23 @@ package com.denis.domain.interactor;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.models.User;
+import com.denis.domain.repository.UserRepository;
 
 import rx.Observable;
 
 /**
  * Created by denis on 4/22/16.
  */
-public class LoginUseCase extends UseCase<User> {
-    public LoginUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+public class LoginUseCase extends UseCase<String> {
+    private UserRepository userRepository;
+
+    public LoginUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, UserRepository repository) {
         super(threadExecutor, postExecutionThread);
+        this.userRepository = repository;
     }
 
     @Override
-    protected Observable buildUseCaseObservable(User... arg) {
-        return null;
+    protected Observable buildUseCaseObservable(String... arg) {
+        return userRepository.getUser(arg[0]);
     }
 }
