@@ -22,16 +22,18 @@ import com.denis.mypocket.internal.di.PerActivity;
 
 import java.util.Map;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
 /**
  * Created by denis on 4/15/16.
  */
-@Module
+@Module(includes = ActivityModule.class)
 public class RegistrationModule {
     @Provides @PerActivity
-    RegistrationViewModel registrationViewModel(UseCase<User> regUserCase, Context context){
+    RegistrationViewModel registrationViewModel(UseCase<User> regUserCase, @Named("activity") Context context){
         return new RegistrationViewModel(regUserCase, context);
     }
 

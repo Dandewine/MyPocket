@@ -1,5 +1,7 @@
 package com.denis.mypocket.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +23,10 @@ public class SignUpActivity extends BaseActivity implements RegistrationViewMode
     public RegistrationViewModel viewModel;
     private ActivitySignupBinding binding;
 
+    public static Intent getCallingIntent(Context context){
+        return new Intent(context, SignUpActivity.class);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,7 @@ public class SignUpActivity extends BaseActivity implements RegistrationViewMode
         DaggerRegistrationComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .registrationModule(new RegistrationModule())
+                .activityModule(getActivityModule())
                 .build().inject(this);
     }
 

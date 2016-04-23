@@ -1,7 +1,9 @@
 package com.denis.mypocket.viewmodel;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableByte;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
@@ -63,6 +65,8 @@ public class RegistrationViewModel implements ViewModel {
     }
 
     public View.OnClickListener onClick = v -> execute();
+
+    public View.OnClickListener gotoLogin = v -> ((Activity) context).finish();
 
     private void execute() {
         if (isPasswordValid && isUsernameValid && isEmailValid) {
@@ -174,8 +178,8 @@ public class RegistrationViewModel implements ViewModel {
                 Bundle bundle = new Bundle();
                 bundle.putString(PLConstants.EMAIL_INTENT, email);
                 context.startActivity(SigInActivity.getCallingIntent(context, bundle));
-            }else
-            Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(context, "Probably user already exists, or problem with internet connection", Toast.LENGTH_SHORT).show();
         }
     }
 

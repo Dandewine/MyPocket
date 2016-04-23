@@ -16,16 +16,18 @@ import com.denis.domain.repository.UserRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.viewmodel.LoginViewModel;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
 /**
  * Created by denis on 4/23/16.
  */
-@Module
+@Module(includes = ActivityModule.class)
 public class LoginModule {
 
-    @Provides @PerActivity LoginViewModel provideViewModel(UseCase<String> loginUseCase, Context context){
+    @Provides @PerActivity LoginViewModel provideViewModel(UseCase<String> loginUseCase, @Named("activity") Context context){
         return new LoginViewModel(loginUseCase,context);
     }
 

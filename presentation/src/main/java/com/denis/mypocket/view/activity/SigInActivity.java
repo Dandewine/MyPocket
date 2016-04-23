@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityLoginBinding;
 import com.denis.mypocket.internal.di.components.DaggerLoginComponent;
@@ -17,13 +18,14 @@ import javax.inject.Inject;
 
 public class SigInActivity extends BaseActivity {
 
-    @Inject LoginViewModel viewModel;
+    @Inject
+    LoginViewModel viewModel;
 
     public static Intent getCallingIntent(Context context, @Nullable Bundle bundle) {
         Intent intent = new Intent(context, SigInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (bundle != null)
-            intent.putExtra(SigInActivity.class.getName(), bundle);
+            intent.putExtra(PLConstants.EMAIL_INTENT, bundle);
         return intent;
     }
 
@@ -31,7 +33,12 @@ public class SigInActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+
+        Bundle bundle = getIntent().getBundleExtra(PLConstants.EMAIL_INTENT);
+        if (bundle != null)
+            viewModel.email = bundle.getString(PLConstants.EMAIL_INTENT);
+
         binding.setViewModel(viewModel);
     }
 
@@ -39,7 +46,13 @@ public class SigInActivity extends BaseActivity {
     protected void initDIComponent() {
         DaggerLoginComponent.builder()
                 .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
                 .loginModule(new LoginModule())
                 .build().inject(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
