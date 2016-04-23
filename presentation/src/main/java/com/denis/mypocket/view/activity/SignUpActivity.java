@@ -10,7 +10,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivitySignupBinding;
 import com.denis.mypocket.internal.di.components.DaggerRegistrationComponent;
 import com.denis.mypocket.internal.di.modules.RegistrationModule;
-import com.denis.mypocket.viewmodel.RegistrationViewModel;
+import com.denis.mypocket.viewmodel.auth.RegistrationViewModel;
 
 import javax.inject.Inject;
 

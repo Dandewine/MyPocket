@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.denis.mypocket.PLConstants;
@@ -12,7 +11,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityLoginBinding;
 import com.denis.mypocket.internal.di.components.DaggerLoginComponent;
 import com.denis.mypocket.internal.di.modules.LoginModule;
-import com.denis.mypocket.viewmodel.LoginViewModel;
+import com.denis.mypocket.viewmodel.auth.LoginViewModel;
 
 import javax.inject.Inject;
 

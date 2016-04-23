@@ -16,11 +16,9 @@ import com.denis.domain.interactor.RegistrationUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
 import com.denis.domain.repository.UserRepository;
-import com.denis.mypocket.viewmodel.RegistrationViewModel;
+import com.denis.mypocket.viewmodel.auth.RegistrationViewModel;
 
 import com.denis.mypocket.internal.di.PerActivity;
-
-import java.util.Map;
 
 import javax.inject.Named;
 

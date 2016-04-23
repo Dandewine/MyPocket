@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.mypocket.viewmodel.auth;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,7 @@ import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.view.activity.SigInActivity;
 import com.denis.mypocket.view.activity.SignUpActivity;
+import com.denis.mypocket.viewmodel.ViewModel;
 import com.google.gson.Gson;
 
 /**

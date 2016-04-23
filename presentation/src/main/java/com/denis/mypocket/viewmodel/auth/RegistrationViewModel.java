@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.mypocket.viewmodel.auth;
 
 
 import android.app.Activity;
@@ -24,6 +24,7 @@ import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.view.activity.SigInActivity;
+import com.denis.mypocket.viewmodel.ViewModel;
 
 import java.util.regex.Pattern;
 

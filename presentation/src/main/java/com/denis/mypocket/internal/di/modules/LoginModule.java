@@ -14,7 +14,7 @@ import com.denis.domain.interactor.LoginUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.repository.UserRepository;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.viewmodel.LoginViewModel;
+import com.denis.mypocket.viewmodel.auth.LoginViewModel;
 
 import javax.inject.Named;
 

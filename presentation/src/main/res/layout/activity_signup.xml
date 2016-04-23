@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.RegistrationViewModel"/>
+            type="com.denis.mypocket.viewmodel.auth.RegistrationViewModel"/>
     </data>
 
     <ScrollView
