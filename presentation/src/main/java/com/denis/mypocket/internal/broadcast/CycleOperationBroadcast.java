@@ -9,7 +9,7 @@ import com.denis.domain.interactor.cycle_operations.AddCircleOperationUseCase;
 import com.denis.domain.models.CycleOperation;
 import com.denis.mypocket.MyPocketApp;
 import com.denis.mypocket.internal.di.components.ApplicationComponent;
-import com.denis.mypocket.internal.di.components.DaggerAddCycleOPComponent;
+import com.denis.mypocket.internal.di.components.activity.DaggerAddCycleOPComponent;
 
 import javax.inject.Inject;
 

@@ -1,6 +1,7 @@
-package com.denis.mypocket.internal.di.components;
+package com.denis.mypocket.internal.di.components.fragment;
 
 import com.denis.mypocket.internal.di.PerFragment;
+import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.modules.GetCycleOperationViewModelModule;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 

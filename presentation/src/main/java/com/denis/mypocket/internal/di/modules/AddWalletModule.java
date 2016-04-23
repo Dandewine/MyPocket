@@ -63,4 +63,6 @@ public class AddWalletModule {
         return new GetWalletsUseCase(threadExecutor,postExecutionThread,repository);
     }
 
+
+
 }

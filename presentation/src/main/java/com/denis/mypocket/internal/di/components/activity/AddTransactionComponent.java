@@ -1,6 +1,7 @@
-package com.denis.mypocket.internal.di.components;
+package com.denis.mypocket.internal.di.components.activity;
 
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.modules.ProvideViewModelAddTransactionModule;
 import com.denis.mypocket.view.activity.AddTransactionActivity;
 
