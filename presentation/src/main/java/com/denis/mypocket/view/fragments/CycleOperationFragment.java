@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentCycleOperationBinding;
-import com.denis.mypocket.internal.di.components.DaggerGetCycleOpComponent;
 import com.denis.mypocket.viewmodel.getting.GetCycleOperationViewModel;
 
 import javax.inject.Inject;
@@ -46,9 +45,9 @@ public class CycleOperationFragment extends BaseFragment {
 
     @Override
     protected void initDI() {
-        DaggerGetCycleOpComponent.builder()
+       /* DaggerGetCycleOpComponent.builder()
                 .applicationComponent(getBaseActivity().getApplicationComponent())
-                .build().inject(this);
+                .build().inject(this);*/
     }
 
     @Override

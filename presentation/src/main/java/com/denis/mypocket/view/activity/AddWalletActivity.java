@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddWalletBinding;
 import com.denis.mypocket.internal.di.components.DaggerWalletsComponent;
-import com.denis.mypocket.internal.di.modules.AddWalletModule;
 import com.denis.mypocket.viewmodel.adding.AddWalletViewModel;
 
 import javax.inject.Inject;

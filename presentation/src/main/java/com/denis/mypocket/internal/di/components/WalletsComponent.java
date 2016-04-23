@@ -1,6 +1,7 @@
 package com.denis.mypocket.internal.di.components;
 
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.internal.di.components.activity.ActivityComponent;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
 import com.denis.mypocket.internal.di.modules.AddWalletModule;
 import com.denis.mypocket.view.activity.AddWalletActivity;
