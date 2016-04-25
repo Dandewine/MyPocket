@@ -17,7 +17,7 @@ ext {
     rxJavaVersion = '1.0.14'
     rxAndroidVersion = '1.0.1'
     javaxAnnotationVersion = '1.0'
-    realmVersion = '0.87.4'
+    realmVersion = '0.89.0'
     androidAnnotationsVersion = '23.3.0'
     retrolambdaVersion = '2.0.6'
     retrofit = '2.0.1'
@@ -78,7 +78,7 @@ ext {
             rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
             javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
-            realm             : "io.realm:realm-android:${realmVersion}",
+          //  realm             : "io.realm:realm-android:${realmVersion}",
             lambda            : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
             retrofit          : "compile 'com.squareup.retrofit2:retrofit:${retrofit}",
             gsonconverter     : "com.squareup.retrofit2:converter-gson:${retrofit}",

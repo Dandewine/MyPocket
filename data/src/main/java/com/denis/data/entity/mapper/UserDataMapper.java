@@ -23,7 +23,7 @@ public class UserDataMapper implements EntityMapper<UserEntity, User> {
         if (user != null) {
             entity = new UserEntity(user.getId());
             entity.setEmail(user.getEmail());
-            entity.setName(user.getName());
+            entity.setName(user.getUsername());
             entity.setPassword(user.getPassword());
         }
         return entity;
@@ -48,7 +48,7 @@ public class UserDataMapper implements EntityMapper<UserEntity, User> {
         if (model != null) {
             user = new User(model.getId());
             user.setEmail(model.getEmail());
-            user.setName(model.getName());
+            user.setUsername(model.getName());
             user.setPassword(model.getPassword());
         }
         return user;

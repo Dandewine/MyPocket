@@ -3,6 +3,7 @@ package com.denis.mypocket.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -50,6 +51,11 @@ public class DrawerActivity extends BaseActivity implements
     private Interpolator interpolatorClose = new DecelerateInterpolator();
     private boolean[] currentlyPageShown = {true, false, false, false}; //need to indicate which button is showing
     private FloatingActionButton[] fabMassive;
+
+
+    public static Intent getCallingIntent(Context context){
+        return new Intent(context,DrawerActivity.class);
+    }
 
     /**
      * Listener which need to subscribe to tab selection events

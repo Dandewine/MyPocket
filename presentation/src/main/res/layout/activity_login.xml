@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -29,13 +29,16 @@
                 android:src="@drawable/logo"/>
 
             <!--  Email Label -->
-            <android.support.design.widget.TextInputLayout
+            <com.denis.mypocket.view.FixedTextInputLayout
+                android:id="@+id/inputEmail_AL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                app:error="@{viewModel.emailError}"
+                app:errorTextAppearance="@style/errorAppearance">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,16 +46,19 @@
                     android:text="@{viewModel.email}"
                     android:hint="Email"
                     android:inputType="textEmailAddress"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.denis.mypocket.view.FixedTextInputLayout>
 
             <!--  Password Label -->
-            <android.support.design.widget.TextInputLayout
+            <com.denis.mypocket.view.FixedTextInputLayout
+                android:id="@+id/input_password_AL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                app:error="@{viewModel.passwordError}"
+                app:errorTextAppearance="@style/errorAppearance">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,20 +66,37 @@
                     android:text="@{viewModel.password}"
                     android:hint="Password"
                     android:inputType="textPassword"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.denis.mypocket.view.FixedTextInputLayout>
 
-            <Button
-                android:id="@+id/btn_login"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp"
-                android:padding="12dp"
-                android:onClick="@{viewModel.login}"
-                android:text="Login"/>
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_login_AL"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="24dp"
+                    android:padding="12dp"
+                    android:onClick="@{viewModel.login}"
+                    android:text="Login"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar_AL"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:indeterminate="true"
+                    android:layout_marginTop="24dp"
+                    android:visibility="@{viewModel.prorgessBarVisibility}"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
 
             <TextView
-                android:id="@+id/link_signup"
+                android:id="@+id/link_signup_AL"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"

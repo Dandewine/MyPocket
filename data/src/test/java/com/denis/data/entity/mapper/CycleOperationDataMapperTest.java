@@ -32,7 +32,7 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
         assertThat(entity, is(notNullValue()));
         assertThat(entity.getId(),is(FAKE_ID));
         assertThat(entity.getInterval(),is(FAKE_INTERVAL));
-        assertThat(entity.getName(),is(FAKE_NAME));
+        assertThat(entity.getUsername(),is(FAKE_NAME));
         assertThat(entity.getTransactionEntity(),is(notNullValue()));
         assertThat(entity.getTransactionEntity(),is(instanceOf(TransactionEntity.class)));
     }
@@ -45,7 +45,7 @@ public class CycleOperationDataMapperTest extends ApplicationTestCase{
         assertThat(operation, is(notNullValue()));
         assertThat(operation.getId(),is(FAKE_ID));
         assertThat(operation.getInterval(),is(FAKE_INTERVAL));
-        assertThat(operation.getName(),is(FAKE_NAME));
+        assertThat(operation.getUsername(),is(FAKE_NAME));
         assertThat(operation.getTransaction(),is(notNullValue()));
         assertThat(operation.getTransaction(),is(instanceOf(Transaction.class)));
     }

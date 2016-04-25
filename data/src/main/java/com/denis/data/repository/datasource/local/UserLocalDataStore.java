@@ -33,4 +33,9 @@ public class UserLocalDataStore implements UserDataStore {
     public Observable<UserEntity> put(UserEntity userEntity) {
         return realmStore.put(userEntity);
     }
+
+    @Override
+    public Observable<UserEntity> update() {
+        return null;
+    }
 }

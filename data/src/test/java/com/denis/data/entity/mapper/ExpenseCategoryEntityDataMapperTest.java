@@ -23,7 +23,7 @@ public class ExpenseCategoryEntityDataMapperTest extends ApplicationTestCase {
         assertThat(entity, is(notNullValue()));
         assertThat(entity.getId(), is(FAKE_ID));
         assertThat(entity.getPath(), is(FAKE_PATH));
-        assertThat(entity.getName(), is(FAKE_NAME));
+        assertThat(entity.getUsername(), is(FAKE_NAME));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ExpenseCategoryEntityDataMapperTest extends ApplicationTestCase {
         assertThat(category, is(notNullValue()));
         assertThat(category.getId(), is(FAKE_ID));
         assertThat(category.getPath(), is(FAKE_PATH));
-        assertThat(category.getName(), is(FAKE_NAME));
+        assertThat(category.getUsername(), is(FAKE_NAME));
     }
 
     @Test

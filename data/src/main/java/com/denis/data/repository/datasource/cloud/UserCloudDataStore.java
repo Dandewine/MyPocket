@@ -1,19 +1,22 @@
 package com.denis.data.repository.datasource.cloud;
 
 
-import com.denis.data.entity.Token;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 import com.denis.data.rest.AuthService;
 import com.denis.domain.models.User;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import rx.Observable;
@@ -44,8 +47,10 @@ public class UserCloudDataStore implements UserDataStore {
         String token = null;
 
         try {
-            Response<Token> response = authService.loginUser(body).execute();
-            token = response.body().getToken();
+            RequestBody requestBody = RequestBody.create(MediaType.parse(body),body);
+            Response<Token> response = authService.loginUser(requestBody).execute();
+
+            token = response.body() != null ? response.body().getToken() : null;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +62,8 @@ public class UserCloudDataStore implements UserDataStore {
         Response response = null;
         User user = mapper.fromEntity(userEntity);
         String body = new Gson().toJson(user);
-        Call call = authService.registerUser(body);
+        RequestBody requestBody = RequestBody.create(MediaType.parse(body),body);
+        Call call = authService.registerUser(requestBody);
 
         try {
             response = call.execute();
@@ -66,7 +72,34 @@ public class UserCloudDataStore implements UserDataStore {
         }
 
         return Observable.just(
-                (response != null ? response.code() : 0) == 201 ? userEntity : null
+                (response != null ? response.code() : 0) == HttpURLConnection.HTTP_CREATED ? userEntity : null
         );
     }
+
+    @Override
+    public Observable<UserEntity> update() {
+        return null;
+    }
+
+    public static class Token {
+        @SerializedName("token")
+        private String token;
+
+        public Token(String token) {
+            this.token = token;
+        }
+
+        public Token() {
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+    }
+
+
 }

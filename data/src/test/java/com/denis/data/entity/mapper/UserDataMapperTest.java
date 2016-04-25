@@ -42,7 +42,7 @@ public class UserDataMapperTest extends ApplicationTestCase {
         assertThat(user,notNullValue());
         assertThat(user.getId(),is(FAKE_USER_UUID_BATMAN));
         assertThat(user.getEmail(), is(FAKE_USER_EMAIL_BATMAN));
-        assertThat(user.getName(), is(FAKE_USERNAME_BATMAN));
+        assertThat(user.getUsername(), is(FAKE_USERNAME_BATMAN));
     }
 
     @Test
@@ -57,11 +57,11 @@ public class UserDataMapperTest extends ApplicationTestCase {
         assertThat(userList.size(),is(2));
 
         assertThat(userList.get(0).getId(), is(FAKE_USER_UUID_BATMAN));
-        assertThat(userList.get(0).getName(), is(FAKE_USERNAME_BATMAN));
+        assertThat(userList.get(0).getUsername(), is(FAKE_USERNAME_BATMAN));
         assertThat(userList.get(0).getEmail(), is(FAKE_USER_EMAIL_BATMAN));
 
         assertThat(userList.get(1).getId(), is(FAKE_USER_UUID_SUPERMAN));
-        assertThat(userList.get(1).getName(), is(FAKE_USERNAME_SUPERMAN));
+        assertThat(userList.get(1).getUsername(), is(FAKE_USERNAME_SUPERMAN));
         assertThat(userList.get(1).getEmail(), is(FAKE_USER_EMAIL_SUPERMAN));
     }
 
@@ -98,14 +98,14 @@ public class UserDataMapperTest extends ApplicationTestCase {
 
     private User buildFakeUser_Batman(){
         User user = new User(FAKE_USER_UUID_BATMAN);
-        user.setName(FAKE_USERNAME_BATMAN);
+        user.setUsername(FAKE_USERNAME_BATMAN);
         user.setEmail(FAKE_USER_EMAIL_BATMAN);
         return user;
     }
 
     private User buildFakeUser_Superman(){
         User user = new User(FAKE_USER_UUID_SUPERMAN);
-        user.setName(FAKE_USERNAME_SUPERMAN);
+        user.setUsername(FAKE_USERNAME_SUPERMAN);
         user.setEmail(FAKE_USER_EMAIL_SUPERMAN);
         return user;
     }

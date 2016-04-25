@@ -41,7 +41,7 @@ public class RegistrationUseCaseTest extends ApplicationTestCase {
 
     private User buildFakeUser(){
         User user = new User(FAKE_USER_ID);
-        user.setName(FAKE_USERNAME);
+        user.setUsername(FAKE_USERNAME);
         user.setEmail(FAKE_EMAIL);
         return user;
     }*/

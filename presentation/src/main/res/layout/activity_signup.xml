@@ -124,7 +124,7 @@
                     android:textSize="16dip"/>
 
                 <ProgressBar
-                    android:id="@+id/progressBar"
+                    android:id="@+id/progressBar_AS"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

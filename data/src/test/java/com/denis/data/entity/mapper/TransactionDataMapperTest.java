@@ -39,7 +39,7 @@ public class TransactionDataMapperTest{
 
         assertThat(entity.getWalletEntity(),is(notNullValue()));
         assertThat(entity.getWalletEntity().getId(),is(FAKE_WALLET_ID));
-        assertThat(entity.getWalletEntity().getName(),is(FAKE_WALLET_NAME));
+        assertThat(entity.getWalletEntity().getUsername(),is(FAKE_WALLET_NAME));
         assertThat(entity.getWalletEntity().getCurrency(),is(FAKE_WALLET_CURRENCY));
         assertThat(entity.getWalletEntity().getBalance(),is(FAKE_WALLET_BALANCE));
     }
@@ -58,7 +58,7 @@ public class TransactionDataMapperTest{
 
         assertThat(transaction.getWallet(),is(notNullValue()));
         assertThat(transaction.getWallet().getId(),is(FAKE_WALLET_ID));
-        assertThat(transaction.getWallet().getName(),is(FAKE_WALLET_NAME));
+        assertThat(transaction.getWallet().getUsername(),is(FAKE_WALLET_NAME));
         assertThat(transaction.getWallet().getCurrency(),is(FAKE_WALLET_CURRENCY));
         assertThat(transaction.getWallet().getBalance(),is(FAKE_WALLET_BALANCE));
     }

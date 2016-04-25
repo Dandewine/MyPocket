@@ -3,12 +3,9 @@ package com.denis.mypocket.viewmodel.auth;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.databinding.ObservableByte;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -131,7 +128,7 @@ public class RegistrationViewModel implements ViewModel {
     private User getUserTest() {
         User user = new User();
         user.setEmail(email);
-        user.setName(userName);
+        user.setUsername(userName);
         user.setPassword(password);
         return user;
     }

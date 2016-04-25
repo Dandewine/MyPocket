@@ -24,7 +24,7 @@ public class WalletDataMapperTest extends ApplicationTestCase {
         assertThat(walletEntity, is(notNullValue()));
         assertThat(walletEntity.getId(), is(FAKE_WALLET_ID));
         assertThat(walletEntity.getBalance(), is(FAKE_BALANCE));
-        assertThat(walletEntity.getName(), is(FAKE_WALLET_NAME));
+        assertThat(walletEntity.getUsername(), is(FAKE_WALLET_NAME));
         assertThat(walletEntity.getCurrency(), is(FAKE_CURRENCY));
     }
 
@@ -53,7 +53,7 @@ public class WalletDataMapperTest extends ApplicationTestCase {
         assertThat(wallet, is(notNullValue()));
         assertThat(wallet.getId(), is(FAKE_WALLET_ID));
         assertThat(wallet.getBalance(), is(FAKE_BALANCE));
-        assertThat(wallet.getName(), is(FAKE_WALLET_NAME));
+        assertThat(wallet.getUsername(), is(FAKE_WALLET_NAME));
         assertThat(wallet.getCurrency(), is(FAKE_CURRENCY));
     }
 

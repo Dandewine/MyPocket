@@ -5,6 +5,7 @@ import android.content.Context;
 import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
+import com.denis.domain.repository.TokenRepository;
 import com.denis.mypocket.internal.di.modules.ApplicationModule;
 import com.denis.mypocket.view.activity.BaseActivity;
 
@@ -27,4 +28,5 @@ public interface ApplicationComponent {
     PostExecutionThread postExecutionThread();
     Realm realm();
     RestClient restClient();
+    TokenRepository tokenRepo();
 }

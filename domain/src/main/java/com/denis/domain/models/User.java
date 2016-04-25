@@ -5,7 +5,7 @@ package com.denis.domain.models;
  */
 public class User {
     private String id;
-    private String name;
+    private String username;
     private String email;
     private String password;
 
@@ -20,12 +20,12 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public String getEmail() {

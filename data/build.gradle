@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -46,7 +47,7 @@ dependencies {
     provided dataDependencies.daggerCompiler
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.dagger
-    compile dataDependencies.realm
+   // compile dataDependencies.realm
 
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid

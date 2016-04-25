@@ -14,27 +14,27 @@ import rx.Observable;
 @Singleton
 public class TransactionRealmStore implements RealmStore<TransactionEntity> {
 
-    private Realm mRealm;
+    private Realm realm;
 
     @Inject
     public TransactionRealmStore(Realm realm) {
-        this.mRealm = realm;
+        this.realm = realm;
     }
 
     @Override
     public Observable<TransactionEntity> get(int id) {
-        return Observable.just(mRealm.where(TransactionEntity.class).equalTo("id", id).findFirst());
+        return Observable.just(realm.where(TransactionEntity.class).equalTo("id", id).findFirst());
     }
 
     @Override
     public Observable<TransactionEntity> put(TransactionEntity item) {
 
-        Number max = mRealm.where(TransactionEntity.class).max("id");
+        Number max = realm.where(TransactionEntity.class).max("id");
         int nextId = max == null ? 0 : max.intValue() + 1;
         item.setId(nextId);
 
         final TransactionEntity[] entity = new TransactionEntity[1];
-        mRealm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
+        realm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
         return Observable.just(entity[0]);
     }
 
@@ -45,11 +45,11 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
 
     @Override
     public Observable<List<TransactionEntity>> getList() {
-        return Observable.just(mRealm.where(TransactionEntity.class).findAll());
+        return Observable.just(realm.where(TransactionEntity.class).findAll());
     }
 
     @Override
     public Observable<TransactionEntity> update(TransactionEntity item) {
-        return Observable.just(mRealm.copyToRealmOrUpdate(item));
+        return Observable.just(realm.copyToRealmOrUpdate(item));
     }
 }

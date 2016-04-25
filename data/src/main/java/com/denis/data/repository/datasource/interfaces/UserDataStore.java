@@ -21,4 +21,6 @@ public interface UserDataStore {
      * Get an {@link rx.Observable} which will emit a {@link UserEntity}.
      */
     Observable<UserEntity> put(UserEntity userEntity);
+
+    Observable<UserEntity> update();
 }

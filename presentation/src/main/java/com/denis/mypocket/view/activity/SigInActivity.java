@@ -15,10 +15,11 @@ import com.denis.mypocket.viewmodel.auth.LoginViewModel;
 
 import javax.inject.Inject;
 
-public class SigInActivity extends BaseActivity {
+public class SigInActivity extends BaseActivity implements LoginViewModel.ClearBlankSpaceCallback {
 
     @Inject
     LoginViewModel viewModel;
+    private ActivityLoginBinding binding;
 
     public static Intent getCallingIntent(Context context, @Nullable Bundle bundle) {
         Intent intent = new Intent(context, SigInActivity.class);
@@ -32,7 +33,8 @@ public class SigInActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        viewModel.setBlankSpaceCallback(this);
 
         Bundle bundle = getIntent().getBundleExtra(PLConstants.EMAIL_INTENT);
         if (bundle != null)
@@ -53,5 +55,11 @@ public class SigInActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public void clear() {
+        binding.inputEmailAL.setErrorEnabled(false);
+        binding.inputPasswordAL.setErrorEnabled(!viewModel.isPasswordValid);
     }
 }
