@@ -1,5 +1,6 @@
 package com.denis.mypocket.viewmodel.auth;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -141,6 +142,7 @@ public class LoginViewModel implements ViewModel {
                 Intent intent = DrawerActivity.getCallingIntent(context);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
+                ((Activity)context).finish();
             }
         }
     }

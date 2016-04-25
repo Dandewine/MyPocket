@@ -17,8 +17,7 @@ import javax.inject.Inject;
 
 public class SigInActivity extends BaseActivity implements LoginViewModel.ClearBlankSpaceCallback {
 
-    @Inject
-    LoginViewModel viewModel;
+    @Inject LoginViewModel viewModel;
     private ActivityLoginBinding binding;
 
     public static Intent getCallingIntent(Context context, @Nullable Bundle bundle) {

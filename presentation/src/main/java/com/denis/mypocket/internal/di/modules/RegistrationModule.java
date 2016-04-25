@@ -12,7 +12,7 @@ import com.denis.data.rest.AuthService;
 import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
-import com.denis.domain.interactor.RegistrationUseCase;
+import com.denis.domain.interactor.auth.RegistrationUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
 import com.denis.domain.repository.UserRepository;

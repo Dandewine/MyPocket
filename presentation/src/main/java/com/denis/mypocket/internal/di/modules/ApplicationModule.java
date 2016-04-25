@@ -14,7 +14,7 @@ import com.denis.data.rest.RestClientRetrofit;
 import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
-import com.denis.domain.interactor.TokenGet;
+import com.denis.domain.interactor.auth.TokenGet;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.repository.TokenRepository;
 import com.denis.mypocket.MyPocketApp;
