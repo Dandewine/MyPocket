@@ -55,7 +55,7 @@ public class UserRealmStore implements RealmStore<UserEntity> {
 
     @Override
     public Observable<List<UserEntity>> getList() {
-        return realm.where(UserEntity.class).findAllAsync().asObservable().map(this::parseList);
+        return realm.where(UserEntity.class).findAll().asObservable().map(this::parseList);
     }
 
     private List<UserEntity> parseList(RealmResults<UserEntity> data) {

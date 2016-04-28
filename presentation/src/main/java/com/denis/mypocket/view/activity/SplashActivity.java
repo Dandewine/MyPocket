@@ -1,16 +1,24 @@
 package com.denis.mypocket.view.activity;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
+import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivitySplashBinding;
 import com.denis.mypocket.internal.di.components.DaggerSplashComponent;
 import com.denis.mypocket.internal.di.modules.SplashModule;
 import com.denis.mypocket.viewmodel.auth.SplashViewModel;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by denis on 4/25/16.
@@ -25,7 +33,34 @@ public class SplashActivity extends BaseActivity {
         ActivitySplashBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         binding.setViewModel(viewModel);
 
-        viewModel.execute();
+
+        Observable.timer(2000, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(l -> viewModel.execute())
+                .subscribe(new DefaultSubscriber<Boolean>() {
+                    @Override
+                    public void onNext(Boolean isUserExist) {
+                        if (isUserExist)
+                            startTabs();
+                        else
+                            startLogin();
+
+                    }
+                });
+    }
+
+    private void startTabs() {
+        Intent intent = DrawerActivity.getCallingIntent(this);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void startLogin() {
+        Intent intent = SigInActivity.getCallingIntent(this, null);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override

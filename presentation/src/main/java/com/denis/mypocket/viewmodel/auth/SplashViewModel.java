@@ -9,7 +9,11 @@ import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.viewmodel.ViewModel;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import rx.Observable;
 
 /**
  * Created by denis on 4/25/16.
@@ -17,20 +21,20 @@ import javax.inject.Inject;
 @PerActivity
 public class SplashViewModel implements ViewModel {
     private UseCase<String> tokenGetUseCase;
-    private UseCase<UserModel> userGetUseCase;
+    private UseCase<User> userGetUseCase;
 
     private boolean isUserExist = false, isTokenExist = false;
 
     @Inject
-    public SplashViewModel(UseCase<String> tokenGetUseCase, UseCase<UserModel> userGetUseCase) {
+    public SplashViewModel(UseCase<String> tokenGetUseCase, UseCase<User> userGetUseCase) {
         this.tokenGetUseCase = tokenGetUseCase;
         this.userGetUseCase = userGetUseCase;
     }
 
-    public boolean execute() {
+    public Observable<Boolean> execute() {
         tokenGetUseCase.executeSync(new TokenGetSubscriber());
         userGetUseCase.executeSync(new UserGetSubscriber());
-        return isUserExist && isTokenExist;
+        return Observable.just(isUserExist && isTokenExist);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class SplashViewModel implements ViewModel {
         }
     }
 
-    private class UserGetSubscriber extends DefaultSubscriber<User> {
+    private class UserGetSubscriber extends DefaultSubscriber<List<User>> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -69,14 +73,16 @@ public class SplashViewModel implements ViewModel {
         }
 
         @Override
-        public void onNext(User user) {
-            isUserExist = isUserValid(user);
-        }
-    }
+        public void onNext(List<User> users) {
+            if (users != null && !users.isEmpty())
+                isUserExist = isUserValid(users.get(0));
 
-    private boolean isUserValid(User userModel) {
-        return userModel.getEmail() != null &&
-                userModel.getUsername() != null &&
-                userModel.getEmail() != null;
+        }
+
+        private boolean isUserValid(User userModel) {
+            return userModel.getEmail() != null &&
+                    userModel.getUsername() != null &&
+                    userModel.getEmail() != null;
+        }
     }
 }
