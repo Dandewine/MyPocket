@@ -4,7 +4,7 @@ package com.denis.domain.models;
  * Created by denis on 4/10/16.
  */
 public class User {
-    private String id;
+    private String Id;
     private String username;
     private String email;
     private String password;
@@ -13,11 +13,11 @@ public class User {
     }
 
     public User(String id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getId() {
-        return id;
+        return Id;
     }
 
     public String getUsername() {

@@ -1,5 +1,6 @@
 package com.denis.data.repository.datasource.local;
 
+import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
@@ -24,10 +25,9 @@ public class UserLocalDataStore implements UserDataStore {
     }
 
     @Override
-    public Observable<String> getUserEntity(String body) {
-        return null;
+    public Observable<LoginResponseEntity> getUserEntity(String body) {
+        throw new UnsupportedOperationException("This method can be useful only from CloudUserDataStore.class");
     }
-
 
     @Override
     public Observable<UserEntity> put(UserEntity userEntity) {
@@ -36,6 +36,6 @@ public class UserLocalDataStore implements UserDataStore {
 
     @Override
     public Observable<UserEntity> update() {
-        return null;
+        throw new UnsupportedOperationException("This method can be useful only from CloudUserDataStore.class");
     }
 }

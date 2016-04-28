@@ -15,6 +15,8 @@ import android.view.View;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
+import com.denis.domain.models.LoginResponse;
+import com.denis.domain.models.User;
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.UserModel;
@@ -33,6 +35,7 @@ import rx.observers.SafeSubscriber;
  */
 public class LoginViewModel implements ViewModel {
     private UseCase<String> loginUserCase, tokenSaveUseCase;
+    private UseCase<User> userSaveUseCase;
     public String email = "", password = "";
     private Context context;
 
@@ -45,9 +48,12 @@ public class LoginViewModel implements ViewModel {
 
     private ClearBlankSpaceCallback blankSpaceCallback;
 
-    public LoginViewModel(UseCase<String> loginUserCase, UseCase<String> tokenSaveUseCase, Context context) {
+    public LoginViewModel(UseCase<String> loginUserCase,
+                          UseCase<String> tokenSaveUseCase,
+                          UseCase<User> userSaveUseCase, Context context) {
         this.loginUserCase = loginUserCase;
         this.tokenSaveUseCase = tokenSaveUseCase;
+        this.userSaveUseCase = userSaveUseCase;
         this.context = context;
     }
 
@@ -61,10 +67,11 @@ public class LoginViewModel implements ViewModel {
 
     private void execute() {
         if (isEmailValid && isPasswordValid) {
+            prorgessBarVisibility.set(View.VISIBLE);
             UserModel model = new UserModel(email, password);
             String body = new Gson().toJson(model);
             loginUserCase.executeAsync(new LoginSubscriber(), body);
-        }else{
+        } else {
             validatePassword();
             validateEmail();
         }
@@ -121,9 +128,11 @@ public class LoginViewModel implements ViewModel {
     @Override
     public void destroy() {
         loginUserCase.unSubscribe();
+        userSaveUseCase.unSubscribe();
+        tokenSaveUseCase.unSubscribe();
     }
 
-    private class LoginSubscriber extends DefaultSubscriber<String> {
+    private class LoginSubscriber extends DefaultSubscriber<LoginResponse> {
         @Override
         public void onCompleted() {
 
@@ -135,20 +144,28 @@ public class LoginViewModel implements ViewModel {
         }
 
         @Override
-        public void onNext(String token) {
-            if (token != null) {
-                tokenSaveUseCase.executeSync(new TokenSubscriber(), token);
-
+        public void onNext(LoginResponse data) {
+            if (data != null) {
+                saveUserData(data.getToken(), data.getUser());
                 Intent intent = DrawerActivity.getCallingIntent(context);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
-                ((Activity)context).finish();
+                ((Activity) context).finish();
             }
         }
     }
 
+    private void saveUserData(String token, User user) {
+        userSaveUseCase.executeSync(new UserSaveSubscriber(), user);
+        tokenSaveUseCase.executeSync(new TokenSubscriber(), token);
+    }
+
     private static class TokenSubscriber extends DefaultSubscriber<String> {
     }
+
+    private static class UserSaveSubscriber extends DefaultSubscriber<String> {
+    }
+
 
     public interface ClearBlankSpaceCallback {
         void clear();

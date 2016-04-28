@@ -1,6 +1,8 @@
 package com.denis.data.repository.datasource.interfaces;
 
+import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
+import com.denis.domain.models.LoginResponse;
 
 
 import rx.Observable;
@@ -16,7 +18,7 @@ public interface UserDataStore {
     Observable<UserEntity> getUserEntity(final int categoryId);
 
 
-    Observable<String> getUserEntity(String body);
+    Observable<LoginResponseEntity> getUserEntity(String body);
     /**
      * Get an {@link rx.Observable} which will emit a {@link UserEntity}.
      */

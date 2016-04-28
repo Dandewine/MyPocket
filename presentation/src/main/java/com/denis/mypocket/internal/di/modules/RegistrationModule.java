@@ -2,8 +2,10 @@ package com.denis.mypocket.internal.di.modules;
 
 import android.content.Context;
 
+import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.entity.mapper.EntityMapper;
+import com.denis.data.entity.mapper.LoginResponseMapper;
 import com.denis.data.entity.mapper.UserDataMapper;
 import com.denis.data.repository.UserDataStoreRepository;
 import com.denis.data.repository.datasource.cloud.UserCloudDataStore;
@@ -14,6 +16,7 @@ import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.auth.RegistrationUseCase;
 import com.denis.domain.interactor.UseCase;
+import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.repository.UserRepository;
 import com.denis.mypocket.viewmodel.auth.RegistrationViewModel;
@@ -41,8 +44,13 @@ public class RegistrationModule {
     }
 
     @Provides @PerActivity
-    UserRepository provideUserRepository(UserDataMapper dataMapper, UserDataStore dataStore){
-        return new UserDataStoreRepository(dataMapper, dataStore);
+    UserRepository provideUserRepository(UserDataMapper dataMapper, UserDataStore dataStore,
+                                         EntityMapper<LoginResponseEntity, LoginResponse> loginMapper){
+        return new UserDataStoreRepository(dataMapper, dataStore, loginMapper);
+    }
+
+    @Provides @PerActivity EntityMapper<LoginResponseEntity, LoginResponse> provideLoginMapper(){
+        return new LoginResponseMapper();
     }
 
     @Provides @PerActivity

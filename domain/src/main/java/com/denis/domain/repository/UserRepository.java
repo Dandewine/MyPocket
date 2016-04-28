@@ -1,5 +1,6 @@
 package com.denis.domain.repository;
 
+import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 
 import rx.Observable;
@@ -24,5 +25,5 @@ public interface UserRepository {
     Observable<User> addUser(User user);
 
 
-    Observable getUser(String body);
+    Observable<LoginResponse> login(String body);
 }

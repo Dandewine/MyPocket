@@ -61,4 +61,10 @@ public class SigInActivity extends BaseActivity implements LoginViewModel.ClearB
         binding.inputEmailAL.setErrorEnabled(false);
         binding.inputPasswordAL.setErrorEnabled(!viewModel.isPasswordValid);
     }
+
+    @Override
+    protected void onDestroy() {
+        viewModel.destroy();
+        super.onDestroy();
+    }
 }

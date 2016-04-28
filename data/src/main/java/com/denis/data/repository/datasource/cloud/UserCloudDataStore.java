@@ -1,13 +1,13 @@
 package com.denis.data.repository.datasource.cloud;
 
 
+import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 import com.denis.data.rest.AuthService;
 import com.denis.domain.models.User;
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -43,26 +43,26 @@ public class UserCloudDataStore implements UserDataStore {
     }
 
     @Override
-    public Observable<String> getUserEntity(String body) {
-        String token = null;
+    public Observable<LoginResponseEntity> getUserEntity(String body) { //getUser
+        LoginResponseEntity loginResponseEntity = null;
 
         try {
-            RequestBody requestBody = RequestBody.create(MediaType.parse(body),body);
-            Response<Token> response = authService.loginUser(requestBody).execute();
+            RequestBody requestBody = RequestBody.create(MediaType.parse(body), body);
+            Response<LoginResponseEntity> response = authService.loginUser(requestBody).execute();
 
-            token = response.body() != null ? response.body().getToken() : null;
+            loginResponseEntity = response.body() != null ? response.body() : null;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Observable.just(token);
+        return Observable.just(loginResponseEntity);
     }
 
     @Override
-    public Observable<UserEntity> put(UserEntity userEntity) {
+    public Observable<UserEntity> put(UserEntity userEntity) {//registration
         Response response = null;
         User user = mapper.fromEntity(userEntity);
         String body = new Gson().toJson(user);
-        RequestBody requestBody = RequestBody.create(MediaType.parse(body),body);
+        RequestBody requestBody = RequestBody.create(MediaType.parse(body), body);
         Call call = authService.registerUser(requestBody);
 
         try {
@@ -78,27 +78,7 @@ public class UserCloudDataStore implements UserDataStore {
 
     @Override
     public Observable<UserEntity> update() {
-        return null;
-    }
-
-    public static class Token {
-        @SerializedName("token")
-        private String token;
-
-        public Token(String token) {
-            this.token = token;
-        }
-
-        public Token() {
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
+        throw new UnsupportedOperationException("Can't update user yet");
     }
 
 
