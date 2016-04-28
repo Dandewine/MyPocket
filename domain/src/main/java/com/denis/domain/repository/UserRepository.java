@@ -3,6 +3,8 @@ package com.denis.domain.repository;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 
+import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -14,7 +16,7 @@ public interface UserRepository {
      *
      * @param UserId The getUser id used to retrieve getUser data.
      */
-    Observable<User> getUser(final int UserId);
+    Observable<User> getUser(final String UserId);
 
     /**
      * Add User into our local storage
@@ -26,4 +28,6 @@ public interface UserRepository {
 
 
     Observable<LoginResponse> login(String body);
+
+    Observable<List<User>> getAll();
 }

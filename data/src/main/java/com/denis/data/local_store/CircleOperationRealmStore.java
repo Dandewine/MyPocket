@@ -20,7 +20,7 @@ public class CircleOperationRealmStore implements RealmStore<CycleOperationEntit
     }
 
     @Override
-    public Observable<CycleOperationEntity> get(int id) {
+    public Observable<CycleOperationEntity> get(String id) {
         return Observable.just(mRealm.where(CycleOperationEntity.class).equalTo("id", id).findFirst());
     }
 

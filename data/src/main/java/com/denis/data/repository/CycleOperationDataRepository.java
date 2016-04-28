@@ -29,7 +29,7 @@ public class CycleOperationDataRepository implements CycleOperationRepository {
     }
 
     @Override
-    public Observable<CycleOperation> getCircleOperation(int userId) {
+    public Observable<CycleOperation> getCircleOperation(String userId) {
         return dataStore.getCircleOperationEntity(userId)
                 .map(dataMapper::fromEntity);
     }

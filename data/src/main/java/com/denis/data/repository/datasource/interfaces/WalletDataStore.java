@@ -17,7 +17,7 @@ public interface WalletDataStore {
      *
      * @param walletId The id to retrieve wallet data.
      */
-    Observable<WalletEntity> getWalletEntity(final int walletId);
+    Observable<WalletEntity> getWalletEntity(final String walletId);
 
     /**
      * Get an {@link rx.Observable} which will emit a List of {@link WalletEntity}.

@@ -21,7 +21,7 @@ public class TransactionLocalDataStore implements TransactionDataStore {
     }
 
     @Override
-    public Observable<TransactionEntity> getTransactionEntity(int transactionId) {
+    public Observable<TransactionEntity> getTransactionEntity(String transactionId) {
         return realmStore.get(transactionId);
     }
 

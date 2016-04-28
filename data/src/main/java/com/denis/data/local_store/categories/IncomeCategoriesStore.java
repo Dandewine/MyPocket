@@ -24,7 +24,7 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
     }
 
     @Override
-    public Observable<IncomeCategoryEntity> get(int id) {
+    public Observable<IncomeCategoryEntity> get(String id) {
         return Observable.just(mRealm.where(IncomeCategoryEntity.class).equalTo("id", id).findFirst());
     }
 

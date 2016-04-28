@@ -21,7 +21,7 @@ public interface DebtRepository {
      *
      * @param userId The getDebt id used to retrieve getDebt data.
      */
-    Observable<Debt> getDebt(final int userId);
+    Observable<Debt> getDebt(final String userId);
 
     /**
      * Add Debt into our local storage

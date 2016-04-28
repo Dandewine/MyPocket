@@ -30,7 +30,7 @@ public class IncomeCategoriesDataRepository implements IncomeCategoriesRepositor
     }
 
     @Override
-    public Observable<IncomeCategory> getIncomeCategory(int userId) {
+    public Observable<IncomeCategory> getIncomeCategory(String userId) {
         return dataStore.getIncomeCategoryEntity(userId)
                 .map(mapper::fromEntity);
     }

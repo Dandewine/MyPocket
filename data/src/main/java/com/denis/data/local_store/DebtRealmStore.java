@@ -23,7 +23,7 @@ public class DebtRealmStore implements RealmStore<DebtEntity> {
     }
 
     @Override
-    public Observable<DebtEntity> get(int id) {
+    public Observable<DebtEntity> get(String id) {
         return Observable.just(mRealm.where(DebtEntity.class).equalTo("id",id).findFirst());
     }
 

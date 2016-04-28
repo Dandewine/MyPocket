@@ -17,7 +17,7 @@ public interface IncomeCategoriesRepository {
      *
      * @param userId The getIncomeCategory id used to retrieve getIncomeCategory data.
      */
-    Observable<IncomeCategory> getIncomeCategory(final int userId);
+    Observable<IncomeCategory> getIncomeCategory(final String userId);
 
     /**
      * Add IncomeCategory into our local storage

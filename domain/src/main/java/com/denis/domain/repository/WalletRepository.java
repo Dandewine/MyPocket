@@ -18,7 +18,7 @@ public interface WalletRepository {
      *
      * @param userId The getWallet id used to retrieve getWallet data.
      */
-    Observable<Wallet> getWallet(final int userId);
+    Observable<Wallet> getWallet(final String userId);
 
     Observable<Wallet> addWallet(Wallet wallet);
 

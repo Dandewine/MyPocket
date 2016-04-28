@@ -29,7 +29,7 @@ public class ExpenseCategoryDataRepository implements ExpenseCategoriesRepositor
     }
 
     @Override
-    public Observable<ExpenseCategory> getExpenseCategory(int categoryId) {
+    public Observable<ExpenseCategory> getExpenseCategory(String categoryId) {
         return dataStore.getExpenseCategoryEntity(categoryId)
                 .map(dataMapper::fromEntity);
     }

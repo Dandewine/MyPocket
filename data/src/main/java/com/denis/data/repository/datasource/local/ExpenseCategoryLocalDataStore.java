@@ -20,7 +20,7 @@ public class ExpenseCategoryLocalDataStore implements ExpenseCategoryDataStore {
     }
 
     @Override
-    public Observable<ExpenseCategoryEntity> getExpenseCategoryEntity(int categoryId) {
+    public Observable<ExpenseCategoryEntity> getExpenseCategoryEntity(String categoryId) {
         return realmStore.get(categoryId);
     }
 

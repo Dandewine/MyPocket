@@ -21,8 +21,8 @@ public class CycleOperationLocalDataStore implements CycleOperationDataStore {
     }
 
     @Override
-    public Observable<CycleOperationEntity> getCircleOperationEntity(int categoryId) {
-        return dataStore.get(categoryId);
+    public Observable<CycleOperationEntity> getCircleOperationEntity(String id) {
+        return dataStore.get(id);
     }
 
     @Override

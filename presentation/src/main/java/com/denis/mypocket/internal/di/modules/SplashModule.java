@@ -18,7 +18,7 @@ import com.denis.domain.interactor.auth.TokenGet;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.repository.TokenRepository;
 import com.denis.domain.repository.UserRepository;
-import com.denis.domain.interactor.user.GetUserUseCase;
+import com.denis.domain.interactor.user.GetAllUsers;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.viewmodel.auth.SplashViewModel;
 
@@ -47,7 +47,7 @@ public class SplashModule {
     @Provides @PerActivity @Named("user_get")
     UseCase provideUserGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread, UserRepository repository){
 
-        return new GetUserUseCase(executor,postExecutionThread,repository);
+        return new GetAllUsers(executor,postExecutionThread,repository);
     }
 
     @Provides @PerActivity UserRepository provideUserRepository(UserDataMapper userDataMapper, UserDataStore userDataStore,

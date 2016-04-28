@@ -17,7 +17,7 @@ public interface ExpenseCategoriesRepository {
      *
      * @param userId The getExpenseCategory id used to retrieve getExpenseCategory data.
      */
-    Observable<ExpenseCategory> getExpenseCategory(final int userId);
+    Observable<ExpenseCategory> getExpenseCategory(final String userId);
 
     /**
      * Add ExpenseCategory into our local storage

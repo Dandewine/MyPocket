@@ -6,6 +6,8 @@ import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rx.Observable;
@@ -19,10 +21,6 @@ public class UserLocalDataStore implements UserDataStore {
         this.realmStore = realmStore;
     }
 
-    @Override
-    public Observable<UserEntity> getUserEntity(int categoryId) {
-        return realmStore.get(categoryId);
-    }
 
     @Override
     public Observable<LoginResponseEntity> getUserEntity(String body) {
@@ -37,5 +35,15 @@ public class UserLocalDataStore implements UserDataStore {
     @Override
     public Observable<UserEntity> update() {
         throw new UnsupportedOperationException("This method can be useful only from CloudUserDataStore.class");
+    }
+
+    @Override
+    public Observable<UserEntity> getUserEntityByID(String id) {
+        return realmStore.get(id);
+    }
+
+    @Override
+    public Observable<List<UserEntity>> getAll() {
+        return realmStore.getList();
     }
 }

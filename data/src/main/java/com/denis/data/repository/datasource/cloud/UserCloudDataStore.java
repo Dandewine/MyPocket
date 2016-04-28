@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,12 +39,18 @@ public class UserCloudDataStore implements UserDataStore {
     }
 
     @Override
-    public Observable<UserEntity> getUserEntity(int categoryId) {
+    public Observable<UserEntity> getUserEntityByID(String userID) {
         throw new UnsupportedOperationException("Can't do this");
     }
 
+    /**
+     * Use this when you need to login
+     *
+     * @param body - json
+     * @return
+     */
     @Override
-    public Observable<LoginResponseEntity> getUserEntity(String body) { //getUser
+    public Observable<LoginResponseEntity> getUserEntity(String body) { //login
         LoginResponseEntity loginResponseEntity = null;
 
         try {
@@ -57,6 +64,10 @@ public class UserCloudDataStore implements UserDataStore {
         return Observable.just(loginResponseEntity);
     }
 
+    /**
+     * @param userEntity
+     * @return
+     */
     @Override
     public Observable<UserEntity> put(UserEntity userEntity) {//registration
         Response response = null;
@@ -81,5 +92,8 @@ public class UserCloudDataStore implements UserDataStore {
         throw new UnsupportedOperationException("Can't update user yet");
     }
 
-
+    @Override
+    public Observable<List<UserEntity>> getAll() {
+        throw new UnsupportedOperationException("Can't do this");
+    }
 }

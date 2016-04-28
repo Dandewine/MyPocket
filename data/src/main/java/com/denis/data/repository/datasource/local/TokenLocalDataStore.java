@@ -24,7 +24,7 @@ public class TokenLocalDataStore implements TokenDataStore {
 
     @Override
     public Observable<Token> get() {
-        return tokenRealmStore.get(0); //db has only one token
+        return tokenRealmStore.get(""); //db has only one token
     }
 
     @Override

@@ -22,7 +22,7 @@ public class WalletRealmStore implements RealmStore<WalletEntity> {
     }
 
     @Override
-    public Observable<WalletEntity> get(int id) {
+    public Observable<WalletEntity> get(String id) {
         return Observable.just(mRealm.where(WalletEntity.class).equalTo("id", id).findFirst());
     }
 

@@ -16,7 +16,7 @@ public interface DebtsDataStore {
      *Get an {@link rx.Observable} which will emit a {@link DebtEntity} by its id.
      * @param categoryId The id to retrieve wallet data.
      */
-    Observable<DebtEntity> getDebtEntity(final int categoryId);
+    Observable<DebtEntity> getDebtEntity(final String categoryId);
     /**
      * Get an {@link rx.Observable} which will emit a List of {@link DebtEntity}.
      */

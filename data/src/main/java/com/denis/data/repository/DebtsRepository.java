@@ -31,7 +31,7 @@ public class DebtsRepository implements DebtRepository {
     }
 
     @Override
-    public Observable<Debt> getDebt(int userId) {
+    public Observable<Debt> getDebt(String userId) {
         return debtsDataStore.getDebtEntity(userId).map(debtsMapper::fromEntity);
     }
 

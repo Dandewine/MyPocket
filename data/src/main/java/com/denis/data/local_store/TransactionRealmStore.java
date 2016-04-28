@@ -22,7 +22,7 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
     }
 
     @Override
-    public Observable<TransactionEntity> get(int id) {
+    public Observable<TransactionEntity> get(String id) {
         return Observable.just(realm.where(TransactionEntity.class).equalTo("id", id).findFirst());
     }
 

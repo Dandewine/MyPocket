@@ -9,6 +9,8 @@ import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.repository.UserRepository;
 
+import java.util.List;
+
 import rx.Observable;
 import rx.Scheduler;
 import rx.functions.Func1;
@@ -31,8 +33,9 @@ public class UserDataStoreRepository implements UserRepository {
     }
 
     @Override
-    public Observable<User> getUser(int userId) {
-        return userDataStore.getUserEntity(userId).map(userDataMapper::fromEntity);
+    public Observable<User> getUser(String userId) {
+        return userDataStore.getUserEntityByID(userId)
+                .map(userDataMapper::fromEntity);
     }
 
     @Override
@@ -46,5 +49,10 @@ public class UserDataStoreRepository implements UserRepository {
     public Observable<LoginResponse> login(String body) {
         return userDataStore.getUserEntity(body)
                 .map(loginResponseMapper::fromEntity);
+    }
+
+    @Override
+    public Observable<List<User>> getAll() {
+        return userDataStore.getAll().map(userDataMapper::fromEntity);
     }
 }

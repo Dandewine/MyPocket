@@ -21,7 +21,7 @@ public class WalletLocalDataStore implements WalletDataStore {
     }
 
     @Override
-    public Observable<WalletEntity> getWalletEntity(int walletId) {
+    public Observable<WalletEntity> getWalletEntity(String walletId) {
         return storage.get(walletId);
     }
 

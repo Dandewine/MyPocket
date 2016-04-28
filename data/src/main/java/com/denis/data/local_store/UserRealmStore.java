@@ -1,6 +1,8 @@
 package com.denis.data.local_store;
 
 import com.denis.data.entity.UserEntity;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Observable;
 
 /**
@@ -25,7 +28,7 @@ public class UserRealmStore implements RealmStore<UserEntity> {
     }
 
     @Override
-    public Observable<UserEntity> get(int id) {
+    public Observable<UserEntity> get(String id) {
         return Observable.just(realm.where(UserEntity.class).equalTo("id", id).findFirst());
     }
 
@@ -52,6 +55,17 @@ public class UserRealmStore implements RealmStore<UserEntity> {
 
     @Override
     public Observable<List<UserEntity>> getList() {
-        throw new UnsupportedOperationException("You can't get a list of users");
+        return realm.where(UserEntity.class).findAllAsync().asObservable().map(this::parseList);
+    }
+
+    private List<UserEntity> parseList(RealmResults<UserEntity> data) {
+        List<UserEntity> itemList = null;
+        if (data != null) {
+            itemList = new ArrayList<>();
+            for (UserEntity ue : data) {
+                itemList.add(ue);
+            }
+        }
+        return itemList;
     }
 }

@@ -20,7 +20,7 @@ public class ExpenseCategoriesStore implements RealmStore<ExpenseCategoryEntity>
     }
 
     @Override
-    public Observable<ExpenseCategoryEntity> get(int id) {
+    public Observable<ExpenseCategoryEntity> get(String id) {
         return Observable.just(mRealm.where(ExpenseCategoryEntity.class).equalTo("id",id).findFirst());
     }
 

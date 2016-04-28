@@ -24,6 +24,8 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ActivitySplashBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         binding.setViewModel(viewModel);
+
+        viewModel.execute();
     }
 
     @Override

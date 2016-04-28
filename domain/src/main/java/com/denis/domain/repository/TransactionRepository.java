@@ -17,7 +17,7 @@ public interface TransactionRepository {
      *
      * @param transactionId The getTransaction id used to retrieve getTransaction data.
      */
-    Observable<Transaction> getTransaction(final int transactionId);
+    Observable<Transaction> getTransaction(final String transactionId);
 
     /**
      * Add transaction into our local storage

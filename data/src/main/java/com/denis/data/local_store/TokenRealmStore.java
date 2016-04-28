@@ -28,7 +28,7 @@ public class TokenRealmStore implements RealmStore<Token> {
     }
 
     @Override
-    public Observable<Token> get(int id) {
+    public Observable<Token> get(String id) {
         //Realm objects can only be accessed on the thread they were created
         if (!TextUtils.equals(Thread.currentThread().getName(), "main")) {
             Realm realm = Realm.getDefaultInstance();

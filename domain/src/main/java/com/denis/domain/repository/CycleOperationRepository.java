@@ -17,7 +17,7 @@ public interface CycleOperationRepository {
      *
      * @param userId The getCircleOperation id used to retrieve getCircleOperation data.
      */
-    Observable<CycleOperation> getCircleOperation(final int userId);
+    Observable<CycleOperation> getCircleOperation(final String userId);
 
     /**
      * Add CycleOperation into our local storage

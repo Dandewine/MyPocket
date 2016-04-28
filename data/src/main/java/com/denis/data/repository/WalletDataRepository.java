@@ -30,7 +30,7 @@ public class WalletDataRepository implements WalletRepository {
     }
 
     @Override
-    public Observable<Wallet> getWallet(int userId) {
+    public Observable<Wallet> getWallet(String userId) {
         return walletDataStore.getWalletEntity(userId)
                 .map(walletDataMapper::fromEntity);
     }

@@ -29,7 +29,7 @@ public class TransactionDataRepository implements TransactionRepository {
     }
 
     @Override
-    public Observable<Transaction> getTransaction(int transactionId) {
+    public Observable<Transaction> getTransaction(String transactionId) {
         return dataStore.getTransactionEntity(transactionId).map(dataMapper::fromEntity);
     }
 

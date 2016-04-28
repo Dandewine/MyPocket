@@ -1,7 +1,10 @@
 package com.denis.mypocket.viewmodel.auth;
 
+import android.text.TextUtils;
+
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
+import com.denis.domain.models.User;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.viewmodel.ViewModel;
@@ -16,23 +19,27 @@ public class SplashViewModel implements ViewModel {
     private UseCase<String> tokenGetUseCase;
     private UseCase<UserModel> userGetUseCase;
 
+    private boolean isUserExist = false, isTokenExist = false;
+
     @Inject
     public SplashViewModel(UseCase<String> tokenGetUseCase, UseCase<UserModel> userGetUseCase) {
         this.tokenGetUseCase = tokenGetUseCase;
         this.userGetUseCase = userGetUseCase;
     }
 
-    public void execute(){
+    public boolean execute() {
         tokenGetUseCase.executeSync(new TokenGetSubscriber());
         userGetUseCase.executeSync(new UserGetSubscriber());
+        return isUserExist && isTokenExist;
     }
 
     @Override
     public void destroy() {
-
+        tokenGetUseCase.unSubscribe();
+        userGetUseCase.unSubscribe();
     }
 
-    private class TokenGetSubscriber extends DefaultSubscriber<String>{
+    private class TokenGetSubscriber extends DefaultSubscriber<String> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -45,11 +52,12 @@ public class SplashViewModel implements ViewModel {
 
         @Override
         public void onNext(String s) {
-            super.onNext(s);
+            if (!TextUtils.isEmpty(s))
+                isTokenExist = true;
         }
     }
 
-    private class UserGetSubscriber extends DefaultSubscriber<UserModel>{
+    private class UserGetSubscriber extends DefaultSubscriber<User> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -61,8 +69,14 @@ public class SplashViewModel implements ViewModel {
         }
 
         @Override
-        public void onNext(UserModel userModel) {
-            super.onNext(userModel);
+        public void onNext(User user) {
+            isUserExist = isUserValid(user);
         }
+    }
+
+    private boolean isUserValid(User userModel) {
+        return userModel.getEmail() != null &&
+                userModel.getUsername() != null &&
+                userModel.getEmail() != null;
     }
 }

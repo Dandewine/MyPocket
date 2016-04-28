@@ -24,7 +24,7 @@ public class DebtsOperationLocalDataStore implements DebtsDataStore {
     }
 
     @Override
-    public Observable<DebtEntity> getDebtEntity(int categoryId) {
+    public Observable<DebtEntity> getDebtEntity(String categoryId) {
         return realmStore.get(categoryId);
     }
 

@@ -21,7 +21,7 @@ public class IncomeCateforyLocalDataStore implements IncomeCategoryDataStore {
     }
 
     @Override
-    public Observable<IncomeCategoryEntity> getIncomeCategoryEntity(int categoryId) {
+    public Observable<IncomeCategoryEntity> getIncomeCategoryEntity(String categoryId) {
         return realmStore.get(categoryId);
     }
 

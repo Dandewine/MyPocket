@@ -13,7 +13,7 @@ public interface CycleOperationDataStore {
      *
      * @param categoryId The id to retrieve wallet data.
      */
-    Observable<CycleOperationEntity> getCircleOperationEntity(final int categoryId);
+    Observable<CycleOperationEntity> getCircleOperationEntity(final String categoryId);
 
     /**
      * Get an {@link rx.Observable} which will emit a List of {@link CycleOperationEntity}.

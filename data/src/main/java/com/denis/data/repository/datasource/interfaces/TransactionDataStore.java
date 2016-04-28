@@ -12,7 +12,7 @@ public interface TransactionDataStore {
      *Get an {@link rx.Observable} which will emit a {@link TransactionEntity} by its id.
      * @param transactionId The id to retrieve wallet data.
      */
-    Observable<TransactionEntity> getTransactionEntity(final int transactionId);
+    Observable<TransactionEntity> getTransactionEntity(final String transactionId);
     /**
      * Get an {@link rx.Observable} which will emit a List of {@link TransactionEntity}.
      */
