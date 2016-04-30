@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.mypocket.R;
@@ -44,7 +43,6 @@ public class SplashActivity extends BaseActivity {
                             startTabs();
                         else
                             startLogin();
-
                     }
                 });
     }

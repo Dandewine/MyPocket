@@ -1,5 +1,6 @@
 package com.denis.data.rest;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.denis.data.DataConstants;
@@ -7,7 +8,6 @@ import com.denis.domain.RestClient;
 import com.denis.domain.interactor.UseCase;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,6 +36,7 @@ public class RestClientRetrofit implements RestClient {
     }
 
     private void init() {
+        Log.i("RestClient","Rest client initialization");
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new TokenInterceptor(tokenUseCase))
                 .addInterceptor(getLoggerInterceptor())
@@ -64,11 +65,11 @@ public class RestClientRetrofit implements RestClient {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
-            token = token == null ? getToken() : token;
+            token = (token == null || TextUtils.isEmpty(token)) ? getToken() : token;
 
             Request request = chain.request();
             request = request.newBuilder()
-                    .addHeader("Authorization",token)
+                    .addHeader("Authorization","Bearer "+token)
                     .build();
             return chain.proceed(request);
         }

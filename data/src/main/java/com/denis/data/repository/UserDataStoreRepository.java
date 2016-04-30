@@ -12,9 +12,6 @@ import com.denis.domain.repository.UserRepository;
 import java.util.List;
 
 import rx.Observable;
-import rx.Scheduler;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by denis on 4/10/16.
@@ -54,5 +51,10 @@ public class UserDataStoreRepository implements UserRepository {
     @Override
     public Observable<List<User>> getAll() {
         return userDataStore.getAll().map(userDataMapper::fromEntity);
+    }
+
+    @Override
+    public Observable logout() {
+        return userDataStore.update();
     }
 }

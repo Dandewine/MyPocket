@@ -20,6 +20,7 @@ public abstract class UseCase<Argument> {
         this.threadExecutor = threadExecutor;
         this.postExecutionThread = postExecutionThread;
     }
+
     /**
      * Builds an {@link rx.Observable} which will be used when executing the current {@link UseCase}.
      */
@@ -40,7 +41,7 @@ public abstract class UseCase<Argument> {
     }
 
     @SuppressWarnings("unchecked")
-    public void executeSync(Subscriber useCaseSubscriber, Argument... arg){
+    public void executeSync(Subscriber useCaseSubscriber, Argument... arg) {
         this.subscription = this.buildUseCaseObservable(arg)
                 .subscribe(useCaseSubscriber);
     }

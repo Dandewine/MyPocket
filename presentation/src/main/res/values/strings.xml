@@ -39,4 +39,6 @@
     <string name="email_error">Please provide a valid email address</string>
     <string name="password_error">Password should be 6-20 length and contain at least one digit and one uppercase letter</string>
     <string name="username_not_valid">Please provide a valid username, (3-10 symbols, a-Z, 0-9)</string>
+    <string name="Logout">Logout</string>
+    <string name="other">Other</string>
 </resources>

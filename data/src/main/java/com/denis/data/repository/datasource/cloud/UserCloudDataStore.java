@@ -64,7 +64,7 @@ public class UserCloudDataStore implements UserDataStore {
         return Observable.just(loginResponseEntity);
     }
 
-    /**
+    /** Use this when you need registration
      * @param userEntity
      * @return
      */
@@ -87,9 +87,20 @@ public class UserCloudDataStore implements UserDataStore {
         );
     }
 
+    /**
+     * Use this when you need logout
+     * @return
+     */
     @Override
-    public Observable<UserEntity> update() {
-        throw new UnsupportedOperationException("Can't update user yet");
+    public Observable update() {
+        Call<Void> logout = authService.logout();
+        int code = 0;
+        try {
+            code = logout.execute().code();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Observable.just(code);
     }
 
     @Override

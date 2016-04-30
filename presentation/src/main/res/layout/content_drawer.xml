@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.denis.mypocket.viewmodel.DrawerNavViewModel" />
+    </data>
+
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_content"
@@ -49,7 +56,8 @@
             android:visibility="invisible"
             app:backgroundTint="@color/fab_income"
             app:elevation="6dp"
-            app:pressedTranslationZ="12dp"/>
+            android:onClick="@{viewModel}"
+            app:pressedTranslationZ="12dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addExpenseTrans"
@@ -64,6 +72,7 @@
             android:visibility="invisible"
             app:backgroundTint="@color/fab_outcome"
             app:elevation="6dp"
+            android:onClick="@{viewModel}"
             app:pressedTranslationZ="12dp" />
 
         <android.support.design.widget.FloatingActionButton
@@ -72,8 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/vector_plus"
-             />
+            android:onClick="@{viewModel}"
+            android:src="@drawable/vector_plus" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabCyclic"
@@ -81,12 +90,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:visibility="invisible"
-            android:src="@drawable/vector_plus"
-            app:backgroundTint="@color/d2m_bg_warning_1"
+            android:alpha="0"
             android:scaleX="0"
             android:scaleY="0"
-            android:alpha="0"/>
+            android:src="@drawable/vector_plus"
+            android:visibility="invisible"
+            android:onClick="@{viewModel}"
+            app:backgroundTint="@color/d2m_bg_warning_1" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabSaves"
@@ -94,12 +104,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:visibility="invisible"
-            android:src="@drawable/vector_plus"
-            app:backgroundTint="@color/d2m_bg_warning_3"
+            android:alpha="0"
             android:scaleX="0"
             android:scaleY="0"
-            android:alpha="0"/>
+            android:src="@drawable/vector_plus"
+            android:visibility="invisible"
+            android:onClick="@{viewModel}"
+            app:backgroundTint="@color/d2m_bg_warning_3" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabStats"
@@ -107,12 +118,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:visibility="invisible"
-            android:src="@drawable/vector_plus"
-            app:backgroundTint="@color/fab_income"
+            android:alpha="0"
             android:scaleX="0"
             android:scaleY="0"
-            android:alpha="0"/>
+            android:src="@drawable/vector_plus"
+            android:onClick="@{viewModel}"
+            android:visibility="invisible"
+            app:backgroundTint="@color/fab_income" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

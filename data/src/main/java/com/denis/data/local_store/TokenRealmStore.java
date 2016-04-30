@@ -33,9 +33,10 @@ public class TokenRealmStore implements RealmStore<Token> {
         if (!TextUtils.equals(Thread.currentThread().getName(), "main")) {
             Realm realm = Realm.getDefaultInstance();
             Token first = realm.where(Token.class).findFirst();
+            String temp = first != null ? first.getToken() : "";
             realm.close();
-            if (first != null)
-                return first.asObservable().map(realmObject -> (Token) realmObject);
+            if (temp != null)
+                return Observable.just(new Token(temp));
             else
                 return Observable.just(null);
         } else {
@@ -50,7 +51,7 @@ public class TokenRealmStore implements RealmStore<Token> {
     @Override
     public Observable<Token> put(Token item) {
         realm.beginTransaction();
-        realm.clear(Token.class);
+        realm.delete(Token.class);
         Token token = realm.copyToRealm(item);
         realm.commitTransaction();
         return Observable.just(token);

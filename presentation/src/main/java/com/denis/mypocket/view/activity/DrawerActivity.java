@@ -25,7 +25,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,9 +34,14 @@ import android.view.animation.Interpolator;
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
+import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
+import com.denis.mypocket.internal.di.modules.DrawerModule;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
+import com.denis.mypocket.viewmodel.DrawerNavViewModel;
+
+import javax.inject.Inject;
 
 public class DrawerActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -52,6 +56,7 @@ public class DrawerActivity extends BaseActivity implements
     private boolean[] currentlyPageShown = {true, false, false, false}; //need to indicate which button is showing
     private FloatingActionButton[] fabMassive;
 
+    @Inject DrawerNavViewModel viewModel;
 
     public static Intent getCallingIntent(Context context){
         return new Intent(context,DrawerActivity.class);
@@ -191,6 +196,7 @@ public class DrawerActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityDrawerBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_drawer);
+        binding.setViewModel(viewModel);
 
         Toolbar toolbar = binding.content.toolbar;
         configireToolbar(toolbar, R.string.app_name, false);
@@ -250,6 +256,7 @@ public class DrawerActivity extends BaseActivity implements
             case R.id.fabStats:
                 Snackbar.make(fabStats, "Stats", Snackbar.LENGTH_SHORT).show();
                 break;
+
 
             default:
                 throw new IllegalArgumentException("Can't recognize incoming ID");
@@ -350,6 +357,8 @@ public class DrawerActivity extends BaseActivity implements
             replaceFragment(R.id.containerDrawer, CycleOperationFragment.newInstance());
         } else if (id == R.id.nav_transactions) {
             replaceFragment(R.id.containerDrawer, TransactionsFragment.newInstance());
+        } else if (id == R.id.nav_logout_MD) {
+            viewModel.logout();
         }
 
         mDrawer.closeDrawer(GravityCompat.START);
@@ -358,7 +367,10 @@ public class DrawerActivity extends BaseActivity implements
 
     @Override
     protected void initDIComponent() {
-
+        DaggerDrawerComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .drawerModule(new DrawerModule())
+                .build().inject(this);
     }
 
     /**

@@ -28,6 +28,7 @@ public interface UserRepository {
 
 
     Observable<LoginResponse> login(String body);
+    Observable logout();
 
     Observable<List<User>> getAll();
 }
