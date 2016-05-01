@@ -17,11 +17,14 @@ import javax.inject.Inject;
 @PerActivity
 public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
     private UseCase logoutUseCase;
+    private UseCase deleteUser, deleteTokenUseCase;
     private Context context;
 
     @Inject
-    public DrawerNavViewModel(UseCase logoutUseCase, Context context) {
+    public DrawerNavViewModel(UseCase logoutUseCase, UseCase deleteUser, UseCase deleteTokenUseCase, Context context) {
         this.logoutUseCase = logoutUseCase;
+        this.deleteUser = deleteUser;
+        this.deleteTokenUseCase = deleteTokenUseCase;
         this.context = context;
     }
 
@@ -33,7 +36,6 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
     public void logout() {
         logoutUseCase.executeAsync(new LogoutSubscriber());
     }
-
 
     @Override
     public void onClick(View v) {
@@ -77,6 +79,22 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
         @Override
         public void onNext(Integer integer) {
             Log.d("myTag", "code = " + integer);
+            deleteUser.executeSync(new DeleteUserSubscriber());
+            deleteTokenUseCase.executeSync(new DeleteTokenSubscriber());
+        }
+    }
+
+    private class DeleteUserSubscriber extends DefaultSubscriber<Boolean> {
+        @Override
+        public void onNext(Boolean aBoolean) {
+            Log.d("myTag","" +aBoolean);
+        }
+    }
+
+    private class DeleteTokenSubscriber extends DefaultSubscriber<Boolean> {
+        @Override
+        public void onNext(Boolean o) {
+            Log.d("myTag","" +o);
         }
     }
 }

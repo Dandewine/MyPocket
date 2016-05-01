@@ -68,4 +68,10 @@ public class UserRealmStore implements RealmStore<UserEntity> {
         }
         return itemList;
     }
+
+    @Override
+    public Observable delete(UserEntity item) {
+        realm.executeTransaction(r -> realm.delete(UserEntity.class));
+        return Observable.just(true);
+    }
 }

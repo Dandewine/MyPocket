@@ -48,4 +48,9 @@ public class ExpenseCategoriesStore implements RealmStore<ExpenseCategoryEntity>
     public Observable<ExpenseCategoryEntity> update(ExpenseCategoryEntity item) {
         return Observable.just(mRealm.copyToRealmOrUpdate(item));
     }
+
+    @Override
+    public Observable delete(ExpenseCategoryEntity item) {
+        return null;
+    }
 }

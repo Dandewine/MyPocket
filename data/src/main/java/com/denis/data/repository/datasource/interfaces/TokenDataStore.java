@@ -10,4 +10,5 @@ import rx.Observable;
 public interface TokenDataStore {
     Observable<Token> get();
     Observable<Token> put(Token token);
+    Observable<Boolean> delete();
 }

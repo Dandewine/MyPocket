@@ -15,9 +15,12 @@
  */
 package com.denis.domain.interactor;
 
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
+
 /**
  * Default subscriber base class to be used whenever you want default error handling.
  */
+@RxLogSubscriber
 public class DefaultSubscriber<T> extends rx.Subscriber<T> {
   @Override public void onCompleted() {
     // no-op by default.

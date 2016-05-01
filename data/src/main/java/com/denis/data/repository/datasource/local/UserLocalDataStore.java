@@ -46,4 +46,9 @@ public class UserLocalDataStore implements UserDataStore {
     public Observable<List<UserEntity>> getAll() {
         return realmStore.getList();
     }
+
+    @Override
+    public Observable deleteUser() {
+        return realmStore.delete(null);
+    }
 }

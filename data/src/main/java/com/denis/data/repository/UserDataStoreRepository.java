@@ -3,7 +3,6 @@ package com.denis.data.repository;
 import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.entity.mapper.EntityMapper;
-import com.denis.data.entity.mapper.UserDataMapper;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
@@ -18,13 +17,13 @@ import rx.Observable;
  */
 public class UserDataStoreRepository implements UserRepository {
 
-    private UserDataMapper userDataMapper;
+    private EntityMapper<UserEntity, User> userDataMapper;
     private UserDataStore userDataStore;
     private EntityMapper<LoginResponseEntity,LoginResponse> loginResponseMapper;
 
-    public UserDataStoreRepository(UserDataMapper userDataMapper, UserDataStore userDataStore,
+    public UserDataStoreRepository(EntityMapper<UserEntity, User> mapper, UserDataStore userDataStore,
                                    EntityMapper<LoginResponseEntity,LoginResponse> loginResponseMapper) {
-        this.userDataMapper = userDataMapper;
+        this.userDataMapper = mapper;
         this.userDataStore = userDataStore;
         this.loginResponseMapper = loginResponseMapper;
     }
@@ -54,7 +53,12 @@ public class UserDataStoreRepository implements UserRepository {
     }
 
     @Override
-    public Observable logout() {
+    public Observable update() {
         return userDataStore.update();
+    }
+
+    @Override
+    public Observable deleteUser() {
+        return userDataStore.deleteUser();
     }
 }

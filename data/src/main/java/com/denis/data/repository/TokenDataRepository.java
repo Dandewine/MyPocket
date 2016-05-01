@@ -31,4 +31,9 @@ public class TokenDataRepository implements TokenRepository {
     public Observable<String> put(String token) {
         return tokenDataStore.put(new Token(token)).map(Token::getToken);
     }
+
+    @Override
+    public Observable<Boolean> delete() {
+        return tokenDataStore.delete();
+    }
 }

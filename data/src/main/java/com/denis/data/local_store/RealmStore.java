@@ -14,4 +14,5 @@ public interface RealmStore<T>  {
     Observable<List<T>> put(Collection<T> collection);
     Observable<T> update(T item);
     Observable<List<T>> getList();
+    Observable<Boolean> delete(T item);
 }

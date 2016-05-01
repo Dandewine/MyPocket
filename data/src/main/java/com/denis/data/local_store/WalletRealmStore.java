@@ -61,4 +61,9 @@ public class WalletRealmStore implements RealmStore<WalletEntity> {
         mRealm.commitTransaction();
         return Observable.just(update);
     }
+
+    @Override
+    public Observable delete(WalletEntity item) {
+        return null;
+    }
 }

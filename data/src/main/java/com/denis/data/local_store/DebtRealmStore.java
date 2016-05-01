@@ -56,4 +56,9 @@ public class DebtRealmStore implements RealmStore<DebtEntity> {
     public Observable<List<DebtEntity>> getList() {
         return Observable.just(mRealm.where(DebtEntity.class).findAllSorted("id"));
     }
+
+    @Override
+    public Observable delete(DebtEntity item) {
+        return null;
+    }
 }

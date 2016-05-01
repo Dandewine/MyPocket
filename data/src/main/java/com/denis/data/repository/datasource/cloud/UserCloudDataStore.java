@@ -88,7 +88,7 @@ public class UserCloudDataStore implements UserDataStore {
     }
 
     /**
-     * Use this when you need logout
+     * Use this when you need update
      * @return
      */
     @Override
@@ -105,6 +105,11 @@ public class UserCloudDataStore implements UserDataStore {
 
     @Override
     public Observable<List<UserEntity>> getAll() {
+        throw new UnsupportedOperationException("Can't do this");
+    }
+
+    @Override
+    public Observable deleteUser() {
         throw new UnsupportedOperationException("Can't do this");
     }
 }

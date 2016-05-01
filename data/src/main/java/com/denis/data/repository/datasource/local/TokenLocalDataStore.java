@@ -31,4 +31,9 @@ public class TokenLocalDataStore implements TokenDataStore {
     public Observable<Token> put(Token token) {
         return tokenRealmStore.put(token);
     }
+
+    @Override
+    public Observable<Boolean> delete() {
+        return tokenRealmStore.delete(null);
+    }
 }

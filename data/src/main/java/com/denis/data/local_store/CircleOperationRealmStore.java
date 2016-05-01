@@ -52,4 +52,9 @@ public class CircleOperationRealmStore implements RealmStore<CycleOperationEntit
     public Observable<CycleOperationEntity> update(CycleOperationEntity item) {
         return Observable.just(mRealm.copyToRealmOrUpdate(item));
     }
+
+    @Override
+    public Observable delete(CycleOperationEntity item) {
+        return null;
+    }
 }

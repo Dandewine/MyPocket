@@ -84,4 +84,9 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
     public Observable<IncomeCategoryEntity> update(IncomeCategoryEntity item) {
         return Observable.just(mRealm.copyToRealmOrUpdate(item));
     }
+
+    @Override
+    public Observable delete(IncomeCategoryEntity item) {
+        return null;
+    }
 }

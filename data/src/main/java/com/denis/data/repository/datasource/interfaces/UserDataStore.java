@@ -28,4 +28,6 @@ public interface UserDataStore {
 
 
     Observable<List<UserEntity>> getAll();
+
+    Observable deleteUser();
 }

@@ -370,6 +370,7 @@ public class DrawerActivity extends BaseActivity implements
         DaggerDrawerComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .drawerModule(new DrawerModule())
+                .activityModule(getActivityModule())
                 .build().inject(this);
     }
 

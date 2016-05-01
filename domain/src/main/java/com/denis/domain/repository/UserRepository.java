@@ -17,7 +17,7 @@ public interface UserRepository {
      * @param UserId The getUser id used to retrieve getUser data.
      */
     Observable<User> getUser(final String UserId);
-
+    Observable<LoginResponse> login(String body);
     /**
      * Add User into our local storage
      * @param user
@@ -26,9 +26,9 @@ public interface UserRepository {
 
     Observable<User> addUser(User user);
 
+    Observable deleteUser();
 
-    Observable<LoginResponse> login(String body);
-    Observable logout();
+    Observable update();
 
     Observable<List<User>> getAll();
 }

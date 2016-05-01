@@ -1,4 +1,4 @@
-package com.denis.domain.interactor.auth;
+package com.denis.domain.interactor.user;
 
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
@@ -8,18 +8,18 @@ import com.denis.domain.repository.UserRepository;
 import rx.Observable;
 
 /**
- * Created by denis on 4/29/16.
+ * Created by denis on 4/30/16.
  */
-public class LogoutUseCase extends UseCase {
-    private UserRepository userRepository;
+public class DeleteUserUseCase extends UseCase {
+    private UserRepository repository;
 
-    public LogoutUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, UserRepository userRepository) {
+    public DeleteUserUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, UserRepository repository) {
         super(threadExecutor, postExecutionThread);
-        this.userRepository = userRepository;
+        this.repository = repository;
     }
 
     @Override
     protected Observable buildUseCaseObservable(Object... arg) {
-        return userRepository.update();
+        return repository.deleteUser();
     }
 }

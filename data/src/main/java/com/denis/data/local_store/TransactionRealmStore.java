@@ -52,4 +52,9 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
     public Observable<TransactionEntity> update(TransactionEntity item) {
         return Observable.just(realm.copyToRealmOrUpdate(item));
     }
+
+    @Override
+    public Observable delete(TransactionEntity item) {
+        return null;
+    }
 }

@@ -71,4 +71,10 @@ public class TokenRealmStore implements RealmStore<Token> {
     public Observable<List<Token>> getList() {
         throw new UnsupportedOperationException("Can't do this with token");
     }
+
+    @Override
+    public Observable<Boolean> delete(Token item) {
+        realm.executeTransaction(r -> r.delete(Token.class));
+        return Observable.just(true);
+    }
 }

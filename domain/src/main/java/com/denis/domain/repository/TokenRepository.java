@@ -8,4 +8,5 @@ import rx.Observable;
 public interface TokenRepository {
     Observable<String> get();
     Observable<String> put(String token);
+    Observable<Boolean> delete();
 }
