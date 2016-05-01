@@ -1,6 +1,7 @@
 package com.denis.mypocket.viewmodel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
@@ -8,8 +9,10 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 
 import javax.inject.Inject;
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by denis on 4/29/16.
@@ -65,6 +68,7 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
         }
     }
 
+    @RxLogSubscriber
     private class LogoutSubscriber extends DefaultSubscriber<Integer> {
         @Override
         public void onCompleted() {
@@ -78,23 +82,29 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
 
         @Override
         public void onNext(Integer integer) {
-            Log.d("myTag", "code = " + integer);
-            deleteUser.executeSync(new DeleteUserSubscriber());
-            deleteTokenUseCase.executeSync(new DeleteTokenSubscriber());
+            if (integer == HttpsURLConnection.HTTP_OK) {
+                deleteUser.executeSync(new DeleteUserSubscriber());
+            }
         }
     }
 
+    @RxLogSubscriber
     private class DeleteUserSubscriber extends DefaultSubscriber<Boolean> {
         @Override
         public void onNext(Boolean aBoolean) {
-            Log.d("myTag","" +aBoolean);
+            if (aBoolean)
+                deleteTokenUseCase.executeSync(new DeleteTokenSubscriber());
         }
     }
 
+    @RxLogSubscriber
     private class DeleteTokenSubscriber extends DefaultSubscriber<Boolean> {
         @Override
         public void onNext(Boolean o) {
-            Log.d("myTag","" +o);
+            String packageName = context.getPackageName();
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
     }
 }
