@@ -3,13 +3,10 @@ package com.denis.mypocket.viewmodel.auth;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
-import android.support.annotation.MainThread;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -17,7 +14,6 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
-import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.view.activity.DrawerActivity;
@@ -27,15 +23,15 @@ import com.google.gson.Gson;
 
 import java.util.regex.Pattern;
 
-import rx.Observer;
-import rx.observers.SafeSubscriber;
-
 /**
  * Created by denis on 4/22/16.
  */
 public class LoginViewModel implements ViewModel {
-    private UseCase<String> loginUserCase, tokenSaveUseCase;
+
+    private UseCase<String> loginUserCase;
+    private UseCase<String> tokenSaveUseCase;
     private UseCase<User> userSaveUseCase;
+
     public String email = "", password = "";
     private Context context;
 
@@ -86,7 +82,6 @@ public class LoginViewModel implements ViewModel {
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailError.set(context.getResources().getString(R.string.email_error));
-            Log.d("myTag", "email is not valid");
         } else {
             emailError.set(null);
             blankSpaceCallback.clear();
@@ -104,7 +99,6 @@ public class LoginViewModel implements ViewModel {
 
         if (!Pattern.matches("^[a-zA-Z0-9._-]{6,20}$", password)) {
             passwordError.set(context.getResources().getString(R.string.password_error));
-            Log.d("myTag", "password is not valid");
         } else {
             passwordError.set(null);
             blankSpaceCallback.clear();
@@ -146,13 +140,18 @@ public class LoginViewModel implements ViewModel {
         @Override
         public void onNext(LoginResponse data) {
             if (data != null) {
-                saveUserData(data.getToken(), data.getUser());
-                Intent intent = DrawerActivity.getCallingIntent(context);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
-                ((Activity) context).finish();
+                startDrawerActivity(data);
+            }else{
+                prorgessBarVisibility.set(View.GONE);
             }
         }
+    }
+
+    private void startDrawerActivity(LoginResponse data){
+        Intent intent = DrawerActivity.getCallingIntent(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+        ((Activity) context).finish();
     }
 
     private void saveUserData(String token, User user) {

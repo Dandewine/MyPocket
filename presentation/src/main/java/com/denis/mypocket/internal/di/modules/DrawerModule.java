@@ -21,6 +21,7 @@ import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.auth.DeleteTokenUseCase;
 import com.denis.domain.interactor.auth.LogoutUseCase;
 import com.denis.domain.interactor.user.DeleteUserUseCase;
+import com.denis.domain.interactor.user.GetAllUsers;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.repository.TokenRepository;
@@ -44,8 +45,9 @@ public class DrawerModule {
     DrawerNavViewModel provideViewModel (@Named("logout") UseCase logoutUseCase,
                                          @Named("delete_user") UseCase deleteUser,
                                          @Named("delete_token") UseCase deleteTokenUseCase,
+                                         @Named("user_get_local") UseCase<User> getUserUseCase,
                                          @Named("activity") Context context) {
-        return new DrawerNavViewModel(logoutUseCase, deleteUser, deleteTokenUseCase, context);
+        return new DrawerNavViewModel(logoutUseCase, deleteUser, deleteTokenUseCase, getUserUseCase, context);
     }
 
     //region provide LogoutUseCase
@@ -99,6 +101,14 @@ public class DrawerModule {
     @Provides @PerActivity @Named("delete_token")
     UseCase provideDeleteTokenUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread, TokenRepository repository){
         return new DeleteTokenUseCase(executor,postExecutionThread,repository);
+    }
+    //endregion
+
+    //region provide GetUserUseCase
+    @Provides @PerActivity @Named("user_get_local")
+    UseCase<User> provideGetUserUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread,
+                                                         @Named("local") UserRepository repository){
+        return new GetAllUsers(executor,postExecutionThread,repository);
     }
     //endregion
 

@@ -6,6 +6,9 @@
         <variable
             name="viewModel"
             type="com.denis.mypocket.viewmodel.DrawerNavViewModel" />
+        <variable
+            name="user"
+            type="com.denis.mypocket.model.UserModel"/>
     </data>
 
     <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"

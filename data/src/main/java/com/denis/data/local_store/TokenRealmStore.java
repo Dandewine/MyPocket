@@ -38,13 +38,13 @@ public class TokenRealmStore implements RealmStore<Token> {
             if (temp != null)
                 return Observable.just(new Token(temp));
             else
-                return Observable.just(null);
+                return Observable.just(new Token(""));
         } else {
             Token token = realm.where(Token.class).findFirst();
             if (token != null)
                 return token.asObservable().map(realmObject -> (Token) realmObject);
             else
-                return Observable.just(null);
+                return Observable.just(new Token(""));
         }
     }
 

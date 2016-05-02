@@ -2,6 +2,7 @@ package com.denis.domain.interactor;
 
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -24,6 +25,7 @@ public abstract class UseCase<Argument> {
     /**
      * Builds an {@link rx.Observable} which will be used when executing the current {@link UseCase}.
      */
+    @RxLogObservable
     protected abstract Observable buildUseCaseObservable(Argument... arg);
 
     /**

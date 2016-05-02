@@ -34,8 +34,10 @@ import android.view.animation.Interpolator;
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
+import com.denis.mypocket.databinding.NavDrawerHeaderBinding;
 import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
 import com.denis.mypocket.internal.di.modules.DrawerModule;
+import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
@@ -199,6 +201,12 @@ public class DrawerActivity extends BaseActivity implements
         binding.setViewModel(viewModel);
 
         Toolbar toolbar = binding.content.toolbar;
+
+        View view = binding.navView.getHeaderView(0);
+        NavDrawerHeaderBinding headerBinding = NavDrawerHeaderBinding.bind(view);
+        UserModel userModel = viewModel.getUser();
+        headerBinding.setUser(userModel);
+
         configireToolbar(toolbar, R.string.app_name, false);
 
         initAnimations();

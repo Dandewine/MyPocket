@@ -1,6 +1,5 @@
 package com.denis.data.rest;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.denis.data.DataConstants;
@@ -65,7 +64,8 @@ public class RestClientRetrofit implements RestClient {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
-            token = (token == null || TextUtils.isEmpty(token)) ? getToken() : token;
+            //token = (token == null || TextUtils.isEmpty(token)) ? getToken() : token;
+            token = getToken();
 
             Request request = chain.request();
             request = request.newBuilder()
