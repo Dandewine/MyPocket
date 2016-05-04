@@ -7,25 +7,25 @@ import io.realm.annotations.PrimaryKey;
  * Created by denis on 2/20/16.
  */
 public class DebtEntity extends RealmObject {
-    @PrimaryKey private int id;
+    @PrimaryKey private String id;
     private String name;
     private long startDate;
     private long endDate;
     private float amount;
     private String person;
 
-    public DebtEntity(int id) {
+    public DebtEntity(String id) {
         this.id = id;
     }
 
     public DebtEntity() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

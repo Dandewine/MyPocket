@@ -29,9 +29,9 @@ public class DebtRealmStore implements RealmStore<DebtEntity> {
 
     @Override
     public Observable<DebtEntity> put(DebtEntity item) {
-        Number max = mRealm.where(DebtEntity.class).max("id");
-        int nextId = max == null ? 0 : max.intValue() + 1;
-        item.setId(nextId);
+      /*  Number max = mRealm.where(DebtEntity.class).max("id");
+        String nextId = max == null ? 0 : max.intValue() + 1;
+        item.setId(nextId);*/
 
         mRealm.beginTransaction();
         DebtEntity debtEntity = mRealm.copyToRealmOrUpdate(item);

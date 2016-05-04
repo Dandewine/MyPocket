@@ -81,7 +81,6 @@ public class RegistrationViewModel implements ViewModel {
         }
         if (!Pattern.matches("^[a-zA-Z0-9._-]{3,10}$", userName)) {
             userNameError.set(context.getResources().getString(R.string.username_not_valid));
-            Log.d("myTag", "username is not valid");
         } else {
             userNameError.set(null);
             blankSpaceCallback.clear();

@@ -2,24 +2,24 @@ package com.denis.domain.models;
 
 
 public class Debt {
-    private int id;
+    private String id;
     private String name;
     private long startDate;
     private long endDate;
     private float amount;
     private String person;
 
-    public Debt(int id) {
+    public Debt(String id) {
         this.id = id;
     }
 
     public Debt() {}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

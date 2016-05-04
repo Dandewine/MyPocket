@@ -7,7 +7,7 @@ public class ExpenseCategoryEntity extends RealmObject {
     @PrimaryKey
     private int id;
     private String name;
-    private String path;
+    private String path; //reference to .img
 
     public ExpenseCategoryEntity(int id) {
         this.id = id;
