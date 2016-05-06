@@ -4,7 +4,6 @@ import com.denis.data.entity.WalletEntity;
 import com.denis.domain.models.Wallet;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,7 +27,7 @@ public class WalletDataMapper implements EntityMapper<WalletEntity, Wallet> {
             wallet = new Wallet(walletEntity.getId());
             wallet.setBalance(walletEntity.getBalance());
             wallet.setCurrency(walletEntity.getCurrency());
-            wallet.setName(walletEntity.getName());
+            wallet.setWalletName(walletEntity.getName());
         }
         return wallet;
     }
@@ -71,7 +70,7 @@ public class WalletDataMapper implements EntityMapper<WalletEntity, Wallet> {
     public WalletEntity toEntity(Wallet wallet) {
         WalletEntity entity = null;
         if (wallet != null) {
-            entity = new WalletEntity(wallet.getId(), wallet.getName(), wallet.getCurrency(), wallet.getBalance());
+            entity = new WalletEntity(wallet.getId(), wallet.getWalletName(), wallet.getCurrency(), wallet.getBalance());
         }
         return entity;
     }

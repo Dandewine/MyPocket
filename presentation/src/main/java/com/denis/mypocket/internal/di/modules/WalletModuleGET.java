@@ -43,8 +43,10 @@ public class WalletModuleGET {
         return new WalletDataMapper();
     }
 
-    @Provides @PerActivity WalletDataStore provideWalletDataStore(WalletService walletService, UserDataStore dataStore){
-        return new WalletCloudDataStore(walletService,dataStore);
+    @Provides @PerActivity WalletDataStore provideWalletDataStore(WalletService walletService,
+                                                                  UserDataStore dataStore,
+                                                                  WalletDataMapper mapper){
+        return new WalletCloudDataStore(walletService,dataStore, mapper);
     }
 
     @Provides @PerActivity WalletService provideWalletService(RestClient restClient){
@@ -58,4 +60,5 @@ public class WalletModuleGET {
     @Provides @PerActivity RealmStore<UserEntity> provideRealmStore(Realm realm){
         return new UserRealmStore(realm);
     }
+
 }

@@ -64,12 +64,12 @@ public class RestClientRetrofit implements RestClient {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
-            //token = (token == null || TextUtils.isEmpty(token)) ? getToken() : token;
             token = getToken();
 
             Request request = chain.request();
             request = request.newBuilder()
                     .addHeader("Authorization","Bearer "+token)
+                    .addHeader("Content-Type","application/json")
                     .build();
             return chain.proceed(request);
         }

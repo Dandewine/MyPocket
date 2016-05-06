@@ -5,35 +5,29 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.denis.domain.interactor.DefaultSubscriber;
-import com.denis.domain.interactor.cycle_operations.AddCircleOperationUseCase;
 import com.denis.domain.models.CycleOperation;
-import com.denis.mypocket.MyPocketApp;
-import com.denis.mypocket.internal.di.components.ApplicationComponent;
-import com.denis.mypocket.internal.di.components.DaggerAddCycleOPComponent;
-
-import javax.inject.Inject;
 
 /**
  * Will create a new ViewModel instance, even if we already has existing one
  */
 public class CycleOperationBroadcast extends BroadcastReceiver {
 
-    @Inject public AddCircleOperationUseCase useCase;
+  //  @Inject public AddCircleOperationUseCase useCase;
     private static int notificationID = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         initDI();
         CycleOperation operation = intent.getParcelableExtra("data");
-        useCase.executeSync(new AlarmSetterSubscriber(context), operation);
+        //useCase.executeSync(new AlarmSetterSubscriber(context), operation);
         generateNotification(context);
     }
 
     private void initDI() {
-        ApplicationComponent component = MyPocketApp.getPocketApp().getApplicationComponent();
+      /*  ApplicationComponent component = MyPocketApp.getPocketApp().getApplicationComponent();
         DaggerAddCycleOPComponent.builder()
                 .applicationComponent(component)
-                .build().inject(this);
+                .build().inject(this);*/
     }
 
     private void generateNotification(Context context) {

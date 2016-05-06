@@ -1,32 +1,8 @@
 package com.denis.mypocket.internal.di.modules;
 
-import android.util.Log;
-
-import com.denis.data.entity.mapper.CycleOperationDataMapper;
-import com.denis.data.entity.mapper.TransactionDataMapper;
-import com.denis.data.local_store.CircleOperationRealmStore;
-import com.denis.data.local_store.RealmStore;
-import com.denis.data.repository.CycleOperationDataRepository;
-import com.denis.data.repository.datasource.interfaces.CycleOperationDataStore;
-import com.denis.data.repository.datasource.local.CycleOperationLocalDataStore;
-import com.denis.domain.executor.PostExecutionThread;
-import com.denis.domain.executor.ThreadExecutor;
-import com.denis.domain.interactor.UseCase;
-import com.denis.domain.interactor.cycle_operations.GetAllCycleOperationUseCase;
-import com.denis.domain.repository.CycleOperationRepository;
-import com.denis.mypocket.internal.di.PerFragment;
-import com.denis.mypocket.model.mapper.CycleOperationModelMapper;
-import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
-import com.denis.mypocket.model.mapper.WalletModelDataMapper;
-import com.denis.mypocket.utils.PLTags;
-import com.denis.mypocket.viewmodel.getting.GetCycleOperationViewModel;
-
-import dagger.Module;
-import dagger.Provides;
-import io.realm.Realm;
-
-@Module
+//@Module
 public class GetCycleOperationViewModelModule {
+/*
 
     public GetCycleOperationViewModelModule() {
         Log.d(PLTags.INSTANCE_TAG,"get cycle operation module "+hashCode());
@@ -71,6 +47,7 @@ public class GetCycleOperationViewModelModule {
     @Provides @PerFragment GetCycleOperationViewModel provideViewModel(UseCase useCase, CycleOperationModelMapper modelMapper){
         return new GetCycleOperationViewModel(useCase, modelMapper);
     }
+*/
 
 
 }

@@ -2,16 +2,16 @@ package com.denis.mypocket.model;
 
 public class WalletModel{
 
-    private int id;
+    private String id;
     private String name;
     private String currency;
     private float balance;
 
-    public WalletModel(int id) {
+    public WalletModel(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

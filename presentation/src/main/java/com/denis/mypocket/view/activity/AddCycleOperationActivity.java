@@ -12,15 +12,12 @@ import android.view.View;
 import com.denis.mypocket.AnimationUtils;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddCycleOperationBinding;
-import com.denis.mypocket.internal.di.components.DaggerAddCycleOPComponent;
-import com.denis.mypocket.viewmodel.adding.AddCycleOperationViewModel;
 
-import javax.inject.Inject;
+
 
 public class AddCycleOperationActivity extends BaseActivity {
 
-    @Inject
-    public AddCycleOperationViewModel viewModel;
+  //  @Inject public AddCycleOperationViewModel viewModel;
     private ActivityAddCycleOperationBinding binding;
 
     @Override
@@ -30,16 +27,16 @@ public class AddCycleOperationActivity extends BaseActivity {
        // setupEnterTransition();
        // setupExitTransition();
         configireToolbar(binding.toolbarAddCO.toolbar,R.string.toolbar_add_co,true);
-        binding.radioGroupAddCycleOP.setOnCheckedChangeListener(viewModel.changeListener);
-        binding.setViewModel(viewModel);
+       // binding.radioGroupAddCycleOP.setOnCheckedChangeListener(viewModel.changeListener);
+        //binding.setViewModel(viewModel);
     }
 
     @Override
     protected void initDIComponent() {
-        DaggerAddCycleOPComponent.builder()
+      /*  DaggerAddCycleOPComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .build().inject(this);
+                .build().inject(this);*/
     }
 
     @Override

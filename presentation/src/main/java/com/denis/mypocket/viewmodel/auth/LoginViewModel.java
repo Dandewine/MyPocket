@@ -7,7 +7,6 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -18,6 +17,7 @@ import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.UserModel;
+import com.denis.mypocket.view.activity.AddWalletActivity;
 import com.denis.mypocket.view.activity.DrawerActivity;
 import com.denis.mypocket.view.activity.SignUpActivity;
 import com.denis.mypocket.viewmodel.ViewModel;
@@ -161,6 +161,13 @@ public class LoginViewModel implements ViewModel {
         ((Activity) context).finish();
     }
 
+    private void startCreateWalletActivity() {
+        Intent intent = AddWalletActivity.getCallingIntent(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+        ((Activity) context).finish();
+    }
+
     private void saveUserData(String token, User user) {
         userSaveUseCase.executeSync(new UserSaveSubscriber(), user);
         tokenSaveUseCase.executeSync(new TokenSubscriber(), token);
@@ -176,10 +183,13 @@ public class LoginViewModel implements ViewModel {
     private static class UserSaveSubscriber extends DefaultSubscriber<String> {
     }
 
-    private static class WalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+    private class WalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onNext(List<Wallet> wallets) {
-            Log.d("myTag","size = "+wallets.size());
+            if (wallets == null || wallets.isEmpty())
+                startCreateWalletActivity();
+            else
+                startDrawerActivity();
         }
     }
 

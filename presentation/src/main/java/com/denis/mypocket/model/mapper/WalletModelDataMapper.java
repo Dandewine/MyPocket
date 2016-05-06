@@ -22,7 +22,7 @@ public class WalletModelDataMapper {
         if (wallet == null)
             throw new NullPointerException("Cannot toEntity a null value");
         WalletModel walletModel = new WalletModel(wallet.getId());
-        walletModel.setName(wallet.getName());
+        walletModel.setName(wallet.getWalletName());
         walletModel.setCurrency(wallet.getCurrency());
         walletModel.setBalance(wallet.getBalance());
         return walletModel;

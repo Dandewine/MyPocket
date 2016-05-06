@@ -2,11 +2,8 @@ package com.denis.mypocket.view.activity;
 
 import android.annotation.TargetApi;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.design.widget.FloatingActionButton;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -19,14 +16,9 @@ import com.denis.mypocket.AnimationUtils;
 import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
-import com.denis.mypocket.internal.di.components.DaggerAddTransactionComponent;
-import com.denis.mypocket.internal.di.modules.ProvideViewModelAddTransactionModule;
-import com.denis.mypocket.utils.GUIUtils;
 import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;
 
 import javax.inject.Inject;
-
-import dagger.Lazy;
 
 
 public class AddTransactionActivity extends BaseActivity {
@@ -129,11 +121,11 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     protected void initDIComponent() {
-        DaggerAddTransactionComponent.builder()
+     /*   DaggerAddTransactionComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .provideViewModelAddTransactionModule(new ProvideViewModelAddTransactionModule(isIncome))
-                .build().inject(this);
+                .build().inject(this);*/
     }
 
 

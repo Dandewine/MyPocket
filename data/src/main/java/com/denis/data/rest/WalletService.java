@@ -4,7 +4,9 @@ import com.denis.data.entity.WalletEntity;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -15,7 +17,7 @@ import rx.Observable;
  */
 public interface WalletService {
     @POST("/users/{userId}/wallets")
-    Call<Void> createWallet(@Path("userId") String userId);
+    Call<Void> createWallet(@Path("userId") String userId, @Body RequestBody body);
 
     @GET("/users/{userId}/wallets")
     Observable<List<WalletEntity>> getAllWallets(@Path("userId") String userId);

@@ -4,7 +4,7 @@
     >
    <!-- <data>
         <variable
-            name="wallet"
+            walletName="wallet"
             type="com.denis.mypocket.model.WalletModel"/>
     </data>
 -->

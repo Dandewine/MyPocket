@@ -50,7 +50,7 @@ public class AddTransactionModule {
     UseCase<Transaction> provideAddTransactionUseCase(ThreadExecutor threadExecutor,
                                                       PostExecutionThread postExecutionThread,
                                                       TransactionRepository repository,
-                                                      WalletRepository walletRepo){
+                                                   @Named("local")  WalletRepository walletRepo){
         return new AddTransactionUseCase(threadExecutor,postExecutionThread,repository, walletRepo);
     }
 

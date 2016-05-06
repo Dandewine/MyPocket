@@ -1,7 +1,6 @@
 package com.denis.mypocket.viewmodel.adding;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -135,7 +134,7 @@ public class AddTransactionViewModel implements ViewModel {
         public void onNext(List<Wallet> wallets) {
             walletList = wallets;
             for (int i = 0; i < wallets.size(); i++) {
-                walletsAdapter.add(wallets.get(i).getName());
+                walletsAdapter.add(wallets.get(i).getWalletName());
             }
         }
     }

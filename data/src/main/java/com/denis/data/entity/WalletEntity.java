@@ -9,12 +9,12 @@ import io.realm.annotations.PrimaryKey;
 public class WalletEntity extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private String id;
     private String name;
     private String currency;
     private float balance;
 
-    public WalletEntity(int id, String name, String currency, float balance) {
+    public WalletEntity(String id, String name, String currency, float balance) {
         this.id = id;
         this.name = name;
         this.currency = currency;
@@ -24,11 +24,11 @@ public class WalletEntity extends RealmObject {
     public WalletEntity() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="OK"
             android:id="@+id/addWalletBt"
-            android:onClick="@{viewModel.addWalletOnClick}"
+            android:onClick="@{viewModel.addWallet}"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </layout>

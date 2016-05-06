@@ -1,5 +1,7 @@
 package com.denis.mypocket.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,23 +15,26 @@ import com.denis.mypocket.viewmodel.adding.AddWalletViewModel;
 
 import javax.inject.Inject;
 
-public class AddWalletActivity extends BaseActivity{
+public class AddWalletActivity extends BaseActivity {
 
     @Inject public AddWalletViewModel viewModel;
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, AddWalletActivity.class);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityAddWalletBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_add_wallet);
-        configireToolbar(binding.addWalletToolbar.toolbar,R.string.toolbar_add_wallet,true);
-
+        configireToolbar(binding.addWalletToolbar.toolbar, R.string.toolbar_add_wallet, true);
         binding.setViewModel(viewModel);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
@@ -38,9 +43,9 @@ public class AddWalletActivity extends BaseActivity{
     @Override
     protected void initDIComponent() {
         DaggerWalletsComponent.builder()
-                .activityModule(getActivityModule())
                 .applicationComponent(getApplicationComponent())
-               // .walletModule(new AddWalletModule())
+                .activityModule(getActivityModule())
+                .addWalletModule(new AddWalletModule())
                 .build().inject(this);
     }
 

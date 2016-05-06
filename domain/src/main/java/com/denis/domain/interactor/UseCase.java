@@ -33,7 +33,7 @@ public abstract class UseCase<Argument> {
      *
      * @param useCaseSubscriber The guy who will be listen to the observable build with {@link #buildUseCaseObservable(Argument... args)}.
      */
-    // TODO: 2/3/16 make this async
+
     @SuppressWarnings("unchecked")
     public void executeAsync(Subscriber useCaseSubscriber, Argument... arg) {
         this.subscription = Observable.<Argument>defer(() -> buildUseCaseObservable(arg))
