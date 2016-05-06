@@ -1,6 +1,9 @@
 package com.denis.data.local_store;
 
+import android.text.TextUtils;
+
 import com.denis.data.entity.UserEntity;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,8 +31,25 @@ public class UserRealmStore implements RealmStore<UserEntity> {
     }
 
     @Override
+    @RxLogObservable
     public Observable<UserEntity> get(String id) {
-        return Observable.just(realm.where(UserEntity.class).equalTo("id", id).findFirst());
+        if (TextUtils.equals(Thread.currentThread().getName(), "main")) {
+            return Observable.just(realm.where(UserEntity.class).findAll().get(0));
+        } else {
+            Realm realm = Realm.getDefaultInstance();
+            UserEntity entity = realm.where(UserEntity.class).findAll().get(0);
+            Observable<UserEntity> observable = mapUserEntity(entity);
+            realm.close();
+            return observable;
+        }
+    }
+
+    private Observable<UserEntity> mapUserEntity(UserEntity user) {
+        UserEntity userEntity = new UserEntity(user.getId());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setName(user.getName());
+        return Observable.just(userEntity);
     }
 
     @Override
@@ -55,7 +75,17 @@ public class UserRealmStore implements RealmStore<UserEntity> {
 
     @Override
     public Observable<List<UserEntity>> getList() {
-        return realm.where(UserEntity.class).findAll().asObservable().map(this::parseList);
+        if (TextUtils.equals(Thread.currentThread().getName(), "main")) {
+            return realm.where(UserEntity.class).findAll().asObservable().map(this::parseList);
+        } else {
+            Realm realm = Realm.getDefaultInstance();
+            Observable<List<UserEntity>> response = realm.where(UserEntity.class)
+                    .findAll()
+                    .asObservable()
+                    .map(this::parseList);
+            realm.close();
+            return response;
+        }
     }
 
     private List<UserEntity> parseList(RealmResults<UserEntity> data) {

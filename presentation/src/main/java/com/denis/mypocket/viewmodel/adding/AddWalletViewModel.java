@@ -56,7 +56,7 @@ public class AddWalletViewModel implements ViewModel {
             walletName = s.toString();
     }
 
-    public void afterTextChanged(Editable s) {
+    public void setWalletName(Editable s) {
         if (!Objects.equals(walletName, s.toString()))
             walletName = s.toString();
     }

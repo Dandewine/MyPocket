@@ -21,6 +21,7 @@ import com.denis.domain.interactor.auth.TokenSave;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
+import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.TokenRepository;
 import com.denis.domain.repository.UserRepository;
 import com.denis.domain.interactor.user.AddUserUseCase;
@@ -36,15 +37,16 @@ import io.realm.Realm;
 /**
  * Created by denis on 4/23/16.
  */
-@Module(includes = ActivityModule.class)
+@Module(includes = {ActivityModule.class,WalletModuleGET.class})
 public class LoginModule {
 
     @Provides @PerActivity
     LoginViewModel provideViewModel(@Named("getUser") UseCase<String> loginUseCase,
                                     @Named("token-save") UseCase<String> tokenSaveUseCase,
                                     @Named("activity") Context context,
+                                    @Named("getWallets") UseCase<Wallet> getWalletUseCase,
                                     @Named("add user") UseCase<User> userSaveUseCase) {
-        return new LoginViewModel(loginUseCase, tokenSaveUseCase, userSaveUseCase, context);
+        return new LoginViewModel(loginUseCase, tokenSaveUseCase, userSaveUseCase, getWalletUseCase, context);
     }
 
 
@@ -54,7 +56,7 @@ public class LoginModule {
     }
 
     @Provides @PerActivity @Named("token-save")
-    UseCase<String> providUTokenSaveUseCase(ThreadExecutor executor, PostExecutionThread thread, TokenRepository repository) {
+    UseCase<String> provideUTokenSaveUseCase(ThreadExecutor executor, PostExecutionThread thread, TokenRepository repository) {
         return new TokenSave(executor, thread, repository);
     }
 

@@ -51,6 +51,7 @@ public class RegistrationViewModel implements ViewModel {
     public ObservableInt prorgessBarVisibility = new ObservableInt(View.GONE);
 
     private Context context;
+
     //cause for this callback that android sdk has a problem with InputTextLayout error handling
     //they make errors invisible after successful validation, so we will have blank spaces under the edittext
     //solution is to crete your own TIL with setErrorEnabled method and call it with false parameter after successful validation

@@ -37,7 +37,7 @@ public abstract class UseCase<Argument> {
     @SuppressWarnings("unchecked")
     public void executeAsync(Subscriber useCaseSubscriber, Argument... arg) {
         this.subscription = Observable.<Argument>defer(() -> buildUseCaseObservable(arg))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(useCaseSubscriber);
     }

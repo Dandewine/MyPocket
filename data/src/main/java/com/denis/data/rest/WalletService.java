@@ -1,0 +1,22 @@
+package com.denis.data.rest;
+
+import com.denis.data.entity.WalletEntity;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import rx.Observable;
+
+/**
+ * Created by denis on 5/4/16.
+ */
+public interface WalletService {
+    @POST("/users/{userId}/wallets")
+    Call<Void> createWallet(@Path("userId") String userId);
+
+    @GET("/users/{userId}/wallets")
+    Observable<List<WalletEntity>> getAllWallets(@Path("userId") String userId);
+}

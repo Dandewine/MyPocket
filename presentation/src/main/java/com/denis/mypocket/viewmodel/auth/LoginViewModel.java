@@ -7,6 +7,7 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -14,6 +15,7 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
+import com.denis.domain.models.Wallet;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.view.activity.DrawerActivity;
@@ -21,6 +23,7 @@ import com.denis.mypocket.view.activity.SignUpActivity;
 import com.denis.mypocket.viewmodel.ViewModel;
 import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,6 +34,7 @@ public class LoginViewModel implements ViewModel {
     private UseCase<String> loginUserCase;
     private UseCase<String> tokenSaveUseCase;
     private UseCase<User> userSaveUseCase;
+    private UseCase<Wallet> getWalletUseCase;
 
     public String email = "", password = "";
     private Context context;
@@ -46,10 +50,12 @@ public class LoginViewModel implements ViewModel {
 
     public LoginViewModel(UseCase<String> loginUserCase,
                           UseCase<String> tokenSaveUseCase,
-                          UseCase<User> userSaveUseCase, Context context) {
+                          UseCase<User> userSaveUseCase,
+                          UseCase<Wallet> getWalletUseCase, Context context) {
         this.loginUserCase = loginUserCase;
         this.tokenSaveUseCase = tokenSaveUseCase;
         this.userSaveUseCase = userSaveUseCase;
+        this.getWalletUseCase = getWalletUseCase;
         this.context = context;
     }
 
@@ -140,14 +146,15 @@ public class LoginViewModel implements ViewModel {
         @Override
         public void onNext(LoginResponse data) {
             if (data != null) {
-                startDrawerActivity(data);
-            }else{
+                //startDrawerActivity();
+                saveUserData(data.getToken(), data.getUser());
+            } else {
                 prorgessBarVisibility.set(View.GONE);
             }
         }
     }
 
-    private void startDrawerActivity(LoginResponse data){
+    private void startDrawerActivity() {
         Intent intent = DrawerActivity.getCallingIntent(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
@@ -159,10 +166,21 @@ public class LoginViewModel implements ViewModel {
         tokenSaveUseCase.executeSync(new TokenSubscriber(), token);
     }
 
-    private static class TokenSubscriber extends DefaultSubscriber<String> {
+    private class TokenSubscriber extends DefaultSubscriber<String> {
+        @Override
+        public void onNext(String s) {
+            getWalletUseCase.executeAsync(new WalletsSubscriber());
+        }
     }
 
     private static class UserSaveSubscriber extends DefaultSubscriber<String> {
+    }
+
+    private static class WalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+        @Override
+        public void onNext(List<Wallet> wallets) {
+            Log.d("myTag","size = "+wallets.size());
+        }
     }
 
 
