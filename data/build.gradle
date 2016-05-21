@@ -34,20 +34,53 @@ android {
     }
 
 }
+def daggerVersion = '2.0.2'
+def rxJavaVersion = '1.0.14'
+def rxAndroidVersion = '1.0.1'
+def javaxAnnotationVersion = '1.0'
+def androidAnnotationsVersion = '23.3.0'
+def retrolambdaVersion = '2.0.6'
+def retrofit = '2.0.1'
+
+//Testing
+def robolectricVersion = '3.0'
+def jUnitVersion = '4.12'
+def assertJVersion = '1.7.1'
+def mockitoVersion = '1.9.5'
+
+//region Data
+def dataDependencies = [
+        daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+        dagger            : "com.google.dagger:dagger:${daggerVersion}",
+        rxJava            : "io.reactivex:rxjava:${rxJavaVersion}",
+        rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
+        javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+        androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
+        //  realm             : "io.realm:realm-android:${realmVersion}",
+        lambda            : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
+        retrofit          : "compile 'com.squareup.retrofit2:retrofit:${retrofit}",
+        gsonconverter     : "com.squareup.retrofit2:converter-gson:${retrofit}",
+        retrofitrx        : "com.squareup.retrofit2:adapter-rxjava:${retrofit}",
+]
+
+def testDependencies = [
+        junit      : "junit:junit:${jUnitVersion}",
+        assertj    : "org.assertj:assertj-core:${assertJVersion}",
+        mockito    : "org.mockito:mockito-core:${mockitoVersion}",
+        robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+]
+//endregion
 
 dependencies {
     compile project(':domain')
     //compile project(path: ':domain', configuration: 'provided')
-
-    def dataDependencies = rootProject.ext.dataDependencies
-    def testDependencies = rootProject.ext.dataTestDependencies
 
 
     compile project(path: ':domain')
     provided dataDependencies.daggerCompiler
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.dagger
-   // compile dataDependencies.realm
+    // compile dataDependencies.realm
 
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid

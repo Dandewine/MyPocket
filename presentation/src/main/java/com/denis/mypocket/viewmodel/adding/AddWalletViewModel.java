@@ -67,8 +67,9 @@ public class AddWalletViewModel implements ViewModel {
 
         @Override
         public void onNext(Wallet wallet) {
-            //if (wallet != null)
-                //addWalletUseCase.executeSync(new AddToLocalStorageSubscriber(), wallet);
+            if (wallet != null)
+                addWalletUseCase.executeSync(new AddToLocalStorageSubscriber(), wallet);
+            // TODO: 5/19/16 create case if wallet was null
         }
     }
 

@@ -23,8 +23,7 @@ public class SigInActivity extends BaseActivity implements LoginViewModel.ClearB
     public static Intent getCallingIntent(Context context, @Nullable Bundle bundle) {
         Intent intent = new Intent(context, SigInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (bundle != null)
-            intent.putExtra(PLConstants.EMAIL_INTENT, bundle);
+        intent.putExtra(PLConstants.EMAIL_INTENT, bundle);
         return intent;
     }
 
@@ -38,7 +37,6 @@ public class SigInActivity extends BaseActivity implements LoginViewModel.ClearB
         Bundle bundle = getIntent().getBundleExtra(PLConstants.EMAIL_INTENT);
         if (bundle != null)
             viewModel.email = bundle.getString(PLConstants.EMAIL_INTENT);
-
         binding.setViewModel(viewModel);
     }
 
@@ -66,5 +64,5 @@ public class SigInActivity extends BaseActivity implements LoginViewModel.ClearB
     protected void onDestroy() {
         viewModel.destroy();
         super.onDestroy();
-    }
+    }// TODO: 5/19/16 Create message for user if he trying to log in when DB hasn't record
 }

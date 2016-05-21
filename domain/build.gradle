@@ -1,11 +1,6 @@
-
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.fernandocejas.frodo'
-//noinspection GroovyUnusedAssignment
-sourceCompatibility = 1.8
-//noinspection GroovyUnusedAssignment
-targetCompatibility = 1.8
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -26,10 +21,6 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
     }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
 }
 
 configurations {
@@ -41,9 +32,35 @@ sourceSets {
     }
 }
 
+def daggerVersion = '2.0.2'
+def rxJavaVersion = '1.0.14'
+def javaxAnnotationVersion = '1.0'
+def retrolambdaVersion = '2.0.6'
+
+//Testing
+def robolectricVersion = '3.0'
+def jUnitVersion = '4.12'
+def assertJVersion = '1.7.1'
+def mockitoVersion = '1.9.5'
+
+//region Domain
+def domainDependencies = [
+        daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+        dagger         : "com.google.dagger:dagger:${daggerVersion}",
+        javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+        rxJava         : "io.reactivex:rxjava:${rxJavaVersion}",
+        lambda         : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
+]
+
+def domainTestDependencies = [
+        junit      : "junit:junit:${jUnitVersion}",
+        mockito    : "org.mockito:mockito-core:${mockitoVersion}",
+        robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+        assertj    : "org.assertj:assertj-core:${assertJVersion}",
+]
+//endregion
+
 dependencies {
-    def domainDependencies = rootProject.ext.domainDependencies
-    def domainTestDependencies = rootProject.ext.domainTestDependencies
 
     provided domainDependencies.daggerCompiler
     provided domainDependencies.javaxAnnotation

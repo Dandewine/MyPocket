@@ -52,7 +52,7 @@ public class CycleOperationFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        viewModel.destroy();
+//        viewModel.destroy();
         super.onDestroy();
     }
 }
