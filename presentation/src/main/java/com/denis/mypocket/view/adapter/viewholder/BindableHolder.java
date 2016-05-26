@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 public class BindableHolder<VH extends ViewDataBinding> extends RecyclerView.ViewHolder {
     private VH binding;
 
-    public static <VH extends ViewDataBinding>BindableHolder<VH> newInstance(@LayoutRes int laoutId,
-                                                                             LayoutInflater inflater,
-                                                                             @Nullable ViewGroup parent,
-                                                                             boolean attachToRoot){
+    public static <VH extends ViewDataBinding>BindableHolder<VH>
+    newInstance(@LayoutRes int laoutId, LayoutInflater inflater, @Nullable ViewGroup parent, boolean attachToRoot){
 
         VH vh = DataBindingUtil.inflate(inflater,laoutId,parent,attachToRoot);
         return new BindableHolder<>(vh);

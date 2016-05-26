@@ -31,11 +31,13 @@ import io.realm.Realm;
 @Module
 public class WalletModuleGET {
     @Provides @PerActivity @Named("getWallets")
-    UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread, WalletRepository repository){
+    UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread,
+                                            @Named("cloud") WalletRepository repository){
         return new GetWalletsUseCase(executor,postExecutionThread,repository);
     }
 
-    @Provides @PerActivity WalletRepository provideWalletRepo(WalletDataMapper walletDataMapper, WalletDataStore dataStore){
+    @Provides @PerActivity @Named("cloud")
+    WalletRepository provideWalletRepo(WalletDataMapper walletDataMapper,@Named("cloud_store") WalletDataStore dataStore){
         return new WalletDataRepository(walletDataMapper,dataStore);
     }
 
@@ -43,7 +45,8 @@ public class WalletModuleGET {
         return new WalletDataMapper();
     }
 
-    @Provides @PerActivity WalletDataStore provideWalletDataStore(WalletService walletService,
+    @Provides @PerActivity @Named("cloud_store")
+    WalletDataStore provideWalletDataStore(WalletService walletService,
                                                                   UserDataStore dataStore,
                                                                   WalletDataMapper mapper){
         return new WalletCloudDataStore(walletService,dataStore, mapper);

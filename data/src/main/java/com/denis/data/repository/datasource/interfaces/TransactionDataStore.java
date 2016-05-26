@@ -2,7 +2,6 @@ package com.denis.data.repository.datasource.interfaces;
 
 import com.denis.data.entity.TransactionEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 import rx.Observable;
@@ -27,8 +26,8 @@ public interface TransactionDataStore {
 
     /**
      * Store collection into local storage {@link io.realm.Realm}
-     * @param collection
+     * @param list
      * @return
      */
-    Observable<List<TransactionEntity>> put(Collection<TransactionEntity> collection);
+    Observable<List<TransactionEntity>> put(List<TransactionEntity> list);
 }

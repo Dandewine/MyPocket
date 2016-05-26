@@ -36,7 +36,7 @@ public class WalletLocalDataStore implements WalletDataStore {
     }
 
     @Override
-    public Observable<List<WalletEntity>> put(Collection<WalletEntity> collection) {
+    public Observable<List<WalletEntity>> put(List<WalletEntity> collection) {
         return storage.put(collection);
     }
 

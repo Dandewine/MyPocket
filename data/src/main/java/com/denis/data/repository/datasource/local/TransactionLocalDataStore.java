@@ -4,7 +4,6 @@ import com.denis.data.entity.TransactionEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.TransactionDataStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,8 +35,8 @@ public class TransactionLocalDataStore implements TransactionDataStore {
     }
 
     @Override
-    public Observable<List<TransactionEntity>> put(Collection<TransactionEntity> collection) {
-        return realmStore.put(collection);
+    public Observable<List<TransactionEntity>> put(List<TransactionEntity> list) {
+        return realmStore.put(list);
     }
 
 }

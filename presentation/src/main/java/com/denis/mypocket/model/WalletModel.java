@@ -11,6 +11,9 @@ public class WalletModel{
         this.id = id;
     }
 
+    public WalletModel() {
+    }
+
     public String getId() {
         return id;
     }

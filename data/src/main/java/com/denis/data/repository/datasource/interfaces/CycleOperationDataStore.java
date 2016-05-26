@@ -31,8 +31,8 @@ public interface CycleOperationDataStore {
     /**
      * Put the {@link Collection<CycleOperationEntity>} in the store
      *
-     * @param collection
+     * @param list
      * @return {@link rx.Observable<List<CycleOperationEntity>>}
      */
-    Observable<List<CycleOperationEntity>> put(Collection<CycleOperationEntity> collection);
+    Observable<List<CycleOperationEntity>> put(List<CycleOperationEntity> list);
 }

@@ -19,5 +19,5 @@ public interface ExpenseCategoryDataStore {
     Observable<List<ExpenseCategoryEntity>> getListExpenseEntities();
 
     Observable<ExpenseCategoryEntity> put(ExpenseCategoryEntity ExpenseCategoryEntity);
-    Observable<List<ExpenseCategoryEntity>> put(Collection<ExpenseCategoryEntity> collection);
+    Observable<List<ExpenseCategoryEntity>> put(List<ExpenseCategoryEntity> list);
 }

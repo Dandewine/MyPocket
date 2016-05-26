@@ -1,5 +1,7 @@
 package com.denis.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -10,6 +12,7 @@ public class WalletEntity extends RealmObject {
 
     @PrimaryKey
     private String id;
+    @SerializedName("walletName")
     private String name;
     private String currency;
     private float balance;

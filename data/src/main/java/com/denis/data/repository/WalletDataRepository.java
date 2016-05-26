@@ -44,7 +44,8 @@ public class WalletDataRepository implements WalletRepository {
 
     @Override
     public Observable<List<Wallet>> addWallet(List<Wallet> wallets) {
-        throw new UnsupportedOperationException("You can't add a list of wallets");
+        List<WalletEntity> entities = walletDataMapper.toEntity(wallets);
+        return walletDataStore.put(entities).map(walletDataMapper::fromEntity);
     }
 
     @Override

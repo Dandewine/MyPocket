@@ -16,14 +16,12 @@
             android:theme="@style/AppTheme.Dark">
 
         </activity>
-        <activity
-            android:name=".view.activity.WalletsActivity"
+        <activity android:name=".view.add_wallet.WalletActivity"
             android:parentActivityName=".view.activity.DrawerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.DrawerActivity"/>
         </activity>
-        <activity android:name=".view.activity.AddWalletActivity"/>
         <activity android:name=".view.activity.AddTransactionActivity"/>
         <activity android:name=".view.activity.AddCycleOperationActivity"/>
         <activity

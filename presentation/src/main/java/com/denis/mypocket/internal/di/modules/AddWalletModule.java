@@ -21,10 +21,13 @@ import com.denis.domain.interactor.wallets.AddWalletUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.wallets.CloudCreateWalletUseCase;
 import com.denis.domain.interactor.wallets.GetWalletsUseCase;
+import com.denis.domain.interactor.wallets.SaveWalletList;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.utils.PLTags;
+
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -44,6 +47,16 @@ public class AddWalletModule {
                                                @Named("net") WalletRepository repository){
         return new CloudCreateWalletUseCase(executor,postExecutionThread,repository);
     }
+
+    @Provides @PerActivity
+    UseCase<Wallet> provideWalletSaveList(ThreadExecutor executor,
+                                                PostExecutionThread postExecutionThread,
+                                                @Named("local") WalletRepository repository){
+        return new GetWalletsUseCase(executor,postExecutionThread,repository);
+    }
+
+
+
 
     //region Wallet local
     @Provides @PerActivity @Named("getWallets")
@@ -75,7 +88,7 @@ public class AddWalletModule {
 
     //endregion
 
-   //region add wallet cloud
+    //region add wallet cloud
 
     @Provides @PerActivity @Named("net")
     WalletRepository provideUserRepositoryCloud(WalletDataMapper mapper, @Named("walletStore_net") WalletDataStore walletDataStore) {

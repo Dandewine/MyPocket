@@ -4,7 +4,6 @@ import com.denis.data.entity.DebtEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.DebtsDataStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,7 +38,7 @@ public class DebtsOperationLocalDataStore implements DebtsDataStore {
     }
 
     @Override
-    public Observable<List<DebtEntity>> put(Collection<DebtEntity> collection) {
-        return realmStore.put(collection);
+    public Observable<List<DebtEntity>> put(List<DebtEntity> list) {
+        return realmStore.put(list);
     }
 }

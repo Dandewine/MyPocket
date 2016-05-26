@@ -4,7 +4,6 @@ import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.ExpenseCategoryDataStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,7 +34,7 @@ public class ExpenseCategoryLocalDataStore implements ExpenseCategoryDataStore {
     }
 
     @Override
-    public Observable<List<ExpenseCategoryEntity>> put(Collection<ExpenseCategoryEntity> collection) {
-        return realmStore.put(collection);
+    public Observable<List<ExpenseCategoryEntity>> put(List<ExpenseCategoryEntity> list) {
+        return realmStore.put(list);
     }
 }

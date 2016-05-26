@@ -43,11 +43,11 @@
                 app:errorTextAppearance="@style/errorAppearance"
                 >
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/input_name_AS"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:afterTextChanged="@{viewModel.setUsername}"
+                    android:afterTextChanged="@{viewModel::setUsername}"
                     android:hint="Name"
                     android:inputType="textCapWords"
                     android:text="@{viewModel.userName}"/>
@@ -64,11 +64,11 @@
                 app:error="@{viewModel.emailError}"
                 app:errorTextAppearance="@style/errorAppearance">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/input_email_AS"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:afterTextChanged="@{viewModel.setEmail}"
+                    android:afterTextChanged="@{viewModel::setEmail}"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:text="@{viewModel.userName}"/>
@@ -85,11 +85,11 @@
                 app:error="@{viewModel.passwordError}"
                 app:errorTextAppearance="@style/errorAppearance">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/input_password_AS"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:afterTextChanged="@{viewModel.setPassword}"
+                    android:afterTextChanged="@{viewModel::setPassword}"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:text="@{viewModel.password}"/>

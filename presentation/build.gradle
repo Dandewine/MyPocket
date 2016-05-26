@@ -50,7 +50,7 @@ android {
 }
 
 
-def daggerVersion = '2.0.2'
+def daggerVersion = '2.2'
 def rxJavaVersion = '1.0.14'
 def supportLibVersion = '23.4.0'
 def rxAndroidVersion = '1.0.1'
@@ -108,8 +108,5 @@ dependencies {
     androidTestCompile presentationTestDependencies.dexmakerMockito
     androidTestCompile presentationTestDependencies.espresso
     androidTestCompile presentationTestDependencies.testingSupportLib
-
-
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
 
 }

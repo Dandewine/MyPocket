@@ -12,20 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class RecyclerBindableAdapter<T,VH extends BindableHolder> extends RecyclerView.Adapter<VH> {
+public abstract class RecyclerBindableAdapter<M,VH extends BindableHolder> extends RecyclerView.Adapter<VH> {
 
-    public static final int TYPE_HEADER = 10;
-    public static final int TYPE_FOOTER = 20;
+    protected static final int TYPE_HEADER = 10;
+    protected static final int TYPE_FOOTER = 20;
     public static final int TYPE_ITEM = 30;
     public Context context;
     public LayoutInflater inflater;
 
 
-    private List<T> items = new ArrayList<>();
+    private List<M> items = new ArrayList<>();
     private List<ViewDataBinding> headers = new ArrayList<>();
 
     //region add section
-    public void add(int position, T item){
+    public void add(int position, M item){
         items.add(position,item);
         notifyItemInserted(position);
         int positionStart = position + getHeadersCount();
@@ -33,23 +33,23 @@ public abstract class RecyclerBindableAdapter<T,VH extends BindableHolder> exten
         notifyItemRangeChanged(positionStart,itemCount);
     }
 
-    public void add(T item){
+    public void add(M item){
         items.add(item);
         notifyItemInserted(items.size()-1+getHeadersCount());
     }
 
-    public void addAll(int position, List<? extends T> items){
+    public void addAll(int position, List<? extends M> items){
         final int size = this.items.size();
         this.items.addAll(items);
         notifyItemRangeInserted(position+size+getHeadersCount(),items.size() - position);
     }
-    public void addAll(List<? extends T> items) {
+    public void addAll(List<? extends M> items) {
         final int size = this.items.size();
         this.items.addAll(items);
         notifyItemRangeInserted(size + getHeadersCount(), items.size());
     }
 
-    public void set(int position, T item){
+    public void set(int position, M item){
         items.set(position, item);
         notifyItemChanged(position + getHeadersCount());
     }
@@ -71,7 +71,7 @@ public abstract class RecyclerBindableAdapter<T,VH extends BindableHolder> exten
     //endregion
 
     //region getters
-    public List<T> getItems() {
+    public List<M> getItems() {
         return items;
     }
 
@@ -84,7 +84,7 @@ public abstract class RecyclerBindableAdapter<T,VH extends BindableHolder> exten
         return items.size()+getHeadersCount();
     }
 
-    public T getItem(int position){
+    public M getItem(int position){
         return items.get(position);
     }
     //endregion

@@ -12,7 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 @PerActivity
-public class WalletModelDataMapper {
+public class WalletModelDataMapper implements ModelMapper<Wallet,WalletModel>{
 
     @Inject
     public WalletModelDataMapper() {

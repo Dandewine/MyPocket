@@ -6,7 +6,6 @@ import com.denis.data.entity.UserEntity;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,7 +60,7 @@ public class UserRealmStore implements RealmStore<UserEntity> {
     }
 
     @Override
-    public Observable<List<UserEntity>> put(Collection<UserEntity> collection) {
+    public Observable<List<UserEntity>> put(List<UserEntity> list) {
         throw new UnsupportedOperationException("You can't add a bunch of users.");
     }
 

@@ -1,5 +1,4 @@
-<resources
-    >
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -9,16 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-       <!-- <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+        <!-- <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
     </style>
 
     <style name="AppTheme.Drawer" parent="AppTheme">
-      <!--  <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <!--  <item name="android:statusBarColor">@android:color/transparent</item>-->
     </style>
 
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
-        <item name ="colorPrimary">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
 
@@ -26,11 +25,11 @@
 
         <item name="colorControlNormal">@color/iron</item>
         <item name="colorControlActivated">@color/white</item>
-      <!--  <item name="colorControlHighlight">@color/white</item>-->
+        <!--  <item name="colorControlHighlight">@color/white</item>-->
         <item name="android:textColorHint">@color/iron</item>
 
         <item name="colorButtonNormal">@color/accent</item>
-      <!--  <item name="android:colorButtonNormal">@color/accent</item>-->
+        <!--  <item name="android:colorButtonNormal">@color/accent</item>-->
     </style>
 
     <style name="FabStyle">
@@ -39,7 +38,7 @@
         <item name="android:layout_gravity">bottom|end</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:gravity">center_horizontal</item>
@@ -48,6 +47,13 @@
     <style name="errorAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/errorRegColor</item>
     </style>
+
+    <declare-styleable name="MorphingFloatingActionButton">
+        <attr name="backgroundColorFrom" format="color" />
+        <attr name="backgroundColorTo" format="color" />
+        <attr name="animationFrom" format="reference" />
+        <attr name="animationTo" format="reference" />
+    </declare-styleable>
 
 
 </resources>

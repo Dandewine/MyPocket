@@ -70,7 +70,7 @@ public class WalletCloudDataStore implements WalletDataStore {
     }
 
     @Override
-    public Observable<List<WalletEntity>> put(Collection<WalletEntity> collection) {
+    public Observable<List<WalletEntity>> put(List<WalletEntity> collection) {
         return null;
     }
 

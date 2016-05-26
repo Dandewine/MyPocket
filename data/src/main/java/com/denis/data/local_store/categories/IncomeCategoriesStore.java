@@ -5,7 +5,6 @@ import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.local_store.RealmStore;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -76,7 +75,7 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
     }
 
     @Override
-    public Observable<List<IncomeCategoryEntity>> put(Collection<IncomeCategoryEntity> collection) {
+    public Observable<List<IncomeCategoryEntity>> put(List<IncomeCategoryEntity> list) {
         throw new UnsupportedOperationException("Can't do that");
     }
 

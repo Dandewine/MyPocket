@@ -2,7 +2,6 @@ package com.denis.data.local_store;
 
 import com.denis.data.entity.CycleOperationEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,7 +38,7 @@ public class CircleOperationRealmStore implements RealmStore<CycleOperationEntit
     }
 
     @Override
-    public Observable<List<CycleOperationEntity>> put(Collection<CycleOperationEntity> collection) {
+    public Observable<List<CycleOperationEntity>> put(List<CycleOperationEntity> list) {
         throw new UnsupportedOperationException("This is unsupported now");
     }
 

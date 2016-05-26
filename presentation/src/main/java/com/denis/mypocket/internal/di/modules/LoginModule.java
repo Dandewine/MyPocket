@@ -6,12 +6,17 @@ import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.entity.mapper.LoginResponseMapper;
 import com.denis.data.entity.mapper.UserDataMapper;
+import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.local_store.UserRealmStore;
+import com.denis.data.local_store.WalletRealmStore;
 import com.denis.data.repository.UserDataStoreRepository;
+import com.denis.data.repository.WalletDataRepository;
 import com.denis.data.repository.datasource.cloud.UserCloudDataStore;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
+import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.data.repository.datasource.local.UserLocalDataStore;
+import com.denis.data.repository.datasource.local.WalletLocalDataStore;
 import com.denis.data.rest.AuthService;
 import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
@@ -19,14 +24,18 @@ import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.auth.LoginUseCase;
 import com.denis.domain.interactor.auth.TokenSave;
 import com.denis.domain.interactor.UseCase;
+import com.denis.domain.interactor.wallets.SaveWalletList;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.TokenRepository;
 import com.denis.domain.repository.UserRepository;
 import com.denis.domain.interactor.user.AddUserUseCase;
+import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.viewmodel.auth.LoginViewModel;
+
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -45,8 +54,9 @@ public class LoginModule {
                                     @Named("token-save") UseCase<String> tokenSaveUseCase,
                                     @Named("activity") Context context,
                                     @Named("getWallets") UseCase<Wallet> getWalletUseCase,
-                                    @Named("add user") UseCase<User> userSaveUseCase) {
-        return new LoginViewModel(loginUseCase, tokenSaveUseCase, userSaveUseCase, getWalletUseCase, context);
+                                    @Named("add user") UseCase<User> userSaveUseCase,
+                                    UseCase<List<Wallet>> walletSave) {
+        return new LoginViewModel(loginUseCase, tokenSaveUseCase, userSaveUseCase, getWalletUseCase, walletSave, context);
     }
 
 
@@ -60,6 +70,8 @@ public class LoginModule {
         return new TokenSave(executor, thread, repository);
     }
 
+
+
     @Provides @PerActivity
     UserDataMapper provideMapper() {
         return new UserDataMapper();
@@ -70,6 +82,31 @@ public class LoginModule {
         return new LoginResponseMapper();
     }
 
+    //region Save wallets
+    @Provides @PerActivity
+    UseCase<List<Wallet>> provideWalletSaveList(ThreadExecutor executor,
+                                                PostExecutionThread postExecutionThread,
+                                                @Named("local") WalletRepository repository){
+        return new SaveWalletList(executor,postExecutionThread,repository);
+    }
+
+
+    @Provides @PerActivity @Named("local")
+    WalletRepository provideUserRepository(WalletDataMapper mapper, WalletDataStore walletDataStore) {
+        return new WalletDataRepository(mapper,walletDataStore);
+    }
+
+    @Provides @PerActivity
+    WalletDataStore walletDataStore(@Named("walletStore") RealmStore store){
+        return new WalletLocalDataStore(store);
+    }
+
+    @Provides @PerActivity @Named("walletStore")
+    RealmStore getRealmStore(Realm realm){
+        return new WalletRealmStore(realm);
+    }
+
+    //endregion
 
     //region provide LocalUserDataStore
     @Provides @PerActivity @Named("add user")

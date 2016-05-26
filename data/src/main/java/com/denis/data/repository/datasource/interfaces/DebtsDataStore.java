@@ -23,5 +23,5 @@ public interface DebtsDataStore {
     Observable<List<DebtEntity>> getListExpenseEntities();
 
     Observable<DebtEntity> put(DebtEntity DebtEntity);
-    Observable<List<DebtEntity>> put(Collection<DebtEntity> collection);
+    Observable<List<DebtEntity>> put(List<DebtEntity> list);
 }

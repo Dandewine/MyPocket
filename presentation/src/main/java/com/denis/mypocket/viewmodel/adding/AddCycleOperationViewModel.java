@@ -101,7 +101,7 @@ public class AddCycleOperationViewModel implements ViewModel {
         }
     };
 
-    public RadioGroup.OnCheckedChangeListener changeListener = (group, checkedId) -> {
+    /*public RadioGroup.OnCheckedChangeListener changeListener = (group, checkedId) -> {
         switch (checkedId) {
             case R.id.rbDay:
                 interval = CycleOperation.CircleTypes.DAY.getValue();
@@ -119,7 +119,7 @@ public class AddCycleOperationViewModel implements ViewModel {
                 interval = CycleOperation.CircleTypes.CUSTOM.getValue();
                 break;
         }
-    };
+    };*/
 
     @Override
     public void destroy() {

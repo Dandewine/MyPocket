@@ -38,6 +38,7 @@ import com.denis.mypocket.databinding.NavDrawerHeaderBinding;
 import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
 import com.denis.mypocket.internal.di.modules.DrawerModule;
 import com.denis.mypocket.model.UserModel;
+import com.denis.mypocket.view.add_wallet.WalletActivity;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
@@ -350,7 +351,8 @@ public class DrawerActivity extends BaseActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_wallets) {
-            //startActivity(new Intent(this,WalletsActivity.class));
+            Intent callingIntent = WalletActivity.getCallingIntent(this);
+            startActivity(callingIntent);
         } else if (id == R.id.nav_categories) {
 
         } else if (id == R.id.nav_debts) {

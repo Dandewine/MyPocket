@@ -17,7 +17,7 @@ import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.view.activity.AddWalletActivity;
+import com.denis.mypocket.view.add_wallet.WalletActivity;
 import com.denis.mypocket.view.activity.DrawerActivity;
 import com.denis.mypocket.view.activity.SignUpActivity;
 import com.denis.mypocket.viewmodel.ViewModel;
@@ -35,6 +35,7 @@ public class LoginViewModel implements ViewModel {
     private UseCase<String> tokenSaveUseCase;
     private UseCase<User> userSaveUseCase;
     private UseCase<Wallet> getWalletUseCase;
+    private UseCase<List<Wallet>> saveWalletUseCase;
 
     public String email = "", password = "";
     private Context context;
@@ -51,11 +52,13 @@ public class LoginViewModel implements ViewModel {
     public LoginViewModel(UseCase<String> loginUserCase,
                           UseCase<String> tokenSaveUseCase,
                           UseCase<User> userSaveUseCase,
-                          UseCase<Wallet> getWalletUseCase, Context context) {
+                          UseCase<Wallet> getWalletUseCase,
+                          UseCase<List<Wallet>> walletsSave, Context context) {
         this.loginUserCase = loginUserCase;
         this.tokenSaveUseCase = tokenSaveUseCase;
         this.userSaveUseCase = userSaveUseCase;
         this.getWalletUseCase = getWalletUseCase;
+        this.saveWalletUseCase = walletsSave;
         this.context = context;
     }
 
@@ -162,14 +165,14 @@ public class LoginViewModel implements ViewModel {
     }
 
     private void startCreateWalletActivity() {
-        Intent intent = AddWalletActivity.getCallingIntent(context);
+        Intent intent = WalletActivity.getCallingIntent(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
         ((Activity) context).finish();
     }
 
     private void saveUserData(String token, User user) {
-        userSaveUseCase.executeSync(new UserSaveSubscriber(), user);
+        userSaveUseCase.executeSync(new DefaultSubscriber<String>(), user);
         tokenSaveUseCase.executeSync(new TokenSubscriber(), token);
     }
 
@@ -180,16 +183,22 @@ public class LoginViewModel implements ViewModel {
         }
     }
 
-    private static class UserSaveSubscriber extends DefaultSubscriber<String> {
-    }
-
     private class WalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onNext(List<Wallet> wallets) {
             if (wallets == null || wallets.isEmpty())
                 startCreateWalletActivity();
-            else
-                startDrawerActivity();
+            else {
+                saveWalletUseCase.executeSync(new SaveWalletSubscriber(), wallets);
+            }
+
+        }
+    }
+
+    private class SaveWalletSubscriber extends DefaultSubscriber<List<Wallet>> {
+        @Override
+        public void onNext(List<Wallet> wallets) {
+            startDrawerActivity();
         }
     }
 

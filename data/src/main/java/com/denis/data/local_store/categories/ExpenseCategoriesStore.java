@@ -3,7 +3,6 @@ package com.denis.data.local_store.categories;
 import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.local_store.RealmStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,7 +34,7 @@ public class ExpenseCategoriesStore implements RealmStore<ExpenseCategoryEntity>
     }
 
     @Override
-    public Observable<List<ExpenseCategoryEntity>> put(Collection<ExpenseCategoryEntity> collection) {
+    public Observable<List<ExpenseCategoryEntity>> put(List<ExpenseCategoryEntity> list) {
         throw new UnsupportedOperationException("I can't do this, yet");
     }
 

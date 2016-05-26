@@ -4,7 +4,6 @@ import com.denis.data.entity.CycleOperationEntity;
 import com.denis.data.local_store.CircleOperationRealmStore;
 import com.denis.data.repository.datasource.interfaces.CycleOperationDataStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,7 +35,7 @@ public class CycleOperationLocalDataStore implements CycleOperationDataStore {
     }
 
     @Override
-    public Observable<List<CycleOperationEntity>> put(Collection<CycleOperationEntity> collection) {
-        return dataStore.put(collection);
+    public Observable<List<CycleOperationEntity>> put(List<CycleOperationEntity> list) {
+        return dataStore.put(list);
     }
 }

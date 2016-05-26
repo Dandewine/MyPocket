@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector android:drawable="@drawable/vector_check"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <target
+        android:animation="@animator/check_to_plus"
+        android:name="check"/>
+</animated-vector>

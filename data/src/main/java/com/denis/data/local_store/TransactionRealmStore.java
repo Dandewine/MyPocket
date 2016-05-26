@@ -2,7 +2,6 @@ package com.denis.data.local_store;
 
 import com.denis.data.entity.TransactionEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,7 +38,7 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
     }
 
     @Override
-    public Observable<List<TransactionEntity>> put(Collection<TransactionEntity> collection) {
+    public Observable<List<TransactionEntity>> put(List<TransactionEntity> list) {
         throw new UnsupportedOperationException("I cant do this");
     }
 

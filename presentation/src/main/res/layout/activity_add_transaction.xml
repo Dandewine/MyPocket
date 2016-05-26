@@ -39,7 +39,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:afterTextChanged="@{viewModel.afterTextChanged}"
+                        android:afterTextChanged="@{viewModel::afterTextChanged}"
                         android:gravity="right"
                         android:hint="Amount"
                         android:text="@{viewModel.amount}"

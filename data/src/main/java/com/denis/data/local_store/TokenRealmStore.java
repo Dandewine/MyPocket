@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.denis.data.entity.Token;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,7 +57,7 @@ public class TokenRealmStore implements RealmStore<Token> {
     }
 
     @Override
-    public Observable<List<Token>> put(Collection<Token> collection) {
+    public Observable<List<Token>> put(List<Token> list) {
         throw new UnsupportedOperationException("Can't do this with token");
     }
 
