@@ -29,7 +29,7 @@
                 android:src="@drawable/logo"/>
 
             <!--  Email Label -->
-            <android.support.design.widget.TextInputLayout
+            <com.denis.mypocket.view.FixedTextInputLayout
                 android:id="@+id/inputEmail_AL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 app:error="@{viewModel.emailError}"
                 app:errorTextAppearance="@style/errorAppearance">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,10 +46,10 @@
                     android:text="@{viewModel.email}"
                     android:hint="Email"
                     android:inputType="textEmailAddress"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.denis.mypocket.view.FixedTextInputLayout>
 
             <!--  Password Label -->
-            <android.support.design.widget.TextInputLayout
+            <com.denis.mypocket.view.FixedTextInputLayout
                 android:id="@+id/input_password_AL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,15 +58,15 @@
                 app:error="@{viewModel.passwordError}"
                 app:errorTextAppearance="@style/errorAppearance">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:afterTextChanged="@{viewModel.setPassword}"
+                    android:afterTextChanged="@{viewModel::setPassword}"
                     android:text="@{viewModel.password}"
                     android:hint="Password"
                     android:inputType="textPassword"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.denis.mypocket.view.FixedTextInputLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"

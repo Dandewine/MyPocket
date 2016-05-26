@@ -1,5 +1,7 @@
 package com.denis.data.repository.datasource.local;
 
+import android.support.annotation.Nullable;
+
 import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.local_store.RealmStore;
@@ -32,7 +34,7 @@ public class UserLocalDataStore implements UserDataStore {
         return realmStore.put(userEntity);
     }
 
-    @Override
+    @Override @Nullable
     public Observable<UserEntity> update() {
         throw new UnsupportedOperationException("This method can be useful only from CloudUserDataStore.class");
     }

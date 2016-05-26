@@ -351,7 +351,7 @@ public class DrawerActivity extends BaseActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_wallets) {
-            Intent callingIntent = WalletActivity.getCallingIntent(this);
+            Intent callingIntent = WalletActivity.getCallingIntent(this,false);
             startActivity(callingIntent);
         } else if (id == R.id.nav_categories) {
 
@@ -435,4 +435,9 @@ public class DrawerActivity extends BaseActivity implements
 
     }
 
+    @Override
+    protected void onDestroy() {
+        viewModel.destroy();
+        super.onDestroy();
+    }
 }

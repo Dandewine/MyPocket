@@ -1,15 +1,11 @@
 package com.denis.mypocket.viewmodel.adding;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.widget.LinearLayout;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
@@ -43,15 +39,17 @@ public class WalletsViewModel implements ViewModel {
     private String walletName = "";
     private float balance = 0f;
 
+    private boolean isNewUser;
 
     @Inject
-    WalletsViewModel(@Named("addWallet") UseCase<Wallet> addWalletLocalUseCase,
-                     @Named("createWallet_server") UseCase<Wallet> addWalletCloudUseCase,
-                     UseCase<Wallet> allWalletUseCase, @Named("activity") Context context) {
+    public WalletsViewModel(@Named("addWallet") UseCase<Wallet> addWalletLocalUseCase,
+                            @Named("createWallet_server") UseCase<Wallet> addWalletCloudUseCase,
+                            UseCase<Wallet> allWalletUseCase, @Named("activity") Context context, boolean isNewUser) {
         this.addWalletLocalUseCase = addWalletLocalUseCase;
         this.addWalletCloudUseCase = addWalletCloudUseCase;
         this.getWalletUseCase = allWalletUseCase;
         this.context = context;
+        this.isNewUser = isNewUser;
 
         walletAdapter = new WalletAdapter();
 
@@ -59,14 +57,21 @@ public class WalletsViewModel implements ViewModel {
         Log.d(PLTags.INSTANCE_TAG, "AddWallet ViewModel, " + hashCode());
     }
 
-    public View.OnClickListener addWallet = v -> execute();
-
     public void execute() {
-        addWalletCloudUseCase.executeAsync(new AddWalletToServerSubscriber(), new Wallet(null, walletName, "usd", balance));
+        if (isPassValidation()) {
+            addWalletCloudUseCase.executeAsync(new AddWalletToServerSubscriber(), new Wallet(null, walletName, "usd", balance));
+        }
+    }
+
+    private boolean isPassValidation() {
+        return !TextUtils.isEmpty(walletName) && balance != 0f;
     }
 
     @Override
     public void destroy() {
+        context = null;
+        modelMapper = null;
+        walletAdapter = null;
         addWalletLocalUseCase.unSubscribe();
     }
 
@@ -94,7 +99,10 @@ public class WalletsViewModel implements ViewModel {
     private class AddToLocalStorageSubscriber extends DefaultSubscriber<Wallet> {
         @Override
         public void onNext(Wallet wallet) {
-            startDrawerActivity();
+            WalletModel walletModel = modelMapper.transform(wallet);
+            walletAdapter.add(walletModel);
+            if (isNewUser)
+                startDrawerActivity();
         }
     }
 
@@ -123,7 +131,20 @@ public class WalletsViewModel implements ViewModel {
             walletName = s.toString();
     }
 
+    public void setBalance(Editable s) {
+        if (!Objects.equals(walletName, s.toString()) && !TextUtils.isEmpty(s))
+            balance = Float.parseFloat(s.toString());
+    }
+
     public WalletAdapter getWalletAdapter() {
         return walletAdapter;
+    }
+
+    public String getWalletName() {
+        return walletName;
+    }
+
+    public float getBalance() {
+        return balance;
     }
 }

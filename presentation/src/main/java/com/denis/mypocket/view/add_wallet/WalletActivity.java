@@ -23,12 +23,16 @@ import javax.inject.Inject;
 
 public class WalletActivity extends BaseActivity {
 
+    private static final String INTENT_EXTRA_NEW_USER = "new_user";
+
     @Inject
     public WalletsViewModel viewModel;
     private boolean isAddPressed = false;
 
-    public static Intent getCallingIntent(Context context) {
-        return new Intent(context, WalletActivity.class);
+    public static Intent getCallingIntent(Context context, boolean isNewUser) {
+        Intent intent = new Intent(context, WalletActivity.class);
+        intent.putExtra(INTENT_EXTRA_NEW_USER,isNewUser);
+        return intent;
     }
 
     @Override
@@ -42,6 +46,7 @@ public class WalletActivity extends BaseActivity {
                 binding.llEditTextHolder.setVisibility(View.VISIBLE);
                 revealEditText(binding.llEditTextHolder);
             }else{
+                viewModel.execute();
                 hideEditText(binding.llEditTextHolder);
             }
 
@@ -88,10 +93,11 @@ public class WalletActivity extends BaseActivity {
 
     @Override
     protected void initDIComponent() {
+        boolean isNewUser = getIntent().getBooleanExtra(INTENT_EXTRA_NEW_USER,false);
         DaggerWalletsComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .addWalletModule(new AddWalletModule())
+                .addWalletModule(new AddWalletModule(isNewUser))
                 .build().inject(this);
     }
 

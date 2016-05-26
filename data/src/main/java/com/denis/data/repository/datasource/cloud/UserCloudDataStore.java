@@ -88,7 +88,7 @@ public class UserCloudDataStore implements UserDataStore {
     }
 
     /**
-     * Use this when you need update
+     * Use this when you need to update
      * @return
      */
     @Override

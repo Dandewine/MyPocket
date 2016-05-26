@@ -26,13 +26,15 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
-
+import io.realm.RealmConfiguration;
 @Module
 public class ApplicationModule {
     private final MyPocketApp pocketApp;
+    private Realm realm;
 
     public ApplicationModule(MyPocketApp pocketApp) {
         this.pocketApp = pocketApp;
+        configureRealm();
         Log.d(PLTags.INSTANCE_TAG,"AppModule, "+hashCode());
     }
 
@@ -52,7 +54,10 @@ public class ApplicationModule {
     }
 
     @Provides @Singleton Realm provideRealm(){
-        return Realm.getDefaultInstance();
+        if(realm.isClosed()){
+            realm = Realm.getDefaultInstance();
+        }
+        return realm;
     }
 
     @Provides @Singleton
@@ -75,6 +80,12 @@ public class ApplicationModule {
     @Provides @Singleton
     RestClient provideRestClient(UseCase<String> tokenGetUseCase){
         return new RestClientRetrofit(tokenGetUseCase);
+    }
+
+    private void configureRealm() {
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(pocketApp).build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+        realm = Realm.getDefaultInstance();
     }
 
 

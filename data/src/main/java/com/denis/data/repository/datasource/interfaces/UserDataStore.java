@@ -31,5 +31,9 @@ public interface UserDataStore {
 
     Observable<List<UserEntity>> getAll();
 
+    /**
+     * This method will drop database, because without user DB has no sense, and data can be corrupted
+     * @return
+     */
     Observable deleteUser();
 }

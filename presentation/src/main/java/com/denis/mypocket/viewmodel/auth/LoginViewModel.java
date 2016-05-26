@@ -165,7 +165,7 @@ public class LoginViewModel implements ViewModel {
     }
 
     private void startCreateWalletActivity() {
-        Intent intent = WalletActivity.getCallingIntent(context);
+        Intent intent = WalletActivity.getCallingIntent(context,true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
         ((Activity) context).finish();

@@ -29,12 +29,12 @@
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/drawer_bg"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginEnd="@dimen/custom_padding_64dp"
                 app:expandedTitleMarginStart="@dimen/custom_padding_48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:background="@drawable/drawer_bg"
                 app:titleEnabled="false">
 
                 <LinearLayout
@@ -43,8 +43,8 @@
                     android:layout_height="match_parent"
                     android:background="#95000000"
                     android:gravity="center"
-                    android:visibility="invisible"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="invisible">
 
                     <com.denis.mypocket.view.FixedTextInputLayout
                         android:layout_width="match_parent"
@@ -56,6 +56,8 @@
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:afterTextChanged="@{viewModel::setWalletName}"
+                            android:text="@{viewModel.walletName}"
                             android:textColor="@android:color/white" />
                     </com.denis.mypocket.view.FixedTextInputLayout>
 
@@ -78,36 +80,11 @@
                             <android.support.design.widget.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:afterTextChanged="@{viewModel::setBalance}"
                                 android:inputType="numberDecimal"
+                                android:text="@{viewModel.balance == 0f ? String.valueOf(0) : String.valueOf(viewModel.balance)}"
                                 android:textColor="@android:color/white" />
                         </com.denis.mypocket.view.FixedTextInputLayout>
-
-                        <!-- <NumberPicker
-                             android:id="@+id/numberPicker"
-                             android:layout_width="match_parent"
-                             android:layout_height="100dp"
-                             android:layout_marginBottom="20dp"
-                             android:layout_marginLeft="20dp"
-                             android:layout_marginRight="20dp"
-                             android:layout_weight="1"
-                             />-->
-
-                        <!-- <com.denis.mypocket.view.FixedTextInputLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:layout_gravity="bottom"
-                             android:hint="Currency"
-                             android:layout_weight="1"
-                             android:layout_marginLeft="20dp"
-                             android:layout_marginRight="20dp"
-                             android:layout_marginBottom="20dp">
-
-                             <android.support.design.widget.TextInputEditText
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:textColor="@android:color/white" />
-                         </com.denis.mypocket.view.FixedTextInputLayout>-->
-
 
                     </LinearLayout>
 
@@ -134,6 +111,7 @@
             android:id="@+id/recycler_AAW"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="always"
             app:layoutManager="LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             bind:adapter="@{viewModel.getWalletAdapter}" />

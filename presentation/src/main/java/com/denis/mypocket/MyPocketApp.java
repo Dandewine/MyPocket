@@ -17,7 +17,6 @@ public class MyPocketApp extends Application {
     public void onCreate() {
         super.onCreate();
         initializeInjector();
-        configureRealm();
         pocketApp = this;
     }
 
@@ -30,11 +29,6 @@ public class MyPocketApp extends Application {
                 .builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
-    }
-
-    private void configureRealm() {
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
-        Realm.setDefaultConfiguration(realmConfiguration);
     }
 
     public ApplicationComponent getApplicationComponent() {

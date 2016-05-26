@@ -1,5 +1,6 @@
 package com.denis.mypocket.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -25,12 +26,11 @@ import rx.Subscriber;
 /**
  * Created by denis on 4/29/16.
  */
-@PerActivity
+@PerActivity // TODO: 5/26/16 MUltiple instance of this class, after logout
 public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
     private UseCase logoutUseCase;
     private UseCase deleteUser;
     private UseCase deleteTokenUseCase;
-    private UseCase<User> getUserUseCase;
 
     private Context context;
     private ModelMapper<User, UserModel> userModelMapper = new UserModelMapper();
@@ -39,7 +39,7 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
     private Subscriber<List<User>> userSubscriber = new DefaultSubscriber<List<User>>() {
         @Override
         public void onNext(List<User> users) {
-            if (users != null)
+            if (users != null && !users.isEmpty())
                 userModel = userModelMapper.transform(users.get(0));
         }
     };
@@ -53,7 +53,6 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
         this.logoutUseCase = logoutUseCase;
         this.deleteUser = deleteUser;
         this.deleteTokenUseCase = deleteTokenUseCase;
-        this.getUserUseCase = getUserUseCase;
         this.context = context;
 
         getUserUseCase.executeSync(userSubscriber);
@@ -61,6 +60,10 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
 
     @Override
     public void destroy() {
+        userModelMapper = null;
+        context = null;
+        deleteTokenUseCase.unSubscribe();
+        deleteUser.unSubscribe();
         logoutUseCase.unSubscribe();
     }
 
@@ -114,18 +117,9 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
 
         @Override
         public void onNext(Integer code) {
-            if (code == HttpsURLConnection.HTTP_OK) {
-                deleteUser.executeSync(new DeleteUserSubscriber());
-            }
-        }
-    }
-
-    @RxLogSubscriber
-    private class DeleteUserSubscriber extends DefaultSubscriber<Boolean> {
-        @Override
-        public void onNext(Boolean isUserDeleted) {
-            if (isUserDeleted)
+            if (code == HttpsURLConnection.HTTP_OK)
                 deleteTokenUseCase.executeSync(new DeleteTokenSubscriber());
+
         }
     }
 
@@ -133,11 +127,21 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
     private class DeleteTokenSubscriber extends DefaultSubscriber<Boolean> {
         @Override
         public void onNext(Boolean isTokenDeleted) {
+            if (isTokenDeleted)
+                deleteUser.executeSync(new DeleteUserSubscriber());
+        }
+    }
+
+    @RxLogSubscriber
+    private class DeleteUserSubscriber extends DefaultSubscriber<Boolean> {
+        @Override
+        public void onNext(Boolean isTokenDeleted) {
             if (isTokenDeleted) {
                 String packageName = context.getPackageName();
                 Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+                ((Activity) context).finish();
             }
         }
     }

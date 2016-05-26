@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import rx.Observable;
 
@@ -100,7 +101,7 @@ public class UserRealmStore implements RealmStore<UserEntity> {
 
     @Override
     public Observable delete(UserEntity item) {
-        realm.executeTransaction(r -> realm.delete(UserEntity.class));
+        realm.executeTransaction(realm1 -> realm.deleteAll());
         return Observable.just(true);
     }
 }

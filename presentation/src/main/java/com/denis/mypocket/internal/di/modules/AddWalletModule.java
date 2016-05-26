@@ -1,5 +1,6 @@
 package com.denis.mypocket.internal.di.modules;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.denis.data.entity.UserEntity;
@@ -26,6 +27,7 @@ import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.utils.PLTags;
+import com.denis.mypocket.viewmodel.adding.WalletsViewModel;
 
 import java.util.List;
 
@@ -37,8 +39,19 @@ import io.realm.Realm;
 
 @Module
 public class AddWalletModule {
-    public AddWalletModule() {
+    private boolean isNewUser;
+
+    public AddWalletModule(boolean isNewUser) {
+        this.isNewUser = isNewUser;
         Log.d(PLTags.INSTANCE_TAG,"Wallet Module, "+hashCode());
+    }
+
+    @Provides @PerActivity
+    WalletsViewModel  provideWalletsViewModel(@Named("addWallet") UseCase<Wallet> addWalletUseCase,
+                                              @Named("getWallets") UseCase<Wallet> getWalletUseCase,
+                                              @Named("createWallet_server") UseCase<Wallet> addToCloudWalletUseCase,
+                                              @Named("activity") Context context){
+        return new WalletsViewModel(addWalletUseCase,addToCloudWalletUseCase,getWalletUseCase,context, isNewUser);
     }
 
     @Provides @PerActivity @Named("createWallet_server")

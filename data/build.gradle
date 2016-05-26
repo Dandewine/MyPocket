@@ -41,6 +41,7 @@ def javaxAnnotationVersion = '1.0'
 def androidAnnotationsVersion = '23.3.0'
 def retrolambdaVersion = '2.0.6'
 def retrofit = '2.0.1'
+def realmVersion = '1.0.0'
 
 //Testing
 def robolectricVersion = '3.0'
@@ -56,7 +57,6 @@ def dataDependencies = [
         rxAndroid         : "io.reactivex:rxandroid:${rxAndroidVersion}",
         javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
         androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
-        //  realm             : "io.realm:realm-android:${realmVersion}",
         lambda            : "net.orfjackal.retrolambda:retrolambda:${retrolambdaVersion}",
         retrofit          : "compile 'com.squareup.retrofit2:retrofit:${retrofit}",
         gsonconverter     : "com.squareup.retrofit2:converter-gson:${retrofit}",
@@ -80,7 +80,6 @@ dependencies {
     provided dataDependencies.daggerCompiler
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.dagger
-    // compile dataDependencies.realm
 
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid

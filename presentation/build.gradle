@@ -94,7 +94,7 @@ dependencies {
 
     compile presentationDependencies.recyclerView
     compile presentationDependencies.cardView
-    compile presentationDependencies.appcompat
+  //  compile presentationDependencies.appcompat
     compile presentationDependencies.design
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'

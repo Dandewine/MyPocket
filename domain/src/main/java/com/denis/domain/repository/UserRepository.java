@@ -26,6 +26,10 @@ public interface UserRepository {
 
     Observable<User> addUser(User user);
 
+    /**
+     * This method will drop database, because without user DB has no sense, and data can be corrupted
+     * @return
+     */
     Observable deleteUser();
 
     Observable update();
