@@ -3,13 +3,10 @@ package com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
-import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.model.mapper.ModelMapper;
@@ -28,7 +25,7 @@ import rx.Subscriber;
  * Created by denis on 4/29/16.
  */
 @PerActivity // TODO: 5/26/16 MUltiple instance of this class, after logout
-public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
+public class DrawerNavViewModel implements ViewModel {
     private UseCase logoutUseCase;
     private UseCase deleteUser;
     private UseCase deleteTokenUseCase;
@@ -74,34 +71,6 @@ public class DrawerNavViewModel implements ViewModel, View.OnClickListener {
 
     public UserModel getUser() {
         return userModel;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.addExpenseTrans:
-                Log.d("myTag", "works");
-                //startAddTransactionAct(false);
-                break;
-            case R.id.addIncomeTrans:
-                //startAddTransactionAct(true);
-                break;
-            case R.id.fabTrans:
-                // animateFAB();
-                break;
-            case R.id.fabCyclic:
-                //  Snackbar.make(fabCyclic, "Cyclic", Snackbar.LENGTH_SHORT).show();
-                break;
-            case R.id.fabSaves:
-                // Snackbar.make(fabSaves, "Saves", Snackbar.LENGTH_SHORT).show();
-                break;
-            case R.id.fabStats:
-                //  Snackbar.make(fabStats, "Stats", Snackbar.LENGTH_SHORT).show();
-                break;
-
-            default:
-                throw new IllegalArgumentException("Can't recognize incoming ID");
-        }
     }
 
     @RxLogSubscriber

@@ -61,12 +61,14 @@ public class DrawerActivity extends BaseActivity implements
     private boolean[] currentlyPageShown = {true, false, false, false}; //need to indicate which button is showing
     private FloatingActionButton[] fabMassive;
 
-    @Inject DrawerNavViewModel viewModel;
+    @Inject
+    DrawerNavViewModel viewModel;
 
-    public static Intent getCallingIntent(Context context){
-        return new Intent(context,DrawerActivity.class);
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, DrawerActivity.class);
     }
 
+    //region tab event listener
     /**
      * Listener which need to subscribe to tab selection events
      */
@@ -196,6 +198,8 @@ public class DrawerActivity extends BaseActivity implements
         }
 
     }
+    //endregion
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -353,7 +357,7 @@ public class DrawerActivity extends BaseActivity implements
         int id = item.getItemId();
 
         if (id == R.id.nav_wallets) {
-            Intent callingIntent = WalletActivity.getCallingIntent(this,false);
+            Intent callingIntent = WalletActivity.getCallingIntent(this, false);
             startActivity(callingIntent);
         } else if (id == R.id.nav_categories) {
 
@@ -433,8 +437,6 @@ public class DrawerActivity extends BaseActivity implements
                     throw new IllegalStateException("Can't find title.");
             }
         }
-
-
     }
 
     @Override
