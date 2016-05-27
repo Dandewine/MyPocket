@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,7 @@ import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.model.mapper.ModelMapper;
 import com.denis.mypocket.model.mapper.UserModelMapper;
+import com.denis.mypocket.viewmodel.ViewModel;
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 
 import java.util.List;

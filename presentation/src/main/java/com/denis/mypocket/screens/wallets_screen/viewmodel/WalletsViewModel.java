@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel.adding;
+package com.denis.mypocket.screens.wallets_screen.viewmodel;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,8 @@ import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.ModelMapper;
 import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.utils.PLTags;
-import com.denis.mypocket.view.activity.DrawerActivity;
-import com.denis.mypocket.view.add_wallet.adapter.WalletAdapter;
+import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
+import com.denis.mypocket.screens.wallets_screen.view.WalletAdapter;
 import com.denis.mypocket.viewmodel.ViewModel;
 
 import java.util.List;

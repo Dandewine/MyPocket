@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel.auth;
+package com.denis.mypocket.screens.signup_screen.viewmodel;
 
 
 import android.app.Activity;
@@ -17,10 +17,10 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
 
-import com.denis.mypocket.PLConstants;
+import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.view.activity.SigInActivity;
+import com.denis.mypocket.screens.login_screen.view.SigInActivity;
 import com.denis.mypocket.viewmodel.ViewModel;
 
 import java.util.regex.Pattern;

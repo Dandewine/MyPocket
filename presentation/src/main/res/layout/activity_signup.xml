@@ -33,7 +33,7 @@
 
             <!-- Name Label -->
 
-            <com.denis.mypocket.view.FixedTextInputLayout
+            <com.denis.mypocket.custom_views.FixedTextInputLayout
                 android:id="@+id/textInputLatour_Name_AS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:hint="Name"
                     android:inputType="textCapWords"
                     android:text="@{viewModel.userName}"/>
-            </com.denis.mypocket.view.FixedTextInputLayout>
+            </com.denis.mypocket.custom_views.FixedTextInputLayout>
 
             <!--  Email Label -->
 

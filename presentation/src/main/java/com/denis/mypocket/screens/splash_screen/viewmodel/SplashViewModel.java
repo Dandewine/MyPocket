@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel.auth;
+package com.denis.mypocket.screens.splash_screen.viewmodel;
 
 import android.text.TextUtils;
 

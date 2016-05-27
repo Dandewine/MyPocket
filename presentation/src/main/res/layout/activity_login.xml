@@ -29,7 +29,7 @@
                 android:src="@drawable/logo"/>
 
             <!--  Email Label -->
-            <com.denis.mypocket.view.FixedTextInputLayout
+            <com.denis.mypocket.custom_views.FixedTextInputLayout
                 android:id="@+id/inputEmail_AL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,10 +46,10 @@
                     android:text="@{viewModel.email}"
                     android:hint="Email"
                     android:inputType="textEmailAddress"/>
-            </com.denis.mypocket.view.FixedTextInputLayout>
+            </com.denis.mypocket.custom_views.FixedTextInputLayout>
 
             <!--  Password Label -->
-            <com.denis.mypocket.view.FixedTextInputLayout
+            <com.denis.mypocket.custom_views.FixedTextInputLayout
                 android:id="@+id/input_password_AL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     android:text="@{viewModel.password}"
                     android:hint="Password"
                     android:inputType="textPassword"/>
-            </com.denis.mypocket.view.FixedTextInputLayout>
+            </com.denis.mypocket.custom_views.FixedTextInputLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"

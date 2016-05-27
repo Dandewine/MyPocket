@@ -33,7 +33,7 @@ import com.denis.domain.repository.UserRepository;
 import com.denis.domain.interactor.user.AddUserUseCase;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.viewmodel.auth.LoginViewModel;
+import com.denis.mypocket.screens.login_screen.viewmodel.LoginViewModel;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.denis.mypocket.internal.di.components;
 
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.internal.di.modules.SplashModule;
-import com.denis.mypocket.view.activity.SplashActivity;
+import com.denis.mypocket.screens.splash_screen.view.SplashActivity;
 
 import dagger.Component;
 

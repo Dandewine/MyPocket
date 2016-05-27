@@ -19,7 +19,7 @@ import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.repository.UserRepository;
-import com.denis.mypocket.viewmodel.auth.RegistrationViewModel;
+import com.denis.mypocket.screens.signup_screen.viewmodel.RegistrationViewModel;
 
 import com.denis.mypocket.internal.di.PerActivity;
 

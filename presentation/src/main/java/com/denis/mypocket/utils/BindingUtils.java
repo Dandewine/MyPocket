@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel;
+package com.denis.mypocket.utils;
 
 import android.annotation.TargetApi;
 import android.databinding.BindingAdapter;
@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.denis.mypocket.R;
-import com.denis.mypocket.utils.TextWatcherAdapter;
+import com.denis.mypocket.custom_views.TextWatcherAdapter;
 
 import java.util.Objects;
 

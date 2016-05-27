@@ -27,7 +27,7 @@ import com.denis.domain.models.User;
 import com.denis.domain.repository.TokenRepository;
 import com.denis.domain.repository.UserRepository;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.viewmodel.DrawerNavViewModel;
+import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
 
 import javax.inject.Named;
 

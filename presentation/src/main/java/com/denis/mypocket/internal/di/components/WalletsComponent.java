@@ -3,7 +3,7 @@ package com.denis.mypocket.internal.di.components;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
 import com.denis.mypocket.internal.di.modules.AddWalletModule;
-import com.denis.mypocket.view.add_wallet.WalletActivity;
+import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
 
 import dagger.Component;
 

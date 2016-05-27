@@ -2,7 +2,7 @@ package com.denis.mypocket.internal.di.components;
 
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.internal.di.modules.LoginModule;
-import com.denis.mypocket.view.activity.SigInActivity;
+import com.denis.mypocket.screens.login_screen.view.SigInActivity;
 
 import dagger.Component;
 

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.denis.mypocket.view.activity.SigInActivity;
+import com.denis.mypocket.screens.login_screen.view.SigInActivity;
 
 /**
  * Created by denis on 4/23/16.

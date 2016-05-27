@@ -1,21 +1,16 @@
 package com.denis.mypocket.view.fragments;
 
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
-import com.denis.mypocket.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentTransactionsListBinding;
-import com.denis.mypocket.view.activity.AddTransactionActivity;
 
 /**
  * Created by denis on 12/13/15.

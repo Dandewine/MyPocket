@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.activity;
+package com.denis.mypocket.screens.tab_with_drawer_screen.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -31,18 +31,20 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.denis.mypocket.PLConstants;
+import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
 import com.denis.mypocket.databinding.NavDrawerHeaderBinding;
 import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
 import com.denis.mypocket.internal.di.modules.DrawerModule;
 import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.view.add_wallet.WalletActivity;
+import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
+import com.denis.mypocket.view.activity.AddTransactionActivity;
+import com.denis.mypocket.view.activity.BaseActivity;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
-import com.denis.mypocket.viewmodel.DrawerNavViewModel;
+import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
 
 import javax.inject.Inject;
 

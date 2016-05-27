@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.add_wallet;
+package com.denis.mypocket.screens.wallets_screen.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -17,7 +17,7 @@ import com.denis.mypocket.databinding.ActivityAddWalletBinding;
 import com.denis.mypocket.internal.di.components.DaggerWalletsComponent;
 import com.denis.mypocket.internal.di.modules.AddWalletModule;
 import com.denis.mypocket.view.activity.BaseActivity;
-import com.denis.mypocket.viewmodel.adding.WalletsViewModel;
+import com.denis.mypocket.screens.wallets_screen.viewmodel.WalletsViewModel;
 
 import javax.inject.Inject;
 

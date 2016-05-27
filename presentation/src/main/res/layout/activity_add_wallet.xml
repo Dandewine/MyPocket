@@ -46,7 +46,7 @@
                     android:orientation="vertical"
                     android:visibility="invisible">
 
-                    <com.denis.mypocket.view.FixedTextInputLayout
+                    <com.denis.mypocket.custom_views.FixedTextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -59,7 +59,7 @@
                             android:afterTextChanged="@{viewModel::setWalletName}"
                             android:text="@{viewModel.walletName}"
                             android:textColor="@android:color/white" />
-                    </com.denis.mypocket.view.FixedTextInputLayout>
+                    </com.denis.mypocket.custom_views.FixedTextInputLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                         android:layout_marginRight="20dp"
                         android:orientation="horizontal">
 
-                        <com.denis.mypocket.view.FixedTextInputLayout
+                        <com.denis.mypocket.custom_views.FixedTextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -84,7 +84,7 @@
                                 android:inputType="numberDecimal"
                                 android:text="@{viewModel.balance == 0f ? String.valueOf(0) : String.valueOf(viewModel.balance)}"
                                 android:textColor="@android:color/white" />
-                        </com.denis.mypocket.view.FixedTextInputLayout>
+                        </com.denis.mypocket.custom_views.FixedTextInputLayout>
 
                     </LinearLayout>
 
@@ -116,7 +116,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             bind:adapter="@{viewModel.getWalletAdapter}" />
 
-        <com.denis.mypocket.view.MorphingFloatingActionButton
+        <com.denis.mypocket.custom_views.MorphingFloatingActionButton
             android:id="@+id/fab_AAW"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

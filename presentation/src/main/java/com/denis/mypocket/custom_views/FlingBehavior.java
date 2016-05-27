@@ -1,4 +1,4 @@
-package com.denis.mypocket.view;
+package com.denis.mypocket.custom_views;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;

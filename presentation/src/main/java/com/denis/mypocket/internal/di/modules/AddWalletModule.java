@@ -22,14 +22,11 @@ import com.denis.domain.interactor.wallets.AddWalletUseCase;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.wallets.CloudCreateWalletUseCase;
 import com.denis.domain.interactor.wallets.GetWalletsUseCase;
-import com.denis.domain.interactor.wallets.SaveWalletList;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.utils.PLTags;
-import com.denis.mypocket.viewmodel.adding.WalletsViewModel;
-
-import java.util.List;
+import com.denis.mypocket.screens.wallets_screen.viewmodel.WalletsViewModel;
 
 import javax.inject.Named;
 

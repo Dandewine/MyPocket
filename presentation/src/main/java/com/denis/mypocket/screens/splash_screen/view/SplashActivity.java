@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.activity;
+package com.denis.mypocket.screens.splash_screen.view;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -10,7 +10,10 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivitySplashBinding;
 import com.denis.mypocket.internal.di.components.DaggerSplashComponent;
 import com.denis.mypocket.internal.di.modules.SplashModule;
-import com.denis.mypocket.viewmodel.auth.SplashViewModel;
+import com.denis.mypocket.screens.splash_screen.viewmodel.SplashViewModel;
+import com.denis.mypocket.view.activity.BaseActivity;
+import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
+import com.denis.mypocket.screens.login_screen.view.SigInActivity;
 
 import java.util.concurrent.TimeUnit;
 

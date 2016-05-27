@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.denis.mypocket.AnimationUtils;
-import com.denis.mypocket.PLConstants;
+import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
 import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;

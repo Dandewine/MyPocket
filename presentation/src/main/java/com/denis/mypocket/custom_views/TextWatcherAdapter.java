@@ -1,4 +1,4 @@
-package com.denis.mypocket.utils;
+package com.denis.mypocket.custom_views;
 
 import android.text.Editable;
 import android.text.TextWatcher;

@@ -20,7 +20,7 @@ import com.denis.domain.repository.TokenRepository;
 import com.denis.domain.repository.UserRepository;
 import com.denis.domain.interactor.user.GetAllUsers;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.viewmodel.auth.SplashViewModel;
+import com.denis.mypocket.screens.splash_screen.viewmodel.SplashViewModel;
 
 import javax.inject.Named;
 

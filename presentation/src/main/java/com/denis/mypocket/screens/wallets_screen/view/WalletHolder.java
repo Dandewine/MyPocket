@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.add_wallet.adapter;
+package com.denis.mypocket.screens.wallets_screen.view;
 
 import android.view.View;
 

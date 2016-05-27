@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel.auth;
+package com.denis.mypocket.screens.login_screen.viewmodel;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +17,9 @@ import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.view.add_wallet.WalletActivity;
-import com.denis.mypocket.view.activity.DrawerActivity;
-import com.denis.mypocket.view.activity.SignUpActivity;
+import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
+import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
+import com.denis.mypocket.screens.signup_screen.view.SignUpActivity;
 import com.denis.mypocket.viewmodel.ViewModel;
 import com.google.gson.Gson;
 

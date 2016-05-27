@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.activity;
+package com.denis.mypocket.screens.signup_screen.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivitySignupBinding;
 import com.denis.mypocket.internal.di.components.DaggerRegistrationComponent;
 import com.denis.mypocket.internal.di.modules.RegistrationModule;
-import com.denis.mypocket.viewmodel.auth.RegistrationViewModel;
+import com.denis.mypocket.screens.signup_screen.viewmodel.RegistrationViewModel;
+import com.denis.mypocket.view.activity.BaseActivity;
 
 import javax.inject.Inject;
 
