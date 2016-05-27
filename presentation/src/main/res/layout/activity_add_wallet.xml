@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.adding.WalletsViewModel" />
+            type="com.denis.mypocket.screens.wallets_screen.viewmodel.WalletsViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

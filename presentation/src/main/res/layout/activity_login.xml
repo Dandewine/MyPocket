@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.auth.LoginViewModel"/>
+            type="com.denis.mypocket.screens.login_screen.viewmodel.LoginViewModel"/>
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"

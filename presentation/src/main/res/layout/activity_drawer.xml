@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.DrawerNavViewModel" />
+            type="com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel" />
         <variable
             name="user"
             type="com.denis.mypocket.model.UserModel"/>

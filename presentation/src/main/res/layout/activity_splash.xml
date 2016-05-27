@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.auth.SplashViewModel"/>
+            type="com.denis.mypocket.screens.splash_screen.viewmodel.SplashViewModel"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"

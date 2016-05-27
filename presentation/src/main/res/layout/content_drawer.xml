@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.viewmodel.DrawerNavViewModel" />
+            type="com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
