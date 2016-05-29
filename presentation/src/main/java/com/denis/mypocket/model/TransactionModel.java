@@ -2,22 +2,22 @@ package com.denis.mypocket.model;
 
 public class TransactionModel {
 
-    private int id;
+    private String id;
     private WalletModel walletModel;
     private float amount;
-    private int type;
+    private String type;
     private long unixDateTime;
     private int categoryId;
 
-    public TransactionModel(int id) {
+    public TransactionModel(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,11 +37,11 @@ public class TransactionModel {
         this.amount = amount;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

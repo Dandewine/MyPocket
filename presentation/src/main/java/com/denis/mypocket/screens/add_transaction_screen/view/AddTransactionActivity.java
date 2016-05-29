@@ -1,22 +1,22 @@
-package com.denis.mypocket.view.activity;
+package com.denis.mypocket.screens.add_transaction_screen.view;
 
 import android.annotation.TargetApi;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.denis.mypocket.AnimationUtils;
-import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
-import com.denis.mypocket.viewmodel.adding.AddTransactionViewModel;
+import com.denis.mypocket.internal.di.components.DaggerTransactionComponent;
+import com.denis.mypocket.internal.di.modules.transactions.TransactionModule;
+import com.denis.mypocket.screens.add_transaction_screen.viewmodel.TransactionViewModel;
+import com.denis.mypocket.utils.PLConstants;
+import com.denis.mypocket.view.activity.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -24,25 +24,16 @@ import javax.inject.Inject;
 public class AddTransactionActivity extends BaseActivity {
 
     @Inject
-    public AddTransactionViewModel viewModel;
+    public TransactionViewModel viewModel;
     private ActivityAddTransactionBinding binding;
     private boolean isIncome = false;
     private ViewGroup mRlContainer;
-    private FloatingActionButton mFab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        isIncome = getIntent().getBooleanExtra(PLConstants.INTENT_INCOME_FLAG, false);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_transaction);
         binding.setViewModel(viewModel);
-        mRlContainer = binding.containerAddTrans;
-        //mFab = binding.addTrans;
-       // configireToolbar(binding.toolbarAddTrans.toolbar, R.string.toolbar_add_trans, true);
-        //setupEnterAnimation();
-        //setupExitAnimation();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -59,7 +50,7 @@ public class AddTransactionActivity extends BaseActivity {
             @Override
             public void onTransitionEnd(Transition transition) {
                 transition.removeListener(this);
-                animateRevealShow(mRlContainer);
+               // animateRevealShow(mRlContainer);
             }
 
             @Override
@@ -79,7 +70,7 @@ public class AddTransactionActivity extends BaseActivity {
         });
     }
 
-    private void animateRevealShow(final View viewRoot) {
+    /*private void animateRevealShow(final View viewRoot) {
         int cx = (viewRoot.getLeft() + viewRoot.getRight()) / 2;
         int cy = (viewRoot.getTop() + viewRoot.getBottom()) / 2;
         AnimationUtils.animateRevealShow(this, mRlContainer, mFab.getWidth() / 2, R.color.fab_income,
@@ -94,7 +85,7 @@ public class AddTransactionActivity extends BaseActivity {
                         //initViews();
                     }
                 });
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
@@ -121,11 +112,13 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     protected void initDIComponent() {
-     /*   DaggerAddTransactionComponent.builder()
+        isIncome = getIntent().getBooleanExtra(PLConstants.INTENT_INCOME_FLAG, false);
+
+        DaggerTransactionComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .provideViewModelAddTransactionModule(new ProvideViewModelAddTransactionModule(isIncome))
-                .build().inject(this);*/
+                .transactionModule(new TransactionModule(isIncome))
+                .build().inject(this);
     }
 
 

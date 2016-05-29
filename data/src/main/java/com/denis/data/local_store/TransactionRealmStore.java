@@ -27,14 +27,10 @@ public class TransactionRealmStore implements RealmStore<TransactionEntity> {
 
     @Override
     public Observable<TransactionEntity> put(TransactionEntity item) {
-
-        Number max = realm.where(TransactionEntity.class).max("id");
-        int nextId = max == null ? 0 : max.intValue() + 1;
-        item.setId(nextId);
-
-        final TransactionEntity[] entity = new TransactionEntity[1];
-        realm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
-        return Observable.just(entity[0]);
+        realm.beginTransaction();
+        TransactionEntity entity = realm.copyToRealmOrUpdate(item);
+        realm.commitTransaction();
+        return entity.asObservable();
     }
 
     @Override

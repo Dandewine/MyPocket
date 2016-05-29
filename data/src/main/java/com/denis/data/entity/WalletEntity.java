@@ -10,18 +10,18 @@ import io.realm.annotations.PrimaryKey;
  */
 public class WalletEntity extends RealmObject {
 
-    @PrimaryKey
-    private String id;
-    @SerializedName("walletName")
-    private String name;
+    @PrimaryKey  private String id;
+    @SerializedName("walletName") private String name;
     private String currency;
     private float balance;
+    private boolean isActive;
 
-    public WalletEntity(String id, String name, String currency, float balance) {
+    public WalletEntity(String id, String name, String currency, float balance, boolean isActive) {
         this.id = id;
         this.name = name;
         this.currency = currency;
         this.balance = balance;
+        this.isActive = isActive;
     }
 
     public WalletEntity() {
@@ -57,5 +57,13 @@ public class WalletEntity extends RealmObject {
 
     public void setBalance(float balance) {
         this.balance = balance;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

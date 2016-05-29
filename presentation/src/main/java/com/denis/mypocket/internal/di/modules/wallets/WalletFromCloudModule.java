@@ -1,4 +1,4 @@
-package com.denis.mypocket.internal.di.modules;
+package com.denis.mypocket.internal.di.modules.wallets;
 
 import com.denis.data.entity.UserEntity;
 import com.denis.data.entity.mapper.WalletDataMapper;
@@ -29,7 +29,7 @@ import io.realm.Realm;
  * Created by denis on 5/5/16.
  */
 @Module
-public class WalletModuleGET {
+public class WalletFromCloudModule {
     @Provides @PerActivity @Named("getWallets")
     UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread,
                                             @Named("cloud") WalletRepository repository){

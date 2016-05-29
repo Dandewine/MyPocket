@@ -1,4 +1,4 @@
-package com.denis.mypocket.viewmodel.adding;
+package com.denis.mypocket.screens.add_transaction_screen.viewmodel;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -15,6 +15,7 @@ import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
+import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.ExpenseCategoryModel;
 import com.denis.mypocket.model.IncomeCategoryModel;
@@ -26,57 +27,49 @@ import com.denis.mypocket.viewmodel.ViewModel;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 @PerActivity
-public class AddTransactionViewModel implements ViewModel {
+public class TransactionViewModel implements ViewModel {
     public String amount = "";
 
     private int categoryId;
-    private int walletId;
-
     private boolean isIncome;
 
     private ArrayAdapter categoriesAdapter;
-    private ArrayAdapter walletsAdapter;
-    private AddTransactionUseCasesFacade workerFacade;
+    private AddTransactionUseCasesFacade transactionFacade;
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
 
-    private List<Wallet> walletList;
     public Typeface typeface;
 
     @Inject
-    public AddTransactionViewModel(AddTransactionUseCasesFacade workerFacade,
-                                   @Named("activity") Context context,
-                                   boolean isIncome) {
+    public TransactionViewModel(AddTransactionUseCasesFacade transactionFacade, Context context,
+                                boolean isIncome) {
 
-        this.workerFacade = workerFacade;
+        this.transactionFacade = transactionFacade;
         this.isIncome = isIncome;
-        categoriesAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1);
-        walletsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
+        categoriesAdapter = new ArrayAdapter<>(context, R.layout.item_category, R.id.categoryTitle_CSA);
 
-        typeface = Typeface.createFromAsset(context.getAssets(),"Roboto-Light.ttf");
+        typeface = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
 
-        workerFacade.getWallets(new GetAllWalletsSubscriber());
         if (isIncome)
-            workerFacade.getIncomeCategories(new GetAllIncomeCategories());
+            transactionFacade.getIncomeCategories(new GetAllIncomeCategories());
         else
-            workerFacade.getExpenseCategories(new GetAllExpenseCategories());
+            transactionFacade.getExpenseCategories(new GetAllExpenseCategories());
 
     }
 
-    public void afterTextChanged(Editable s){
+    public void afterTextChanged(Editable s) {
         if (!TextUtils.equals(s.toString(), amount))
             amount = s.toString();
     }
 
     @Override
     public void destroy() {
-        Log.i(PLTags.INSTANCE_TAG, "AddTransactionViewModel has been destroyed");
-        workerFacade.destroy();
+        Log.i(PLTags.INSTANCE_TAG, "TransactionViewModel has been destroyed");
+        transactionFacade.destroy();
     }
 
     private class GetAllIncomeCategories extends DefaultSubscriber<List<IncomeCategory>> {
@@ -110,7 +103,7 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<ExpenseCategory> expenseCategories) {
-            if(expenseCategories != null) {
+            if (expenseCategories != null) {
                 List<ExpenseCategoryModel> modelList = expenseMapper.transform(expenseCategories);
                 for (int i = 0; i < modelList.size(); i++) {
                     categoriesAdapter.add(expenseCategories.get(i).getName());
@@ -119,25 +112,6 @@ public class AddTransactionViewModel implements ViewModel {
         }
     }
 
-
-    private class GetAllWalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
-        @Override
-        public void onCompleted() {
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-        }
-
-        @Override
-        public void onNext(List<Wallet> wallets) {
-            walletList = wallets;
-            for (int i = 0; i < wallets.size(); i++) {
-                walletsAdapter.add(wallets.get(i).getWalletName());
-            }
-        }
-    }
 
     private class AddTransactionSubscriber extends DefaultSubscriber<Transaction> {
         @Override
@@ -156,16 +130,32 @@ public class AddTransactionViewModel implements ViewModel {
         }
     }
 
+    class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+        @Override
+        public void onNext(List<Wallet> wallets) {
+        /*    if(wallets != null && !wallets.isEmpty()) {
+                WalletModelDataMapper walletModelDataMapper = dataMapper.getWalletModelDataMapper();
+                walletModels = walletModelDataMapper.transform(wallets);
+                for (WalletModel model : walletModels) {
+                    walletsAdapter.add(model.getName());
+                }
+            }*/
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+        }
+    }
+
 
     public View.OnClickListener addOnClick =
             v -> {
-                Transaction transaction = new Transaction(walletList.get(walletId),
-                        Float.parseFloat(amount.isEmpty()? "0" :amount),
-                        isIncome ? 1 : 0,
-                        categoryId,
-                        System.currentTimeMillis() / 1000);
-                workerFacade.addTransaction(new AddTransactionSubscriber(),
-                        transaction);
+                float amount = Float.parseFloat(this.amount.isEmpty() ? "0" : this.amount);
+                String type = isIncome ? Transaction.TransactionTypes.INCOME.name() : Transaction.TransactionTypes.EXPENSE.name();
+
+                Transaction transaction = new Transaction(amount, type, categoryId, 0L);
+                transactionFacade.addTransaction(new AddTransactionSubscriber(), transaction);
             };
 
     public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
@@ -181,26 +171,7 @@ public class AddTransactionViewModel implements ViewModel {
         }
     };
 
-    public AdapterView.OnItemSelectedListener walletOnCLickListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            walletId = (int) id;
-            Log.d("myTag", "wallet id = " + walletId);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    };
-
-
-
     public ArrayAdapter getCategoriesAdapter() {
         return categoriesAdapter;
-    }
-
-    public ArrayAdapter getWalletsAdapter() {
-        return walletsAdapter;
     }
 }

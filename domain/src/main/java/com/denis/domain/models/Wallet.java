@@ -12,12 +12,14 @@ public class Wallet implements Parcelable {
     private String walletName;
     private String currency;
     private float balance;
+    private boolean isActive;
 
-    public Wallet(String id, String name, String currency, float balance) {
+    public Wallet(String id, String name, String currency, float balance, boolean isActive) {
         this.id = id;
         this.walletName = name;
         this.currency = currency;
         this.balance = balance;
+        this.isActive = isActive;
     }
 
     public Wallet(String id) {
@@ -53,6 +55,13 @@ public class Wallet implements Parcelable {
         this.balance = balance;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     @Override
     public int describeContents() {

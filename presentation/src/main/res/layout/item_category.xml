@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/svg_donat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView4" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="18sp"
+        tools:text="Food &amp; Beverage"
+        android:id="@+id/categoryTitle_CSA" />
+
+</LinearLayout>

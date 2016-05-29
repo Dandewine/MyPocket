@@ -15,16 +15,16 @@ import rx.Observable;
 
 public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
 
-    private Realm mRealm;
+    private Realm realm;
 
     @Inject
     public IncomeCategoriesStore(Realm realm) {
-        this.mRealm = realm;
+        this.realm = realm;
     }
 
     @Override
     public Observable<IncomeCategoryEntity> get(String id) {
-        return Observable.just(mRealm.where(IncomeCategoryEntity.class).equalTo("id", id).findFirst());
+        return Observable.just(realm.where(IncomeCategoryEntity.class).equalTo("id", id).findFirst());
     }
 
     @Override
@@ -58,19 +58,19 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
         );
 
 
-        mRealm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(list));
-        mRealm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(list2));
+        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(list));
+        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(list2));
 
-        return Observable.just(mRealm.where(IncomeCategoryEntity.class).findAllSorted("id"));
+        return Observable.just(realm.where(IncomeCategoryEntity.class).findAllSorted("id"));
     }
 
     @Override
     public Observable<IncomeCategoryEntity> put(IncomeCategoryEntity item) {
-        Number max = mRealm.where(IncomeCategoryEntity.class).max("id");
+        Number max = realm.where(IncomeCategoryEntity.class).max("id");
         int nextId = max == null ? 0 : max.intValue() + 1;
         item.setId(nextId);
         final IncomeCategoryEntity[] entity = {null};
-        mRealm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
+        realm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
         return Observable.just(entity[0]);
     }
 
@@ -81,7 +81,7 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
 
     @Override
     public Observable<IncomeCategoryEntity> update(IncomeCategoryEntity item) {
-        return Observable.just(mRealm.copyToRealmOrUpdate(item));
+        return Observable.just(realm.copyToRealmOrUpdate(item));
     }
 
     @Override

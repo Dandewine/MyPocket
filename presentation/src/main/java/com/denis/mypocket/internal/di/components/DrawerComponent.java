@@ -1,7 +1,7 @@
 package com.denis.mypocket.internal.di.components;
 
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.internal.di.modules.DrawerModule;
+import com.denis.mypocket.internal.di.modules.drawer.DrawerModule;
 import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
 
 import dagger.Component;

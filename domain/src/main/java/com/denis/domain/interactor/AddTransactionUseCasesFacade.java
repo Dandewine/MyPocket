@@ -22,7 +22,6 @@ public class AddTransactionUseCasesFacade {
                                         @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
                                         @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase) {
         this.addTransactionUseCase = addTransactionUseCase;
-        this.getWalletsUseCase = walletsUseCase;
         this.incomeCategoryUseCase = incomeCategoriesUseCase;
         this.expenseCategoryUseCase = expenseCategoryUseCase;
     }
@@ -32,7 +31,7 @@ public class AddTransactionUseCasesFacade {
     }
 
     public void addTransaction(Subscriber subscriber, Transaction transaction){
-        addTransactionUseCase.executeSync(subscriber,transaction);
+        addTransactionUseCase.executeAsync(subscriber,transaction);
     }
 
     public void getIncomeCategories(Subscriber subscriber){

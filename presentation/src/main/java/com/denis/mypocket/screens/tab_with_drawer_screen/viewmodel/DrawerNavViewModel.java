@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
+import com.denis.domain.models.Wallet;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.model.mapper.ModelMapper;
@@ -14,6 +15,7 @@ import com.denis.mypocket.model.mapper.UserModelMapper;
 import com.denis.mypocket.viewmodel.ViewModel;
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,10 +31,12 @@ public class DrawerNavViewModel implements ViewModel {
     private UseCase logoutUseCase;
     private UseCase deleteUser;
     private UseCase deleteTokenUseCase;
+    private UseCase walletsUseCase;
 
     private Context context;
     private ModelMapper<User, UserModel> userModelMapper = new UserModelMapper();
     private UserModel userModel = null;
+    private List<Wallet> walletsList = new ArrayList<>();
 
     private Subscriber<List<User>> userSubscriber = new DefaultSubscriber<List<User>>() {
         @Override
@@ -43,17 +47,19 @@ public class DrawerNavViewModel implements ViewModel {
     };
 
     @Inject
-    public DrawerNavViewModel(UseCase logoutUseCase,
+    public DrawerNavViewModel(UseCase logoutUseCase, // TODO: 5/29/16 cleanup here with facade
                               UseCase deleteUser,
                               UseCase deleteTokenUseCase,
-                              UseCase<User> getUserUseCase,
-                              Context context) {
+                              UseCase<User> userUseCase,
+                              UseCase walletsUseCase, Context context) {
         this.logoutUseCase = logoutUseCase;
         this.deleteUser = deleteUser;
         this.deleteTokenUseCase = deleteTokenUseCase;
+        this.walletsUseCase = walletsUseCase;
         this.context = context;
 
-        getUserUseCase.executeSync(userSubscriber);
+        userUseCase.executeSync(userSubscriber); //retrieve user
+        walletsUseCase.executeSync(new WalletsSubscriber()); //retrieve his wallets
     }
 
     @Override
@@ -112,6 +118,18 @@ public class DrawerNavViewModel implements ViewModel {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 ((Activity) context).finish();
+            }
+        }
+
+
+    }
+    @RxLogSubscriber
+    private class WalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+        @Override
+        public void onNext(List<Wallet> wallets) {
+            if(wallets != null && !wallets.isEmpty()){
+                walletsList.clear();
+                walletsList.addAll(wallets);
             }
         }
     }

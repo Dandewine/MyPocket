@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RadioGroup;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
@@ -19,12 +18,10 @@ import com.denis.domain.models.CycleOperation;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.DateTimeUtils;
-import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
-import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.ViewModel;
 
@@ -89,18 +86,6 @@ public class AddCycleOperationViewModel implements ViewModel {
         }
     };
 
-    public AdapterView.OnItemSelectedListener walletOnItemClick = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            walletModel = walletModels.get(position);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            walletModel = walletModels.get(0);
-        }
-    };
-
     /*public RadioGroup.OnCheckedChangeListener changeListener = (group, checkedId) -> {
         switch (checkedId) {
             case R.id.rbDay:
@@ -138,14 +123,13 @@ public class AddCycleOperationViewModel implements ViewModel {
 
     private Transaction convert(TransactionModel model){ // TODO: 2/20/16 cleanup here
         return new Transaction(model.getId(),
-                convert(walletModel),
                 model.getAmount(),model.getType(),
                 model.getUnixDateTime(), model.getCategoryId());
     }
 
-    private Wallet convert(WalletModel model){
-        return new Wallet(model.getId(),model.getName(),model.getCurrency(),model.getBalance());
-    }
+   /* private Wallet convert(WalletModel model){
+        return new Wallet(model.getId(),model.getName(),model.getCurrency(),model.getBalance(), isActive);
+    }*/
 
     private void setAlarm(CycleOperation operation) {
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -199,13 +183,13 @@ public class AddCycleOperationViewModel implements ViewModel {
     class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
         @Override
         public void onNext(List<Wallet> wallets) {
-            if(wallets != null && !wallets.isEmpty()) {
+        /*    if(wallets != null && !wallets.isEmpty()) {
                 WalletModelDataMapper walletModelDataMapper = dataMapper.getWalletModelDataMapper();
                 walletModels = walletModelDataMapper.transform(wallets);
                 for (WalletModel model : walletModels) {
                     walletsAdapter.add(model.getName());
                 }
-            }
+            }*/
         }
 
         @Override

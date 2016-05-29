@@ -59,7 +59,7 @@ public class WalletsViewModel implements ViewModel {
 
     public void execute() {
         if (isPassValidation()) {
-            addWalletCloudUseCase.executeAsync(new AddWalletToServerSubscriber(), new Wallet(null, walletName, "usd", balance));
+            addWalletCloudUseCase.executeAsync(new AddWalletToServerSubscriber(), new Wallet(null, walletName, "usd", balance, true));
         }
     }
 

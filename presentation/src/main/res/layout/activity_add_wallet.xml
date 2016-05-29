@@ -23,7 +23,7 @@
             android:layout_height="256dp"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_behavior="com.denis.mypocket.view.FlingBehavior">
+            app:layout_behavior="com.denis.mypocket.custom_views.FlingBehavior">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"

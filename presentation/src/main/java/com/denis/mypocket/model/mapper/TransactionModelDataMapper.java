@@ -10,11 +10,9 @@ import javax.inject.Inject;
 
 public class TransactionModelDataMapper implements ModelMapper<Transaction, TransactionModel> {
 
-    private WalletModelDataMapper walletModelDataMapper;
 
     @Inject
-    public TransactionModelDataMapper(WalletModelDataMapper walletModelDataMapper) {
-        this.walletModelDataMapper = walletModelDataMapper;
+    public TransactionModelDataMapper() {
     }
 
     @Override
@@ -25,7 +23,6 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
             model.setAmount(transaction.getAmount());
             model.setType(transaction.getType());
             model.setUnixDateTime(transaction.getUnixDateTime());
-            model.setWalletModel(walletModelDataMapper.transform(transaction.getWallet()));
             model.setCategoryId(transaction.getCategoryId());
         }
         return model;
@@ -44,7 +41,4 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
         return modelList;
     }
 
-    public WalletModelDataMapper getWalletModelDataMapper() {
-        return walletModelDataMapper;
-    }
 }

@@ -22,7 +22,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".screens.tab_with_drawer_screen.view.DrawerActivity"/>
         </activity>
-        <activity android:name=".view.activity.AddTransactionActivity"/>
+        <activity android:name=".screens.add_transaction_screen.view.AddTransactionActivity"/>
         <activity android:name=".view.activity.AddCycleOperationActivity"/>
         <activity
             android:name=".screens.tab_with_drawer_screen.view.DrawerActivity"

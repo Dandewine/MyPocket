@@ -5,48 +5,46 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Transaction implements Parcelable {
-    private int id;
-    private Wallet wallet;
+    private String id;
     private float amount;
-    private int type;
+    private String type;
     private int categoryId;
     private long unixDateTime;
 
-    public Transaction(int id, Wallet wallet, float amount, int type, long unixDateTime, int categoryId) {
+   public enum TransactionTypes{
+        EXPENSE("expense"),
+        INCOME("income");
+
+        TransactionTypes(String s) {
+
+        }
+    }
+
+    public Transaction(String id, float amount, String type, long unixDateTime, int categoryId) {
         this.id = id;
-        this.wallet = wallet;
         this.amount = amount;
         this.type = type;
         this.categoryId = categoryId;
         this.unixDateTime = unixDateTime;
     }
 
-    public Transaction(Wallet wallet, float amount, int type, int categoryId, long unixDateTime) {
-        this.wallet = wallet;
+    public Transaction(float amount, String type, int categoryId, long unixDateTime) {
         this.amount = amount;
         this.type = type;
         this.categoryId = categoryId;
         this.unixDateTime = unixDateTime;
     }
 
-    public Transaction(int id) {
+    public Transaction(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
     }
 
     public int getCategoryId() {
@@ -65,11 +63,11 @@ public class Transaction implements Parcelable {
         this.amount = amount;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -89,19 +87,17 @@ public class Transaction implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeParcelable(this.wallet, flags);
+        dest.writeString(this.id);
         dest.writeFloat(this.amount);
-        dest.writeInt(this.type);
+        dest.writeString(this.type);
         dest.writeInt(this.categoryId);
         dest.writeLong(this.unixDateTime);
     }
 
     protected Transaction(Parcel in) {
-        this.id = in.readInt();
-        this.wallet = in.readParcelable(Wallet.class.getClassLoader());
+        this.id = in.readString();
         this.amount = in.readFloat();
-        this.type = in.readInt();
+        this.type = in.readString();
         this.categoryId = in.readInt();
         this.unixDateTime = in.readLong();
     }

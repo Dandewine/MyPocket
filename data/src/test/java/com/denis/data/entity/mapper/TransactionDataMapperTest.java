@@ -37,11 +37,11 @@ public class TransactionDataMapperTest{
         assertThat(entity.getType(),is(FAKE_TYPE));
         assertThat(entity.getUnixDateTime(),is(FAKE_DATE));
 
-        assertThat(entity.getWalletEntity(),is(notNullValue()));
-        assertThat(entity.getWalletEntity().getId(),is(FAKE_WALLET_ID));
-        assertThat(entity.getWalletEntity().getUsername(),is(FAKE_WALLET_NAME));
-        assertThat(entity.getWalletEntity().getCurrency(),is(FAKE_WALLET_CURRENCY));
-        assertThat(entity.getWalletEntity().getBalance(),is(FAKE_WALLET_BALANCE));
+        assertThat(entity.getWalletId(),is(notNullValue()));
+        assertThat(entity.getWalletId().getId(),is(FAKE_WALLET_ID));
+        assertThat(entity.getWalletId().getUsername(),is(FAKE_WALLET_NAME));
+        assertThat(entity.getWalletId().getCurrency(),is(FAKE_WALLET_CURRENCY));
+        assertThat(entity.getWalletId().getBalance(),is(FAKE_WALLET_BALANCE));
     }
 
     @Test

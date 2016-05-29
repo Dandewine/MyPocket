@@ -1,47 +1,48 @@
 package com.denis.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class TransactionEntity extends RealmObject {
-    @PrimaryKey
-    private int id;
-    private WalletEntity walletEntity;
-    private float amount;
-    private int type; // 1 - Income, 0 - Expense
-    private int categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
-    private long unixDateTime;
+    @PrimaryKey @SerializedName("id")     private String id;
+    @SerializedName("walletId")           private String walletId;
+    @SerializedName("amount")             private float amount;
+    @SerializedName("type")               private String type; // 1 - Income, 0 - Expense
+    @SerializedName("categoryId")         private int categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
+    @SerializedName("unixDataTime")       private long unixDateTime;
 
-    public TransactionEntity(int id) {
+    public TransactionEntity(String id) {
         this.id = id;
     }
 
     public TransactionEntity() {
     }
 
-    public TransactionEntity(int id,  WalletEntity walletEntity, float amount, int type, int categoryId, long unixDateTime) {
+    public TransactionEntity(String id, String walletId, float amount, String type, int categoryId, long unixDateTime) {
         this.id = id;
-        this.walletEntity = walletEntity;
+        this.walletId = walletId;
         this.amount = amount;
         this.type = type;
         this.categoryId = categoryId;
         this.unixDateTime = unixDateTime;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public WalletEntity getWalletEntity() {
-        return walletEntity;
+    public String getWalletId() {
+        return walletId;
     }
 
-    public void setWalletEntity(WalletEntity walletEntity) {
-        this.walletEntity = walletEntity;
+    public void setWalletId(String walletEntity) {
+        this.walletId = walletEntity;
     }
 
     public float getAmount() {
@@ -52,11 +53,11 @@ public class TransactionEntity extends RealmObject {
         this.amount = amount;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

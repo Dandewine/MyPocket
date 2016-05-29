@@ -33,6 +33,7 @@ import com.denis.domain.repository.UserRepository;
 import com.denis.domain.interactor.user.AddUserUseCase;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.internal.di.modules.wallets.WalletFromCloudModule;
 import com.denis.mypocket.screens.login_screen.viewmodel.LoginViewModel;
 
 import java.util.List;
@@ -46,7 +47,7 @@ import io.realm.Realm;
 /**
  * Created by denis on 4/23/16.
  */
-@Module(includes = {ActivityModule.class,WalletModuleGET.class})
+@Module(includes = {ActivityModule.class,WalletFromCloudModule.class})
 public class LoginModule {
 
     @Provides @PerActivity

@@ -10,7 +10,6 @@ import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,7 +63,7 @@ public class WalletCloudDataStore implements WalletDataStore {
                         return Observable.just(call.execute().code() == HttpsURLConnection.HTTP_CREATED ? walletEntity : null);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        return Observable.just(null);
+                        return Observable.empty();
                     }
                 });
     }

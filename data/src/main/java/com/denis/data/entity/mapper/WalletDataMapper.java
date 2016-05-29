@@ -28,6 +28,7 @@ public class WalletDataMapper implements EntityMapper<WalletEntity, Wallet> {
             wallet.setBalance(walletEntity.getBalance());
             wallet.setCurrency(walletEntity.getCurrency());
             wallet.setWalletName(walletEntity.getName());
+            wallet.setActive(wallet.isActive());
         }
         return wallet;
     }
@@ -70,7 +71,12 @@ public class WalletDataMapper implements EntityMapper<WalletEntity, Wallet> {
     public WalletEntity toEntity(Wallet wallet) {
         WalletEntity entity = null;
         if (wallet != null) {
-            entity = new WalletEntity(wallet.getId(), wallet.getWalletName(), wallet.getCurrency(), wallet.getBalance());
+            entity = new WalletEntity();
+            entity.setActive(wallet.isActive());
+            entity.setName(wallet.getWalletName());
+            entity.setId(wallet.getId());
+            entity.setCurrency(wallet.getCurrency());
+            entity.setBalance(wallet.getBalance());
         }
         return entity;
     }
