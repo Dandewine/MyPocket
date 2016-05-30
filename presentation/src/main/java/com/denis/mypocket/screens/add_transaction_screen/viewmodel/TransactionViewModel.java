@@ -130,7 +130,7 @@ public class TransactionViewModel implements ViewModel {
         }
     }
 
-    class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+    static class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
         @Override
         public void onNext(List<Wallet> wallets) {
         /*    if(wallets != null && !wallets.isEmpty()) {
