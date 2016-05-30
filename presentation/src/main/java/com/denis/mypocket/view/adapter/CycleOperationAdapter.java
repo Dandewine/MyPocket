@@ -42,6 +42,5 @@ public class CycleOperationAdapter extends RecyclerBindableAdapter<CycleOperatio
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDecorator(context, MyDecorator.VERTICAL_LIST));
-
     }
 }

@@ -1,8 +1,9 @@
-package com.denis.mypocket.internal.di.components;
+package com.denis.mypocket.internal.di.components.activity;
 
 import android.content.Context;
 
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
 import com.denis.mypocket.view.activity.BaseActivity;
 
