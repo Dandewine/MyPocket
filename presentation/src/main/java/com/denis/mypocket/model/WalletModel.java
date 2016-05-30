@@ -6,6 +6,7 @@ public class WalletModel{
     private String name;
     private String currency;
     private float balance;
+    private boolean isActive;
 
     public WalletModel(String id) {
         this.id = id;
@@ -41,5 +42,13 @@ public class WalletModel{
 
     public void setBalance(float balance) {
         this.balance = balance;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

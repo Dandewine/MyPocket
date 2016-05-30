@@ -5,9 +5,7 @@ import android.app.Application;
 import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.components.DaggerApplicationComponent;
 import com.denis.mypocket.internal.di.modules.ApplicationModule;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import com.squareup.leakcanary.LeakCanary;
 
 public class MyPocketApp extends Application {
     private ApplicationComponent component;
@@ -16,6 +14,7 @@ public class MyPocketApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LeakCanary.install(this);
         initializeInjector();
         pocketApp = this;
     }

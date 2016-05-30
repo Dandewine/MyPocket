@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.denis.domain.interactor.AddTransactionUseCasesFacade;
+import com.denis.domain.interactor.facades.AddTransactionUseCasesFacade;
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;

@@ -10,8 +10,10 @@ import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
+import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.ModelMapper;
 import com.denis.mypocket.model.mapper.UserModelMapper;
+import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.viewmodel.ViewModel;
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 
@@ -31,12 +33,14 @@ public class DrawerNavViewModel implements ViewModel {
     private UseCase logoutUseCase;
     private UseCase deleteUser;
     private UseCase deleteTokenUseCase;
-    private UseCase walletsUseCase;
+    private UseCase<Wallet> walletsUseCase;
 
     private Context context;
     private ModelMapper<User, UserModel> userModelMapper = new UserModelMapper();
+    private ModelMapper<Wallet, WalletModel> modelMapper = new WalletModelDataMapper();
+
     private UserModel userModel = null;
-    private List<Wallet> walletsList = new ArrayList<>();
+    private List<WalletModel> walletsList = new ArrayList<>();
 
     private Subscriber<List<User>> userSubscriber = new DefaultSubscriber<List<User>>() {
         @Override
@@ -51,7 +55,7 @@ public class DrawerNavViewModel implements ViewModel {
                               UseCase deleteUser,
                               UseCase deleteTokenUseCase,
                               UseCase<User> userUseCase,
-                              UseCase walletsUseCase, Context context) {
+                              UseCase<Wallet> walletsUseCase, Context context) {
         this.logoutUseCase = logoutUseCase;
         this.deleteUser = deleteUser;
         this.deleteTokenUseCase = deleteTokenUseCase;
@@ -129,8 +133,12 @@ public class DrawerNavViewModel implements ViewModel {
         public void onNext(List<Wallet> wallets) {
             if(wallets != null && !wallets.isEmpty()){
                 walletsList.clear();
-                walletsList.addAll(wallets);
+                walletsList.addAll(modelMapper.transform(wallets));
             }
         }
+    }
+
+    public List<WalletModel> getWalletsList() {
+        return walletsList;
     }
 }

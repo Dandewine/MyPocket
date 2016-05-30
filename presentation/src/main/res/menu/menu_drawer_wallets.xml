@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Your wallets">
+        <menu>
+            <group
+                android:id="@+id/walletGroup_MDW"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/itemWallet_MDW0"
+                    android:title="Wallet"
+                    app:actionLayout="@layout/wallet_switch"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/itemWallet_MDW1"
+                    android:title="Wallet"
+                    app:actionLayout="@layout/wallet_switch"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/itemWallet_MDW2"
+                    android:title="Wallet"
+                    app:actionLayout="@layout/wallet_switch"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/itemWallet_MDW3"
+                    android:title="Wallet"
+                    app:actionLayout="@layout/wallet_switch"
+                    app:showAsAction="always" />
+                <item
+                    android:id="@+id/itemWallet_MDW4"
+                    android:title="Wallet"
+                    app:actionLayout="@layout/wallet_switch"
+                    app:showAsAction="always" />
+
+            </group>
+        </menu>
+    </item>
+</menu>

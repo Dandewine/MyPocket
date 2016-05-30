@@ -25,6 +25,7 @@ public class WalletModelDataMapper implements ModelMapper<Wallet,WalletModel>{
         walletModel.setName(wallet.getWalletName());
         walletModel.setCurrency(wallet.getCurrency());
         walletModel.setBalance(wallet.getBalance());
+        walletModel.setActive(wallet.isActive());
         return walletModel;
     }
 

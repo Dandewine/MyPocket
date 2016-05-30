@@ -20,10 +20,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -31,20 +33,23 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityDrawerBinding;
 import com.denis.mypocket.databinding.NavDrawerHeaderBinding;
 import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
 import com.denis.mypocket.internal.di.modules.drawer.DrawerModule;
 import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
+import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
+import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
+import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
+import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.view.activity.BaseActivity;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
-import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -59,7 +64,10 @@ public class DrawerActivity extends BaseActivity implements
     private Interpolator interpolatorOpen = new AccelerateInterpolator();
     private Interpolator interpolatorClose = new DecelerateInterpolator();
     private boolean[] currentlyPageShown = {true, false, false, false}; //need to indicate which button is showing
+    private boolean[] switchStates = {false, false, false, false, false};
     private FloatingActionButton[] fabMassive;
+    private NavigationView navigationView;
+
 
     @Inject
     DrawerNavViewModel viewModel;
@@ -69,6 +77,7 @@ public class DrawerActivity extends BaseActivity implements
     }
 
     //region tab event listener
+
     /**
      * Listener which need to subscribe to tab selection events
      */
@@ -212,7 +221,10 @@ public class DrawerActivity extends BaseActivity implements
         View view = binding.navView.getHeaderView(0);
         NavDrawerHeaderBinding headerBinding = NavDrawerHeaderBinding.bind(view);
         UserModel userModel = viewModel.getUser();
+
+        navigationView = binding.navView;
         headerBinding.setUser(userModel);
+        headerBinding.walletImgNDH.setOnClickListener(this);
 
         configireToolbar(toolbar, R.string.app_name, false);
 
@@ -221,6 +233,7 @@ public class DrawerActivity extends BaseActivity implements
         bindFabs(binding);
         bindDrawer(binding, toolbar);
         bindTabs(binding);
+
     }
 
     public void initAnimations() {
@@ -271,10 +284,56 @@ public class DrawerActivity extends BaseActivity implements
             case R.id.fabStats:
                 Snackbar.make(fabStats, "Stats", Snackbar.LENGTH_SHORT).show();
                 break;
+            case R.id.walletImg_NDH:
+                showWallets(v);
+                break;
 
 
             default:
                 throw new IllegalArgumentException("Can't recognize incoming ID");
+        }
+    }
+
+    private void showWallets(View v) {
+        navigationView.getMenu().clear();
+        List<WalletModel> walletsList;
+        SwitchCompat[] switchCompats;
+
+        if (!v.isSelected()) {
+            v.setSelected(true);
+            navigationView.inflateMenu(R.menu.menu_drawer_wallets);
+            walletsList = viewModel.getWalletsList();
+            switchCompats = new SwitchCompat[walletsList.size()];
+
+            SubMenu subMenu = navigationView.getMenu().getItem(0).getSubMenu();
+            for (int i = 0; i < 5; i++) {
+                if(i < walletsList.size()) {
+                    String name = walletsList.get(i).getName();
+                    subMenu.getItem(i).setTitle(name);
+
+                    SwitchCompat actionView = (SwitchCompat) subMenu.getItem(i).getActionView();
+                    actionView.setTag(walletsList.get(i));
+                    actionView.setChecked(switchStates[i]);
+                    switchCompats[i] = actionView;
+
+                    int finalI = i;
+                    actionView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                        for (SwitchCompat switchCompat : switchCompats) {
+                            switchCompat.setChecked(false);
+                        }
+
+                        ((WalletModel) buttonView.getTag()).setActive(isChecked);
+                        switchStates[finalI] = isChecked;
+                        buttonView.setChecked(isChecked);
+
+                    });
+                }else{
+                    subMenu.getItem(i).setVisible(false);
+                }
+            }
+        } else {
+            v.setSelected(false);
+            navigationView.inflateMenu(R.menu.menu_drawer);
         }
     }
 
@@ -372,7 +431,7 @@ public class DrawerActivity extends BaseActivity implements
         } else if (id == R.id.nav_cycle_operations) {
             replaceFragment(R.id.containerDrawer, CycleOperationFragment.newInstance());
         } else if (id == R.id.nav_transactions) {
-            replaceFragment(R.id.containerDrawer, TransactionsFragment.newInstance());
+            //         replaceFragment(R.id.containerDrawer, TransactionsFragment.newInstance());
         } else if (id == R.id.nav_logout_MD) {
             viewModel.logout();
         }
@@ -394,7 +453,7 @@ public class DrawerActivity extends BaseActivity implements
      * A {@link FragmentStatePagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    public static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

@@ -27,6 +27,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
     dataBinding {
         enabled true
@@ -94,7 +98,7 @@ dependencies {
 
     compile presentationDependencies.recyclerView
     compile presentationDependencies.cardView
-  //  compile presentationDependencies.appcompat
+    //  compile presentationDependencies.appcompat
     compile presentationDependencies.design
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
