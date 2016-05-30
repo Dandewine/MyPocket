@@ -36,27 +36,27 @@ public class NavigationDrawerFacade {
         this.retrieveUser = retrieveUserUseCase;
     }
 
-    public void logout(Subscriber subscriber){
+    public void logout(Subscriber<Integer> subscriber){
         logoutUseCase.executeAsync(subscriber);
     }
 
-    public void deleteUser(Subscriber subscriber){
+    public void deleteUser(Subscriber<Boolean> subscriber){
         deleteUser.executeSync(subscriber);
     }
 
-    public void deleteToken(Subscriber subscriber){
+    public void deleteToken(Subscriber<Boolean> subscriber){
         deleteTokenUseCase.executeSync(subscriber);
     }
 
-    public void retrieveAllWallets(Subscriber subscriber){
+    public void retrieveAllWallets(Subscriber<List<Wallet>> subscriber){
         walletsUseCase.executeAsync(subscriber);
     }
 
-    public void updateWallets(Subscriber subscriber, List<Wallet> wallets){
+    public void updateWallets(Subscriber<List<Wallet>> subscriber, List<Wallet> wallets){
         updateWalletUseCase.executeSync(subscriber, wallets);
     }
 
-    public void retriveUser(Subscriber subscriber){
+    public void retriveUser(Subscriber<List<User>> subscriber){
         retrieveUser.executeSync(subscriber);
     }
 

@@ -84,7 +84,7 @@ public class TransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<IncomeCategory> incomeCategories) {
-            List<IncomeCategoryModel> models = incomeMapper.transform(incomeCategories);
+            List<IncomeCategoryModel> models = incomeMapper.toModel(incomeCategories);
             for (int i = 0; i < models.size(); i++) {
                 categoriesAdapter.add(models.get(i).getName());
             }
@@ -104,7 +104,7 @@ public class TransactionViewModel implements ViewModel {
         @Override
         public void onNext(List<ExpenseCategory> expenseCategories) {
             if (expenseCategories != null) {
-                List<ExpenseCategoryModel> modelList = expenseMapper.transform(expenseCategories);
+                List<ExpenseCategoryModel> modelList = expenseMapper.toModel(expenseCategories);
                 for (int i = 0; i < modelList.size(); i++) {
                     categoriesAdapter.add(expenseCategories.get(i).getName());
                 }
@@ -135,7 +135,7 @@ public class TransactionViewModel implements ViewModel {
         public void onNext(List<Wallet> wallets) {
         /*    if(wallets != null && !wallets.isEmpty()) {
                 WalletModelDataMapper walletModelDataMapper = dataMapper.getWalletModelDataMapper();
-                walletModels = walletModelDataMapper.transform(wallets);
+                walletModels = walletModelDataMapper.toModel(wallets);
                 for (WalletModel model : walletModels) {
                     walletsAdapter.add(model.getName());
                 }

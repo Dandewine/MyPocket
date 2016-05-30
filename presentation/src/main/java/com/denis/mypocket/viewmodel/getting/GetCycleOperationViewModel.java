@@ -42,7 +42,7 @@ public class GetCycleOperationViewModel implements ViewModel {
         @Override
         public void onNext(List<CycleOperation> cycleOperations) {
             if(cycleOperations != null && !cycleOperations.isEmpty()) {
-                List<CycleOperationModel> operationModels = mapper.transform(cycleOperations);
+                List<CycleOperationModel> operationModels = mapper.toModel(cycleOperations);
                 operationAdapter.addAll(operationModels);
             }
         }

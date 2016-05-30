@@ -43,7 +43,7 @@ public class DrawerNavViewModel implements ViewModel {
         @Override
         public void onNext(List<User> users) {
             if (users != null && !users.isEmpty())
-                userModel = userModelMapper.transform(users.get(0));
+                userModel = userModelMapper.toModel(users.get(0));
         }
     };
 
@@ -71,6 +71,11 @@ public class DrawerNavViewModel implements ViewModel {
         return userModel;
     }
 
+    public void updateWallets(List<WalletModel> wallets) {
+        List<Wallet> walletList = modelMapper.fromModel(wallets);
+        facadeInterceptor.updateWallets(new WalletsSubscriber(), walletList);
+    }
+
     @RxLogSubscriber
     private class LogoutSubscriber extends DefaultSubscriber<Integer> {
         @Override
@@ -86,7 +91,7 @@ public class DrawerNavViewModel implements ViewModel {
         @Override
         public void onNext(Integer code) {
             if (code == HttpsURLConnection.HTTP_OK)
-               facadeInterceptor.deleteToken(new DeleteTokenSubscriber());
+                facadeInterceptor.deleteToken(new DeleteTokenSubscriber());
 
         }
     }
@@ -96,7 +101,7 @@ public class DrawerNavViewModel implements ViewModel {
         @Override
         public void onNext(Boolean isTokenDeleted) {
             if (isTokenDeleted)
-               facadeInterceptor.deleteUser(new DeleteUserSubscriber());
+                facadeInterceptor.deleteUser(new DeleteUserSubscriber());
         }
     }
 
@@ -122,7 +127,7 @@ public class DrawerNavViewModel implements ViewModel {
         public void onNext(List<Wallet> wallets) {
             if (wallets != null && !wallets.isEmpty()) {
                 walletsList.clear();
-                walletsList.addAll(modelMapper.transform(wallets));
+                walletsList.addAll(modelMapper.toModel(wallets));
             }
         }
     }

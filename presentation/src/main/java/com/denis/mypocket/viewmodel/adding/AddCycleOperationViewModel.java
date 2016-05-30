@@ -172,7 +172,7 @@ public class AddCycleOperationViewModel implements ViewModel {
         @Override
         public void onNext(List<Transaction> transactionList) {
             if (transactionList != null && !transactionList.isEmpty()) {
-                transactionModels = dataMapper.transform(transactionList);
+                transactionModels = dataMapper.toModel(transactionList);
                 for (int i = 0; i < transactionModels.size(); i++) {
                     transactionAdapter.add(transactionModels.get(i).getAmount());
                 }
@@ -185,7 +185,7 @@ public class AddCycleOperationViewModel implements ViewModel {
         public void onNext(List<Wallet> wallets) {
         /*    if(wallets != null && !wallets.isEmpty()) {
                 WalletModelDataMapper walletModelDataMapper = dataMapper.getWalletModelDataMapper();
-                walletModels = walletModelDataMapper.transform(wallets);
+                walletModels = walletModelDataMapper.toModel(wallets);
                 for (WalletModel model : walletModels) {
                     walletsAdapter.add(model.getName());
                 }

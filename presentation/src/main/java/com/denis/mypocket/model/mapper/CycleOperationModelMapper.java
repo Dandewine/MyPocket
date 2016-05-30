@@ -17,28 +17,36 @@ public class CycleOperationModelMapper implements ModelMapper<CycleOperation,Cyc
         this.transactionDataMapper = transactionDataMapper;
     }
 
-    @Override
-    public CycleOperationModel transform(CycleOperation operation) {
+    public CycleOperationModel toModel(CycleOperation operation) {
         CycleOperationModel operationModel = null;
         if (operation != null) {
             operationModel = new CycleOperationModel(operation.getId());
-            operationModel.setTransactionModel(transactionDataMapper.transform(operation.getTransaction()));
+            operationModel.setTransactionModel(transactionDataMapper.toModel(operation.getTransaction()));
             operationModel.setName(operation.getName());
         }
         return operationModel;
     }
 
     @Override
-    public List<CycleOperationModel> transform(List<CycleOperation> operationList) {
+    public List<CycleOperationModel> toModel(List<CycleOperation> operationList) {
         List<CycleOperationModel> modelsList = null;
         if (operationList != null && !operationList.isEmpty()) {
             modelsList = new ArrayList<>();
             for (CycleOperation co : operationList) {
-                CycleOperationModel model = transform(co);
+                CycleOperationModel model = toModel(co);
                 modelsList.add(model);
             }
         }
         return modelsList;
     }
 
+    @Override
+    public List<CycleOperation> fromModel(List<CycleOperationModel> cycleOperationModels) {
+        return null;
+    }
+
+    @Override
+    public CycleOperation fromModel(CycleOperationModel cycleOperationModel) {
+        return null;
+    }
 }

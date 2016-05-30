@@ -99,7 +99,7 @@ public class WalletsViewModel implements ViewModel {
     private class AddToLocalStorageSubscriber extends DefaultSubscriber<Wallet> {
         @Override
         public void onNext(Wallet wallet) {
-            WalletModel walletModel = modelMapper.transform(wallet);
+            WalletModel walletModel = modelMapper.toModel(wallet);
             walletAdapter.add(walletModel);
             if (isNewUser)
                 startDrawerActivity();
@@ -111,7 +111,7 @@ public class WalletsViewModel implements ViewModel {
         @Override
         public void onNext(List<Wallet> wallets) {
             if (wallets != null && !wallets.isEmpty()) {
-                List<WalletModel> items = modelMapper.transform(wallets);
+                List<WalletModel> items = modelMapper.toModel(wallets);
                 walletAdapter.addAll(items);
             }
         }

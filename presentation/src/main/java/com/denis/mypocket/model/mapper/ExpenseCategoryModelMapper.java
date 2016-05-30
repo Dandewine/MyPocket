@@ -16,8 +16,7 @@ public class ExpenseCategoryModelMapper implements ModelMapper<ExpenseCategory,E
     public ExpenseCategoryModelMapper() {
     }
 
-    @Override
-    public ExpenseCategoryModel transform(ExpenseCategory expenseCategory) {
+    public ExpenseCategoryModel toModel(ExpenseCategory expenseCategory) {
         ExpenseCategoryModel model = null;
         if (expenseCategory != null) {
             model = new ExpenseCategoryModel(expenseCategory.getId());
@@ -28,17 +27,25 @@ public class ExpenseCategoryModelMapper implements ModelMapper<ExpenseCategory,E
     }
 
     @Override
-    public List<ExpenseCategoryModel> transform(List<ExpenseCategory> expenseCategories) {
+    public List<ExpenseCategoryModel> toModel(List<ExpenseCategory> expenseCategories) {
         List<ExpenseCategoryModel> modelList = null;
         if (expenseCategories != null && !expenseCategories.isEmpty()) {
             modelList = new ArrayList<>();
             for (ExpenseCategory ec : expenseCategories) {
-                ExpenseCategoryModel cm = transform(ec);
+                ExpenseCategoryModel cm = toModel(ec);
                 modelList.add(cm);
             }
         }
         return modelList;
     }
 
+    @Override
+    public List<ExpenseCategory> fromModel(List<ExpenseCategoryModel> expenseCategoryModels) {
+        return null;
+    }
 
+    @Override
+    public ExpenseCategory fromModel(ExpenseCategoryModel expenseCategoryModel) {
+        return null;
+    }
 }

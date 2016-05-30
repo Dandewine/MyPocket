@@ -16,8 +16,7 @@ public class IncomeCategoryModelMapper implements ModelMapper<IncomeCategory, In
     public IncomeCategoryModelMapper() {
     }
 
-    @Override
-    public IncomeCategoryModel transform(IncomeCategory category) {
+    public IncomeCategoryModel toModel(IncomeCategory category) {
         IncomeCategoryModel categoryModel = null;
         if (category != null) {
             categoryModel = new IncomeCategoryModel(category.getId());
@@ -28,16 +27,25 @@ public class IncomeCategoryModelMapper implements ModelMapper<IncomeCategory, In
     }
 
     @Override
-    public List<IncomeCategoryModel> transform(List<IncomeCategory> categoryList) {
+    public List<IncomeCategoryModel> toModel(List<IncomeCategory> categoryList) {
         List<IncomeCategoryModel> modelList = null;
         if (categoryList != null && !categoryList.isEmpty()) {
             modelList = new ArrayList<>();
             for (IncomeCategory ic : categoryList) {
-                IncomeCategoryModel icm = transform(ic);
+                IncomeCategoryModel icm = toModel(ic);
                 modelList.add(icm);
             }
         }
         return modelList;
     }
 
+    @Override
+    public List<IncomeCategory> fromModel(List<IncomeCategoryModel> incomeCategoryModels) {
+        return null;
+    }
+
+    @Override
+    public IncomeCategory fromModel(IncomeCategoryModel incomeCategoryModel) {
+        return null;
+    }
 }

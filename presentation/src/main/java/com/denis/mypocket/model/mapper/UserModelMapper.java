@@ -11,8 +11,7 @@ import java.util.List;
  */
 public class UserModelMapper implements ModelMapper<User,UserModel> {
 
-    @Override
-    public UserModel transform(User user) {
+    public UserModel toModel(User user) {
         UserModel model = null;
         if(user != null){
             model = new UserModel(user.getId());
@@ -24,15 +23,25 @@ public class UserModelMapper implements ModelMapper<User,UserModel> {
     }
 
     @Override
-    public List<UserModel> transform(List<User> users) {
+    public List<UserModel> toModel(List<User> users) {
         List<UserModel> models = null;
         if(users != null && !users.isEmpty()){
             models = new ArrayList<>();
             for (User user : users) {
-                UserModel model = transform(user);
+                UserModel model = toModel(user);
                 models.add(model);
             }
         }
         return models;
+    }
+
+    @Override
+    public List<User> fromModel(List<UserModel> userModels) {
+        return null;
+    }
+
+    @Override
+    public User fromModel(UserModel userModel) {
+        return null;
     }
 }

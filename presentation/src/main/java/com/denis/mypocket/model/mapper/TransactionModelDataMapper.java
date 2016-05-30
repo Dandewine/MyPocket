@@ -15,8 +15,7 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
     public TransactionModelDataMapper() {
     }
 
-    @Override
-    public TransactionModel transform(Transaction transaction) {
+    public TransactionModel toModel(Transaction transaction) {
         TransactionModel model = null;
         if (transaction != null) {
             model = new TransactionModel(transaction.getId());
@@ -29,16 +28,25 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
     }
 
     @Override
-    public List<TransactionModel> transform(List<Transaction> transactionList) {
+    public List<TransactionModel> toModel(List<Transaction> transactionList) {
         List<TransactionModel> modelList = null;
         if (transactionList != null && !transactionList.isEmpty()) {
             modelList = new ArrayList<>();
             for (Transaction t : transactionList) {
-                TransactionModel model = transform(t);
+                TransactionModel model = toModel(t);
                 modelList.add(model);
             }
         }
         return modelList;
     }
 
+    @Override
+    public List<Transaction> fromModel(List<TransactionModel> transactionModels) {
+        return null;
+    }
+
+    @Override
+    public Transaction fromModel(TransactionModel transactionModel) {
+        return null;
+    }
 }
