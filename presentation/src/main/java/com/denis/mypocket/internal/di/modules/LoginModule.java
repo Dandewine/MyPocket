@@ -34,6 +34,7 @@ import com.denis.domain.interactor.user.AddUserUseCase;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.internal.di.modules.wallets.WalletFromCloudModule;
+import com.denis.mypocket.internal.di.modules.wallets.WalletSaveModule;
 import com.denis.mypocket.screens.login_screen.viewmodel.LoginViewModel;
 
 import java.util.List;
@@ -47,16 +48,16 @@ import io.realm.Realm;
 /**
  * Created by denis on 4/23/16.
  */
-@Module(includes = {ActivityModule.class,WalletFromCloudModule.class})
+@Module(includes = {ActivityModule.class,WalletFromCloudModule.class, WalletSaveModule.class})
 public class LoginModule {
 
     @Provides @PerActivity
     LoginViewModel provideViewModel(@Named("getUser") UseCase<String> loginUseCase,
                                     @Named("token-save") UseCase<String> tokenSaveUseCase,
                                     @Named("activity") Context context,
-                                    @Named("getWallets") UseCase<Wallet> getWalletUseCase,
+                                    @Named("getWallets_cloud") UseCase<Wallet> getWalletUseCase,
                                     @Named("add user") UseCase<User> userSaveUseCase,
-                                    UseCase<List<Wallet>> walletSave) {
+                                    @Named("save_wallets") UseCase<List<Wallet>> walletSave) {
         return new LoginViewModel(loginUseCase, tokenSaveUseCase, userSaveUseCase, getWalletUseCase, walletSave, context);
     }
 
@@ -83,31 +84,6 @@ public class LoginModule {
         return new LoginResponseMapper();
     }
 
-    //region Save wallets
-    @Provides @PerActivity
-    UseCase<List<Wallet>> provideWalletSaveList(ThreadExecutor executor,
-                                                PostExecutionThread postExecutionThread,
-                                                @Named("local") WalletRepository repository){
-        return new SaveWalletList(executor,postExecutionThread,repository);
-    }
-
-
-    @Provides @PerActivity @Named("local")
-    WalletRepository provideUserRepository(WalletDataMapper mapper, WalletDataStore walletDataStore) {
-        return new WalletDataRepository(mapper,walletDataStore);
-    }
-
-    @Provides @PerActivity
-    WalletDataStore walletDataStore(@Named("walletStore") RealmStore store){
-        return new WalletLocalDataStore(store);
-    }
-
-    @Provides @PerActivity @Named("walletStore")
-    RealmStore getRealmStore(Realm realm){
-        return new WalletRealmStore(realm);
-    }
-
-    //endregion
 
     //region provide LocalUserDataStore
     @Provides @PerActivity @Named("add user")
@@ -152,5 +128,7 @@ public class LoginModule {
     }
     //endregion
 
-
+    @Provides @PerActivity WalletDataMapper provideWalletDataMapper(){
+        return new WalletDataMapper();
+    }
 }

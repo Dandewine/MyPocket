@@ -30,7 +30,7 @@ import io.realm.Realm;
  */
 @Module
 public class WalletFromCloudModule {
-    @Provides @PerActivity @Named("getWallets")
+    @Provides @PerActivity @Named("getWallets_cloud")
     UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread,
                                             @Named("cloud") WalletRepository repository){
         return new GetWalletsUseCase(executor,postExecutionThread,repository);
@@ -39,10 +39,6 @@ public class WalletFromCloudModule {
     @Provides @PerActivity @Named("cloud")
     WalletRepository provideWalletRepo(WalletDataMapper walletDataMapper,@Named("cloud_store") WalletDataStore dataStore){
         return new WalletDataRepository(walletDataMapper,dataStore);
-    }
-
-    @Provides @PerActivity WalletDataMapper provideWalletDataMapper(){
-        return new WalletDataMapper();
     }
 
     @Provides @PerActivity @Named("cloud_store")

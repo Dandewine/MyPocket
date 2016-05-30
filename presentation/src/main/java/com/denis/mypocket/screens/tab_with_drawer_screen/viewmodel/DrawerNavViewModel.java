@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.denis.domain.interactor.DefaultSubscriber;
-import com.denis.domain.interactor.UseCase;
+import com.denis.domain.interactor.facades.NavigationDrawerFacade;
 import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.internal.di.PerActivity;
@@ -30,11 +30,8 @@ import rx.Subscriber;
  */
 @PerActivity // TODO: 5/26/16 MUltiple instance of this class, after logout
 public class DrawerNavViewModel implements ViewModel {
-    private UseCase logoutUseCase;
-    private UseCase deleteUser;
-    private UseCase deleteTokenUseCase;
-    private UseCase<Wallet> walletsUseCase;
 
+    private NavigationDrawerFacade facadeInterceptor;
     private Context context;
     private ModelMapper<User, UserModel> userModelMapper = new UserModelMapper();
     private ModelMapper<Wallet, WalletModel> modelMapper = new WalletModelDataMapper();
@@ -51,32 +48,23 @@ public class DrawerNavViewModel implements ViewModel {
     };
 
     @Inject
-    public DrawerNavViewModel(UseCase logoutUseCase, // TODO: 5/29/16 cleanup here with facade
-                              UseCase deleteUser,
-                              UseCase deleteTokenUseCase,
-                              UseCase<User> userUseCase,
-                              UseCase<Wallet> walletsUseCase, Context context) {
-        this.logoutUseCase = logoutUseCase;
-        this.deleteUser = deleteUser;
-        this.deleteTokenUseCase = deleteTokenUseCase;
-        this.walletsUseCase = walletsUseCase;
+    public DrawerNavViewModel(Context context, NavigationDrawerFacade facadeInterceptor) {
+        this.facadeInterceptor = facadeInterceptor;
         this.context = context;
 
-        userUseCase.executeSync(userSubscriber); //retrieve user
-        walletsUseCase.executeSync(new WalletsSubscriber()); //retrieve his wallets
+        facadeInterceptor.retriveUser(userSubscriber); //retrieve user
+        facadeInterceptor.retrieveAllWallets(new WalletsSubscriber()); //retrieve his wallets
     }
 
     @Override
     public void destroy() {
         userModelMapper = null;
         context = null;
-        deleteTokenUseCase.unSubscribe();
-        deleteUser.unSubscribe();
-        logoutUseCase.unSubscribe();
+        facadeInterceptor.unSubscribe();
     }
 
     public void logout() {
-        logoutUseCase.executeAsync(new LogoutSubscriber());
+        facadeInterceptor.logout(new LogoutSubscriber());
     }
 
     public UserModel getUser() {
@@ -98,7 +86,7 @@ public class DrawerNavViewModel implements ViewModel {
         @Override
         public void onNext(Integer code) {
             if (code == HttpsURLConnection.HTTP_OK)
-                deleteTokenUseCase.executeSync(new DeleteTokenSubscriber());
+               facadeInterceptor.deleteToken(new DeleteTokenSubscriber());
 
         }
     }
@@ -108,7 +96,7 @@ public class DrawerNavViewModel implements ViewModel {
         @Override
         public void onNext(Boolean isTokenDeleted) {
             if (isTokenDeleted)
-                deleteUser.executeSync(new DeleteUserSubscriber());
+               facadeInterceptor.deleteUser(new DeleteUserSubscriber());
         }
     }
 
@@ -127,11 +115,12 @@ public class DrawerNavViewModel implements ViewModel {
 
 
     }
+
     @RxLogSubscriber
-    private class WalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+    private class WalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onNext(List<Wallet> wallets) {
-            if(wallets != null && !wallets.isEmpty()){
+            if (wallets != null && !wallets.isEmpty()) {
                 walletsList.clear();
                 walletsList.addAll(modelMapper.transform(wallets));
             }

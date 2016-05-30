@@ -25,6 +25,7 @@ import com.denis.domain.interactor.wallets.GetWalletsUseCase;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.internal.di.modules.wallets.WalletFromLocalModule;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.screens.wallets_screen.viewmodel.WalletsViewModel;
 
@@ -34,7 +35,7 @@ import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
 
-@Module
+@Module(includes = WalletFromLocalModule.class)
 public class AddWalletModule {
     private boolean isNewUser;
 
@@ -45,7 +46,7 @@ public class AddWalletModule {
 
     @Provides @PerActivity
     WalletsViewModel  provideWalletsViewModel(@Named("addWallet") UseCase<Wallet> addWalletUseCase,
-                                              @Named("getWallets") UseCase<Wallet> getWalletUseCase,
+                                              @Named("getWallets_local") UseCase<Wallet> getWalletUseCase,
                                               @Named("createWallet_server") UseCase<Wallet> addToCloudWalletUseCase,
                                               @Named("activity") Context context){
         return new WalletsViewModel(addWalletUseCase,addToCloudWalletUseCase,getWalletUseCase,context, isNewUser);
@@ -65,38 +66,6 @@ public class AddWalletModule {
         return new GetWalletsUseCase(executor,postExecutionThread,repository);
     }
 
-
-
-
-    //region Wallet local
-    @Provides @PerActivity @Named("getWallets")
-    UseCase<Wallet> providerGetWalletsUseCase(ThreadExecutor threadExecutor,
-                                              PostExecutionThread postExecutionThread,
-                                              @Named("local")  WalletRepository repository){
-        return new GetWalletsUseCase(threadExecutor,postExecutionThread,repository);
-    }
-
-    @Provides @PerActivity @Named("local")
-    WalletRepository provideUserRepository(WalletDataMapper mapper, WalletDataStore walletDataStore) {
-        return new WalletDataRepository(mapper,walletDataStore);
-    }
-
-    @Provides @PerActivity
-    WalletDataStore walletDataStore(@Named("walletStore") RealmStore store){
-        return new WalletLocalDataStore(store);
-    }
-
-    @Provides @PerActivity
-    WalletDataMapper getWalletEntityDataMapper(){
-        return new WalletDataMapper();
-    }
-
-    @Provides @PerActivity @Named("walletStore")
-    RealmStore getRealmStore(Realm realm){
-        return new WalletRealmStore(realm);
-    }
-
-    //endregion
 
     //region add wallet cloud
 

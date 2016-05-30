@@ -1,7 +1,10 @@
 package com.denis.domain.interactor.facades;
 
 import com.denis.domain.interactor.UseCase;
+import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,20 +18,22 @@ public class NavigationDrawerFacade {
     private UseCase logoutUseCase;
     private UseCase deleteUser;
     private UseCase deleteTokenUseCase;
+    private UseCase retrieveUser;
     private UseCase<Wallet> walletsUseCase;
-    private UseCase<Wallet> updateWalletUseCase;
+    private UseCase<List<Wallet>> updateWalletUseCase;
 
-    @Inject
-    public NavigationDrawerFacade(UseCase logoutUseCase,
+    @Inject public NavigationDrawerFacade(UseCase logoutUseCase,
                                   UseCase deleteUser,
                                   UseCase deleteTokenUseCase,
                                   UseCase<Wallet> walletsUseCase,
-                                  UseCase<Wallet> updateWalletUseCase) {
+                                  UseCase<List<Wallet>> updateWalletUseCase, UseCase<User> retrieveUserUseCase) {
+
         this.logoutUseCase = logoutUseCase;
         this.deleteUser = deleteUser;
         this.deleteTokenUseCase = deleteTokenUseCase;
         this.walletsUseCase = walletsUseCase;
         this.updateWalletUseCase = updateWalletUseCase;
+        this.retrieveUser = retrieveUserUseCase;
     }
 
     public void logout(Subscriber subscriber){
@@ -47,8 +52,12 @@ public class NavigationDrawerFacade {
         walletsUseCase.executeAsync(subscriber);
     }
 
-    public void switchWallet(Subscriber subscriber, Wallet wallet){
-        updateWalletUseCase.executeSync(subscriber, wallet);
+    public void updateWallets(Subscriber subscriber, List<Wallet> wallets){
+        updateWalletUseCase.executeSync(subscriber, wallets);
+    }
+
+    public void retriveUser(Subscriber subscriber){
+        retrieveUser.executeSync(subscriber);
     }
 
     public void unSubscribe(){

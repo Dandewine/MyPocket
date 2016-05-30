@@ -4,7 +4,6 @@ import com.denis.data.entity.WalletEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,7 @@ import javax.inject.Named;
 import rx.Observable;
 
 public class WalletLocalDataStore implements WalletDataStore {
-    public RealmStore<WalletEntity> storage;
+    private RealmStore<WalletEntity> storage;
 
     @Inject
     public WalletLocalDataStore(@Named("wallets") RealmStore<WalletEntity> storage) {

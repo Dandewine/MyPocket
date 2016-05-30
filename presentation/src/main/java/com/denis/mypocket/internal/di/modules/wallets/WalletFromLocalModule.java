@@ -15,6 +15,8 @@ import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 import io.realm.Realm;
@@ -24,18 +26,14 @@ import io.realm.Realm;
  */
 @Module
 public class WalletFromLocalModule {
-    @Provides @PerActivity
-    UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread, WalletRepository repository){
+    @Provides @PerActivity @Named("getWallets_local")
+    UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread, @Named("local") WalletRepository repository){
         return new GetWalletsUseCase(executor,postExecutionThread,repository);
     }
 
-    @Provides @PerActivity
+    @Provides @PerActivity @Named("local")
     WalletRepository provideWalletRepo(WalletDataMapper walletDataMapper,  WalletDataStore dataStore){
         return new WalletDataRepository(walletDataMapper,dataStore);
-    }
-
-    @Provides @PerActivity WalletDataMapper provideWalletDataMapper(){
-        return new WalletDataMapper();
     }
 
     @Provides @PerActivity
