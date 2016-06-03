@@ -117,8 +117,6 @@ public class DrawerNavViewModel implements ViewModel {
                 ((Activity) context).finish();
             }
         }
-
-
     }
 
     @RxLogSubscriber
@@ -134,5 +132,16 @@ public class DrawerNavViewModel implements ViewModel {
 
     public List<WalletModel> getWalletsList() {
         return walletsList;
+    }
+
+    public WalletModel getActiveWallet(){
+        WalletModel walletModel = null;
+        for (WalletModel walletModel1 : walletsList){
+            if(walletModel1.isActive()){
+                walletModel = walletModel1;
+                break;
+            }
+        }
+        return walletModel;
     }
 }

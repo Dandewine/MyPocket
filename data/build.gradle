@@ -3,15 +3,13 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'realm-android'
 
 android {
-    def globalConfiguration = rootProject.extensions.getByName("ext")
-
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
-        versionCode globalConfiguration.getAt("androidVersionCode")
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -41,7 +39,6 @@ def javaxAnnotationVersion = '1.0'
 def androidAnnotationsVersion = '23.3.0'
 def retrolambdaVersion = '2.0.6'
 def retrofit = '2.0.1'
-def realmVersion = '1.0.0'
 
 //Testing
 def robolectricVersion = '3.0'
@@ -77,13 +74,13 @@ dependencies {
 
 
     compile project(path: ':domain')
-    provided dataDependencies.daggerCompiler
+    //provided dataDependencies.daggerCompiler
     provided dataDependencies.javaxAnnotation
-    compile dataDependencies.dagger
+    //compile dataDependencies.dagger
 
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
-    compile dataDependencies.androidAnnotations
+    //compile dataDependencies.androidAnnotations
     compile dataDependencies.gsonconverter
     compile dataDependencies.retrofitrx
 

@@ -5,13 +5,15 @@
         <variable
             name="user"
             type="com.denis.mypocket.model.UserModel"/>
+        <variable
+            name="wallet"
+            type="com.denis.mypocket.model.WalletModel"/>
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
         android:background="@drawable/side_nav_bar"
-        android:gravity="bottom"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -23,7 +25,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            tools:text="Wallet"/>
+            android:text="@{wallet.name}"
+            tools:text="Wallet"
+            android:layout_marginTop="@dimen/half_padding"
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.username}"
+            tools:text="Username"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            tools:text="denis@gmail.com"
+            android:text="@{user.email}"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -32,25 +54,12 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:src="@android:drawable/sym_def_app_icon"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@{user.username}"
-            tools:text="Username"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="right"
             android:orientation="horizontal">
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="denis@gmail.com"
-                android:text="@{user.email}"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -61,5 +70,5 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+    </FrameLayout>
 </layout>

@@ -1,10 +1,11 @@
-apply from: 'buildsystem/dependencies.gradle'
+
 
 buildscript {
     repositories {
         jcenter()
         mavenCentral()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.0'
         classpath 'me.tatarka:gradle-retrolambda:3.2.4'
@@ -16,10 +17,20 @@ buildscript {
 }
 
 allprojects {
+
+    repositories {
+        jcenter()
+    }
+
     ext {
-        androidApplicationId = 'com.denis.mypocket.presentation'
-        androidVersionCode = 1
-        androidVersionName = "1.0"
+        buildToolsVersion = "23.0.3"
+        minSdkVersion = 21
+        targetSdkVersion = 23
+        compileSdkVersion = 23
+
+        applicationId = 'com.denis.mypocket.presentation'
+        versionCode = 1
+        versionName = "1.0"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         testApplicationId = 'com.denis.mypocket.presentation.test'
     }

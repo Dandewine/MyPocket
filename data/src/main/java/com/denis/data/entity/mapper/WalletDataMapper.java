@@ -28,7 +28,7 @@ public class WalletDataMapper implements EntityMapper<WalletEntity, Wallet> {
             wallet.setBalance(walletEntity.getBalance());
             wallet.setCurrency(walletEntity.getCurrency());
             wallet.setWalletName(walletEntity.getName());
-            wallet.setActive(wallet.isActive());
+            wallet.setActive(walletEntity.isActive());
         }
         return wallet;
     }

@@ -64,10 +64,9 @@ public class DrawerActivity extends BaseActivity implements
     private Interpolator interpolatorOpen = new AccelerateInterpolator();
     private Interpolator interpolatorClose = new DecelerateInterpolator();
     private boolean[] currentlyPageShown = {true, false, false, false}; //need to indicate which button is showing
-    private boolean[] switchStates = {false, false, false, false, false};
     private FloatingActionButton[] fabMassive;
     private NavigationView navigationView;
-
+    private NavDrawerHeaderBinding headerBinding;
 
     @Inject
     DrawerNavViewModel viewModel;
@@ -219,11 +218,12 @@ public class DrawerActivity extends BaseActivity implements
         Toolbar toolbar = binding.content.toolbar;
 
         View view = binding.navView.getHeaderView(0);
-        NavDrawerHeaderBinding headerBinding = NavDrawerHeaderBinding.bind(view);
+        headerBinding = NavDrawerHeaderBinding.bind(view);
         UserModel userModel = viewModel.getUser();
 
         navigationView = binding.navView;
         headerBinding.setUser(userModel);
+        headerBinding.setWallet(viewModel.getActiveWallet());
         headerBinding.walletImgNDH.setOnClickListener(this);
 
         configireToolbar(toolbar, R.string.app_name, false);
@@ -313,18 +313,20 @@ public class DrawerActivity extends BaseActivity implements
 
                     SwitchCompat actionView = (SwitchCompat) subMenu.getItem(i).getActionView();
                     actionView.setTag(walletsList.get(i));
-                    actionView.setChecked(switchStates[i]);
+                    actionView.setChecked(walletsList.get(i).isActive());
                     switchCompats[i] = actionView;
 
-                    int finalI = i;
                     actionView.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                        for (SwitchCompat switchCompat : switchCompats) {
+                        for (SwitchCompat switchCompat : switchCompats)
                             switchCompat.setChecked(false);
-                        }
+
+                        for (WalletModel model : walletsList)
+                             model.setActive(false);
 
                         ((WalletModel) buttonView.getTag()).setActive(isChecked);
-                        switchStates[finalI] = isChecked;
                         buttonView.setChecked(isChecked);
+                        viewModel.updateWallets(walletsList);
+                        headerBinding.setWallet(viewModel.getActiveWallet());
 
                     });
                 }else{

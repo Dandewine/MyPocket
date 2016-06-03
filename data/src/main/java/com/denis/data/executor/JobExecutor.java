@@ -1,6 +1,5 @@
 package com.denis.data.executor;
 
-import android.support.annotation.NonNull;
 
 import com.denis.domain.executor.ThreadExecutor;
 
@@ -47,7 +46,7 @@ public class JobExecutor implements ThreadExecutor {
         private int counter = 0;
 
         @Override
-        public Thread newThread(@NonNull Runnable runnable) {
+        public Thread newThread(Runnable runnable) {
             return new Thread(runnable, THREAD_NAME + counter);
         }
     }

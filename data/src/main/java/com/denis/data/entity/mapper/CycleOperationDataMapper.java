@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
 public class CycleOperationDataMapper implements EntityMapper<CycleOperationEntity, CycleOperation> {
 
     private TransactionDataMapper transactionDataMapper;

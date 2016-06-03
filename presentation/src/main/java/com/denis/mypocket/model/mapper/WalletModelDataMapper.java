@@ -43,7 +43,7 @@ public class WalletModelDataMapper implements ModelMapper<Wallet, WalletModel> {
     @Override
     public List<Wallet> fromModel(List<WalletModel> walletModels) {
         List<Wallet> walletList = null;
-        if (walletModels != null && walletModels.isEmpty()) {
+        if (walletModels != null && !walletModels.isEmpty()) {
             walletList = new ArrayList<>();
             for (WalletModel walletModel : walletModels) {
                 Wallet wallet = fromModel(walletModel);

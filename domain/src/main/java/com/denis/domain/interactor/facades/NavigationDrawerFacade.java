@@ -18,7 +18,7 @@ public class NavigationDrawerFacade {
     private UseCase logoutUseCase;
     private UseCase deleteUser;
     private UseCase deleteTokenUseCase;
-    private UseCase retrieveUser;
+    private UseCase<User> retrieveUser;
     private UseCase<Wallet> walletsUseCase;
     private UseCase<List<Wallet>> updateWalletUseCase;
 
@@ -49,7 +49,7 @@ public class NavigationDrawerFacade {
     }
 
     public void retrieveAllWallets(Subscriber<List<Wallet>> subscriber){
-        walletsUseCase.executeAsync(subscriber);
+        walletsUseCase.executeSync(subscriber);
     }
 
     public void updateWallets(Subscriber<List<Wallet>> subscriber, List<Wallet> wallets){
