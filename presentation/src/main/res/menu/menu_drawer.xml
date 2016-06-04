@@ -50,5 +50,4 @@
                 android:title="@string/Logout" />
         </menu>
     </item>
-
 </menu>

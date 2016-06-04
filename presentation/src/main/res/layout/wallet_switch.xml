@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.SwitchCompat
-    android:text="Switch"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/switch2"
-    android:padding="12dp"
+    android:padding="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android" />

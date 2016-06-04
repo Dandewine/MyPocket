@@ -20,12 +20,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -39,7 +37,6 @@ import com.denis.mypocket.databinding.NavDrawerHeaderBinding;
 import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
 import com.denis.mypocket.internal.di.modules.drawer.DrawerModule;
 import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
 import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
 import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
@@ -48,8 +45,6 @@ import com.denis.mypocket.view.activity.BaseActivity;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
 import com.denis.mypocket.view.fragments.TransactionsFragment;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -285,57 +280,12 @@ public class DrawerActivity extends BaseActivity implements
                 Snackbar.make(fabStats, "Stats", Snackbar.LENGTH_SHORT).show();
                 break;
             case R.id.walletImg_NDH:
-                showWallets(v);
+                viewModel.showWallets(v,navigationView,headerBinding);
                 break;
 
 
             default:
                 throw new IllegalArgumentException("Can't recognize incoming ID");
-        }
-    }
-
-    private void showWallets(View v) {
-        navigationView.getMenu().clear();
-        List<WalletModel> walletsList;
-        SwitchCompat[] switchCompats;
-
-        if (!v.isSelected()) {
-            v.setSelected(true);
-            navigationView.inflateMenu(R.menu.menu_drawer_wallets);
-            walletsList = viewModel.getWalletsList();
-            switchCompats = new SwitchCompat[walletsList.size()];
-
-            SubMenu subMenu = navigationView.getMenu().getItem(0).getSubMenu();
-            for (int i = 0; i < 5; i++) {
-                if(i < walletsList.size()) {
-                    String name = walletsList.get(i).getName();
-                    subMenu.getItem(i).setTitle(name);
-
-                    SwitchCompat actionView = (SwitchCompat) subMenu.getItem(i).getActionView();
-                    actionView.setTag(walletsList.get(i));
-                    actionView.setChecked(walletsList.get(i).isActive());
-                    switchCompats[i] = actionView;
-
-                    actionView.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                        for (SwitchCompat switchCompat : switchCompats)
-                            switchCompat.setChecked(false);
-
-                        for (WalletModel model : walletsList)
-                             model.setActive(false);
-
-                        ((WalletModel) buttonView.getTag()).setActive(isChecked);
-                        buttonView.setChecked(isChecked);
-                        viewModel.updateWallets(walletsList);
-                        headerBinding.setWallet(viewModel.getActiveWallet());
-
-                    });
-                }else{
-                    subMenu.getItem(i).setVisible(false);
-                }
-            }
-        } else {
-            v.setSelected(false);
-            navigationView.inflateMenu(R.menu.menu_drawer);
         }
     }
 
