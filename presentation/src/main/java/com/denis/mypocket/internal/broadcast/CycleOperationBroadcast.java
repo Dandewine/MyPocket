@@ -41,7 +41,7 @@ public class CycleOperationBroadcast extends BroadcastReceiver {
         builder.setStyle(new NotificationCompat.BigTextStyle(builder));
 
         PendingIntent intent = PendingIntent.getBroadcast(context,0,new Intent(),0);
-        builder.addAction(new NotificationCompat.Action(R.drawable.ic_menu_send,"Test",intent));
+        builder.addAction(new NotificationCompat.Action(R.drawable.ic_menu_send,"MainClass",intent));
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         managerCompat.notify(notificationID++, builder.build());*/

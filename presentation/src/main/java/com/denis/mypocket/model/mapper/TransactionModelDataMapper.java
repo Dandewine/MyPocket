@@ -23,6 +23,7 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
             model.setType(transaction.getType());
             model.setUnixDateTime(transaction.getUnixDateTime());
             model.setCategoryId(transaction.getCategoryId());
+            model.setWalletId(transaction.getWalletId());
         }
         return model;
     }

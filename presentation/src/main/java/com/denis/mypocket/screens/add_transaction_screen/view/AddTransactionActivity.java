@@ -33,6 +33,7 @@ public class AddTransactionActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_transaction);
+        configireToolbar(binding.include.toolbar, R.string.toolbar_add_trans, true);
         binding.setViewModel(viewModel);
     }
 
@@ -89,6 +90,7 @@ public class AddTransactionActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
       /*  AnimationUtils.animateRevealHide(this, mRlContainer, R.color.fab_income, mFab.getWidth() / 2,
                 new AnimationUtils.OnRevealAnimationListener() {
                     @Override

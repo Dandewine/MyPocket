@@ -149,6 +149,10 @@ public class DrawerNavViewModel implements ViewModel {
         return walletModel;
     }
 
+    public ArrayList<WalletModel> getWalletsList() {
+        return (ArrayList<WalletModel>) walletsList;
+    }
+
     //// TODO: 6/4/16  On UI user can turn off all wallets, need to make active switch unclickable of uncheckable
     public void showWallets(View v, NavigationView navView, NavDrawerHeaderBinding binding) {
         navView.getMenu().clear();
@@ -187,7 +191,6 @@ public class DrawerNavViewModel implements ViewModel {
                             updateWallets(walletsList);
                             binding.setWallet(getActiveWallet()); //bind model to drawer
                         }
-
                     });
 
                     switchCompats[i] = actionView;

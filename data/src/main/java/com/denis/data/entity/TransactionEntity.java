@@ -10,8 +10,8 @@ public class TransactionEntity extends RealmObject {
     @SerializedName("walletId")           private String walletId;
     @SerializedName("amount")             private float amount;
     @SerializedName("type")               private String type; // 1 - Income, 0 - Expense
-    @SerializedName("categoryId")         private int categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
-    @SerializedName("unixDataTime")       private long unixDateTime;
+    @SerializedName("categoryId")         private String categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
+    @SerializedName("unixDateTime")       private long unixDateTime;
 
     public TransactionEntity(String id) {
         this.id = id;
@@ -20,7 +20,7 @@ public class TransactionEntity extends RealmObject {
     public TransactionEntity() {
     }
 
-    public TransactionEntity(String id, String walletId, float amount, String type, int categoryId, long unixDateTime) {
+    public TransactionEntity(String id, String walletId, float amount, String type, String categoryId, long unixDateTime) {
         this.id = id;
         this.walletId = walletId;
         this.amount = amount;
@@ -61,11 +61,11 @@ public class TransactionEntity extends RealmObject {
         this.type = type;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

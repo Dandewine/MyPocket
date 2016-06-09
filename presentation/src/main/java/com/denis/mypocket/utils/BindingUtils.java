@@ -13,6 +13,8 @@ import android.widget.Spinner;
 
 import com.denis.mypocket.R;
 import com.denis.mypocket.custom_views.TextWatcherAdapter;
+import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionAdapter;
+import com.denis.mypocket.view.adapter.MyDecorator;
 
 import java.util.Objects;
 
@@ -27,6 +29,9 @@ public class BindingUtils {
     @BindingAdapter("bind:adapter")
     public static void bindAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         if (recyclerView.getAdapter() == null) {
+            if(adapter instanceof TransactionAdapter){
+                recyclerView.addItemDecoration(new MyDecorator(recyclerView.getContext(),MyDecorator.VERTICAL_LIST));
+            }
             recyclerView.setAdapter(adapter);
         }
     }

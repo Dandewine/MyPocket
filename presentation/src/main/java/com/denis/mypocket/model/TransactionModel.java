@@ -3,11 +3,11 @@ package com.denis.mypocket.model;
 public class TransactionModel {
 
     private String id;
-    private WalletModel walletModel;
+    private String walletId;
     private float amount;
     private String type;
     private long unixDateTime;
-    private int categoryId;
+    private String categoryId;
 
     public TransactionModel(String id) {
         this.id = id;
@@ -21,12 +21,12 @@ public class TransactionModel {
         this.id = id;
     }
 
-    public WalletModel getWalletModel() {
-        return walletModel;
+    public String getWalletId() {
+        return walletId;
     }
 
-    public void setWalletModel(WalletModel walletModel) {
-        this.walletModel = walletModel;
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
     }
 
     public float getAmount() {
@@ -53,11 +53,11 @@ public class TransactionModel {
         this.unixDateTime = unixDateTime;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 }

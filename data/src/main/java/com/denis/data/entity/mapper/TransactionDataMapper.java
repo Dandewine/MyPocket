@@ -23,6 +23,7 @@ public class TransactionDataMapper implements EntityMapper<TransactionEntity, Tr
             transaction.setType(entity.getType());
             transaction.setUnixDateTime(entity.getUnixDateTime());
             transaction.setCategoryId(entity.getCategoryId());
+            transaction.setWalletId(entity.getWalletId());
         }
         return transaction;
     }
@@ -50,6 +51,7 @@ public class TransactionDataMapper implements EntityMapper<TransactionEntity, Tr
             transactionEntity.setType(transaction.getType());
             transactionEntity.setCategoryId(transaction.getCategoryId());
             transactionEntity.setUnixDateTime(transaction.getUnixDateTime());
+            transactionEntity.setWalletId(transaction.getWalletId());
         }
         return transactionEntity;
     }

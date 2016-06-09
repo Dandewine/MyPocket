@@ -4,9 +4,12 @@ import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
+import java.util.concurrent.Executors;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.internal.util.RxThreadFactory;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 

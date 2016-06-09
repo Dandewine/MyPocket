@@ -22,7 +22,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -44,7 +43,7 @@ import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.view.activity.BaseActivity;
 import com.denis.mypocket.view.fragments.CycleOperationFragment;
 import com.denis.mypocket.view.fragments.DebtsFragment;
-import com.denis.mypocket.view.fragments.TransactionsFragment;
+import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionsFragment;
 
 import javax.inject.Inject;
 
@@ -326,7 +325,7 @@ public class DrawerActivity extends BaseActivity implements
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_options_drawer, menu);
         return true;
@@ -337,7 +336,7 @@ public class DrawerActivity extends BaseActivity implements
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-    }
+    }*/
 
     private void bindTabs(ActivityDrawerBinding binding) {
         TabLayout tabLayout = binding.content.tabs;
@@ -405,7 +404,7 @@ public class DrawerActivity extends BaseActivity implements
      * A {@link FragmentStatePagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public static class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -415,7 +414,7 @@ public class DrawerActivity extends BaseActivity implements
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return TransactionsFragment.newInstance();
+                    return TransactionsFragment.newInstance(viewModel.getWalletsList());
                 case 1:
                     return CycleOperationFragment.newInstance();
                 case 2:

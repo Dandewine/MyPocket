@@ -9,11 +9,9 @@ import com.denis.data.rest.WalletService;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.net.ssl.HttpsURLConnection;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -53,18 +51,10 @@ public class WalletCloudDataStore implements WalletDataStore {
     public Observable<WalletEntity> put(WalletEntity walletEntity) {
         return userDataStore.getUserEntityByID(null)
                 .map(UserEntity::getId)
-                .map(id -> {
+                .flatMap(id -> {
                     String json = new Gson().toJson(mapper.fromEntity(walletEntity));
                     RequestBody body = RequestBody.create(MediaType.parse(json), json);
                     return walletService.createWallet(id, body);
-                })
-                .flatMap(call -> {
-                    try {
-                        return Observable.just(call.execute().code() == HttpsURLConnection.HTTP_CREATED ? walletEntity : null);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return Observable.empty();
-                    }
                 });
     }
 

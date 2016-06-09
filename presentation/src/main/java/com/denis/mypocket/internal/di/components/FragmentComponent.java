@@ -1,6 +1,7 @@
 package com.denis.mypocket.internal.di.components;
 
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 
 import com.denis.mypocket.internal.di.PerFragment;
 import com.denis.mypocket.internal.di.modules.FragmentModule;

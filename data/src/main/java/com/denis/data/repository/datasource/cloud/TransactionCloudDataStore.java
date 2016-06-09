@@ -1,8 +1,11 @@
 package com.denis.data.repository.datasource.cloud;
 
 import com.denis.data.entity.TransactionEntity;
+import com.denis.data.entity.WalletEntity;
 import com.denis.data.repository.datasource.interfaces.TransactionDataStore;
+import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.data.rest.TransactionService;
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -20,10 +23,12 @@ import rx.Observable;
 public class TransactionCloudDataStore implements TransactionDataStore {
 
     private TransactionService transactionService;
+    private WalletDataStore walletDataStore;
 
     @Inject
-    public TransactionCloudDataStore(TransactionService transactionService) {
+    public TransactionCloudDataStore(TransactionService transactionService, WalletDataStore walletDataStore) {
         this.transactionService = transactionService;
+        this.walletDataStore = walletDataStore;
     }
 
     @Override
@@ -31,9 +36,13 @@ public class TransactionCloudDataStore implements TransactionDataStore {
         return null;
     }
 
-    @Override
+    @Override @RxLogObservable
     public Observable<List<TransactionEntity>> getListTransactionEntities() {
-        return null;
+        return walletDataStore
+                .getListWalletEntities()
+                .flatMapIterable(list -> list)
+                .filter(WalletEntity::isActive)
+                .flatMap(walletEntity -> transactionService.getTransactions(walletEntity.getId()));
     }
 
     @Override

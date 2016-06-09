@@ -36,9 +36,10 @@
     <string name="transition_fab_cycle_list_to_add_cycle_op">addCycle</string>
     <string name="field_empty">Mandatory field</string>
     <string name="email_error">Please provide a valid email address</string>
-    <string name="password_error">Password should be 6-20 length and contain at least one digit and one uppercase letter</string>
-    <string name="username_not_valid">Please provide a valid username, (3-10 symbols, a-Z, 0-9)</string>
+    <string name="password_error">Password should be 6–20 length and contain at least one digit and one uppercase letter</string>
+    <string name="username_not_valid">Please provide a valid username, (3–10 symbols, a–Z, 0-9)</string>
     <string name="only_one_wallet_error">Sorry, but your must active wallet</string>
     <string name="Logout">Logout</string>
+    <string name="empty_amount_error">Please type amount of transaction</string>
     <string name="other">Other</string>
 </resources>

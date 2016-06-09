@@ -6,21 +6,21 @@ import android.os.Parcelable;
 
 public class Transaction implements Parcelable {
     private String id;
+    private String walletId;
     private float amount;
     private String type;
-    private int categoryId;
+    private String categoryId;
     private long unixDateTime;
 
-   public enum TransactionTypes{
+    public enum TransactionTypes {
         EXPENSE("expense"),
         INCOME("income");
 
         TransactionTypes(String s) {
-
         }
     }
 
-    public Transaction(String id, float amount, String type, long unixDateTime, int categoryId) {
+    public Transaction(String id, float amount, String type, long unixDateTime, String categoryId) {
         this.id = id;
         this.amount = amount;
         this.type = type;
@@ -28,7 +28,8 @@ public class Transaction implements Parcelable {
         this.unixDateTime = unixDateTime;
     }
 
-    public Transaction(float amount, String type, int categoryId, long unixDateTime) {
+    public Transaction(String walletId , float amount, String type, String categoryId, long unixDateTime) {
+        this.walletId = walletId;
         this.amount = amount;
         this.type = type;
         this.categoryId = categoryId;
@@ -47,11 +48,11 @@ public class Transaction implements Parcelable {
         this.id = id;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -79,6 +80,13 @@ public class Transaction implements Parcelable {
         this.unixDateTime = unixDateTime;
     }
 
+    public String getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
+    }
 
     @Override
     public int describeContents() {
@@ -88,17 +96,19 @@ public class Transaction implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
+        dest.writeString(this.walletId);
         dest.writeFloat(this.amount);
         dest.writeString(this.type);
-        dest.writeInt(this.categoryId);
+        dest.writeString(this.categoryId);
         dest.writeLong(this.unixDateTime);
     }
 
     protected Transaction(Parcel in) {
         this.id = in.readString();
+        this.walletId = in.readString();
         this.amount = in.readFloat();
         this.type = in.readString();
-        this.categoryId = in.readInt();
+        this.categoryId = in.readString();
         this.unixDateTime = in.readLong();
     }
 

@@ -54,7 +54,7 @@ public class RestClientRetrofit implements RestClient {
         return retrofit.create(clazz);
     }
 
-    static class TokenInterceptor implements Interceptor {
+    private static class TokenInterceptor implements Interceptor {
         private UseCase<String> tokenUseCase;
         private String token;
 

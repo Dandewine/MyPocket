@@ -14,10 +14,10 @@ import retrofit2.http.POST;
  * Created by denis on 4/11/16.
  */
 public interface AuthService {
-    @POST("registr") @Headers("Content-Type: application/json")
+    @POST("sign-up") @Headers("Content-Type: application/json")
     Call<Void> registerUser(@Body RequestBody body);
 
-    @POST("token-auth") @Headers("Content-Type: application/json")
+    @POST("login") @Headers("Content-Type: application/json")
     Call<LoginResponseEntity> loginUser(@Body RequestBody body);
 
     @GET("logout")

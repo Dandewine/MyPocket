@@ -25,6 +25,7 @@ public class AddTransactionUseCasesFacade {
         this.addTransactionUseCase = addTransactionUseCase;
         this.incomeCategoryUseCase = incomeCategoriesUseCase;
         this.expenseCategoryUseCase = expenseCategoryUseCase;
+        this.getWalletsUseCase = walletsUseCase;
     }
 
     public void getWallets(Subscriber subscriber){

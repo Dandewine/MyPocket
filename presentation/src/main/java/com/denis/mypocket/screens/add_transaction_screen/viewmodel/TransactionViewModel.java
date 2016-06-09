@@ -1,16 +1,20 @@
 package com.denis.mypocket.screens.add_transaction_screen.viewmodel;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
-import com.denis.domain.interactor.facades.AddTransactionUseCasesFacade;
 import com.denis.domain.interactor.DefaultSubscriber;
+import com.denis.domain.interactor.facades.AddTransactionUseCasesFacade;
 import com.denis.domain.models.ExpenseCategory;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
@@ -19,12 +23,18 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.ExpenseCategoryModel;
 import com.denis.mypocket.model.IncomeCategoryModel;
+import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
 import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
+import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.ViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -32,15 +42,23 @@ import javax.inject.Inject;
 public class TransactionViewModel implements ViewModel {
     public String amount = "";
 
-    private int categoryId;
+    private String categoryId;
     private boolean isIncome;
+    private long date;
+    public ObservableField<String> dateFormat = new ObservableField<>();
+    public ObservableInt isLoading = new ObservableInt(View.GONE);
 
     private ArrayAdapter categoriesAdapter;
     private AddTransactionUseCasesFacade transactionFacade;
+
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
+    private WalletModelDataMapper walletModelDataMapper = new WalletModelDataMapper();
+
 
     public Typeface typeface;
+    private WalletModel walletModel;
+    private Context context;
 
     @Inject
     public TransactionViewModel(AddTransactionUseCasesFacade transactionFacade, Context context,
@@ -48,11 +66,14 @@ public class TransactionViewModel implements ViewModel {
 
         this.transactionFacade = transactionFacade;
         this.isIncome = isIncome;
-        categoriesAdapter = new ArrayAdapter<>(context, R.layout.item_category, R.id.categoryTitle_CSA);
+        this.context = context;
+        initStartDate();
 
+        categoriesAdapter = new ArrayAdapter<>(context, R.layout.item_category, R.id.categoryTitle_CSA);
         typeface = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
+        transactionFacade.getWallets(new GetWalletsSubscriber());
 
         if (isIncome)
             transactionFacade.getIncomeCategories(new GetAllIncomeCategories());
@@ -61,9 +82,16 @@ public class TransactionViewModel implements ViewModel {
 
     }
 
+    private void initStartDate() {
+        Date date = new Date();
+        this.date = date.getTime();
+        dateFormat.set(new SimpleDateFormat("dd/mm/yy", Locale.getDefault()).format(date));
+    }
+
     public void afterTextChanged(Editable s) {
         if (!TextUtils.equals(s.toString(), amount))
             amount = s.toString();
+        Log.d("myTag", amount);
     }
 
     @Override
@@ -127,19 +155,23 @@ public class TransactionViewModel implements ViewModel {
         @Override
         public void onNext(Transaction transaction) {
             Log.d(PLTags.TRANSACTIONS_TAG, "new transaction was added, id = " + transaction.getId() + ", categoryId = " + categoryId);
+            isLoading.set(View.GONE);
+            Toast.makeText(context, "Transaction successfully added", Toast.LENGTH_SHORT).show();
         }
     }
 
-    static class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>>{
+    @SuppressWarnings("ConstantConditions")
+    private class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onNext(List<Wallet> wallets) {
-        /*    if(wallets != null && !wallets.isEmpty()) {
-                WalletModelDataMapper walletModelDataMapper = dataMapper.getWalletModelDataMapper();
-                walletModels = walletModelDataMapper.toModel(wallets);
+            if (wallets != null && !wallets.isEmpty()) {
+                List<WalletModel> walletModels = walletModelDataMapper.toModel(wallets);
                 for (WalletModel model : walletModels) {
-                    walletsAdapter.add(model.getName());
+                    if (model.isActive()) {
+                        walletModel = model;
+                    }
                 }
-            }*/
+            }
         }
 
         @Override
@@ -151,14 +183,36 @@ public class TransactionViewModel implements ViewModel {
 
     public View.OnClickListener addOnClick =
             v -> {
-                float amount = Float.parseFloat(this.amount.isEmpty() ? "0" : this.amount);
-                String type = isIncome ? Transaction.TransactionTypes.INCOME.name() : Transaction.TransactionTypes.EXPENSE.name();
+                if (!amount.isEmpty()) {
+                    float amount = Float.parseFloat(this.amount.isEmpty() ? "0" : this.amount);
+                    String type = isIncome ? Transaction.TransactionTypes.INCOME.name().toLowerCase() : Transaction.TransactionTypes.EXPENSE.name().toLowerCase();
 
-                Transaction transaction = new Transaction(amount, type, categoryId, 0L);
-                transactionFacade.addTransaction(new AddTransactionSubscriber(), transaction);
+                    Transaction transaction = new Transaction(walletModel.getId(), amount, type, categoryId, date);
+                    transactionFacade.addTransaction(new AddTransactionSubscriber(), transaction);
+                    isLoading.set(View.VISIBLE);
+                }else
+                    Toast.makeText(context, R.string.empty_amount_error, Toast.LENGTH_SHORT).show();
             };
 
-    public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
+
+    public View.OnClickListener showDatePicker = v -> {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog pickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, monthOfYear + 1);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                date = calendar.getTimeInMillis();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yy", Locale.getDefault());
+                dateFormat.set(simpleDateFormat.format(calendar.getTime()));
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        pickerDialog.show();
+    };
+
+
+   /* public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Log.d("myTag", "itemClicked, position = " + position + ", id = " + id);
@@ -170,6 +224,7 @@ public class TransactionViewModel implements ViewModel {
 
         }
     };
+*/
 
     public ArrayAdapter getCategoriesAdapter() {
         return categoriesAdapter;
