@@ -16,7 +16,7 @@ public interface WalletRepository {
     /**
      * Get an {@link rx.Observable} which will emit a {@link Wallet}.
      *
-     * @param userId The getWallet id used to retrieve getWallet data.
+     * @param userId The getWallets id used to retrieve getWallets data.
      */
     Observable<Wallet> getWallet(final String userId);
 

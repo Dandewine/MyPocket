@@ -1,6 +1,9 @@
 package com.denis.mypocket.model;
 
-public class TransactionModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class TransactionModel implements Parcelable {
 
     private String id;
     private String walletId;
@@ -60,4 +63,40 @@ public class TransactionModel {
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.walletId);
+        dest.writeFloat(this.amount);
+        dest.writeString(this.type);
+        dest.writeLong(this.unixDateTime);
+        dest.writeString(this.categoryId);
+    }
+
+    protected TransactionModel(Parcel in) {
+        this.id = in.readString();
+        this.walletId = in.readString();
+        this.amount = in.readFloat();
+        this.type = in.readString();
+        this.unixDateTime = in.readLong();
+        this.categoryId = in.readString();
+    }
+
+    public static final Parcelable.Creator<TransactionModel> CREATOR = new Parcelable.Creator<TransactionModel>() {
+        @Override
+        public TransactionModel createFromParcel(Parcel source) {
+            return new TransactionModel(source);
+        }
+
+        @Override
+        public TransactionModel[] newArray(int size) {
+            return new TransactionModel[size];
+        }
+    };
 }

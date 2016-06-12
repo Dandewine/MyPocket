@@ -1,5 +1,7 @@
 package com.denis.mypocket.screens.transactions_tab_screen.view;
 
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,6 @@ public class TransactionAdapter extends RecyclerBindableAdapter<TransactionModel
 
     public TransactionAdapter(List<WalletModel> walletModelList) {
         this.walletModelList = walletModelList;
-
     }
 
     @Override
@@ -41,6 +42,7 @@ public class TransactionAdapter extends RecyclerBindableAdapter<TransactionModel
     @Override
     protected BindableHolder getFooterHolder(LayoutInflater inflater, ViewGroup viewGroup) {
         return null;
+
     }
 
     @Override
@@ -54,5 +56,13 @@ public class TransactionAdapter extends RecyclerBindableAdapter<TransactionModel
 
         holder.getBinding().setVariable(BR.wallet, walletModel);
         holder.getBinding().setVariable(BR.transaction, transaction);
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+
     }
 }

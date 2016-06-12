@@ -17,7 +17,6 @@ import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.CycleOperation;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
-import com.denis.mypocket.DateTimeUtils;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
@@ -141,7 +140,7 @@ public class AddCycleOperationViewModel implements ViewModel {
             manager.set(AlarmManager.RTC_WAKEUP, operation.getTriggerTime(), pi);
         else
             manager.set(AlarmManager.RTC_WAKEUP, operation.getTriggerTime(), pi);
-        Log.d(PLTags.CYCLE_OPERATIONS_TAG, "alarm was set on "+ DateTimeUtils.convertMillis(operation.getTriggerTime()));
+      //  Log.d(PLTags.CYCLE_OPERATIONS_TAG, "alarm was set on "+ DateTimeUtils.convertMillis(operation.getTriggerTime()));
     }
 
     public CycleOperation buildCycleOperation() {

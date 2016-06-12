@@ -4,6 +4,7 @@
 
     <data>
         <import type="com.denis.mypocket.utils.DateTimeUtils"/>
+        <import type="android.text.TextUtils"/>
 
         <variable name="transaction" type="com.denis.mypocket.model.TransactionModel"/>
         <variable name="wallet" type="com.denis.mypocket.model.WalletModel"/>
@@ -30,8 +31,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/layer_list_green_income_br"
-                android:layout_gravity="right|bottom" />
+                android:src='@{TextUtils.equals(transaction.type,"income") ? @drawable/layer_list_green_income_br :  @drawable/layer_list_red_expense_br}'
+                android:layout_gravity="right|bottom"
+                tools:src="@drawable/layer_list_green_income_br"/>
         </FrameLayout>
 
         <LinearLayout

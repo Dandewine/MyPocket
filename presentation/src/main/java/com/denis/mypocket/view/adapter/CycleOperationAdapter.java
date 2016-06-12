@@ -33,6 +33,7 @@ public class CycleOperationAdapter extends RecyclerBindableAdapter<CycleOperatio
     @Override
     public void onBindViewHolder(BindableHolder holder, int position) {
         holder.getBinding().setVariable(BR.operation,getItem(position));
+
     }
 
     @Override

@@ -9,30 +9,29 @@ import com.denis.data.entity.mapper.UserDataMapper;
 import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.local_store.UserRealmStore;
-import com.denis.data.local_store.WalletRealmStore;
 import com.denis.data.repository.UserDataStoreRepository;
-import com.denis.data.repository.WalletDataRepository;
 import com.denis.data.repository.datasource.cloud.UserCloudDataStore;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
-import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.data.repository.datasource.local.UserLocalDataStore;
-import com.denis.data.repository.datasource.local.WalletLocalDataStore;
 import com.denis.data.rest.AuthService;
 import com.denis.domain.RestClient;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
+import com.denis.domain.interactor.auth.LoginInteractorFacade;
 import com.denis.domain.interactor.auth.LoginUseCase;
 import com.denis.domain.interactor.auth.TokenSave;
 import com.denis.domain.interactor.UseCase;
-import com.denis.domain.interactor.wallets.SaveWalletList;
+import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.TokenRepository;
 import com.denis.domain.repository.UserRepository;
 import com.denis.domain.interactor.user.AddUserUseCase;
-import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+import com.denis.mypocket.internal.di.modules.categories.ExpenseCategoryModule;
+import com.denis.mypocket.internal.di.modules.categories.IncomeCategoryModule;
 import com.denis.mypocket.internal.di.modules.wallets.WalletFromCloudModule;
 import com.denis.mypocket.internal.di.modules.wallets.WalletSaveModule;
 import com.denis.mypocket.screens.login_screen.viewmodel.LoginViewModel;
@@ -48,17 +47,23 @@ import io.realm.Realm;
 /**
  * Created by denis on 4/23/16.
  */
-@Module(includes = {ActivityModule.class,WalletFromCloudModule.class, WalletSaveModule.class})
+@Module(includes = {ActivityModule.class,WalletFromCloudModule.class, WalletSaveModule.class, IncomeCategoryModule.class, ExpenseCategoryModule.class})
 public class LoginModule {
 
     @Provides @PerActivity
-    LoginViewModel provideViewModel(@Named("getUser") UseCase<String> loginUseCase,
-                                    @Named("token-save") UseCase<String> tokenSaveUseCase,
-                                    @Named("activity") Context context,
-                                    @Named("getWallets_cloud") UseCase<Wallet> getWalletUseCase,
-                                    @Named("add user") UseCase<User> userSaveUseCase,
-                                    @Named("save_wallets") UseCase<List<Wallet>> walletSave) {
-        return new LoginViewModel(loginUseCase, tokenSaveUseCase, userSaveUseCase, getWalletUseCase, walletSave, context);
+    LoginViewModel provideViewModel(@Named("activity") Context context, LoginInteractorFacade facade) {
+        return new LoginViewModel(context, facade);
+    }
+
+    @Provides @PerActivity
+    LoginInteractorFacade provideInteractorFacade(@Named("getUser") UseCase<String> loginUseCase,
+                                                  @Named("token-save") UseCase<String> tokenSaveUseCase,
+                                                  @Named("getWallets_cloud") UseCase<Wallet> getWalletUseCase,
+                                                  @Named("add user") UseCase<User> userSaveUseCase,
+                                                  @Named("save_wallets") UseCase<List<Wallet>> walletSave,
+                                                  @Named("saveIncome") UseCase<List<IncomeCategory>> incomeCategoryUseCase,
+                                                  @Named("saveExpense") UseCase<List<ExpenseCategory>> expenseCategoryUseCase){
+        return new LoginInteractorFacade(loginUseCase,tokenSaveUseCase,userSaveUseCase,getWalletUseCase,walletSave,incomeCategoryUseCase,expenseCategoryUseCase);
     }
 
 

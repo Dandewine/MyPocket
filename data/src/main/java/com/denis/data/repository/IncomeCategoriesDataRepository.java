@@ -44,6 +44,7 @@ public class IncomeCategoriesDataRepository implements IncomeCategoriesRepositor
 
     @Override
     public Observable<List<IncomeCategory>> addIncomeCategory(List<IncomeCategory> incomeCategorys) {
-        throw new UnsupportedOperationException("I can't do this yet");
+        List<IncomeCategoryEntity> entities = mapper.toEntity(incomeCategorys);
+        return dataStore.put(entities).map(mapper::fromEntity);
     }
 }

@@ -11,31 +11,34 @@ import android.util.Patterns;
 import android.view.View;
 
 import com.denis.domain.interactor.DefaultSubscriber;
-import com.denis.domain.interactor.UseCase;
+import com.denis.domain.interactor.auth.LoginInteractorFacade;
+import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.R;
+import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
-import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
 import com.denis.mypocket.screens.signup_screen.view.SignUpActivity;
+import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
+import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
 import com.denis.mypocket.viewmodel.ViewModel;
 import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 /**
- * Created by denis on 4/22/16.
+ * @author Denis_Zinkovskiy
  */
+
+@PerActivity
 public class LoginViewModel implements ViewModel {
 
-    private UseCase<String> loginUserCase;
-    private UseCase<String> tokenSaveUseCase;
-    private UseCase<User> userSaveUseCase;
-    private UseCase<Wallet> getWalletUseCase;
-    private UseCase<List<Wallet>> saveWalletUseCase;
+    private LoginInteractorFacade interactorFacade;
 
     public String email = "", password = "";
     private Context context;
@@ -45,20 +48,13 @@ public class LoginViewModel implements ViewModel {
 
     public ObservableField<String> emailError = new ObservableField<>();
     public ObservableField<String> passwordError = new ObservableField<>();
-    public ObservableInt prorgessBarVisibility = new ObservableInt(View.GONE);
+    public ObservableInt progressBarVisibility = new ObservableInt(View.GONE);
 
     private ClearBlankSpaceCallback blankSpaceCallback;
 
-    public LoginViewModel(UseCase<String> loginUserCase,
-                          UseCase<String> tokenSaveUseCase,
-                          UseCase<User> userSaveUseCase,
-                          UseCase<Wallet> getWalletUseCase,
-                          UseCase<List<Wallet>> walletsSave, Context context) {
-        this.loginUserCase = loginUserCase;
-        this.tokenSaveUseCase = tokenSaveUseCase;
-        this.userSaveUseCase = userSaveUseCase;
-        this.getWalletUseCase = getWalletUseCase;
-        this.saveWalletUseCase = walletsSave;
+    @Inject
+    public LoginViewModel(Context context, LoginInteractorFacade facade) {
+        this.interactorFacade = facade;
         this.context = context;
     }
 
@@ -72,10 +68,10 @@ public class LoginViewModel implements ViewModel {
 
     private void execute() {
         if (isEmailValid && isPasswordValid) {
-            prorgessBarVisibility.set(View.VISIBLE);
+            progressBarVisibility.set(View.VISIBLE);
             UserModel model = new UserModel(email, password);
             String body = new Gson().toJson(model);
-            loginUserCase.executeAsync(new LoginSubscriber(), body);
+            interactorFacade.login(new LoginSubscriber(), body);
         } else {
             validatePassword();
             validateEmail();
@@ -130,9 +126,8 @@ public class LoginViewModel implements ViewModel {
 
     @Override
     public void destroy() {
-        loginUserCase.unSubscribe();
-        userSaveUseCase.unSubscribe();
-        tokenSaveUseCase.unSubscribe();
+        context = null;
+        interactorFacade.destroy();
     }
 
     private class LoginSubscriber extends DefaultSubscriber<LoginResponse> {
@@ -150,9 +145,9 @@ public class LoginViewModel implements ViewModel {
         public void onNext(LoginResponse data) {
             if (data != null) {
                 //startDrawerActivity();
-                saveUserData(data.getToken(), data.getUser());
+                saveUserData(data.getToken(), data.getUser(), data.getIncomeCategories(), data.getExpenseCategories());
             } else {
-                prorgessBarVisibility.set(View.GONE);
+                progressBarVisibility.set(View.GONE);
             }
         }
     }
@@ -165,21 +160,23 @@ public class LoginViewModel implements ViewModel {
     }
 
     private void startCreateWalletActivity() {
-        Intent intent = WalletActivity.getCallingIntent(context,true);
+        Intent intent = WalletActivity.getCallingIntent(context, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
         ((Activity) context).finish();
     }
 
-    private void saveUserData(String token, User user) {
-        userSaveUseCase.executeSync(new DefaultSubscriber<String>(), user);
-        tokenSaveUseCase.executeSync(new TokenSubscriber(), token);
+    private void saveUserData(String token, User user, List<IncomeCategory> incomeCategories, List<ExpenseCategory> expenseCategories) {
+        interactorFacade.saveUser(new DefaultSubscriber<String>(), user);
+        interactorFacade.saveToken(new TokenSubscriber(), token);
+        interactorFacade.saveExpenseCategories(new DefaultSubscriber<>(), expenseCategories);
+        interactorFacade.saveIncomeCategories(new DefaultSubscriber<>(), incomeCategories);
     }
 
     private class TokenSubscriber extends DefaultSubscriber<String> {
         @Override
         public void onNext(String s) {
-            getWalletUseCase.executeAsync(new WalletsSubscriber());
+            interactorFacade.getWallets(new WalletsSubscriber());
         }
     }
 
@@ -189,7 +186,7 @@ public class LoginViewModel implements ViewModel {
             if (wallets == null || wallets.isEmpty())
                 startCreateWalletActivity();
             else {
-                saveWalletUseCase.executeSync(new SaveWalletSubscriber(), wallets);
+                interactorFacade.saveWallets(new SaveWalletSubscriber(), wallets);
             }
 
         }

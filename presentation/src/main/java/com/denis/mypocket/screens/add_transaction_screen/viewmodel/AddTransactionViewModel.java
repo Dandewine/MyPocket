@@ -1,10 +1,11 @@
 package com.denis.mypocket.screens.add_transaction_screen.viewmodel;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
-import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,10 +24,13 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.ExpenseCategoryModel;
 import com.denis.mypocket.model.IncomeCategoryModel;
+import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
 import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
+import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
 import com.denis.mypocket.model.mapper.WalletModelDataMapper;
+import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.ViewModel;
 
@@ -39,10 +43,11 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 @PerActivity
-public class TransactionViewModel implements ViewModel {
-    public String amount = "";
+public class AddTransactionViewModel implements ViewModel {
 
-    private String categoryId;
+    public static final String TRANSACTION_BUNDLE_KEY = "transaction.bundle.key";
+
+    public String amount = "";
     private boolean isIncome;
     private long date;
     public ObservableField<String> dateFormat = new ObservableField<>();
@@ -54,15 +59,14 @@ public class TransactionViewModel implements ViewModel {
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
     private WalletModelDataMapper walletModelDataMapper = new WalletModelDataMapper();
+    private TransactionModelDataMapper transactionModelDataMapper = new TransactionModelDataMapper();
 
-
-    public Typeface typeface;
     private WalletModel walletModel;
     private Context context;
 
     @Inject
-    public TransactionViewModel(AddTransactionUseCasesFacade transactionFacade, Context context,
-                                boolean isIncome) {
+    public AddTransactionViewModel(AddTransactionUseCasesFacade transactionFacade, Context context,
+                                   boolean isIncome) {
 
         this.transactionFacade = transactionFacade;
         this.isIncome = isIncome;
@@ -70,7 +74,6 @@ public class TransactionViewModel implements ViewModel {
         initStartDate();
 
         categoriesAdapter = new ArrayAdapter<>(context, R.layout.item_category, R.id.categoryTitle_CSA);
-        typeface = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
         transactionFacade.getWallets(new GetWalletsSubscriber());
@@ -96,7 +99,7 @@ public class TransactionViewModel implements ViewModel {
 
     @Override
     public void destroy() {
-        Log.i(PLTags.INSTANCE_TAG, "TransactionViewModel has been destroyed");
+        Log.i(PLTags.INSTANCE_TAG, "AddTransactionViewModel has been destroyed");
         transactionFacade.destroy();
     }
 
@@ -154,9 +157,15 @@ public class TransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(Transaction transaction) {
-            Log.d(PLTags.TRANSACTIONS_TAG, "new transaction was added, id = " + transaction.getId() + ", categoryId = " + categoryId);
+            Log.d(PLTags.TRANSACTIONS_TAG, "new transaction was added, id = " + transaction.getId());
             isLoading.set(View.GONE);
-            Toast.makeText(context, "Transaction successfully added", Toast.LENGTH_SHORT).show();
+
+            TransactionModel model = transactionModelDataMapper.toModel(transaction);
+
+            Intent intent = new Intent();
+            intent.putExtra(TRANSACTION_BUNDLE_KEY,model);
+            ((AddTransactionActivity) context).setResult(Activity.RESULT_OK,intent);
+            ((AddTransactionActivity) context).finish();
         }
     }
 
@@ -187,7 +196,7 @@ public class TransactionViewModel implements ViewModel {
                     float amount = Float.parseFloat(this.amount.isEmpty() ? "0" : this.amount);
                     String type = isIncome ? Transaction.TransactionTypes.INCOME.name().toLowerCase() : Transaction.TransactionTypes.EXPENSE.name().toLowerCase();
 
-                    Transaction transaction = new Transaction(walletModel.getId(), amount, type, categoryId, date);
+                    Transaction transaction = new Transaction(walletModel.getId(), amount, type, "", date);
                     transactionFacade.addTransaction(new AddTransactionSubscriber(), transaction);
                     isLoading.set(View.VISIBLE);
                 }else

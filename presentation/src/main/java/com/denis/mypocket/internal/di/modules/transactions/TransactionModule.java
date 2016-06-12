@@ -13,7 +13,7 @@ import com.denis.mypocket.internal.di.modules.ActivityModule;
 import com.denis.mypocket.internal.di.modules.categories.ExpenseCategoryModule;
 import com.denis.mypocket.internal.di.modules.categories.IncomeCategoryModule;
 import com.denis.mypocket.internal.di.modules.wallets.WalletFromLocalModule;
-import com.denis.mypocket.screens.add_transaction_screen.viewmodel.TransactionViewModel;
+import com.denis.mypocket.screens.add_transaction_screen.viewmodel.AddTransactionViewModel;
 
 import javax.inject.Named;
 
@@ -34,9 +34,9 @@ public class TransactionModule {
     }
 
     @Provides @PerActivity
-    TransactionViewModel provideTransactionViewModel(AddTransactionUseCasesFacade facade,
-                                                     @Named("activity") Context context) {
-        return new TransactionViewModel(facade, context, isIncome);
+    AddTransactionViewModel provideTransactionViewModel(AddTransactionUseCasesFacade facade,
+                                                        @Named("activity") Context context) {
+        return new AddTransactionViewModel(facade, context, isIncome);
     }
 
 

@@ -14,7 +14,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddTransactionBinding;
 import com.denis.mypocket.internal.di.components.DaggerTransactionComponent;
 import com.denis.mypocket.internal.di.modules.transactions.TransactionModule;
-import com.denis.mypocket.screens.add_transaction_screen.viewmodel.TransactionViewModel;
+import com.denis.mypocket.screens.add_transaction_screen.viewmodel.AddTransactionViewModel;
 import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.view.activity.BaseActivity;
 
@@ -24,7 +24,7 @@ import javax.inject.Inject;
 public class AddTransactionActivity extends BaseActivity {
 
     @Inject
-    public TransactionViewModel viewModel;
+    public AddTransactionViewModel viewModel;
     private ActivityAddTransactionBinding binding;
     private boolean isIncome = false;
     private ViewGroup mRlContainer;

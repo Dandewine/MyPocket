@@ -1,8 +1,8 @@
 package com.denis.mypocket.internal.di.modules.categories;
 
 import com.denis.data.entity.mapper.IncomeCategoryDataMapper;
-import com.denis.data.local_store.categories.IncomeCategoriesStore;
 import com.denis.data.local_store.RealmStore;
+import com.denis.data.local_store.categories.IncomeCategoriesStore;
 import com.denis.data.repository.IncomeCategoriesDataRepository;
 import com.denis.data.repository.datasource.interfaces.IncomeCategoryDataStore;
 import com.denis.data.repository.datasource.local.IncomeCateforyLocalDataStore;
@@ -10,9 +10,12 @@ import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.categories.GetIncomeCategoriesUseCase;
+import com.denis.domain.interactor.categories.SaveIncomeCategoriesUseCase;
 import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.repository.IncomeCategoriesRepository;
 import com.denis.mypocket.internal.di.PerActivity;
+
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -27,6 +30,13 @@ public class IncomeCategoryModule {
     UseCase<IncomeCategory> getCategoriesUseCase(ThreadExecutor threadExecutor,
                                                  PostExecutionThread postExecutionThread, IncomeCategoriesRepository repository){
         return new GetIncomeCategoriesUseCase(threadExecutor,postExecutionThread, repository);
+    }
+
+    @Provides @PerActivity @Named("saveIncome")
+    UseCase<List<IncomeCategory>> saveIncomeCategoryUseCase(ThreadExecutor threadExecutor,
+                                                            PostExecutionThread postExecutionThread,
+                                                            IncomeCategoriesRepository repository){
+        return new SaveIncomeCategoriesUseCase(threadExecutor,postExecutionThread,repository);
     }
 
     @Provides @PerActivity IncomeCategoriesRepository provideIncomeRepo(IncomeCategoryDataMapper dataMapper, IncomeCategoryDataStore dataStore){

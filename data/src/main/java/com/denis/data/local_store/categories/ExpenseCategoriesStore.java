@@ -20,22 +20,23 @@ public class ExpenseCategoriesStore implements RealmStore<ExpenseCategoryEntity>
 
     @Override
     public Observable<ExpenseCategoryEntity> get(String id) {
-        return Observable.just(realm.where(ExpenseCategoryEntity.class).equalTo("id",id).findFirst());
+        return Observable.just(realm.where(ExpenseCategoryEntity.class).equalTo("id", id).findFirst());
     }
 
     @Override
     public Observable<ExpenseCategoryEntity> put(ExpenseCategoryEntity item) {
-        Number max = realm.where(ExpenseCategoryEntity.class).max("id");
-        int nextId = max == null ? 0 : max.intValue() + 1;
-        item.setId(nextId);
-        final ExpenseCategoryEntity[] entity = {null};
-        realm.executeTransaction(realm -> entity[0] = realm.copyToRealmOrUpdate(item));
-        return Observable.just(entity[0]);
+        realm.beginTransaction();
+        ExpenseCategoryEntity entity = realm.copyToRealmOrUpdate(item);
+        realm.commitTransaction();
+        return Observable.just(entity);
     }
 
     @Override
     public Observable<List<ExpenseCategoryEntity>> put(List<ExpenseCategoryEntity> list) {
-        throw new UnsupportedOperationException("I can't do this, yet");
+        realm.beginTransaction();
+        List<ExpenseCategoryEntity> entities = realm.copyToRealmOrUpdate(list);
+        realm.commitTransaction();
+        return Observable.just(entities);
     }
 
     @Override

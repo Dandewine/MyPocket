@@ -12,6 +12,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentTransactionsListBinding;
 import com.denis.mypocket.internal.di.components.DaggerTransactionTabComponent;
 import com.denis.mypocket.internal.di.modules.transactions.TransactionTabModule;
+import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.screens.transactions_tab_screen.viewmodel.TransactionViewModel;
 import com.denis.mypocket.view.fragments.BaseFragment;
@@ -56,4 +57,9 @@ public class TransactionsFragment extends BaseFragment {
                 .transactionTabModule(module)
                 .build().inject(this);
     }
+
+    public void updateDataSet(TransactionModel transaction) {
+        viewModel.updateDataSet(transaction);
+    }
+
 }

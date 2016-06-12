@@ -1,5 +1,6 @@
 package com.denis.data.repository;
 
+import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.entity.mapper.ExpenseCategoryDataMapper;
 import com.denis.data.repository.datasource.interfaces.ExpenseCategoryDataStore;
 import com.denis.domain.models.ExpenseCategory;
@@ -42,7 +43,7 @@ public class ExpenseCategoryDataRepository implements ExpenseCategoriesRepositor
 
     @Override
     public Observable<List<ExpenseCategory>> addExpenseCategory(List<ExpenseCategory> expenseCategorys) {
-        return dataStore.put(dataMapper.toEntity(expenseCategorys))
-                .map(dataMapper::fromEntity);
+        List<ExpenseCategoryEntity> entities = dataMapper.toEntity(expenseCategorys);
+        return dataStore.put(entities).map(dataMapper::fromEntity);
     }
 }

@@ -4,7 +4,6 @@ import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.IncomeCategoryDataStore;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,7 @@ import javax.inject.Named;
 import rx.Observable;
 
 public class IncomeCateforyLocalDataStore implements IncomeCategoryDataStore {
-    private RealmStore realmStore;
+    private RealmStore<IncomeCategoryEntity> realmStore;
 
     @Inject
     public IncomeCateforyLocalDataStore(@Named("categories") RealmStore realmStore) {
@@ -27,7 +26,6 @@ public class IncomeCateforyLocalDataStore implements IncomeCategoryDataStore {
 
     @Override
     public Observable<List<IncomeCategoryEntity>> getListIncomeEntities() {
-
         return realmStore.getList();
     }
 
@@ -37,7 +35,7 @@ public class IncomeCateforyLocalDataStore implements IncomeCategoryDataStore {
     }
 
     @Override
-    public Observable<List<IncomeCategoryEntity>> put(Collection<IncomeCategoryEntity> collection) {
+    public Observable<List<IncomeCategoryEntity>> put(List<IncomeCategoryEntity> collection) {
         return realmStore.put(collection);
     }
 }

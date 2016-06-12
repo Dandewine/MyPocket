@@ -2,7 +2,6 @@ package com.denis.data.repository.datasource.interfaces;
 
 import com.denis.data.entity.IncomeCategoryEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 import rx.Observable;
@@ -19,5 +18,5 @@ public interface IncomeCategoryDataStore {
     Observable<List<IncomeCategoryEntity>> getListIncomeEntities();
 
     Observable<IncomeCategoryEntity> put(IncomeCategoryEntity IncomeCategoryEntity);
-    Observable<List<IncomeCategoryEntity>> put(Collection<IncomeCategoryEntity> collection);
+    Observable<List<IncomeCategoryEntity>> put(List<IncomeCategoryEntity> collection);
 }

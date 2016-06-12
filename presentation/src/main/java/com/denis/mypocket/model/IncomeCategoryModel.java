@@ -1,15 +1,15 @@
 package com.denis.mypocket.model;
 
 public class IncomeCategoryModel {
-    private int id;
+    private String id;
     private String name;
     private String path;
 
-    public IncomeCategoryModel(int id) {
+    public IncomeCategoryModel(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

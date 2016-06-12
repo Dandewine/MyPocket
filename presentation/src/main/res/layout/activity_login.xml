@@ -90,7 +90,7 @@
                     android:layout_marginRight="3dp"
                     android:indeterminate="true"
                     android:layout_marginTop="24dp"
-                    android:visibility="@{viewModel.prorgessBarVisibility}"
+                    android:visibility="@{viewModel.progressBarVisibility}"
                     android:layout_gravity="center"/>
             </FrameLayout>
 

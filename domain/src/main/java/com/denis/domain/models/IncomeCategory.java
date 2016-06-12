@@ -1,25 +1,25 @@
 package com.denis.domain.models;
 
 public class IncomeCategory {
-    private int id;
+    private String id;
     private String name;
     private String path;
 
-    public IncomeCategory(int id) {
+    public IncomeCategory(String id) {
         this.id = id;
     }
 
-    public IncomeCategory(int id, String name, String path) {
+    public IncomeCategory(String id, String name, String path) {
         this.id = id;
         this.name = name;
         this.path = path;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

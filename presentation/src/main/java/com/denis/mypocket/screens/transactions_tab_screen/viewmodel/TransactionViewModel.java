@@ -27,6 +27,8 @@ public class TransactionViewModel implements ViewModel {
     private UseCase<Transaction> transactionUseCase;
     private TransactionAdapter transactionAdapter;
     private TransactionModelDataMapper modelDataMapper = new TransactionModelDataMapper();
+
+
     @Inject
     public TransactionViewModel(UseCase<Transaction> transactionUseCase, ArrayList<WalletModel> walletModels) {
         this.transactionUseCase = transactionUseCase;
@@ -54,6 +56,10 @@ public class TransactionViewModel implements ViewModel {
 
     public TransactionAdapter getTransactionAdapter() {
         return transactionAdapter;
+    }
+
+    public void updateDataSet(TransactionModel model){
+        transactionAdapter.addToTop(model);
     }
 
 }

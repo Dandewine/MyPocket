@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.denis.mypocket.screens.add_transaction_screen.viewmodel.TransactionViewModel" />
+            type="com.denis.mypocket.screens.add_transaction_screen.viewmodel.AddTransactionViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

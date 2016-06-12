@@ -70,7 +70,7 @@
             android:rotationX="180"
             android:src="@drawable/vector_expense"
             android:visibility="invisible"
-            app:backgroundTint="@color/fab_outcome"
+            app:backgroundTint="@color/fab_expense"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp" />
 

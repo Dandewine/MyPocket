@@ -16,8 +16,8 @@ public class DateTimeUtils {
     public static String getTransactionTime(long time) {
         StringBuilder builder = new StringBuilder();
         String template = "hh:mm a";
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-        calendar.setTimeInMillis(time *  UNIX_MULTIPLIER_FACTOR);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Unix"));
+        calendar.setTimeInMillis(time);
 
         Date getDate = calendar.getTime();
 

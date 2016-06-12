@@ -19,6 +19,7 @@ public abstract class RecyclerBindableAdapter<M, VH extends BindableHolder> exte
     public static final int TYPE_ITEM = 30;
     public Context context;
     public LayoutInflater inflater;
+    protected RecyclerView recyclerView;
 
 
     private List<M> items = new ArrayList<>();
@@ -36,6 +37,12 @@ public abstract class RecyclerBindableAdapter<M, VH extends BindableHolder> exte
     public void add(M item) {
         items.add(item);
         notifyItemInserted(items.size() - 1 + getHeadersCount());
+    }
+
+    public void addToTop(M item){
+        items.add(item);
+        notifyItemInserted(0 + getHeadersCount());
+        recyclerView.smoothScrollToPosition(0);
     }
 
     public void addAll(int position, List<? extends M> items) {
@@ -116,6 +123,7 @@ public abstract class RecyclerBindableAdapter<M, VH extends BindableHolder> exte
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
         this.context = recyclerView.getContext();
         this.inflater = LayoutInflater.from(context);
     }

@@ -1,24 +1,25 @@
 package com.denis.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class IncomeCategoryEntity extends RealmObject {
-    @PrimaryKey
-    private int id;
-    private String name;
+    @PrimaryKey @SerializedName("id") private String id;
+    @SerializedName("name") private String name;
     private String path;
 
-    public IncomeCategoryEntity(int id) {
+    public IncomeCategoryEntity(String id) {
         this.id = id;
     }
 
-    public IncomeCategoryEntity(int id, String name) {
+    public IncomeCategoryEntity(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public IncomeCategoryEntity(int id, String name, String path) {
+    public IncomeCategoryEntity(String id, String name, String path) {
         this.id = id;
         this.name = name;
         this.path = path;
@@ -27,11 +28,11 @@ public class IncomeCategoryEntity extends RealmObject {
     public IncomeCategoryEntity() {
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
