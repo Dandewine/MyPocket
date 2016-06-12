@@ -1,9 +1,13 @@
 package com.denis.mypocket.model;
 
+import android.support.annotation.DrawableRes;
+
+import com.denis.mypocket.R;
+
 public class ExpenseCategoryModel {
     private String id;
     private String name;
-    private String path;
+    private int path;
 
     public ExpenseCategoryModel(String id) {
         this.id = id;
@@ -13,7 +17,6 @@ public class ExpenseCategoryModel {
         return id;
     }
 
-
     public String getName() {
         return name;
     }
@@ -22,11 +25,17 @@ public class ExpenseCategoryModel {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    @DrawableRes
+    public int getPath() {
+        int d = R.drawable.svg_beer;
+        for (ExpenseCategory category: ExpenseCategory.values()) {
+            if (category.getCategoryName().equals(name))
+                d = category.getDrawable();
+        }
+        return d;
     }
 
-    public void setPath(String path) {
+    public void setPath(int path) {
         this.path = path;
     }
 }

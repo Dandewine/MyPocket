@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -31,6 +30,7 @@ import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
 import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
+import com.denis.mypocket.screens.add_transaction_screen.view.CategoriesAdapter;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.viewmodel.ViewModel;
 
@@ -53,7 +53,7 @@ public class AddTransactionViewModel implements ViewModel {
     public ObservableField<String> dateFormat = new ObservableField<>();
     public ObservableInt isLoading = new ObservableInt(View.GONE);
 
-    private ArrayAdapter categoriesAdapter;
+    private CategoriesAdapter categoriesAdapter;
     private AddTransactionUseCasesFacade transactionFacade;
 
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
@@ -73,7 +73,7 @@ public class AddTransactionViewModel implements ViewModel {
         this.context = context;
         initStartDate();
 
-        categoriesAdapter = new ArrayAdapter<>(context, R.layout.item_category, R.id.categoryTitle_CSA);
+        categoriesAdapter = new CategoriesAdapter();
 
         Log.d(PLTags.INSTANCE_TAG, "Add Transaction ViewModel, " + hashCode());
         transactionFacade.getWallets(new GetWalletsSubscriber());
@@ -116,9 +116,7 @@ public class AddTransactionViewModel implements ViewModel {
         @Override
         public void onNext(List<IncomeCategory> incomeCategories) {
             List<IncomeCategoryModel> models = incomeMapper.toModel(incomeCategories);
-            for (int i = 0; i < models.size(); i++) {
-                categoriesAdapter.add(models.get(i).getName());
-            }
+            categoriesAdapter.addData(models);
         }
     }
 
@@ -136,9 +134,8 @@ public class AddTransactionViewModel implements ViewModel {
         public void onNext(List<ExpenseCategory> expenseCategories) {
             if (expenseCategories != null) {
                 List<ExpenseCategoryModel> modelList = expenseMapper.toModel(expenseCategories);
-                for (int i = 0; i < modelList.size(); i++) {
-                    categoriesAdapter.add(expenseCategories.get(i).getName());
-                }
+                categoriesAdapter.addData(modelList);
+
             }
         }
     }
@@ -235,7 +232,7 @@ public class AddTransactionViewModel implements ViewModel {
     };
 */
 
-    public ArrayAdapter getCategoriesAdapter() {
+    public CategoriesAdapter getCategoriesAdapter() {
         return categoriesAdapter;
     }
 }

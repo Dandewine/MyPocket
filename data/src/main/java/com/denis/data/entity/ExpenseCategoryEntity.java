@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
 public class ExpenseCategoryEntity extends RealmObject {
     @PrimaryKey @SerializedName("id") private String id;
     @SerializedName("name") private String name;
-    private String path;
+    private int path;
 
     public ExpenseCategoryEntity(String id) {
         this.id = id;
@@ -19,7 +19,7 @@ public class ExpenseCategoryEntity extends RealmObject {
         this.name = name;
     }
 
-    public ExpenseCategoryEntity(String id, String name, String path) {
+    public ExpenseCategoryEntity(String id, String name, int path) {
         this.id = id;
         this.name = name;
         this.path = path;
@@ -44,11 +44,11 @@ public class ExpenseCategoryEntity extends RealmObject {
         this.name = name;
     }
 
-    public String getPath() {
+    public int getPath() {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(int path) {
         this.path = path;
     }
 }

@@ -1,9 +1,13 @@
 package com.denis.mypocket.model;
 
+import android.support.annotation.DrawableRes;
+
+import com.denis.mypocket.R;
+
 public class IncomeCategoryModel {
     private String id;
     private String name;
-    private String path;
+    private int path;
 
     public IncomeCategoryModel(String id) {
         this.id = id;
@@ -22,11 +26,17 @@ public class IncomeCategoryModel {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    @DrawableRes
+    public int getPath() {
+        int d = R.drawable.green_oval;
+        for (IncomeCategory category: IncomeCategory.values()) {
+          if (category.name().equals(name))
+              d = category.getDrawable();
+        }
+        return d;
     }
 
-    public void setPath(String path) {
+    public void setPath(int path) {
         this.path = path;
     }
 }

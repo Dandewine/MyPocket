@@ -3,13 +3,13 @@ package com.denis.domain.models;
 public class ExpenseCategory {
     private String id;
     private String name;
-    private String path;
+    private int path;
 
     public ExpenseCategory(String id) {
         this.id = id;
     }
 
-    public ExpenseCategory(String id, String name, String path) {
+    public ExpenseCategory(String id, String name, int path) {
         this.id = id;
         this.name = name;
         this.path = path;
@@ -31,11 +31,11 @@ public class ExpenseCategory {
         this.name = name;
     }
 
-    public String getPath() {
+    public int getPath() {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(int path) {
         this.path = path;
     }
 }
