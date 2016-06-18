@@ -3,6 +3,7 @@ package com.denis.data.local_store;
 import android.text.TextUtils;
 
 import com.denis.data.entity.UserEntity;
+import com.denis.domain.models.categories.Category;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.util.ArrayList;

@@ -1,11 +1,10 @@
-package com.denis.mypocket.view.adapter;
+package com.denis.mypocket.screens;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.denis.mypocket.databinding.ItemWalletBinding;
 import com.denis.mypocket.model.WalletModel;
-import com.denis.mypocket.view.adapter.viewholder.BindableHolder;
 
 public class WalletAdapter extends RecyclerBindableAdapter<WalletModel,BindableHolder> {
     @Override

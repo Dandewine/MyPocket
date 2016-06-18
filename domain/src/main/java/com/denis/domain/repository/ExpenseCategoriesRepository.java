@@ -1,6 +1,7 @@
 package com.denis.domain.repository;
 
-import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.categories.Category;
+import com.denis.domain.models.categories.ExpenseCategory;
 
 import java.util.List;
 

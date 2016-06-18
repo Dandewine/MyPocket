@@ -2,6 +2,7 @@ package com.denis.data.local_store.categories;
 
 import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.local_store.RealmStore;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import com.denis.mypocket.R;
 import com.denis.mypocket.custom_views.TextWatcherAdapter;
 import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionAdapter;
-import com.denis.mypocket.view.adapter.MyDecorator;
+import com.denis.mypocket.screens.MyDecorator;
 
 import java.util.Objects;
 

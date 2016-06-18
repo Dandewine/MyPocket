@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.fragments;
+package com.denis.mypocket.screens;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.denis.mypocket.R;
-import com.denis.mypocket.viewmodel.adding.AddDebtViewModel;
-
-import javax.inject.Inject;
 
 /**
  * Created by denis on 2/20/16.

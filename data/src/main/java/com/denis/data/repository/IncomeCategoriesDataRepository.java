@@ -3,7 +3,8 @@ package com.denis.data.repository;
 import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.entity.mapper.IncomeCategoryDataMapper;
 import com.denis.data.repository.datasource.interfaces.IncomeCategoryDataStore;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.Category;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.domain.repository.IncomeCategoriesRepository;
 
 import java.util.List;

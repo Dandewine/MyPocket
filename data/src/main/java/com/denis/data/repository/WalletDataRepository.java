@@ -4,6 +4,7 @@ import com.denis.data.entity.WalletEntity;
 import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.domain.models.Wallet;
+import com.denis.domain.models.categories.Category;
 import com.denis.domain.repository.WalletRepository;
 
 import java.util.List;

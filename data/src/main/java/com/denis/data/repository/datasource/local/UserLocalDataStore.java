@@ -4,6 +4,7 @@ import com.denis.data.entity.LoginResponseEntity;
 import com.denis.data.entity.UserEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

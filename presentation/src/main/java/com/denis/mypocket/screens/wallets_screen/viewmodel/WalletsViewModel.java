@@ -17,7 +17,7 @@ import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.utils.PLTags;
 import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
 import com.denis.mypocket.screens.wallets_screen.view.WalletAdapter;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 
 import java.util.List;
 import java.util.Objects;

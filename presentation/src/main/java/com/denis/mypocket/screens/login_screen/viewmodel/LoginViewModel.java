@@ -12,8 +12,8 @@ import android.view.View;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.auth.LoginInteractorFacade;
-import com.denis.domain.models.ExpenseCategory;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
 import com.denis.domain.models.Wallet;
@@ -23,7 +23,7 @@ import com.denis.mypocket.model.UserModel;
 import com.denis.mypocket.screens.signup_screen.view.SignUpActivity;
 import com.denis.mypocket.screens.tab_with_drawer_screen.view.DrawerActivity;
 import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 import com.google.gson.Gson;
 
 import java.util.List;

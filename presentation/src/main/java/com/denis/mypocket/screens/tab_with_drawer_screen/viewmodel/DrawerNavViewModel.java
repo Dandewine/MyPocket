@@ -20,7 +20,7 @@ import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.ModelMapper;
 import com.denis.mypocket.model.mapper.UserModelMapper;
 import com.denis.mypocket.model.mapper.WalletModelDataMapper;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 
 import java.util.ArrayList;

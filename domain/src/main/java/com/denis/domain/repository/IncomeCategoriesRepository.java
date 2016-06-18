@@ -1,6 +1,7 @@
 package com.denis.domain.repository;
 
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.Category;
+import com.denis.domain.models.categories.IncomeCategory;
 
 import java.util.List;
 

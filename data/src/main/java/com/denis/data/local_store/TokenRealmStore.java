@@ -3,6 +3,7 @@ package com.denis.data.local_store;
 import android.text.TextUtils;
 
 import com.denis.data.entity.Token;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

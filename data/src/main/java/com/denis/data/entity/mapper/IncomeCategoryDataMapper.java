@@ -1,7 +1,7 @@
 package com.denis.data.entity.mapper;
 
 import com.denis.data.entity.IncomeCategoryEntity;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class IncomeCategoryDataMapper {
-
     @Inject
     public IncomeCategoryDataMapper() {
     }

@@ -1,4 +1,4 @@
-package com.denis.mypocket;
+package com.denis.mypocket.utils;
 
 public class StringUtils {
     private static StringBuilder builder;
@@ -10,5 +10,4 @@ public class StringUtils {
             builder.append(o.toString());
         return builder.toString();
     }
-
 }

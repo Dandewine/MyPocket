@@ -1,4 +1,4 @@
-package com.denis.mypocket.view;
+package com.denis.mypocket.screens;
 
 public interface OnRevealListener {
     void onRevealHide();

@@ -10,19 +10,19 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.facades.AddTransactionUseCasesFacade;
-import com.denis.domain.models.ExpenseCategory;
-import com.denis.domain.models.IncomeCategory;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
+import com.denis.domain.models.categories.Category;
+import com.denis.domain.models.categories.ExpenseCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.model.ExpenseCategoryModel;
-import com.denis.mypocket.model.IncomeCategoryModel;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
@@ -32,7 +32,7 @@ import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
 import com.denis.mypocket.screens.add_transaction_screen.view.CategoriesAdapter;
 import com.denis.mypocket.utils.PLTags;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -50,6 +50,8 @@ public class AddTransactionViewModel implements ViewModel {
     public String amount = "";
     private boolean isIncome;
     private long date;
+    private Category category;
+
     public ObservableField<String> dateFormat = new ObservableField<>();
     public ObservableInt isLoading = new ObservableInt(View.GONE);
 
@@ -115,8 +117,8 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<IncomeCategory> incomeCategories) {
-            List<IncomeCategoryModel> models = incomeMapper.toModel(incomeCategories);
-            categoriesAdapter.addData(models);
+           /* List<IncomeCategoryModel> models = incomeMapper.toModel(incomeCategories);
+            categoriesAdapter.addData(models);*/
         }
     }
 
@@ -133,8 +135,10 @@ public class AddTransactionViewModel implements ViewModel {
         @Override
         public void onNext(List<ExpenseCategory> expenseCategories) {
             if (expenseCategories != null) {
-                List<ExpenseCategoryModel> modelList = expenseMapper.toModel(expenseCategories);
-                categoriesAdapter.addData(modelList);
+               /* List<CategoryModel> modelList =  expenseMapper.toModel(expenseCategories);
+
+                categoriesAdapter.addData(modelList);*/
+
 
             }
         }
@@ -160,8 +164,8 @@ public class AddTransactionViewModel implements ViewModel {
             TransactionModel model = transactionModelDataMapper.toModel(transaction);
 
             Intent intent = new Intent();
-            intent.putExtra(TRANSACTION_BUNDLE_KEY,model);
-            ((AddTransactionActivity) context).setResult(Activity.RESULT_OK,intent);
+            intent.putExtra(TRANSACTION_BUNDLE_KEY, model);
+            ((AddTransactionActivity) context).setResult(Activity.RESULT_OK, intent);
             ((AddTransactionActivity) context).finish();
         }
     }
@@ -191,12 +195,12 @@ public class AddTransactionViewModel implements ViewModel {
             v -> {
                 if (!amount.isEmpty()) {
                     float amount = Float.parseFloat(this.amount.isEmpty() ? "0" : this.amount);
-                    String type = isIncome ? Transaction.TransactionTypes.INCOME.name().toLowerCase() : Transaction.TransactionTypes.EXPENSE.name().toLowerCase();
+                    String type = isIncome ? Transaction.TransactionType.INCOME.getType() : Transaction.TransactionType.EXPENSE.getType();
 
-                    Transaction transaction = new Transaction(walletModel.getId(), amount, type, "", date);
+                    Transaction transaction = new Transaction(walletModel.getId(), amount, type, category, date);
                     transactionFacade.addTransaction(new AddTransactionSubscriber(), transaction);
                     isLoading.set(View.VISIBLE);
-                }else
+                } else
                     Toast.makeText(context, R.string.empty_amount_error, Toast.LENGTH_SHORT).show();
             };
 
@@ -210,7 +214,7 @@ public class AddTransactionViewModel implements ViewModel {
                 calendar.set(Calendar.MONTH, monthOfYear + 1);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 date = calendar.getTimeInMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yy", Locale.getDefault());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
                 dateFormat.set(simpleDateFormat.format(calendar.getTime()));
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -218,11 +222,13 @@ public class AddTransactionViewModel implements ViewModel {
     };
 
 
-   /* public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
+    public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Log.d("myTag", "itemClicked, position = " + position + ", id = " + id);
-            categoryId = (int) id;
+      /*      Object item = categoriesAdapter.getItem(position);
+            if (isIncome)
+                category = ((IncomeCategoryModel) item).getId();
+            else category = ((ExpenseCategoryModel) item).getId();*/
         }
 
         @Override
@@ -230,7 +236,6 @@ public class AddTransactionViewModel implements ViewModel {
 
         }
     };
-*/
 
     public CategoriesAdapter getCategoriesAdapter() {
         return categoriesAdapter;

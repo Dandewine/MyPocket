@@ -1,8 +1,8 @@
 package com.denis.mypocket.model.mapper;
 
-import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.model.ExpenseCategoryModel;
+import com.denis.mypocket.model.categories.ExpenseCategoryModel;
 
 import java.util.ArrayList;
 import java.util.List;

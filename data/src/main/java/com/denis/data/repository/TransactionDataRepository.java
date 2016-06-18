@@ -3,6 +3,7 @@ package com.denis.data.repository;
 import com.denis.data.entity.mapper.TransactionDataMapper;
 import com.denis.data.repository.datasource.interfaces.TransactionDataStore;
 import com.denis.domain.models.Transaction;
+import com.denis.domain.models.categories.Category;
 import com.denis.domain.repository.TransactionRepository;
 
 import java.util.List;

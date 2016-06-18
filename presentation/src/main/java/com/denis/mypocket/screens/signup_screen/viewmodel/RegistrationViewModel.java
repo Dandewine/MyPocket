@@ -21,7 +21,7 @@ import com.denis.mypocket.utils.PLConstants;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.screens.login_screen.view.SigInActivity;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 
 import java.util.regex.Pattern;
 

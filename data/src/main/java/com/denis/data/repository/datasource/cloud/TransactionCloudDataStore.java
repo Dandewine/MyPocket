@@ -5,6 +5,7 @@ import com.denis.data.entity.WalletEntity;
 import com.denis.data.repository.datasource.interfaces.TransactionDataStore;
 import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.data.rest.TransactionService;
+import com.denis.domain.models.categories.Category;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
 

@@ -1,5 +1,8 @@
 package com.denis.domain.models;
 
+import com.denis.domain.models.categories.ExpenseCategory;
+import com.denis.domain.models.categories.IncomeCategory;
+
 import java.util.List;
 
 /**

@@ -11,7 +11,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityLoginBinding;
 import com.denis.mypocket.internal.di.components.DaggerLoginComponent;
 import com.denis.mypocket.internal.di.modules.LoginModule;
-import com.denis.mypocket.view.activity.BaseActivity;
+import com.denis.mypocket.screens.BaseActivity;
 import com.denis.mypocket.screens.login_screen.viewmodel.LoginViewModel;
 
 import javax.inject.Inject;

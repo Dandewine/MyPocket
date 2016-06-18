@@ -24,7 +24,7 @@
                 android:value=".screens.tab_with_drawer_screen.view.DrawerActivity"/>
         </activity>
         <activity android:name=".screens.add_transaction_screen.view.AddTransactionActivity"/>
-        <activity android:name=".view.activity.AddCycleOperationActivity"/>
+        <activity android:name=".screens.AddCycleOperationActivity"/>
         <activity
             android:name=".screens.tab_with_drawer_screen.view.DrawerActivity"
             android:theme="@style/AppTheme.Drawer">

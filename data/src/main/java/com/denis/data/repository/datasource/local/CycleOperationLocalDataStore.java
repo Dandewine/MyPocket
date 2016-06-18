@@ -3,6 +3,7 @@ package com.denis.data.repository.datasource.local;
 import com.denis.data.entity.CycleOperationEntity;
 import com.denis.data.local_store.CircleOperationRealmStore;
 import com.denis.data.repository.datasource.interfaces.CycleOperationDataStore;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

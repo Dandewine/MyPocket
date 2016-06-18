@@ -8,7 +8,7 @@ import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 
-import com.denis.mypocket.view.OnRevealListener;
+import com.denis.mypocket.screens.OnRevealListener;
 
 public class GUIUtils {
     public static void animateRvealShow(final Context context, final View view, final int startRadius, @ColorRes int color,

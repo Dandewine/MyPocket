@@ -1,11 +1,10 @@
-package com.denis.mypocket.view.fragments;
+package com.denis.mypocket.screens;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.denis.mypocket.internal.di.components.ApplicationComponent;
 import com.denis.mypocket.internal.di.modules.FragmentModule;
-import com.denis.mypocket.view.activity.BaseActivity;
 
 /**
  * Created by denis on 12/27/15.

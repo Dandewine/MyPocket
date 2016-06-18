@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.adapter;
+package com.denis.mypocket.screens;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.denis.mypocket.BR;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.CycleOperationModel;
-import com.denis.mypocket.view.adapter.viewholder.BindableHolder;
 
 public class CycleOperationAdapter extends RecyclerBindableAdapter<CycleOperationModel,BindableHolder> {
 

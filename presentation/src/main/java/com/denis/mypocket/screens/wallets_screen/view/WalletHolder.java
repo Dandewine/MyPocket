@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.denis.mypocket.databinding.ItemWalletBinding;
 import com.denis.mypocket.model.WalletModel;
-import com.denis.mypocket.view.adapter.viewholder.BindableHolder;
+import com.denis.mypocket.screens.BindableHolder;
 
 /**
  * Created by denis on 5/22/16.

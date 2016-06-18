@@ -3,6 +3,7 @@ package com.denis.data.repository;
 import com.denis.data.entity.mapper.DebtsMapper;
 import com.denis.data.repository.datasource.interfaces.DebtsDataStore;
 import com.denis.domain.models.Debt;
+import com.denis.domain.models.categories.Category;
 import com.denis.domain.repository.DebtRepository;
 
 import java.util.List;

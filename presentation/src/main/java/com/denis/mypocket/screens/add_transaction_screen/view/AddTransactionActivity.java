@@ -16,7 +16,7 @@ import com.denis.mypocket.internal.di.components.DaggerTransactionComponent;
 import com.denis.mypocket.internal.di.modules.transactions.TransactionModule;
 import com.denis.mypocket.screens.add_transaction_screen.viewmodel.AddTransactionViewModel;
 import com.denis.mypocket.utils.PLConstants;
-import com.denis.mypocket.view.activity.BaseActivity;
+import com.denis.mypocket.screens.BaseActivity;
 
 import javax.inject.Inject;
 

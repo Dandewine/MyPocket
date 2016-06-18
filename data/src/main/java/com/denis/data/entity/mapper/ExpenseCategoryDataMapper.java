@@ -1,7 +1,7 @@
 package com.denis.data.entity.mapper;
 
 import com.denis.data.entity.ExpenseCategoryEntity;
-import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
 
 import java.util.ArrayList;
 import java.util.List;

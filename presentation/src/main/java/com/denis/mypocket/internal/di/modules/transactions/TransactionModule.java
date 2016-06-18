@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.facades.AddTransactionUseCasesFacade;
-import com.denis.domain.models.ExpenseCategory;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
 import com.denis.mypocket.internal.di.PerActivity;
@@ -24,7 +24,7 @@ import dagger.Provides;
  * @author denis at 5/28/16.
  */
 
-@Module(includes = {AddCloudTransaction.class, ActivityModule.class, WalletFromLocalModule.class, ExpenseCategoryModule.class, IncomeCategoryModule.class})
+@Module(includes = {AddCloudTransaction.class, ActivityModule.class, WalletFromLocalModule.class,ExpenseCategoryModule.class, IncomeCategoryModule.class})
 public class TransactionModule {
 
     private boolean isIncome;

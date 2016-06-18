@@ -1,12 +1,10 @@
-package com.denis.mypocket.view.adapter;
+package com.denis.mypocket.screens;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
-import com.denis.mypocket.view.adapter.viewholder.BindableHolder;
 
 import java.util.ArrayList;
 import java.util.List;

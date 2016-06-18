@@ -33,7 +33,7 @@ public class TransactionDataMapperTest{
         assertThat(entity,is(notNullValue()));
         assertThat(entity.getId(),is(FAKE_ID));
         assertThat(entity.getAmount(),is(FAKE_AMOUNT));
-        assertThat(entity.getCategoryId(),is(FAKE_CATEGORY_ID));
+        assertThat(entity.getCategory(),is(FAKE_CATEGORY_ID));
         assertThat(entity.getType(),is(FAKE_TYPE));
         assertThat(entity.getUnixDateTime(),is(FAKE_DATE));
 
@@ -52,7 +52,7 @@ public class TransactionDataMapperTest{
         assertThat(transaction,is(notNullValue()));
         assertThat(transaction.getId(),is(FAKE_ID));
         assertThat(transaction.getAmount(),is(FAKE_AMOUNT));
-        assertThat(transaction.getCategoryId(),is(FAKE_CATEGORY_ID));
+        assertThat(transaction.getCategory(),is(FAKE_CATEGORY_ID));
         assertThat(transaction.getType(),is(FAKE_TYPE));
         assertThat(transaction.getUnixDateTime(),is(FAKE_DATE));
 

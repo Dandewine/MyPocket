@@ -6,6 +6,7 @@ import com.denis.data.entity.mapper.EntityMapper;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 import com.denis.domain.models.LoginResponse;
 import com.denis.domain.models.User;
+import com.denis.domain.models.categories.Category;
 import com.denis.domain.repository.UserRepository;
 
 import java.util.List;

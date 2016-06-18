@@ -4,35 +4,29 @@ package com.denis.domain.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.denis.domain.models.categories.Category;
+
 public class Transaction implements Parcelable {
     private String id;
     private String walletId;
     private float amount;
     private String type;
-    private String categoryId;
+    private Category category;
     private long unixDateTime;
 
-    public enum TransactionTypes {
-        EXPENSE("expense"),
-        INCOME("income");
-
-        TransactionTypes(String s) {
-        }
-    }
-
-    public Transaction(String id, float amount, String type, long unixDateTime, String categoryId) {
+    public Transaction(String id, float amount, String type, long unixDateTime, Category category) {
         this.id = id;
         this.amount = amount;
         this.type = type;
-        this.categoryId = categoryId;
+        this.category = category;
         this.unixDateTime = unixDateTime;
     }
 
-    public Transaction(String walletId , float amount, String type, String categoryId, long unixDateTime) {
+    public Transaction(String walletId , float amount, String type, Category category, long unixDateTime) {
         this.walletId = walletId;
         this.amount = amount;
         this.type = type;
-        this.categoryId = categoryId;
+        this.category = category;
         this.unixDateTime = unixDateTime;
     }
 
@@ -48,12 +42,12 @@ public class Transaction implements Parcelable {
         this.id = id;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public float getAmount() {
@@ -99,7 +93,7 @@ public class Transaction implements Parcelable {
         dest.writeString(this.walletId);
         dest.writeFloat(this.amount);
         dest.writeString(this.type);
-        dest.writeString(this.categoryId);
+        dest.writeParcelable(category,flags);
         dest.writeLong(this.unixDateTime);
     }
 
@@ -108,7 +102,7 @@ public class Transaction implements Parcelable {
         this.walletId = in.readString();
         this.amount = in.readFloat();
         this.type = in.readString();
-        this.categoryId = in.readString();
+        this.category = in.readParcelable(Category.class.getClassLoader());
         this.unixDateTime = in.readLong();
     }
 
@@ -121,4 +115,19 @@ public class Transaction implements Parcelable {
             return new Transaction[size];
         }
     };
+
+    public enum TransactionType {
+        INCOME("income"),
+        EXPENSE("expense");
+
+        private String type;
+
+        TransactionType(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
 }

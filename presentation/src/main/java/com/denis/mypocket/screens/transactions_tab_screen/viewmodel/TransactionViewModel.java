@@ -10,7 +10,7 @@ import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
 import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionAdapter;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

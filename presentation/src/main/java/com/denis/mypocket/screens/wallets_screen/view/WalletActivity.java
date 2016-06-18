@@ -16,7 +16,7 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ActivityAddWalletBinding;
 import com.denis.mypocket.internal.di.components.DaggerWalletsComponent;
 import com.denis.mypocket.internal.di.modules.AddWalletModule;
-import com.denis.mypocket.view.activity.BaseActivity;
+import com.denis.mypocket.screens.BaseActivity;
 import com.denis.mypocket.screens.wallets_screen.viewmodel.WalletsViewModel;
 
 import javax.inject.Inject;

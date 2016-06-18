@@ -43,9 +43,9 @@ import com.denis.mypocket.screens.add_transaction_screen.viewmodel.AddTransactio
 import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
 import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
 import com.denis.mypocket.utils.PLConstants;
-import com.denis.mypocket.view.activity.BaseActivity;
-import com.denis.mypocket.view.fragments.CycleOperationFragment;
-import com.denis.mypocket.view.fragments.DebtsFragment;
+import com.denis.mypocket.screens.BaseActivity;
+import com.denis.mypocket.screens.CycleOperationFragment;
+import com.denis.mypocket.screens.DebtsFragment;
 import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionsFragment;
 
 import javax.inject.Inject;

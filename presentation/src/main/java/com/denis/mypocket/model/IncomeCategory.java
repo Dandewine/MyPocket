@@ -9,9 +9,9 @@ import com.denis.mypocket.R;
 public enum IncomeCategory {
     SELLING(R.drawable.svg_selling, "Selling"),
     SALARY(R.drawable.svg_salary, "Salary"),
-    GIFTS(R.drawable.svg_gifts, "Gifts and presents"),
-    AWARD(R.drawable.svg_award, "Awards"),
-    INTEREST_MONEY(R.drawable.svg_coins, "Interest money"),
+    GIFTS(R.drawable.svg_gifts, "Gifts & presents"),
+    AWARD(R.drawable.svg_award, "Award"),
+    INTEREST_MONEY(R.drawable.svg_coins, "Interest Money"),
     OTHER(R.drawable.svg_other, "Other");
 
     private int drawable;

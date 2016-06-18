@@ -3,7 +3,7 @@ package com.denis.domain.interactor.categories;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
-import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
 import com.denis.domain.repository.ExpenseCategoriesRepository;
 
 import rx.Observable;

@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.activity;
+package com.denis.mypocket.screens;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

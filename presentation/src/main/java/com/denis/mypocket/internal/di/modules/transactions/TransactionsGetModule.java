@@ -1,11 +1,15 @@
 package com.denis.mypocket.internal.di.modules.transactions;
 
+import com.denis.data.entity.ExpenseCategoryEntity;
+import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.entity.TransactionEntity;
 import com.denis.data.entity.WalletEntity;
 import com.denis.data.entity.mapper.TransactionDataMapper;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.local_store.TransactionRealmStore;
 import com.denis.data.local_store.WalletRealmStore;
+import com.denis.data.local_store.categories.ExpenseCategoriesStore;
+import com.denis.data.local_store.categories.IncomeCategoriesStore;
 import com.denis.data.repository.TransactionDataRepository;
 import com.denis.data.repository.datasource.cloud.TransactionCloudDataStore;
 import com.denis.data.repository.datasource.interfaces.TransactionDataStore;
@@ -40,7 +44,9 @@ public class TransactionsGetModule {
         return new GetTransactions(executor,thread,repository);
     }
 
-    @Provides @PerFragment TransactionRepository providTransactionRepository(@Named("cloud") TransactionDataStore dataStore, TransactionDataMapper dataMapper){
+    @Provides @PerFragment
+    TransactionRepository providTransactionRepository(@Named("cloud") TransactionDataStore dataStore,
+                                                      TransactionDataMapper dataMapper){
         return new TransactionDataRepository(dataStore, dataMapper);
     }
 
@@ -54,6 +60,21 @@ public class TransactionsGetModule {
 
     @Provides @PerFragment RealmStore<TransactionEntity> provideTransactionEntityRealmStore(Realm realm){
         return new TransactionRealmStore(realm);
+    }
+
+    @Provides @PerFragment
+    TransactionDataMapper provideTransactionDataMapper(@Named("expense_local") RealmStore<ExpenseCategoryEntity> expenseStore,
+                                                       @Named("income_local") RealmStore<IncomeCategoryEntity> incomeStore){
+        return new TransactionDataMapper(incomeStore, expenseStore);
+    }
+
+
+    @Provides @PerFragment @Named("expense_local") RealmStore<ExpenseCategoryEntity> provideExpenseCategoryEntityRealmStore(Realm realm){
+        return new ExpenseCategoriesStore(realm);
+    }
+
+    @Provides @PerFragment @Named("income_local") RealmStore<IncomeCategoryEntity>  provideIncomeCategoryEntityRealmStore(Realm realm){
+        return new IncomeCategoriesStore(realm);
     }
 
     //region Wallets

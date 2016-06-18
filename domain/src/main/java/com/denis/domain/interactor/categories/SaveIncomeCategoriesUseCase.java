@@ -3,7 +3,7 @@ package com.denis.domain.interactor.categories;
 import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.domain.repository.IncomeCategoriesRepository;
 
 import java.util.List;

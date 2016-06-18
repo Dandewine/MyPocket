@@ -1,18 +1,19 @@
 package com.denis.mypocket.screens.add_transaction_screen.view;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.denis.mypocket.BR;
 import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.ItemCategoryBinding;
-import com.denis.mypocket.model.ExpenseCategoryModel;
-import com.denis.mypocket.model.IncomeCategoryModel;
+import com.denis.mypocket.model.categories.CategoryModel;
+import com.denis.mypocket.model.categories.ExpenseCategoryModel;
+import com.denis.mypocket.model.categories.IncomeCategoryModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,28 +24,22 @@ public class CategoriesAdapter extends BaseAdapter {
 
     private List<IncomeCategoryModel> incomeCategoryModels;
     private List<ExpenseCategoryModel> expenseCategoryModels;
-
-    public CategoriesAdapter(List data) {
-        if (data == null)
-            throw new NullPointerException("Categories are null!");
-        if (data.get(0) instanceof IncomeCategoryModel)
-            incomeCategoryModels = data;
-        else
-            expenseCategoryModels = data;
-    }
+    private List<CategoryModel> categoryList = new ArrayList<>();
 
     public CategoriesAdapter() {
     }
 
     @Override
     public int getCount() {
-        return expenseCategoryModels == null ? incomeCategoryModels.size() : expenseCategoryModels.size();
+       // return expenseCategoryModels == null ? incomeCategoryModels.size() : expenseCategoryModels.size();
+        return categoryList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return expenseCategoryModels == null ? incomeCategoryModels.get(position) :
-                expenseCategoryModels.get(position);
+     /*   return expenseCategoryModels == null ? incomeCategoryModels.get(position) :
+                expenseCategoryModels.get(position);*/
+        return categoryList.get(position);
     }
 
     @Override
@@ -52,29 +47,27 @@ public class CategoriesAdapter extends BaseAdapter {
         return position;
     }
 
-    @Override
+    @Override @SuppressLint("ViewHolder")
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        ViewHolder holder;
-        if (view == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
-            holder = new ViewHolder(DataBindingUtil.bind(view));
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemCategoryBinding binding = DataBindingUtil.inflate(inflater,R.layout.item_category,parent,false);
+       // ExpenseCategoryModel expenseCategory = expenseCategoryModels != null ? expenseCategoryModels.get(position) : null;
+        //IncomeCategoryModel incomeCategory = incomeCategoryModels != null ? incomeCategoryModels.get(position) : null;
+        CategoryModel category = categoryList.get(position);
 
-            int drawableId = incomeCategoryModels == null ? expenseCategoryModels.get(position).getPath() : incomeCategoryModels.get(position).getPath();
-            Drawable drawable = parent.getContext().getDrawable(drawableId);
+        binding.setTitle(category.getName());
+        binding.setD(parent.getContext().getDrawable(category.getPath()));
+       // binding.setD(expenseCategory == null ? parent.getContext().getDrawable(incomeCategory.getPath()) : parent.getContext().getDrawable(expenseCategory.getPath()));
 
-            holder.binding.setVariable(BR.d,drawable);
-            holder.binding.setVariable(BR.incomeCategory, incomeCategoryModels != null ? incomeCategoryModels.get(position) : null);
-            holder.binding.setVariable(BR.expenseCategory, expenseCategoryModels != null ? expenseCategoryModels.get(position) : null);
-            view.setTag(holder);
-        }else{
-            holder = ((ViewHolder) view.getTag());
-        }
-        return holder.binding.getRoot();
+        return binding.getRoot();
     }
 
-    public void addData(List data) {
-        if (incomeCategoryModels != null)
+    public void addData(List<CategoryModel> data) {
+        categoryList.clear();
+        categoryList.addAll(data);
+
+
+       /* if (incomeCategoryModels != null)
             incomeCategoryModels.clear();
         if (expenseCategoryModels != null)
             expenseCategoryModels.clear();
@@ -85,15 +78,7 @@ public class CategoriesAdapter extends BaseAdapter {
 
             incomeCategoryModels = data;
         else
-            expenseCategoryModels = data;
-    }
-
-    private static class ViewHolder{
-        ItemCategoryBinding binding;
-
-        public ViewHolder(ItemCategoryBinding binding) {
-            this.binding = binding;
-        }
+            expenseCategoryModels = data;*/
     }
 
 }

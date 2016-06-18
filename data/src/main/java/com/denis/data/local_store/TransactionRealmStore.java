@@ -1,6 +1,7 @@
 package com.denis.data.local_store;
 
 import com.denis.data.entity.TransactionEntity;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

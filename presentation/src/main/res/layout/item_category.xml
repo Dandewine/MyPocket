@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="incomeCategory"
-            type="com.denis.mypocket.model.IncomeCategoryModel" />
+            type="com.denis.mypocket.model.categories.IncomeCategoryModel" />
 
         <variable
             name="expenseCategory"
-            type="com.denis.mypocket.model.ExpenseCategoryModel" />
-        <variable
-            name="d"
-            type="android.graphics.drawable.Drawable"/>
+            type="com.denis.mypocket.model.categories.ExpenseCategoryModel" />
+
+        <variable name="d" type="android.graphics.drawable.Drawable"/>
+        <variable name="title" type="String"/>
     </data>
 
     <LinearLayout
@@ -36,9 +35,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@{incomeCategory == null ? expenseCategory.name : incomeCategory.name}"
+            android:text="@{title}"
             android:textSize="18sp"
             tools:text="Food &amp; Beverage" />
 
-    </LinearLayout>
+    </LinearLayout
+>
 </layout>

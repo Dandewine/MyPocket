@@ -1,6 +1,7 @@
 package com.denis.domain.repository;
 
 import com.denis.domain.models.CycleOperation;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

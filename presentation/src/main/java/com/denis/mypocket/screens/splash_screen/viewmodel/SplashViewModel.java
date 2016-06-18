@@ -6,8 +6,7 @@ import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.models.User;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.model.UserModel;
-import com.denis.mypocket.viewmodel.ViewModel;
+import com.denis.mypocket.screens.ViewModel;
 
 import java.util.List;
 

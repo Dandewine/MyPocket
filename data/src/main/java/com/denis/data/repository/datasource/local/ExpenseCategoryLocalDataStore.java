@@ -3,6 +3,7 @@ package com.denis.data.repository.datasource.local;
 import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.repository.datasource.interfaces.ExpenseCategoryDataStore;
+import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.adapter.viewholder;
+package com.denis.mypocket.screens;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;

@@ -6,6 +6,7 @@ import com.denis.data.entity.mapper.WalletDataMapper;
 import com.denis.data.repository.datasource.interfaces.UserDataStore;
 import com.denis.data.repository.datasource.interfaces.WalletDataStore;
 import com.denis.data.rest.WalletService;
+import com.denis.domain.models.categories.Category;
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
 

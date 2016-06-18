@@ -15,7 +15,7 @@ import com.denis.mypocket.internal.di.modules.transactions.TransactionTabModule;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.screens.transactions_tab_screen.viewmodel.TransactionViewModel;
-import com.denis.mypocket.view.fragments.BaseFragment;
+import com.denis.mypocket.screens.BaseFragment;
 
 import java.util.ArrayList;
 

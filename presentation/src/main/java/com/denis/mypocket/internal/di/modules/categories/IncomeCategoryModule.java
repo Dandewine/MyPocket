@@ -1,5 +1,6 @@
 package com.denis.mypocket.internal.di.modules.categories;
 
+import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.entity.mapper.IncomeCategoryDataMapper;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.local_store.categories.IncomeCategoriesStore;
@@ -11,7 +12,7 @@ import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.categories.GetIncomeCategoriesUseCase;
 import com.denis.domain.interactor.categories.SaveIncomeCategoriesUseCase;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.domain.repository.IncomeCategoriesRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 
@@ -47,11 +48,11 @@ public class IncomeCategoryModule {
         return new IncomeCategoryDataMapper();
     }
 
-    @Provides @PerActivity IncomeCategoryDataStore provideDataStore(@Named("incomeRS") RealmStore store){
+    @Provides @PerActivity IncomeCategoryDataStore provideDataStore(@Named("incomeRS") RealmStore<IncomeCategoryEntity>  store){
         return new IncomeCateforyLocalDataStore(store);
     }
 
-    @Provides @PerActivity @Named("incomeRS") RealmStore provideStore(Realm realm){
+    @Provides @PerActivity @Named("incomeRS") RealmStore<IncomeCategoryEntity>  provideStore(Realm realm){
         return new IncomeCategoriesStore(realm);
     }
 }

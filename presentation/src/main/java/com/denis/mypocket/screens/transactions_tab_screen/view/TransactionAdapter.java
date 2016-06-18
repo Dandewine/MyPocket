@@ -11,8 +11,8 @@ import com.denis.mypocket.BR;
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
-import com.denis.mypocket.view.adapter.RecyclerBindableAdapter;
-import com.denis.mypocket.view.adapter.viewholder.BindableHolder;
+import com.denis.mypocket.screens.RecyclerBindableAdapter;
+import com.denis.mypocket.screens.BindableHolder;
 
 import java.util.List;
 

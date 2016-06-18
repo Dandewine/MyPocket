@@ -2,6 +2,7 @@ package com.denis.data.repository.datasource.interfaces;
 
 import com.denis.data.entity.DebtEntity;
 import com.denis.data.entity.DebtEntity;
+import com.denis.domain.models.categories.Category;
 
 import java.util.Collection;
 import java.util.List;

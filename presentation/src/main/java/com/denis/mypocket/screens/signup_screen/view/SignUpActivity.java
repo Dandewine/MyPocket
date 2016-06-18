@@ -11,7 +11,7 @@ import com.denis.mypocket.databinding.ActivitySignupBinding;
 import com.denis.mypocket.internal.di.components.DaggerRegistrationComponent;
 import com.denis.mypocket.internal.di.modules.RegistrationModule;
 import com.denis.mypocket.screens.signup_screen.viewmodel.RegistrationViewModel;
-import com.denis.mypocket.view.activity.BaseActivity;
+import com.denis.mypocket.screens.BaseActivity;
 
 import javax.inject.Inject;
 

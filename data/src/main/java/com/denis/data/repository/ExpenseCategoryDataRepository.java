@@ -3,7 +3,7 @@ package com.denis.data.repository;
 import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.entity.mapper.ExpenseCategoryDataMapper;
 import com.denis.data.repository.datasource.interfaces.ExpenseCategoryDataStore;
-import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
 import com.denis.domain.repository.ExpenseCategoriesRepository;
 
 import java.util.List;

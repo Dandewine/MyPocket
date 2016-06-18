@@ -1,5 +1,6 @@
 package com.denis.mypocket.internal.di.modules.categories;
 
+import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.entity.mapper.ExpenseCategoryDataMapper;
 import com.denis.data.local_store.RealmStore;
 import com.denis.data.local_store.categories.ExpenseCategoriesStore;
@@ -11,7 +12,7 @@ import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.categories.GetExpenseCategoriesUseCase;
 import com.denis.domain.interactor.categories.SaveExpenseCategoriesUseCase;
-import com.denis.domain.models.ExpenseCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
 import com.denis.domain.repository.ExpenseCategoriesRepository;
 import com.denis.mypocket.internal.di.PerActivity;
 
@@ -48,11 +49,11 @@ public class ExpenseCategoryModule {
         return new ExpenseCategoryDataMapper();
     }
 
-    @Provides @PerActivity ExpenseCategoryDataStore provideDataStore(@Named("expenseRS") RealmStore store){
+    @Provides @PerActivity ExpenseCategoryDataStore provideDataStore(@Named("expenseRS") RealmStore<ExpenseCategoryEntity>  store){
         return new ExpenseCategoryLocalDataStore(store);
     }
 
-    @Provides @PerActivity @Named("expenseRS") RealmStore provideStore(Realm realm){
+    @Provides @PerActivity @Named("expenseRS") RealmStore<ExpenseCategoryEntity> provideStore(Realm realm){
         return new ExpenseCategoriesStore(realm);
     }
 }

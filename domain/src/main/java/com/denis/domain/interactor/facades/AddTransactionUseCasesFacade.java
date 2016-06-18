@@ -1,8 +1,8 @@
 package com.denis.domain.interactor.facades;
 
 import com.denis.domain.interactor.UseCase;
-import com.denis.domain.models.ExpenseCategory;
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.ExpenseCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.domain.models.Transaction;
 import com.denis.domain.models.Wallet;
 

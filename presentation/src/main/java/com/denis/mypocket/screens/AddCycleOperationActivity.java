@@ -1,17 +1,7 @@
-package com.denis.mypocket.view.activity;
+package com.denis.mypocket.screens;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.transition.Fade;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.view.MenuItem;
-import android.view.View;
-
-import com.denis.mypocket.AnimationUtils;
-import com.denis.mypocket.R;
-
 
 
 public class AddCycleOperationActivity extends BaseActivity {

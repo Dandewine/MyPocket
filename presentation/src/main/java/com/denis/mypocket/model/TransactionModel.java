@@ -3,6 +3,9 @@ package com.denis.mypocket.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.denis.domain.models.categories.Category;
+import com.denis.mypocket.model.categories.CategoryModel;
+
 public class TransactionModel implements Parcelable {
 
     private String id;
@@ -10,7 +13,7 @@ public class TransactionModel implements Parcelable {
     private float amount;
     private String type;
     private long unixDateTime;
-    private String categoryId;
+    private CategoryModel category;
 
     public TransactionModel(String id) {
         this.id = id;
@@ -56,12 +59,12 @@ public class TransactionModel implements Parcelable {
         this.unixDateTime = unixDateTime;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public CategoryModel getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(CategoryModel category) {
+        this.category = category;
     }
 
     @Override
@@ -76,7 +79,7 @@ public class TransactionModel implements Parcelable {
         dest.writeFloat(this.amount);
         dest.writeString(this.type);
         dest.writeLong(this.unixDateTime);
-        dest.writeString(this.categoryId);
+        dest.writeParcelable(this.category,flags);
     }
 
     protected TransactionModel(Parcel in) {
@@ -85,7 +88,7 @@ public class TransactionModel implements Parcelable {
         this.amount = in.readFloat();
         this.type = in.readString();
         this.unixDateTime = in.readLong();
-        this.categoryId = in.readString();
+        this.category = in.readParcelable(Category.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<TransactionModel> CREATOR = new Parcelable.Creator<TransactionModel>() {

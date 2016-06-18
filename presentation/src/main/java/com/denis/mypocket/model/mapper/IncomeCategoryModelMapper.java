@@ -1,8 +1,8 @@
 package com.denis.mypocket.model.mapper;
 
-import com.denis.domain.models.IncomeCategory;
+import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.mypocket.internal.di.PerActivity;
-import com.denis.mypocket.model.IncomeCategoryModel;
+import com.denis.mypocket.model.categories.IncomeCategoryModel;
 
 import java.util.ArrayList;
 import java.util.List;

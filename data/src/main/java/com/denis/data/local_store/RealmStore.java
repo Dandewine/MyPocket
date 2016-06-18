@@ -1,6 +1,7 @@
 package com.denis.data.local_store;
 
-import java.util.Collection;
+import com.denis.domain.models.categories.Category;
+
 import java.util.List;
 
 import rx.Observable;

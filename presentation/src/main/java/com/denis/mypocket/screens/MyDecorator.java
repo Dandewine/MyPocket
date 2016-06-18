@@ -1,4 +1,4 @@
-package com.denis.mypocket.view.adapter;
+package com.denis.mypocket.screens;
 
 import android.content.Context;
 import android.content.res.TypedArray;

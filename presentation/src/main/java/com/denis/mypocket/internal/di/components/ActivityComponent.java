@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.internal.di.modules.ActivityModule;
-import com.denis.mypocket.view.activity.BaseActivity;
+import com.denis.mypocket.screens.BaseActivity;
 
 import dagger.Component;
 

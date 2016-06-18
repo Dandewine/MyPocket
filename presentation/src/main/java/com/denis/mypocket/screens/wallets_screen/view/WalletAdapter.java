@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.denis.mypocket.R;
 import com.denis.mypocket.model.WalletModel;
-import com.denis.mypocket.view.adapter.RecyclerBindableAdapter;
+import com.denis.mypocket.screens.RecyclerBindableAdapter;
 
 /**
  * Created by denis on 5/22/16.

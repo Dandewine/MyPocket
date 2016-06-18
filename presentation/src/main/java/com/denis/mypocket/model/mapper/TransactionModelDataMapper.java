@@ -1,7 +1,9 @@
 package com.denis.mypocket.model.mapper;
 
 import com.denis.domain.models.Transaction;
+import com.denis.domain.models.categories.Category;
 import com.denis.mypocket.model.TransactionModel;
+import com.denis.mypocket.model.categories.CategoryModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +12,11 @@ import javax.inject.Inject;
 
 public class TransactionModelDataMapper implements ModelMapper<Transaction, TransactionModel> {
 
+    private CategoryMapper categoryMapper;
 
     @Inject
     public TransactionModelDataMapper() {
+        categoryMapper = new CategoryMapper();
     }
 
     public TransactionModel toModel(Transaction transaction) {
@@ -22,7 +26,11 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
             model.setAmount(transaction.getAmount());
             model.setType(transaction.getType());
             model.setUnixDateTime(transaction.getUnixDateTime());
-            model.setCategoryId(transaction.getCategoryId());
+
+            Category category = transaction.getCategory();
+            CategoryModel categoryModel = categoryMapper.toModel(category);
+
+            model.setCategory(categoryModel);
             model.setWalletId(transaction.getWalletId());
         }
         return model;

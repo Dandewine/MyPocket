@@ -1,17 +1,12 @@
-package com.denis.mypocket.view.fragments;
+package com.denis.mypocket.screens;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.denis.mypocket.R;
 import com.denis.mypocket.databinding.FragmentCycleOperationBinding;
-import com.denis.mypocket.viewmodel.getting.GetCycleOperationViewModel;
-
-import javax.inject.Inject;
 
 public class CycleOperationFragment extends BaseFragment {
 
@@ -23,17 +18,11 @@ public class CycleOperationFragment extends BaseFragment {
     }
 
     private FragmentCycleOperationBinding binding;
-    @Inject public GetCycleOperationViewModel viewModel;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cycle_operation, container, false);
-       // binding.fabAddCO.setOnClickListener(v -> startTransition());
-      //  binding.recyclerTransactions.setAdapter(viewModel.operationAdapter);
-        binding.setViewModel(viewModel);
-
-        return binding.getRoot();
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
   /*  private void startTransition(){
