@@ -44,8 +44,10 @@ public class TransactionModule {
     AddTransactionUseCasesFacade provideAddTransactionUseCasesFacade(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
                                                                      @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
                                                                      @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase,
-                                                                     @Named("getWallets_local") UseCase<Wallet> walletUseCase){
+                                                                     @Named("getWallets_local") UseCase<Wallet> walletUseCase,
+                                                                     @Named("updWallet") UseCase<Wallet> updateWalletUseCase){
 
-        return new AddTransactionUseCasesFacade(addTransactionUseCase, walletUseCase,incomeCategoriesUseCase, expenseCategoryUseCase);
+        return new AddTransactionUseCasesFacade(addTransactionUseCase, walletUseCase,incomeCategoriesUseCase,
+                expenseCategoryUseCase, updateWalletUseCase);
     }
 }

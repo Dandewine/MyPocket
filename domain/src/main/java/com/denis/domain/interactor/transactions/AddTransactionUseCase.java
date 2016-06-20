@@ -23,17 +23,6 @@ public class AddTransactionUseCase extends UseCase<Transaction> {
 
     @Override
     protected Observable buildUseCaseObservable(Transaction... arg) {
-       /* Transaction transaction = arg[0];
-        if (transaction != null) {
-            Wallet wallet = transaction.getWallets();
-            if (transaction.getType() == 0) // if transaction was expense
-                wallet.setBalance(wallet.getBalance() - transaction.getAmount());
-            else if (transaction.getType() == 1) //if transaction was income
-                wallet.setBalance(wallet.getBalance() + transaction.getAmount());
-            Log.d("myTag", "walletBalance = "+wallet.getBalance());
-            walletsRepository.update(wallet);
-            return transactionRepository.addTransaction(transaction);
-        } else throw new RuntimeException("Transaction was null, can't proceed operation!");*/
         return Observable.empty();
     }
 }

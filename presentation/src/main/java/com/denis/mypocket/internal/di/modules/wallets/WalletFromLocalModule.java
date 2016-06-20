@@ -11,6 +11,7 @@ import com.denis.domain.executor.PostExecutionThread;
 import com.denis.domain.executor.ThreadExecutor;
 import com.denis.domain.interactor.UseCase;
 import com.denis.domain.interactor.wallets.GetWalletsUseCase;
+import com.denis.domain.interactor.wallets.UpdateWalletUseCase;
 import com.denis.domain.models.Wallet;
 import com.denis.domain.repository.WalletRepository;
 import com.denis.mypocket.internal.di.PerActivity;
@@ -26,6 +27,13 @@ import io.realm.Realm;
  */
 @Module
 public class WalletFromLocalModule {
+
+    @Provides @PerActivity @Named("updWallet")
+    UseCase<Wallet> provideWalletUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread,
+                                         @Named("local") WalletRepository repository){
+        return new UpdateWalletUseCase(executor,postExecutionThread,repository);
+    }
+
     @Provides @PerActivity @Named("getWallets_local")
     UseCase<Wallet> provideWalletGetUseCase(ThreadExecutor executor, PostExecutionThread postExecutionThread, @Named("local") WalletRepository repository){
         return new GetWalletsUseCase(executor,postExecutionThread,repository);

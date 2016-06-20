@@ -26,6 +26,7 @@ import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.categories.CategoryModel;
+import com.denis.mypocket.model.mapper.CategoryMapper;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
 import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
@@ -66,6 +67,7 @@ public class AddTransactionViewModel implements ViewModel {
     private TransactionModelDataMapper transactionModelDataMapper = new TransactionModelDataMapper();
 
     private WalletModel walletModel;
+    private Wallet wallet;
     private Context context;
 
     @Inject
@@ -164,6 +166,15 @@ public class AddTransactionViewModel implements ViewModel {
             isLoading.set(View.GONE);
 
             TransactionModel model = transactionModelDataMapper.toModel(transaction);
+            if(transaction.getType().equals("income")){
+                float balance = wallet.getBalance() + transaction.getAmount();
+                wallet.setBalance(balance);
+            }else{
+                float balance = wallet.getBalance() - transaction.getAmount();
+                wallet.setBalance(balance);
+            }
+
+            transactionFacade.updateWallet(new DefaultSubscriber<>(),wallet);
 
             Intent intent = new Intent();
             intent.putExtra(TRANSACTION_BUNDLE_KEY, model);
@@ -176,11 +187,18 @@ public class AddTransactionViewModel implements ViewModel {
     private class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onNext(List<Wallet> wallets) {
-            if (wallets != null && !wallets.isEmpty()) {
+           /* if (wallets != null && !wallets.isEmpty()) {
                 List<WalletModel> walletModels = walletModelDataMapper.toModel(wallets);
                 for (WalletModel model : walletModels) {
                     if (model.isActive()) {
                         walletModel = model;
+                    }
+                }
+            }*/
+            if (wallets != null && !wallets.isEmpty()){
+                for (Wallet wallet1 : wallets) {
+                    if(wallet1.isActive()){
+                        wallet = wallet1;
                     }
                 }
             }
@@ -199,7 +217,7 @@ public class AddTransactionViewModel implements ViewModel {
                     float amount = Float.parseFloat(this.amount.isEmpty() ? "0" : this.amount);
                     String type = isIncome ? Transaction.TransactionType.INCOME.getType() : Transaction.TransactionType.EXPENSE.getType();
 
-                    Transaction transaction = new Transaction(walletModel.getId(), amount, type, category, date);
+                    Transaction transaction = new Transaction(wallet.getId(), amount, type, category, date);
                     transactionFacade.addTransaction(new AddTransactionSubscriber(), transaction);
                     isLoading.set(View.VISIBLE);
                 } else
@@ -216,7 +234,7 @@ public class AddTransactionViewModel implements ViewModel {
                 calendar.set(Calendar.MONTH, monthOfYear + 1);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 date = calendar.getTimeInMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yy", Locale.getDefault());
                 dateFormat.set(simpleDateFormat.format(calendar.getTime()));
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
@@ -227,10 +245,9 @@ public class AddTransactionViewModel implements ViewModel {
     public AdapterView.OnItemSelectedListener categoryOnClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-      /*      Object item = categoriesAdapter.getItem(position);
-            if (isIncome)
-                category = ((IncomeCategoryModel) item).getId();
-            else category = ((ExpenseCategoryModel) item).getId();*/
+            CategoryMapper categoryMapper = transactionModelDataMapper.getCategoryMapper();
+            CategoryModel model = (CategoryModel) categoriesAdapter.getItem(position);
+            category = categoryMapper.fromModel(model);
         }
 
         @Override

@@ -2,7 +2,6 @@ package com.denis.data.local_store.categories;
 
 import com.denis.data.entity.IncomeCategoryEntity;
 import com.denis.data.local_store.RealmStore;
-import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 
@@ -23,7 +22,14 @@ public class IncomeCategoriesStore implements RealmStore<IncomeCategoryEntity> {
 
     @Override
     public Observable<IncomeCategoryEntity> get(String id) {
-        return Observable.just(realm.where(IncomeCategoryEntity.class).equalTo("id", id).findFirst());
+        if (!Thread.currentThread().getName().equals("main")){
+            Realm realm = Realm.getDefaultInstance();
+            IncomeCategoryEntity entity = realm.where(IncomeCategoryEntity.class).equalTo("id", id).findFirst();
+            realm.close();
+            return Observable.just(entity);
+        }else {
+            return realm.where(IncomeCategoryEntity.class).equalTo("id", id).findFirst().asObservable();
+        }
     }
 
     @Override

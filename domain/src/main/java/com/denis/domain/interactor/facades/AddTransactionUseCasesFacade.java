@@ -16,16 +16,19 @@ public class AddTransactionUseCasesFacade {
     private UseCase<Wallet> getWalletsUseCase;
     private UseCase<IncomeCategory> incomeCategoryUseCase;
     private UseCase<ExpenseCategory> expenseCategoryUseCase;
+    private UseCase<Wallet> updateWalletUseCase;
 
     @Inject
     public AddTransactionUseCasesFacade(@Named("addTransaction") UseCase<Transaction> addTransactionUseCase,
                                         @Named("getWallets") UseCase<Wallet> walletsUseCase,
                                         @Named("incomeUC") UseCase<IncomeCategory> incomeCategoriesUseCase,
-                                        @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase) {
+                                        @Named("expenseUC") UseCase<ExpenseCategory> expenseCategoryUseCase,
+                                        @Named("updWallet") UseCase<Wallet> updateWalletUseCase) {
         this.addTransactionUseCase = addTransactionUseCase;
         this.incomeCategoryUseCase = incomeCategoriesUseCase;
         this.expenseCategoryUseCase = expenseCategoryUseCase;
         this.getWalletsUseCase = walletsUseCase;
+        this.updateWalletUseCase = updateWalletUseCase;
     }
 
     public void getWallets(Subscriber subscriber){
@@ -49,5 +52,9 @@ public class AddTransactionUseCasesFacade {
         expenseCategoryUseCase.unSubscribe();
         incomeCategoryUseCase.unSubscribe();
         getWalletsUseCase.unSubscribe();
+    }
+
+    public void updateWallet(Subscriber subscriber, Wallet wallet){
+        updateWalletUseCase.executeSync(subscriber,wallet);
     }
 }

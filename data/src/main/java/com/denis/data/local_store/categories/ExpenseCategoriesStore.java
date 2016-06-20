@@ -2,7 +2,6 @@ package com.denis.data.local_store.categories;
 
 import com.denis.data.entity.ExpenseCategoryEntity;
 import com.denis.data.local_store.RealmStore;
-import com.denis.domain.models.categories.Category;
 
 import java.util.List;
 
@@ -21,7 +20,14 @@ public class ExpenseCategoriesStore implements RealmStore<ExpenseCategoryEntity>
 
     @Override
     public Observable<ExpenseCategoryEntity> get(String id) {
-        return Observable.just(realm.where(ExpenseCategoryEntity.class).equalTo("id", id).findFirst());
+        if (!Thread.currentThread().getName().equals("main")) {
+            Realm realm = Realm.getDefaultInstance();
+            ExpenseCategoryEntity first = realm.where(ExpenseCategoryEntity.class).equalTo("id", id).findFirst();
+            realm.close();
+            return Observable.just(first);
+        }else {
+            return Observable.just(realm.where(ExpenseCategoryEntity.class).equalTo("id", id).findFirst());
+        }
     }
 
     @Override

@@ -58,4 +58,8 @@ public class TransactionModelDataMapper implements ModelMapper<Transaction, Tran
     public Transaction fromModel(TransactionModel transactionModel) {
         return null;
     }
+
+    public CategoryMapper getCategoryMapper() {
+        return categoryMapper;
+    }
 }
