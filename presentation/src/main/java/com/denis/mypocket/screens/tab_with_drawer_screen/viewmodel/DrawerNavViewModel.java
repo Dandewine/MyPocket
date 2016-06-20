@@ -49,8 +49,11 @@ public class DrawerNavViewModel implements ViewModel {
     private Subscriber<List<User>> userSubscriber = new DefaultSubscriber<List<User>>() {
         @Override
         public void onNext(List<User> users) {
-            if (users != null && !users.isEmpty())
+            if (users != null && !users.isEmpty()) {
+                if (userModelMapper == null)
+                    userModelMapper = new UserModelMapper();
                 userModel = userModelMapper.toModel(users.get(0));
+            }
         }
     };
 

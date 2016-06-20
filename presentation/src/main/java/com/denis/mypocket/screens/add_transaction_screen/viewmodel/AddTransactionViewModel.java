@@ -25,16 +25,18 @@ import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.WalletModel;
+import com.denis.mypocket.model.categories.CategoryModel;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
 import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
 import com.denis.mypocket.model.mapper.WalletModelDataMapper;
+import com.denis.mypocket.screens.ViewModel;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
 import com.denis.mypocket.screens.add_transaction_screen.view.CategoriesAdapter;
 import com.denis.mypocket.utils.PLTags;
-import com.denis.mypocket.screens.ViewModel;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -117,8 +119,10 @@ public class AddTransactionViewModel implements ViewModel {
 
         @Override
         public void onNext(List<IncomeCategory> incomeCategories) {
-           /* List<IncomeCategoryModel> models = incomeMapper.toModel(incomeCategories);
-            categoriesAdapter.addData(models);*/
+            if (incomeCategories != null) {
+                List<CategoryModel> models = new ArrayList<>(incomeMapper.toModel(incomeCategories));
+                categoriesAdapter.addData(models);
+            }
         }
     }
 
@@ -135,11 +139,9 @@ public class AddTransactionViewModel implements ViewModel {
         @Override
         public void onNext(List<ExpenseCategory> expenseCategories) {
             if (expenseCategories != null) {
-               /* List<CategoryModel> modelList =  expenseMapper.toModel(expenseCategories);
-
-                categoriesAdapter.addData(modelList);*/
-
-
+                List<CategoryModel> modelList = new ArrayList<>();
+                modelList.addAll(expenseMapper.toModel(expenseCategories));
+                categoriesAdapter.addData(modelList);
             }
         }
     }
