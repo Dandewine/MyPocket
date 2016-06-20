@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -21,6 +22,17 @@
             app:adapter="@{viewModel.getTransactionAdapter}"
             app:layoutManager="GridLayoutManager"
             app:spanCount="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            app:layout_anchor="@id/recyclerTransactions"
+            app:layout_anchorGravity="center"
+            android:padding="16dp"
+            android:gravity="center"
+            android:visibility="@{viewModel.splashVisibility}"
+            android:text="Sorry, no transaction found, you can add new one by clicking on button below"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

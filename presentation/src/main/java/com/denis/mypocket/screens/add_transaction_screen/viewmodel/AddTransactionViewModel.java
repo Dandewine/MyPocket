@@ -24,13 +24,11 @@ import com.denis.domain.models.categories.IncomeCategory;
 import com.denis.mypocket.R;
 import com.denis.mypocket.internal.di.PerActivity;
 import com.denis.mypocket.model.TransactionModel;
-import com.denis.mypocket.model.WalletModel;
 import com.denis.mypocket.model.categories.CategoryModel;
 import com.denis.mypocket.model.mapper.CategoryMapper;
 import com.denis.mypocket.model.mapper.ExpenseCategoryModelMapper;
 import com.denis.mypocket.model.mapper.IncomeCategoryModelMapper;
 import com.denis.mypocket.model.mapper.TransactionModelDataMapper;
-import com.denis.mypocket.model.mapper.WalletModelDataMapper;
 import com.denis.mypocket.screens.ViewModel;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
 import com.denis.mypocket.screens.add_transaction_screen.view.CategoriesAdapter;
@@ -63,10 +61,8 @@ public class AddTransactionViewModel implements ViewModel {
 
     private IncomeCategoryModelMapper incomeMapper = new IncomeCategoryModelMapper();
     private ExpenseCategoryModelMapper expenseMapper = new ExpenseCategoryModelMapper();
-    private WalletModelDataMapper walletModelDataMapper = new WalletModelDataMapper();
     private TransactionModelDataMapper transactionModelDataMapper = new TransactionModelDataMapper();
 
-    private WalletModel walletModel;
     private Wallet wallet;
     private Context context;
 
@@ -94,7 +90,7 @@ public class AddTransactionViewModel implements ViewModel {
     private void initStartDate() {
         Date date = new Date();
         this.date = date.getTime();
-        dateFormat.set(new SimpleDateFormat("dd/mm/yy", Locale.getDefault()).format(date));
+        dateFormat.set(new SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(date));
     }
 
     public void afterTextChanged(Editable s) {
@@ -187,14 +183,6 @@ public class AddTransactionViewModel implements ViewModel {
     private class GetWalletsSubscriber extends DefaultSubscriber<List<Wallet>> {
         @Override
         public void onNext(List<Wallet> wallets) {
-           /* if (wallets != null && !wallets.isEmpty()) {
-                List<WalletModel> walletModels = walletModelDataMapper.toModel(wallets);
-                for (WalletModel model : walletModels) {
-                    if (model.isActive()) {
-                        walletModel = model;
-                    }
-                }
-            }*/
             if (wallets != null && !wallets.isEmpty()){
                 for (Wallet wallet1 : wallets) {
                     if(wallet1.isActive()){
@@ -234,7 +222,7 @@ public class AddTransactionViewModel implements ViewModel {
                 calendar.set(Calendar.MONTH, monthOfYear + 1);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 date = calendar.getTimeInMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yy", Locale.getDefault());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
                 dateFormat.set(simpleDateFormat.format(calendar.getTime()));
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));

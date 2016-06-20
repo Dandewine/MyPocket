@@ -38,15 +38,14 @@ import com.denis.mypocket.internal.di.components.DaggerDrawerComponent;
 import com.denis.mypocket.internal.di.modules.drawer.DrawerModule;
 import com.denis.mypocket.model.TransactionModel;
 import com.denis.mypocket.model.UserModel;
+import com.denis.mypocket.screens.BaseActivity;
+import com.denis.mypocket.screens.CycleOperationFragment;
 import com.denis.mypocket.screens.add_transaction_screen.view.AddTransactionActivity;
 import com.denis.mypocket.screens.add_transaction_screen.viewmodel.AddTransactionViewModel;
 import com.denis.mypocket.screens.tab_with_drawer_screen.viewmodel.DrawerNavViewModel;
+import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionsFragment;
 import com.denis.mypocket.screens.wallets_screen.view.WalletActivity;
 import com.denis.mypocket.utils.PLConstants;
-import com.denis.mypocket.screens.BaseActivity;
-import com.denis.mypocket.screens.CycleOperationFragment;
-import com.denis.mypocket.screens.DebtsFragment;
-import com.denis.mypocket.screens.transactions_tab_screen.view.TransactionsFragment;
 
 import javax.inject.Inject;
 
@@ -256,7 +255,7 @@ public class DrawerActivity extends BaseActivity implements
         } else if (id == R.id.nav_categories) {
 
         } else if (id == R.id.nav_debts) {
-            replaceFragment(R.id.containerDrawer, DebtsFragment.newInstance());
+
         } else if (id == R.id.travel_mode) {
 
         } else if (id == R.id.nav_settings) {
@@ -264,9 +263,9 @@ public class DrawerActivity extends BaseActivity implements
         } else if (id == R.id.nav_tutorials) {
 
         } else if (id == R.id.nav_cycle_operations) {
-            replaceFragment(R.id.containerDrawer, CycleOperationFragment.newInstance());
+
         } else if (id == R.id.nav_transactions) {
-            //         replaceFragment(R.id.containerDrawer, TransactionsFragment.newInstance());
+
         } else if (id == R.id.nav_logout_MD) {
             viewModel.logout();
         }

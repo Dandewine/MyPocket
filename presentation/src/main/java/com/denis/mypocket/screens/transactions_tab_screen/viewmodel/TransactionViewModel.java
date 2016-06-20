@@ -1,6 +1,8 @@
 package com.denis.mypocket.screens.transactions_tab_screen.viewmodel;
 
+import android.databinding.ObservableInt;
 import android.util.Log;
+import android.view.View;
 
 import com.denis.domain.interactor.DefaultSubscriber;
 import com.denis.domain.interactor.UseCase;
@@ -28,6 +30,7 @@ public class TransactionViewModel implements ViewModel {
     private TransactionAdapter transactionAdapter;
     private TransactionModelDataMapper modelDataMapper = new TransactionModelDataMapper();
 
+    public ObservableInt splashVisibility = new ObservableInt(View.VISIBLE);
 
     @Inject
     public TransactionViewModel(UseCase<Transaction> transactionUseCase, ArrayList<WalletModel> walletModels) {
@@ -46,10 +49,10 @@ public class TransactionViewModel implements ViewModel {
     private class TransactionSubscriber extends DefaultSubscriber<List<Transaction>>{
         @Override
         public void onNext(List<Transaction> transactions) {
-            Log.d("myTag","size = "+ (transactions != null ? transactions.size() : null));
             if(transactions != null && !transactions.isEmpty()) {
                 List<TransactionModel> transactionModels = modelDataMapper.toModel(transactions);
                 transactionAdapter.addAll(transactionModels);
+                splashVisibility.set(View.GONE);
             }
         }
     }
@@ -59,6 +62,7 @@ public class TransactionViewModel implements ViewModel {
     }
 
     public void updateDataSet(TransactionModel model){
+        splashVisibility.set(View.GONE);
         transactionAdapter.addToTop(model);
     }
 

@@ -10,7 +10,7 @@ public class TransactionEntity extends RealmObject {
     @SerializedName("walletId")           private String walletId;
     @SerializedName("amount")             private float amount;
     @SerializedName("type")               private String type; // 1 - Income, 0 - Expense
-    @SerializedName("categoryId")         private String categoryId; //IncomeCategoryEntity(1) or ExpenseCategoryEntity(0)
+    @SerializedName("categoryId")         private String categoryId;
     @SerializedName("unixDateTime")       private long unixDateTime;
 
     public TransactionEntity(String id) {
